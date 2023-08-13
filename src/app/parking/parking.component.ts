@@ -7,6 +7,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   styleUrls: ['./parking.component.scss']
 })
 export class ParkingComponent {
+  
   public routingOption: Array<{ name: string, router: string,active:boolean }> = [
     {
       name: 'Details',
