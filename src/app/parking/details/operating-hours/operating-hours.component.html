@@ -1,0 +1,49 @@
+<div class="container">
+    <form [formGroup]="operatingForm" class="form g-3 needs-validation" novalidate (ngSubmit)="saveForm($event)">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="operationHours" class="form-label">
+                    Operation Hours *
+                </label>
+                <select class="form-select" id="operationHours" formControlName="operationHours" required="">
+                    <option value=""></option>
+                    <option value="24/7">24/7</option>
+                    <option value="">Limited</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please Select Operation Hours
+                </div>
+            </div>
+        </div>
+        <mat-divider class="mt-4"></mat-divider>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">Day</th>
+                    <th scope="col">Open</th>
+                    <th scope="col">Closed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of operationTime">
+                    <th scope="row"> <span>{{data.day}}</span></th>
+                    <td>
+                        <button type="button" class="btn btn-light defbtn">
+                            <mat-icon>schedule</mat-icon>
+                            {{data.open}}
+                        </button>
+                    </td>
+                    <td><button type="button" class="btn btn-light defbtn">
+                            <mat-icon class="mat-icon">schedule</mat-icon>
+                            {{data.closed}}
+                        </button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row pb-3">
+            <div class="col-2">
+                <button class="mb-4" type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

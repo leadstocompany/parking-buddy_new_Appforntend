@@ -1,0 +1,17 @@
+.defbtn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 0.2px solid gray;
+    width: 70%;
+}
+
+.mat-icon {
+    width: fit-content;
+}
+
+table th,
+table td {
+    white-space: nowrap;
+    padding: 10px 20px;
+}

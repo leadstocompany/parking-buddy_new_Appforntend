@@ -1,0 +1,170 @@
+<div class="container-fluid main-container">
+    <div class="container-fluid valid">
+        <h2 class="title">TAXES</h2>
+        <P>We calculate two types of taxes, Pre-tax and Post-tax, Pre-tax will calculate the entered based on the
+            reservation's Sub Total (daily rate X number of days) </P>
+        <P>Post-tax will calculate the tax entered based on the reservation total,including any Pre-tax entered.</P>
+        <div class="d-flex flex-row justify-content-end align-items-center flex-wrap mt-4">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Rate</button>
+        </div>
+        <div class="table-responsive text-nowrap mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Tax on</th>
+                        <th>Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fixed Amount</td>
+                        <td>Subtotal</td>
+                        <td>13.00%</td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <mat-icon>edit</mat-icon> <mat-icon>cancel</mat-icon>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fixed Amount</td>
+                        <td>Subtotal</td>
+                        <td>10.00%</td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <mat-icon>edit</mat-icon> <mat-icon>cancel</mat-icon>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Modal -->
+        <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="staticBackdropLabel">Add Tex</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="country" class="form-label text-nowrap">Category</label>
+                                    <select class="form-select" id="country" required="">
+                                        <option value="" disabled selected>Select Your Category</option>
+                                        <option *ngFor="let value of taxList " [value]="value">{{value}}</option>
+                                    </select>
+                                    <div class="form-text">choose the appropriate category type for the applied fee/tax
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="" class="text-nowrap">Amount Type</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)">
+                                    </div>
+                                    <div class="form-text">Specify whether the fee/tax is a percentage of dollar amount.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="" class="text-nowrap">Amount</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)">
+                                    </div>
+                                    <div class="form-text">Enter the fee/tax amount.</div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="country" class="form-label text-nowrap">Type</label>
+                                    <select class="form-select" id="country" required="">
+                                        <option value="" disabled selected>Select Your Type</option>
+                                        <option value="fixed_amount">Fixed Amount</option>
+                                        <option value="per_day">Per Day</option>
+                                        <option value="per_calendar_day">Per Calendar Day</option>
+                                    </select>
+                                    <div class="form-text">Specify how often this fee/tax applied.</div>
+                                    <div class="form-text">- <u><i>Fixed:</i></u> applied once per reservation</div>
+                                    <div class="form-text">- <u><i>Per Day:</i></u> applied once per 24 hour period
+                                    </div>
+                                    <div class="form-text">- <u><i>Per Calendar Day:</i></u> applied once per calendar
+                                        date
+                                        parked</div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="country" class="form-label text-nowrap">When To Apply</label>
+                                    <select class="form-select" id="country" required="">
+                                        <option value="" disabled selected>Select Your Tax</option>
+                                        <option value="per_tax">Pre Tax</option>
+                                        <option value="post_tax">Post Tax</option>
+                                    </select>
+                                    <div class="form-text">Specify whether or not taxable amount includes other taxes
+                                        and
+                                        fees.</div>
+                                    <div class="form-text">- <u><i>Pre tax:</i></u> applied before other taxes and fees.
+                                        (most common)</div>
+                                    <div class="form-text">- <u><i>Post tax:</i></u> applied once per 24 hour period
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <span>
+                                        Used on Post Tax <br> Calculation
+                                    </span>
+                                    <div class="form-check d-flex flex-row align-items-center">
+                                        <label for="flexCheckDefault" class="form-check-label form-text">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault">
+                                            Specify if this tax amount should be used to calculate on POST tax
+                                            calculation
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Create Tax</button>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid expried">
+        <h2 class="title">OPTION</h2>
+        <div class="row">
+            <div class="form-check">
+                <label class="form-check-label" for="flexCheckChecked">
+                    Are Your Taxes Already Include Within <br> Your Parking Rates?
+                </label>
+                <br>
+                <input class="form-check-input mt-2 mx-1 fs-6" type="checkbox" value="" id="flexCheckChecked" checked>
+            </div>
+        </div>
+        <div class="note row mt-4">
+            <p> <span>NOTE:</span> it is strongly advised to always exclude taxes and fees from your daily
+                parking rates. Your rates will appear to be more expensive as compared to your competition the search
+                results if taxes and fess are included. Once the customer proceeds to the checkout page, taxed and fees
+                are shown in total or itemized if the customer clicks on the more information icon</p>
+        </div>
+    </div>
+</div>

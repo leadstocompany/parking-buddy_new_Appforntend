@@ -1,0 +1,88 @@
+<div class="d-flex flex-row justify-content-end align-items-center flex-wrap mt-4">
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Blackout</button>
+</div>
+
+<div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">Add Blackout</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column gap-1">
+                <div class="row">
+                    <div class="col-8 d-flex flex-row align-items-center gap-4">
+                        <label for="country" class="form-label text-nowrap">Product</label>
+                        <select class="form-select" id="country" required="">
+                            <option value="" disabled selected>Select Your Product</option>
+                            <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 d-flex flex-row align-items-center gap-4 mt-2">
+                        <label for="country"
+                            class="form-label text-nowrap">type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <select class="form-select" id="country" required="">
+                            <option value="" disabled selected>Select Your type</option>
+                            <option value="product1">Check In</option>
+                            <option value="product2">Block All Parking</option>
+                            <option value="product3">Max Cars Per Day</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 d-flex flex-row align-items-center gap-4 mt-2">
+                        <label for="code"
+                            class="form-label text-nowrap">Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 d-flex flex-row align-items-center gap-4 mt-2">
+                        <label for="code"
+                            class="form-label text-nowrap">Cars&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="d-flex flex-row gap-2 align-items-center mt-3">
+                    <span>Recurrence Rule</span>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" disabled>
+                        <label class="btn btn-outline-secondary" for="btnradio1">&nbsp;&nbsp;&nbsp;</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"checked>
+                        <label class="btn btn-outline-secondary" for="btnradio2">Off</label>
+                    </div>
+                </div>
+                <mat-divider class="mt-2"></mat-divider>
+                <div class="row mt-3">
+                    <span>Optional</span>
+                    <span>Add a long stay exception:</span>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex flex-row align-items-center gap-4 mt-2">
+                        <label for="days" class="form-label fs">Parking allowed if # of parking Days is:</label>
+                        <select class="form-select" id="days" required="">
+                            <option value="" disabled selected>Select Your Parking Days</option>
+                            <option value="7">7+</option>
+                            <option value="8">8+</option>
+                            <option value="9">9+</option>
+                            <option value="10">10+</option>
+                            <option value="11">11+</option>
+                            <option value="12">12+</option>
+                            <option value="13">13+</option>d
+                            <option value="14">14+</option>
+                        </select>
+                        <span class="fs">This will override the blackout added above</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Create Blackout</button>
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

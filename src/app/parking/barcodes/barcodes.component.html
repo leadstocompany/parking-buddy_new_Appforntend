@@ -1,0 +1,79 @@
+<div class="container-fluid main-container">
+    <div class="container-fluid valid">
+        <h2 class="title">BARCODES</h2>
+        <P>You can add barcodes to each of your parking lots, or more specifically the individual parking lot products.
+        </P>
+        <P>If you add the barcode to a parking lot and do not select a product it will apply to all the products tht the
+            parking lot offers</P>
+        <p>You can also setup multiple barcodes with an optional start and/or end date then if someone checks in between
+            those dates the corresponding barcode will be used. If you do not setup a start and/of end date on any of
+            the barcodes the latest barcode you have setup will be used.</p>
+        <P>Those barcodes without a start and end date wil take precedence over thos with one and if you have
+            overlapping dates the one created last will take precedence</P>
+        <p>If you have multiple barcodes without a start date the latest barcode created will take precedence.</p>
+        <div class="d-flex flex-row  align-items-center flex-wrap mt-4">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add
+                Barcode</button>
+        </div>
+    </div>
+
+    <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="staticBackdropLabel">Add Barcode</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="country" class="form-label text-nowrap">Product</label>
+                                <select class="form-select" id="country" required="">
+                                    <option value="" disabled selected>Select Your Product</option>
+                                    <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
+                                </select>
+                                <div class="form-text">optional, applies to all products if not selected
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <label for="country" class="form-label text-nowrap">Barcode Version</label>
+                                <select class="form-select" id="country" required="">
+                                    <option value="" disabled selected>Select Your Product</option>
+                                    <option value="code39_default">Code 39 (default)</option>
+                                    <option value="qr_code">QR Code</option>
+                                    <option value="code39">Code 39</option>
+                                    <option value="code128">Code 128</option>
+                                    <option value="codebar">Codebar</option>
+                                    <option value="ltf14">Itf14 </option>
+                                    <option value="leitcode">Leitcode</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <label for="country" class="form-label text-nowrap">Barcode Text</label>
+                                <select class="form-select" id="country" required="">
+                                    <option value="" disabled selected>Select Your Barcode Text</option>
+                                    <option value="product1">Customer Reservation ID</option>
+                                    <option value="product2">Custom Text</option>
+                                    <option value="product3">Regular express</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <label for="code" class="form-label text-nowrap">Date</label>
+                                <input type="text" class="form-control">
+                                <div class="form-text">optional, applies to all date if not selected</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Create Barcode</button>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

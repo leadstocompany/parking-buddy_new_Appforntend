@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <h2 class="title">IMAGES</h2>
+    <p>Upload images of your parking lot. </p>
+    <div class="container mt-5">
+        <h1>Image Upload</h1>
+        <form (ngSubmit)="uploadImages()" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="imageUpload" class="form-label">Choose images</label>
+                <input type="file" class="form-control" id="imageUpload" (change)="onFilesSelected($event)"
+                    accept="image/*" multiple>
+            </div>
+            <div *ngIf="selectedFiles.length > 0" class="row d-flex flex-row gap-4">
+                <div *ngFor="let file of selectedFiles; let i = index" class="col-md-3" style=" position: relative;">
+                    <img [src]="file.url" alt="Selected Image {{ i }}" class="img-fluid mb-3"
+                        style="max-height: 150px;">
+                    <button type="button" class="btn" (click)="removeImage(i)"
+                        style="position: absolute; top:50px;left:100px"><mat-icon
+                            style="color:red">cancel</mat-icon></button>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="selectedFiles.length === 0">Upload Images</button>
+        </form>
+    </div>
+
+
+</div>

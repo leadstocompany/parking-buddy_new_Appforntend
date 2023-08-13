@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <h2 class="title">Details</h2>
+    <p>Please update the Parking Plot Setting</p>
+    <ul class="nav nav-pills mb-4 gap-4" id="pillNav" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" [routerLink]="['General']">
+                <mat-icon>home</mat-icon>
+                <span>General</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" type="button" role="tab"
+                aria-selected="false" tabindex="-1" [routerLink]="['OperatingHours']">
+                <mat-icon>person</mat-icon>
+                <span>Operating Hours</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" type="button" role="tab"
+                aria-selected="false" tabindex="-1" [routerLink]="['ShuttleHours']">
+                <mat-icon>schedule</mat-icon>
+                <span>Shuttle Hours</span>
+            </button>
+        </li>
+    </ul>
+    <div class="router-outlet">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <h2 class="title">BLACKOUTS</h2>
+    <p>Manage When your parking lot will be visible on our search engine</p>
+    <ul class="nav nav-pills mb-4 gap-4" id="pillNav" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" type="button" role="tab"
+                aria-selected="true" [routerLink]="['AllBlackouts']">
+                <mat-icon>home</mat-icon>
+                <span>All Blackouts</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" type="button" role="tab"
+                aria-selected="false" tabindex="-1" [routerLink]="['Setting']">
+                <mat-icon>settings</mat-icon>
+                <span>Setting</span>
+            </button>
+        </li>
+    </ul>
+    <div class="router-outlet">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
