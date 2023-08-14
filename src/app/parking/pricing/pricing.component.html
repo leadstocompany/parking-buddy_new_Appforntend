@@ -1,127 +1,133 @@
 <div class="container-fluid main-container">
-   <div class="container-fluid valid">
-    <h2 class="title">PRICING</h2>
-    <P>please enter rates</P>
-    <div class="d-flex flex-row gap-2 align-items-center">
-        <span>Calendar Day Price</span>
-        <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btnradio1">Yes</label>
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" disabled>
-            <label class="btn btn-outline-primary" for="btnradio2">&nbsp;&nbsp;&nbsp;</label>
+    <div class="container-fluid valid">
+        <h2 class="title">PRICING</h2>
+        <P>please enter rates</P>
+        <div class="d-flex flex-row gap-2 align-items-center">
+            <span>Calendar Day Price</span>
+            <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio1">Yes</label>
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" disabled>
+                <label class="btn btn-outline-primary" for="btnradio2">&nbsp;&nbsp;&nbsp;</label>
+            </div>
         </div>
-    </div>
-    <div class="d-flex flex-row justify-content-between align-items-center flex-wrap mt-4">
-        <p>(if checked,reservations always rounded up to nearest day and hourly rate calculation are not used)</p>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Rate</button>
-    </div>
-    <div class="table-responsive text-nowrap mt-4">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Daily Rate</th>
-                    <th>Hourly</th>
-                    <th>Day</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>code</th>
-                    <th>Active</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Product</td>
-                    <td>Daily Rate</td>
-                    <td>Hourly</td>
-                    <td>Day</td>
-                    <td>Start Date</td>
-                    <td>End Date</td>
-                    <td>code</td>
-                    <td>Active</td>
-                    <td><mat-icon>edit</mat-icon></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Modal -->
-    <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="staticBackdropLabel">Add Rate</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex flex-column gap-1">
-                    <div class="row">
-                        <div class="col-10 d-flex flex-row align-items-center gap-4">
-                            <label for="country" class="form-label text-nowrap">Product&nbsp; &nbsp;
-                                &nbsp; &nbsp; </label>
-                            <select class="form-select" id="country" required="">
-                                <option value="" disabled>Select Your Product</option>
-                                <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
-                            </select>
-                        </div>
+        <div class="d-flex flex-row justify-content-between align-items-center flex-wrap mt-4">
+            <p>(if checked,reservations always rounded up to nearest day and hourly rate calculation are not used)</p>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Rate</button>
+        </div>
+        <div class="table-responsive text-nowrap mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Daily Rate</th>
+                        <th>Hourly</th>
+                        <th>Day</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>code</th>
+                        <th>Active</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Product</td>
+                        <td>Daily Rate</td>
+                        <td>Hourly</td>
+                        <td>Day</td>
+                        <td>Start Date</td>
+                        <td>End Date</td>
+                        <td>code</td>
+                        <td>Active</td>
+                        <td><mat-icon>edit</mat-icon></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Modal -->
+        <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="staticBackdropLabel">Add Rate</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-8 d-flex flex-row align-items-center gap-4">
-                            <label for="" class="text-nowrap">Daily Rate &nbsp;&nbsp; </label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <div class="modal-body d-flex flex-column gap-1">
+                        <form>
+                            <div class="row">
+                                <div class="col-10 d-flex flex-row align-items-center gap-4">
+                                    <label for="country" class="form-label text-nowrap">Product&nbsp; &nbsp;
+                                        &nbsp; &nbsp; </label>
+                                    <select class="form-select" id="country" required="">
+                                        <option value="" disabled>Select Your Product</option>
+                                        <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-10 d-flex flex-row align-items-center gap-4">
-                            <label for="" class="text-nowrap">Hourly Rate</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <div class="row mt-3">
+                                <div class="col-8 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Daily Rate &nbsp;&nbsp; </label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)">
+                                    </div>
+                                </div>
                             </div>
-                            <span>optional</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-10 d-flex flex-row align-items-center gap-4">
-                            <label for="code" class="form-label text-nowrap">code &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                &nbsp; </label>
-                            <input type="text" class="form-control">
-                            <span>optional</span>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center mt-3">
-                        <div class="col-7">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Supply weekly Rate
-                                </label>
+                            <div class="row">
+                                <div class="col-10 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Hourly Rate</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)">
+                                    </div>
+                                    <span>optional</span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-8 d-flex flex-row align-items-center gap-4">
-                            <label for="" class="text-nowrap">Weekly Rate &nbsp;&nbsp; </label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <div class="row">
+                                <div class="col-10 d-flex flex-row align-items-center gap-4">
+                                    <label for="code" class="form-label text-nowrap">code &nbsp; &nbsp; &nbsp; &nbsp;
+                                        &nbsp;
+                                        &nbsp; </label>
+                                    <input type="text" class="form-control">
+                                    <span>optional</span>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-7">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Supply weekly Rate
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-8 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Weekly Rate &nbsp;&nbsp; </label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Create Rate</button>
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Create Rate</button>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-   </div>
-   <div class="container-fluid expried">
-    <h2 class="title">EXPIRED RATES</h2>
-    <P>Below are rates which have been deleted or expired within the last 12 months</P>
-   </div>
+    <div class="container-fluid expried">
+        <h2 class="title">EXPIRED RATES</h2>
+        <P>Below are rates which have been deleted or expired within the last 12 months</P>
+    </div>
 </div>

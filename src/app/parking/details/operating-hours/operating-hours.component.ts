@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-operating-hours',
@@ -16,9 +16,7 @@ export class OperatingHoursComponent {
 
   constructor(private _formBuilder: FormBuilder) { }
   ngOnInit() {
-    this.operatingForm = this._formBuilder.group({
-      operationHours: ['']
-    })
+    this.initForm();
     this.operationTime = [
       {
         day: 'Monday',
@@ -60,7 +58,31 @@ export class OperatingHoursComponent {
     ]
   }
 
+
+  initForm() {
+    this.operatingForm = this._formBuilder.group({
+      operationHours: ['limited'],
+      openTime0: [''],
+      openTime1: [''],
+      openTime2: [''],
+      openTime3: [''],
+      openTime4: [''],
+      openTime5: [''],
+      openTime6: [''],
+      closeTime0: [''],
+      closeTime1: [''],
+      closeTime2: [''],
+      closeTime3: [''],
+      closeTime4: [''],
+      closeTime5: [''],
+      closeTime6: [''],
+    });
+  }
+
   public saveForm(event: any): void {
-    console.log(this.operatingForm)
+    console.log(this.operatingForm.value)
+  }
+  get value(){
+     return this.operatingForm.get('operationHours')?.value;
   }
 }

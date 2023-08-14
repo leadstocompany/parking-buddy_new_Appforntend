@@ -21,7 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AllBlackoutsComponent } from './blackouts/all-blackouts/all-blackouts.component';
 import { SettingComponent } from './blackouts/setting/setting.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { CalenderComponent } from './calender/calender.component'; 
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 @NgModule({
   declarations: [
     SidebarComponent,
@@ -41,6 +43,7 @@ import { FormsModule } from '@angular/forms';
     ShuttleHoursComponent,
     AllBlackoutsComponent,
     SettingComponent,
+    CalenderComponent,
   ],
   imports: [
     CommonModule,
@@ -48,7 +51,8 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxMaterialTimepickerModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

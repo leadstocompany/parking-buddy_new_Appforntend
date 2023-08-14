@@ -1,4 +1,4 @@
-import { Component,NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
@@ -7,50 +7,55 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   styleUrls: ['./parking.component.scss']
 })
 export class ParkingComponent {
-  
-  public routingOption: Array<{ name: string, router: string,active:boolean }> = [
+
+  public routingOption: Array<{ name: string, router: string, active: boolean }> = [
+    {
+      name: 'Calender',
+      router: 'Calender',
+      active: false
+    },
     {
       name: 'Details',
       router: 'Details',
-      active:false
-    },{
+      active: false
+    }, {
       name: 'Products',
       router: 'Products',
-      active:false
-    },{
+      active: false
+    }, {
       name: 'Pricing',
       router: 'Pricing',
-      active:false
-    },{
+      active: false
+    }, {
       name: 'Blackouts',
       router: 'Blackouts',
-      active:false
-    },{
+      active: false
+    }, {
       name: 'TaxesAndFees',
       router: 'TaxesAndFees',
-      active:false
-    },{
+      active: false
+    }, {
       name: 'Amenities',
       router: 'Amenities',
-      active:false
-    },{
+      active: false
+    }, {
       name: 'Descriptions',
       router: 'Descriptions',
-      active:false
-    },{
+      active: false
+    }, {
       name: 'Images',
       router: 'Images',
-      active:false
+      active: false
     },
     {
-      name:'Notifications',
-      router:'Notifications',
-      active:false
+      name: 'Notifications',
+      router: 'Notifications',
+      active: false
     },
     {
-      name:'Barcodes',
-      router:'Barcodes',
-      active:false
+      name: 'Barcodes',
+      router: 'Barcodes',
+      active: false
     }
   ]
 

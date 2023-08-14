@@ -16,10 +16,12 @@ import { OperatingHoursComponent } from './details/operating-hours/operating-hou
 import { ShuttleHoursComponent } from './details/shuttle-hours/shuttle-hours.component';
 import { AllBlackoutsComponent } from './blackouts/all-blackouts/all-blackouts.component';
 import { SettingComponent } from './blackouts/setting/setting.component';
+import { CalenderComponent } from './calender/calender.component';
 const routes: Routes = [
   {
     path: '', component: ParkingComponent, children: [
       { path: '', redirectTo: 'Details', pathMatch: 'full' },
+      { path: 'Calender',component:CalenderComponent},
       {
         path: 'Details', component: DetailsComponent, children: [
           {
