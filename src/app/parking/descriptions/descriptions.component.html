@@ -15,7 +15,7 @@
                 </span>
                 <div class="form-check d-flex flex-row align-items-center">
                     <label for="flexCheckDefault" class="form-check-label form-text">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [(ngModel)]="modal.safety">
                         Specify if this tax amount should be used to calculate on POST tax
                         calculation
                     </label>
@@ -44,5 +44,5 @@
         <p>Email Instructions</p>
         <ckeditor [editor]="Editor" [(ngModel)]="modal.emailInstruction"></ckeditor>
     </div>
-    <button class="btn btn-primary mt-3 mb-4">save</button>
+    <button class="btn btn-primary mt-3 mb-4" (click)="submitForm()">save</button>
 </div>

@@ -32,10 +32,7 @@ export class AmenitiesComponent {
 
   ];
   selectedAmenities: any[] = []; // To store selected amenities
-
   onFormSubmit() {
-    // Here you can access the selected amenities from the selectedAmenities array
     console.log(this.selectedAmenities);
-    // You can perform further actions with the selected amenities, such as sending them to a server.
   }
 }

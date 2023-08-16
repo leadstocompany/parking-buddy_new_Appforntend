@@ -55,11 +55,8 @@ export class ImagesComponent {
 
   uploadImages() {
     if (this.selectedFiles.length > 0) {
-      // Here you can implement the logic to upload the images using a service or API.
-      // You would typically send each selectedFile.file to a backend endpoint for processing.
       console.log('Uploading images:', this.selectedFiles);
       console.log('uploading logo', this.logo)
-      // Reset the selectedFiles and previews after upload if needed
       this.selectedFiles = [];
     }
   }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-barcodes',
@@ -26,4 +27,18 @@ export class BarcodesComponent {
     'Valet Rooftop - Oversized',
     'Valet Curbside - Oversized'
   ];
+  public barCodes !: FormGroup;
+  constructor(private _formBuilder:FormBuilder){}
+
+  ngOnInit():void{
+    this.barCodes = this._formBuilder.group({
+      product:['Self Uncovered'],
+      barcodeVersion:['code39_default'],
+      barcodeText:['Customer Reservation ID'],
+      date:[new Date()]
+    })
+  }
+  public createBarcode():void{
+    console.log(this.barCodes.value)
+  }
 }

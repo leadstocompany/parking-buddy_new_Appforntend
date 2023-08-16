@@ -27,12 +27,11 @@
                 </div>
 
                 <div class="modal-body">
-                    <form>
+                    <form [formGroup]="barCodes">
                         <div class="row">
                             <div class="col-12">
                                 <label for="country" class="form-label text-nowrap">Product</label>
-                                <select class="form-select" id="country" required="">
-                                    <option value="" disabled selected>Select Your Product</option>
+                                <select class="form-select" id="country" required="" formControlName="product">
                                     <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
                                 </select>
                                 <div class="form-text">optional, applies to all products if not selected
@@ -40,7 +39,7 @@
                             </div>
                             <div class="col-12 mt-3">
                                 <label for="country" class="form-label text-nowrap">Barcode Version</label>
-                                <select class="form-select" id="country" required="">
+                                <select class="form-select" id="country" required="" formControlName="barcodeVersion">
                                     <option value="code39_default">Code 39 (default)</option>
                                     <option value="qr_code">QR Code</option>
                                     <option value="code39">Code 39</option>
@@ -52,15 +51,15 @@
                             </div>
                             <div class="col-12 mt-3">
                                 <label for="country" class="form-label text-nowrap">Barcode Text</label>
-                                <select class="form-select" id="country" required="">
-                                    <option value="product1">Customer Reservation ID</option>
-                                    <option value="product2">Custom Text</option>
-                                    <option value="product3">Regular express</option>
+                                <select class="form-select" id="country" required="" formControlName="barcodeText">
+                                    <option value="Customer Reservation ID">Customer Reservation ID</option>
+                                    <option value="Custom Text">Custom Text</option>
+                                    <option value="Regular express">Regular express</option>
                                 </select>
                             </div>
                             <div class="col-12 mt-3 overflow-auto" >
                                 <label for="code" class="form-label text-nowrap">Date</label>
-                                <input type="text" class="form-control z-3" bsDatepicker [bsConfig]="{ adaptivePosition: true }">
+                                <input type="text" class="form-control z-3" bsDatepicker [bsConfig]="{ adaptivePosition: true }" formControlName="date">
                                 <div class="form-text">optional, applies to all date if not selected</div>
                             </div>
                         </div>
@@ -68,7 +67,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Create Barcode</button>
+                    <button type="button" class="btn btn-primary" (click)="createBarcode()">Create Barcode</button>
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
                 </div>
             </div>
