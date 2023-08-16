@@ -8,17 +8,14 @@ import { Component } from '@angular/core';
 export class BarcodesComponent {
   public parkingOptions: string[] = [
     'Self Uncovered',
-    'You',
     'Self Rooftop',
     'Self Indoor',
-    'Type',
     'Valet Indoor',
     'Valet Covered',
     'Valet Ur',
     'Valet Rooftop',
     'Valet Curbside',
     'Self Uncovered - Oversized',
-    'Save',
     'Self Covered - Oversized',
     'Self Indoor - Oversized',
     'Self Rooftop - Oversized',

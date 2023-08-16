@@ -1,1 +1,58 @@
-<app-operating-hours></app-operating-hours>
+<div class="container">
+    <form [formGroup]="operatingForm" class="form g-3 needs-validation" novalidate (ngSubmit)="saveForm($event)">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="operationHours" class="form-label">
+                    Operation Hours *
+                </label>
+                <select class="form-select" id="operationHours" formControlName="operationHours" required="">
+                    <option value="24/7">24/7</option>
+                    <option value="limited">Limited</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please Select Operation Hours
+                </div>
+            </div>
+        </div>
+        <mat-divider class="mt-4"></mat-divider>
+        <div class="table-responsive text-nowrap mt-4">
+            <table class="table" *ngIf="value == 'limited'">
+                <thead>
+                    <tr>
+                        <th scope="col">Day</th>
+                        <th scope="col">Open</th>
+                        <th scope="col">Closed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of operationTime; let i=index">
+                        <th scope="row"> <span>{{data.day}}</span></th>
+                        <td>
+                            <div class="d-flex flex-row position-relative">
+                                <input class="input-" [ngxTimepicker]="toggleTimepicker" [disableClick]="true" readonly
+                                    formControlName="openTime{{i}}" (click)="toggleTimepicker.open()">
+                                <ngx-material-timepicker-toggle [for]="toggleTimepicker" buttonAlign="left"
+                                    class="position-absolute" style="margin-top:5px;"></ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row position-relative">
+                                <input class="input-" [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" readonly
+                                    formControlName="closeTime{{i}}" (click)="toggleTimepicker1.open()">
+                                <ngx-material-timepicker-toggle [for]="toggleTimepicker1" class="position-absolute"
+                                    style="margin-top:5px;"></ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row pb-3 mt-2">
+            <div class="col-2">
+                <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

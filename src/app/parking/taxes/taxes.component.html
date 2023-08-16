@@ -52,12 +52,11 @@
                     </div>
 
                     <div class="modal-body">
-                        <form>
+                        <form [formGroup]="taxes">
                             <div class="row">
                                 <div class="col-12">
                                     <label for="country" class="form-label text-nowrap">Category</label>
-                                    <select class="form-select" id="country" required="">
-                                        <option value="" disabled selected>Select Your Category</option>
+                                    <select class="form-select" id="country" required="" formControlName="category">
                                         <option *ngFor="let value of taxList " [value]="value">{{value}}</option>
                                     </select>
                                     <div class="form-text">choose the appropriate category type for the applied fee/tax
@@ -67,11 +66,10 @@
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <label for="" class="text-nowrap">Amount Type</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">$</span>
-                                        <input type="text" class="form-control"
-                                            aria-label="Amount (to the nearest dollar)">
-                                    </div>
+                                    <select class="form-select" id="country" required="" formControlName="amountType">
+                                        <option value="fixed_amount">Fixed</option>
+                                        <option value="per_day">Percentage</option>
+                                    </select>
                                     <div class="form-text">Specify whether the fee/tax is a percentage of dollar amount.
                                     </div>
                                 </div>
@@ -82,7 +80,7 @@
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
                                         <input type="text" class="form-control"
-                                            aria-label="Amount (to the nearest dollar)">
+                                            aria-label="Amount (to the nearest dollar)" formControlName="amount">
                                     </div>
                                     <div class="form-text">Enter the fee/tax amount.</div>
                                 </div>
@@ -90,8 +88,7 @@
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <label for="country" class="form-label text-nowrap">Type</label>
-                                    <select class="form-select" id="country" required="">
-                                        <option value="" disabled selected>Select Your Type</option>
+                                    <select class="form-select" id="country" required="" formControlName="type">
                                         <option value="fixed_amount">Fixed Amount</option>
                                         <option value="per_day">Per Day</option>
                                         <option value="per_calendar_day">Per Calendar Day</option>
@@ -108,8 +105,7 @@
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <label for="country" class="form-label text-nowrap">When To Apply</label>
-                                    <select class="form-select" id="country" required="">
-                                        <option value="" disabled selected>Select Your Tax</option>
+                                    <select class="form-select" id="country" required="" formControlName="applyTax">
                                         <option value="per_tax">Pre Tax</option>
                                         <option value="post_tax">Post Tax</option>
                                     </select>
@@ -130,7 +126,7 @@
                                     <div class="form-check d-flex flex-row align-items-center">
                                         <label for="flexCheckDefault" class="form-check-label form-text">
                                             <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
+                                                id="flexCheckDefault" formControlName="postTaxCal">
                                             Specify if this tax amount should be used to calculate on POST tax
                                             calculation
                                         </label>
@@ -142,7 +138,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Create Tax</button>
+                        <button type="button" class="btn btn-primary" (click)="createTax">Create Tax</button>
                         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
                     </div>
                 </div>

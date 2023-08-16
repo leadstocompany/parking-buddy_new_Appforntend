@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ProductsService } from 'src/app/service/products.service';
+
 
 @Component({
   selector: 'app-products',
@@ -6,19 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
-  public parkingOptions:string[] = [
+  @ViewChild('staticBackdrop') modalElement!: ElementRef;
+  public parkingOptions: string[] = [
     'Self Uncovered',
-    'You',
     'Self Rooftop',
     'Self Indoor',
-    'Type',
     'Valet Indoor',
     'Valet Covered',
     'Valet Ur',
     'Valet Rooftop',
     'Valet Curbside',
     'Self Uncovered - Oversized',
-    'Save',
     'Self Covered - Oversized',
     'Self Indoor - Oversized',
     'Self Rooftop - Oversized',
@@ -29,4 +29,19 @@ export class ProductsComponent {
     'Valet Rooftop - Oversized',
     'Valet Curbside - Oversized'
   ];
+  public productType: string = 'Self Uncovered';
+  constructor(private _productService: ProductsService) { }
+  public createProduct() {
+    const data = { type: this.productType }
+    this._productService.createProduct(data).subscribe({
+      next: (res) => {
+        console.log(res)
+        this.modalElement.nativeElement.click();
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+
+  }
 }

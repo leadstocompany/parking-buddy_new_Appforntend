@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { TaxesService } from 'src/app/service/taxes.service';
 
 @Component({
   selector: 'app-taxes',
@@ -6,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./taxes.component.scss']
 })
 export class TaxesComponent {
-   public taxList:string[]= [
+  public taxList: string[] = [
     '✓ 10% Airport Tax',
     '10% City of Chicago Tax',
     '6.00% Sales Tax',
@@ -46,5 +48,35 @@ export class TaxesComponent {
     'Taxes & Surcharges',
     'Trip Fee'
   ];
+  taxes!: FormGroup
+  constructor(private _formBuilder: FormBuilder, private _taxeService: TaxesService) { }
   
+  ngOnInit() {
+    this.taxes = this._formBuilder.group({
+      category: [null],
+      amountType: [null],
+      amount: [null],
+      type: [null],
+      applyTax: [null],
+      postTaxCal: [null]
+    })
+  }
+  public createTax(): void {
+    const formData = new FormData();
+    formData.append('', this.taxes.controls[''].value)
+    formData.append('', this.taxes.controls[''].value)
+    formData.append('', this.taxes.controls[''].value)
+    formData.append('', this.taxes.controls[''].value)
+    formData.append('', this.taxes.controls[''].value)
+    formData.append('', this.taxes.controls[''].value)
+    this._taxeService.createTaxService(formData).subscribe({
+      next: (res) => {
+        console.log(res)
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
 }

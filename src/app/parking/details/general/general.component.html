@@ -2,13 +2,28 @@
     <form [formGroup]='generalForm' class="form g-3 needs-validation" novalidate (ngSubmit)="saveForm($event)">
         <div class="row">
             <div class="col-md-4">
-                <label for="street" class="form-label"> Street *</label>
-                <input type="text" class="form-control" id="street" placeholder="Enter Street" formControlName="street"
-                    required="">
+                <label for="country" class="form-label">Country *</label>
+                <select class="form-select" id="country" formControlName="country" required=""
+                    (change)="onCountryChange($event)">
+                    <option *ngFor="let country of countries | keyvalue" [value]="country.key">
+                        {{ country.value }}
+                    </option>
+                </select>
                 <div class="invalid-feedback">
-                    Please Enter Street
+                    Please select Country
                 </div>
             </div>
+
+            <div class="col-md-4">
+                <label for="state" class="form-label">State *</label>
+                <select class="form-select" id="state" formControlName="state" required="">
+                    <option *ngFor="let st of state" [value]="st.name">{{st.name}}</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select State
+                </div>
+            </div>
+
             <div class="col-md-4">
                 <label for="city" class="form-label">City *</label>
                 <input type="text" class="form-control" id="city" placeholder="Enter city" formControlName="city"
@@ -17,31 +32,15 @@
                     Please Enter City
                 </div>
             </div>
-            <div class="col-md-4">
-                <label for="country" class="form-label">Country *</label>
-                <select class="form-select" id="country" formControlName="country" required="">
-                    <option value="" disabled>Select Your Country</option>
-                    <option *ngFor="let c of country">
-                        {{c}}
-                    </option>
-                </select>
-                <div class="invalid-feedback">
-                    Please select Country
-                </div>
-            </div>
+
         </div>
         <div class="row">
             <div class="col-md-4">
-                <label for="state" class="form-label">State *</label>
-                <select class="form-select" id="state" formControlName="state" required="">
-                    <option value="" disabled>Select Your State</option>
-                    <option *ngFor="let c of country">
-
-                        {{c}}
-                    </option>
-                </select>
+                <label for="street" class="form-label"> Street *</label>
+                <input type="text" class="form-control" id="street" placeholder="Enter Street" formControlName="street"
+                    required="">
                 <div class="invalid-feedback">
-                    Please select State
+                    Please Enter Street
                 </div>
             </div>
             <div class="col-md-4">

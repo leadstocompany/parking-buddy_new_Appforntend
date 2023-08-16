@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { DetailsService } from 'src/app/service/details.service';
 
 @Component({
   selector: 'app-operating-hours',
@@ -7,6 +8,7 @@ import { AbstractControl, FormGroup, FormBuilder, Validators, FormArray } from '
   styleUrls: ['./operating-hours.component.scss']
 })
 export class OperatingHoursComponent {
+
   operatingForm!: FormGroup
   operationTime: Array<{
     day: string
@@ -14,7 +16,7 @@ export class OperatingHoursComponent {
     closed: string
   }> = []
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, private _detailService: DetailsService) { }
   ngOnInit() {
     this.initForm();
     this.operationTime = [
@@ -80,9 +82,32 @@ export class OperatingHoursComponent {
   }
 
   public saveForm(event: any): void {
-    console.log(this.operatingForm.value)
+    const fromData = new FormData();
+    fromData.append('monday_open_time', this.operatingForm.controls['openTime0'].value)
+    fromData.append('monday_close_time', this.operatingForm.controls['closeTime0'].value)
+    fromData.append('tuesday_open_time', this.operatingForm.controls['openTime1'].value)
+    fromData.append('tuesday_close_time', this.operatingForm.controls['closeTime1'].value)
+    fromData.append('wednesday_open_time', this.operatingForm.controls['openTime2'].value)
+    fromData.append('wednesday_close_time', this.operatingForm.controls['closeTime2'].value)
+    fromData.append('thursday_open_time', this.operatingForm.controls['openTime3'].value)
+    fromData.append('thursday_close_time', this.operatingForm.controls['closeTime3'].value)
+    fromData.append('friday_open_time', this.operatingForm.controls['openTime4'].value)
+    fromData.append('friday_close_time', this.operatingForm.controls['closeTime4'].value)
+    fromData.append('saturday_open_time', this.operatingForm.controls['openTime5'].value)
+    fromData.append('saturday_close_time', this.operatingForm.controls['closeTime5'].value)
+    fromData.append('sunday_open_time', this.operatingForm.controls['openTime6'].value)
+    fromData.append('sunday_close_time', this.operatingForm.controls['closeTime6'].value)
+    fromData.append('all_days', this.operatingForm.controls['operationHours'].value == 'limit' ? 'true' : 'false')
+    this._detailService.createOperatingHours(fromData).subscribe({
+      next: (res) => {
+        console.log(res)
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
-  get value(){
-     return this.operatingForm.get('operationHours')?.value;
+  get value() {
+    return this.operatingForm.get('operationHours')?.value;
   }
 }

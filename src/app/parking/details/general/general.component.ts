@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import data from './country.json'
-
+import countryState from './country-states.json'
+import { DetailsService } from 'src/app/service/details.service';
+import { HttpErrorResponse } from '@angular/common/http';
+interface Country {
+  [code: string]: string;
+};
 @Component({
   selector: 'app-general',
   templateUrl: './general.component.html',
@@ -10,31 +15,56 @@ import data from './country.json'
 export class GeneralComponent {
   generalForm!: FormGroup
   country: Array<string> = data.country;
+  countries: Country = countryState.country;
+  allState: any = countryState.states;
+  state: any = this.allState['IN'];
 
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private _detailService: DetailsService) { }
 
   ngOnInit() {
     this.generalForm = this.formBuilder.group({
       street: ['', Validators.required],
       city: ['', Validators.required],
-      country: ['', Validators.required],
-      state: ['', Validators.required],
+      country: ['IN', Validators.required],
+      state: ['Madhya Pradesh', Validators.required],
       zipCode: ['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       shuttleNumber: ['', Validators.required],
       flexNumber: ['', Validators.required],
       shuttleBus: ['',]
     })
-  }
 
-  onSubmit() {
+    console.log(countryState)
   }
-
 
   public saveForm(event: any) {
-    console.log(this.generalForm.controls)
     this.validate(event)
+    if (this.generalForm.invalid) {
+      var formData: any = new FormData();
+      formData.append('country', this.generalForm.controls['country'].value)
+      formData.append('state', this.generalForm.controls['state'].value)
+      formData.append('city', this.generalForm.controls['city'].value)
+      formData.append('street', this.generalForm.controls['street'].value)
+      formData.append('zipcode', this.generalForm.controls['zipCode'].value)
+      formData.append('phone_number', this.generalForm.controls['phoneNumber'].value)
+      formData.append('shuttle_phone_number', this.generalForm.controls['shuttleNumber'].value)
+      formData.append('fax_number', this.generalForm.controls['flexNumber'].value)
+      formData.append('shuttle_bus', this.generalForm.controls['shuttleBus'].value)
+      alert('valid')
+      this._detailService.createBasicDetailsService(formData).subscribe({
+        next: (res) => {
+          console.log(res)
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error)
+        }
+      })
+    }
+  }
+
+  onCountryChange(event: any) {
+    const selectedCountryCode = this.generalForm.get('country')!.value;
+    this.state = this.allState[selectedCountryCode]
   }
 
   validate(event: any) {

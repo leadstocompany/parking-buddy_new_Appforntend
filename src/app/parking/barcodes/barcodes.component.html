@@ -41,7 +41,6 @@
                             <div class="col-12 mt-3">
                                 <label for="country" class="form-label text-nowrap">Barcode Version</label>
                                 <select class="form-select" id="country" required="">
-                                    <option value="" disabled selected>Select Your Product</option>
                                     <option value="code39_default">Code 39 (default)</option>
                                     <option value="qr_code">QR Code</option>
                                     <option value="code39">Code 39</option>
@@ -54,15 +53,14 @@
                             <div class="col-12 mt-3">
                                 <label for="country" class="form-label text-nowrap">Barcode Text</label>
                                 <select class="form-select" id="country" required="">
-                                    <option value="" disabled selected>Select Your Barcode Text</option>
                                     <option value="product1">Customer Reservation ID</option>
                                     <option value="product2">Custom Text</option>
                                     <option value="product3">Regular express</option>
                                 </select>
                             </div>
-                            <div class="col-12 mt-3">
+                            <div class="col-12 mt-3 overflow-auto" >
                                 <label for="code" class="form-label text-nowrap">Date</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control z-3" bsDatepicker [bsConfig]="{ adaptivePosition: true }">
                                 <div class="form-text">optional, applies to all date if not selected</div>
                             </div>
                         </div>

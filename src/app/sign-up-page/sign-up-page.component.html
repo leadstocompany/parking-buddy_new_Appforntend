@@ -1,0 +1,60 @@
+<div class="container-fluid d-flex justify-content-center" style="height: 100%;">
+    <div class="row d-flex flex-row justify-content-center align-items-center">
+        <div class="col-md-4">
+            <h2 class="text-center mt-4">Sign Up</h2>
+            <form [formGroup]="signupForm" (ngSubmit)="submitForm()">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" id="firstName" class="form-control" formControlName="firstName" [ngClass]="{
+                        'is-invalid': signupForm.get('firstName')!.invalid && signupForm.get('firstName')!.touched}" />
+                        <div *ngIf="signupForm.get('firstName')!.invalid && signupForm.get('firstName')!.touched"
+                            class="invalid-feedback">
+                            Please enter a valid First Name.
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" formControlName="lastName" [ngClass]="{
+                        'is-invalid': signupForm.get('lastName')!.invalid && signupForm.get('lastName')!.touched}" />
+                        <div *ngIf="signupForm.get('lastName')!.invalid && signupForm.get('lastName')!.touched"
+                            class="invalid-feedback">
+                            Please enter a valid Last Name.
+                        </div>
+                    </div>
+                    <div class="col-12 form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-control" formControlName="email" [ngClass]="{
+                        'is-invalid': signupForm.get('email')!.invalid && signupForm.get('email')!.touched
+                      }" />
+                        <div *ngIf="signupForm.get('email')!.invalid && signupForm.get('email')!.touched"
+                            class="invalid-feedback">
+                            Please enter a valid email address.
+                        </div>
+
+                    </div>
+                    <div class="col-12 form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" class="form-control" formControlName="password" [ngClass]="{
+                        'is-invalid': signupForm.get('password')!.invalid && signupForm.get('password')!.touched
+                      }" />
+                        <div *ngIf="signupForm.get('password')!.invalid && signupForm.get('password')!.touched"
+                            class="invalid-feedback">
+                            Please enter a valid password.
+                        </div>
+                    </div>
+                    <div class="col-12 text-end mt-3">
+                        <p style="color: white;">Already have an account? <a href="#">Sign In</a></p>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block mt-3"
+                            [disabled]="signupForm.invalid">Sign-Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 parking-image">
+            <img src="assets/signup.png" alt="Parking Lot" class="img-fluid">
+        </div>
+    </div>
+</div>

@@ -1,1 +1,92 @@
-<p>calender works!</p>
+<div class="container-fluid">
+    <h2 class="title">CALENDER</h2>
+    <div class="tabs-container row">
+        <div class="col-md-4 tab" [ngClass]="{'activeTab': activeTab === 'checkIn'}" (click)="showCheckIn()">
+            <div class="tab-child">
+                <h1>Check-In</h1>
+            </div>
+            <div class="tab-child">
+                <h1 style="font-size: 5rem; text-align: center;">03</h1>
+            </div>
+        </div>
+        <div class="col-md-4 tab" [ngClass]="{'activeTab': activeTab === 'checkOut'}" (click)="showCheckOut()">
+            <div class="tab-child">
+                <h1>Check-Out</h1>
+            </div>
+            <div class="tab-child">
+                <h1 style="font-size: 5rem; text-align: center;">03</h1>
+            </div>
+        </div>
+    </div>
+    <mat-divider class="mt-4"></mat-divider>
+    <div class="tab-content" [ngClass]="{'active': isCheckInActive}" id="checkInContent">
+        <div class="table-responsive text-nowrap mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>User Name</th>
+                        <th>vehicle Number</th>
+                        <th>Check In Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>user1</td>
+                        <td>mp49</td>
+                        <td>8/16/2023</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>user1</td>
+                        <td>mp49</td>
+                        <td>8/16/2023</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>user1</td>
+                        <td>mp49</td>
+                        <td>8/16/2023</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="tab-content" [ngClass]="{'active': isCheckOutActive}" id="checkOutContent">
+        <div class="table-responsive text-nowrap mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>User Name</th>
+                        <th>vehicle Number</th>
+                        <th>Check Out Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>user1</td>
+                        <td>mp49</td>
+                        <td>8/16/2023</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>user1</td>
+                        <td>mp49</td>
+                        <td>8/16/2023</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>user1</td>
+                        <td>mp49</td>
+                        <td>8/16/2023</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

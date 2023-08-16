@@ -23,7 +23,8 @@ import { SettingComponent } from './blackouts/setting/setting.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
 import { CalenderComponent } from './calender/calender.component'; 
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [
     SidebarComponent,
@@ -52,7 +53,9 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     ReactiveFormsModule,
     FormsModule,
     CKEditorModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    BsDatepickerModule.forRoot(),
+    HttpClientModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
