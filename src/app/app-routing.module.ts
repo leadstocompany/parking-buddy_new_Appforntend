@@ -7,7 +7,8 @@ const routes: Routes = [
   // { path: '', redirectTo: "parking/Details/General", pathMatch: 'full' },
   { path: '', component: SignUpPageComponent },
   { path: 'login', component: SignInPageComponent },
-  { path: 'parking', loadChildren: () => import('./parking/parking.module').then(m => m.ParkingModule) }
+  { path: 'parking', loadChildren: () => import('./parking/parking.module').then(m => m.ParkingModule) },
+  { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) }
 ];
 
 @NgModule({

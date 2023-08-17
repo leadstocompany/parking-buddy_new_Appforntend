@@ -1,0 +1,11 @@
+<!-- <google-map [center]="userLocation" [zoom]="zoom">
+    <map-marker *ngFor="let outlet of outlets" [position]="outlet.latLng" [label]="outlet.label"
+        [options]="{ icon: outlet.icon }" (mapClick)="showOutletDirections(outlet)"></map-marker>
+    <map-ground-overlay *ngFor="let outlet of outlets" [url]="outlet.url" [bounds]="outlet.latLng"></map-ground-overlay>
+
+    <directions-renderer *ngIf="selectedOutlet.latLng" [origin]="userLocation" [destination]="selectedOutlet.latLng"></directions-renderer>
+</google-map> -->
+
+<google-map height="400px" width="750px" [center]="center" [zoom]="zoom">
+    <map-ground-overlay [url]="imageUrl" [bounds]="imageBounds"></map-ground-overlay>
+</google-map>
