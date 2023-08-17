@@ -51,7 +51,10 @@
         </div>
         <div class="row pb-3 mt-2">
             <div class="col-2">
-                <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid">Save</button>
+                <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid"  *ngIf="spinner==false">Save</button>
             </div>
         </div>
     </form>

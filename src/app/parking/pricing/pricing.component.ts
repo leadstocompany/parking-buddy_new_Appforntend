@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PricingService } from 'src/app/service/pricing.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
   selector: 'app-pricing',
   templateUrl: './pricing.component.html',
@@ -11,6 +12,7 @@ export class PricingComponent {
   editId: string = ''
   @ViewChild('staticBackdrop') modalElement!: ElementRef;
   public calender_day_price: string = "No";
+  spinner: boolean = false
   public parkingOptions: string[] = [
     'Self Uncovered',
     'Self Rooftop',
@@ -76,7 +78,7 @@ export class PricingComponent {
     monthlyRate: null,
     active: true
   }]
-  constructor(private _formBuilder: FormBuilder, private _pricingService: PricingService) { }
+  constructor(private _formBuilder: FormBuilder, private _pricingService: PricingService,private _snackbarService: SnackbarService) { }
 
   ngOnInit() {
     this.addRate = this._formBuilder.group({
@@ -92,23 +94,38 @@ export class PricingComponent {
   }
 
   public submitForm(): void {
+    this.spinner = true
     // console.log(this.calender_day_price)
     // console.log(this.addRate.value)
-    const formData = new FormData();
-    formData.append('', this.addRate.controls['product'].value)
-    formData.append('', this.addRate.controls['date'].value)
-    formData.append('', this.addRate.controls['dailyRate'].value)
-    formData.append('', this.addRate.controls['hourlyRate'].value)
-    formData.append('', this.addRate.controls['code'].value)
-    formData.append('', this.addRate.controls['supplyWeeklyRate'].value)
-    formData.append('', this.addRate.controls['weeklyRate'].value)
-    formData.append('', this.addRate.controls['monthlyRate'].value)
-    this._pricingService.createPricing(formData).subscribe({
+    // const formData = new FormData();
+    // formData.append('', this.addRate.controls['product'].value)
+    // formData.append('', this.addRate.controls['date'].value)
+    // formData.append('', this.addRate.controls['dailyRate'].value)
+    // formData.append('', this.addRate.controls['hourlyRate'].value)
+    // formData.append('', this.addRate.controls['code'].value)
+    // formData.append('', this.addRate.controls['supplyWeeklyRate'].value)
+    // formData.append('', this.addRate.controls['weeklyRate'].value)
+    // formData.append('', thisS.addRate.controls['monthlyRate'].value)
+    const data = {
+      "dail_rate":this.addRate.controls['dailyRate'].value,
+      "hourly_rate": this.addRate.controls['hourlyRate'].value,
+      "weekly_rate": this.addRate.controls['weeklyRate'].value,
+      "monthly_rate":this.addRate.controls['monthlyRate'].value,
+      "code": this.addRate.controls['code'].value,
+      "property":localStorage.getItem('detailsId'),
+      "product": localStorage.getItem('productId')
+  }
+
+
+    this._pricingService.createPricing(data).subscribe({
       next: (res) => {
-        console.log(res)
+        this.spinner = false
+        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.modalElement.nativeElement.click();
       },
       error: (error) => {
+        this.spinner = false
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
         console.log(error)
       }
     })

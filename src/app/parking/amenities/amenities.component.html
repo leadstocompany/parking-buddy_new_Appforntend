@@ -14,5 +14,8 @@
             </mat-selection-list>
         </div>
     </div>
-    <button class="btn btn-primary mt-3" (click)="onFormSubmit()">save</button>
+    <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <button class="btn btn-primary mt-3" (click)="onFormSubmit()"  *ngIf="spinner==false">save</button>
 </div>

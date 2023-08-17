@@ -10,15 +10,9 @@ export class AmentitiesService {
 
   constructor(private _http: HttpClient) { }
 
-  createBasicDetailsService(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+  createAmenities(data:any): Observable<any> {
+    console.log(data)
+    return this._http.post(`http://139.84.137.166/parking_location/add/amenities/`,data)
   }
 
-  createOperatingHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
-  }
-
-  createShuttleHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
-  }
 }

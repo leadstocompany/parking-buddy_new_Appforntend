@@ -149,7 +149,10 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" (click)="submitForm()">Create Rate</button>
+                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="submitForm()" *ngIf="spinner==false">Create Rate</button>
                         <button type="button" #staticBackdrop class="btn btn-warning"
                             data-bs-dismiss="modal">cancel</button>
                     </div>
@@ -178,7 +181,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <!-- <div class="row mt-3">
                                 <div class="col-12 d-flex flex-row align-items-center gap-4 mb-3">
                                     <label for="date" class="form-label text-nowrap">Date &nbsp; &nbsp;
                                         &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</label>
@@ -186,7 +189,7 @@
                                         placeholder="Pick Start and End Date" bsDaterangepicker autocapitalize="off"
                                         formControlName="date">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row mt-3">
                                 <div class="col-8 d-flex flex-row align-items-center gap-4">
                                     <label for="" class="text-nowrap">Daily Rate &nbsp;&nbsp; </label>
@@ -254,7 +257,10 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" (click)="submitForm()">Edit Rate</button>
+                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="submitForm()"  *ngIf="spinner==false">Edit Rate</button>
                         <button type="button" #staticBackdropEdit class="btn btn-warning"
                             data-bs-dismiss="modal">cancel</button>
                     </div>

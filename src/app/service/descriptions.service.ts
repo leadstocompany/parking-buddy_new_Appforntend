@@ -9,16 +9,9 @@ import { environment } from 'src/environments/environment.prod';
 export class DescriptionsService {
 
   constructor(private _http: HttpClient) { }
-
-  createBasicDetailsService(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+  createDescriptions(data:any): Observable<any> {
+    
+    return this._http.post(`http://139.84.137.166/parking_location/add/description/`,data)
   }
 
-  createOperatingHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
-  }
-
-  createShuttleHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
-  }
 }

@@ -5,7 +5,7 @@
             reservation's Sub Total (daily rate X number of days) </P>
         <P>Post-tax will calculate the tax entered based on the reservation total,including any Pre-tax entered.</P>
         <div class="d-flex flex-row justify-content-end align-items-center flex-wrap mt-4">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Rate</button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Tax</button>
         </div>
         <div class="table-responsive text-nowrap mt-4">
             <table class="table">
@@ -67,8 +67,8 @@
                                 <div class="col-12">
                                     <label for="" class="text-nowrap">Amount Type</label>
                                     <select class="form-select" id="country" required="" formControlName="amountType">
-                                        <option value="fixed_amount">Fixed</option>
-                                        <option value="per_day">Percentage</option>
+                                        <option value="Fixed">Fixed</option>
+                                        <option value="Percentage">Percentage</option>
                                     </select>
                                     <div class="form-text">Specify whether the fee/tax is a percentage of dollar amount.
                                     </div>
@@ -138,7 +138,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" (click)="createTax">Create Tax</button>
+                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="createTax()"  *ngIf="spinner==false">Create Tax</button>
                         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
                     </div>
                 </div>

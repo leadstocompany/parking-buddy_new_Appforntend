@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import { DescriptionsService } from 'src/app/service/descriptions.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 
 @Component({
   selector: 'app-descriptions',
@@ -17,13 +18,36 @@ export class DescriptionsComponent {
     customerFeedback: '',
     emailInstruction: '<p>Thank you for choosing Airport Parking on this trip! </p>',
     safety: true
-
   }
+
+  spinner = false
+  constructor(private _descriptionService: DescriptionsService, private _snackbarService: SnackbarService) { }
   ngOnInit() {
     console.log(this.modal.temporary)
   }
 
   submitForm(): void {
-    console.log(this.modal)
+    const data = {
+      "temporary_message": this.modal.temporary,
+      "checkin_info": this.modal.checkInInformation,
+      "shuttle_info": this.modal.airportShuttleInformation,
+      "pickup_info": this.modal.pickupInformation,
+      "customer_feedback": this.modal.customerFeedback,
+      "email_instruction": this.modal.emailInstruction,
+      "property": localStorage.getItem('detailsId')
+    }
+    this.spinner = true
+    this._descriptionService.createDescriptions(data).subscribe({
+      next: (res) => {
+        console.log(res)
+        this.spinner = false
+        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+      },
+      error: (error) => {
+        console.log(error)
+        this.spinner = false
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
+      }
+    })
   }
 }
