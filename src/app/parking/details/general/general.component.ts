@@ -64,7 +64,7 @@ export class GeneralComponent {
       this._detailService.createBasicDetailsService(data).subscribe({
         next: (res) => {
           this.spinner = false
-          // localStorage.setItem('detailsId', "7e44d59e-fd8e-4472-9db6-5d8f2091ea3a");
+          localStorage.setItem('detailsId', res.id);
           this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         },
         error: (error: HttpErrorResponse) => {
