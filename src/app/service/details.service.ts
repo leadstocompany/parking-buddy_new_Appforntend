@@ -21,7 +21,7 @@ export class DetailsService {
 
   createOperatingHours(data: any): Observable<any> {
     console.log(data)
-    return this._http.post(`http://139.84.137.166/parking_location/add/operating_hour/${data.id}/`, data.data)
+    return this._http.put(`http://139.84.137.166/parking_location/add/operating_hour/${data.id}/`,data.data)
   }
 
   createShuttleHours(data: FormData): Observable<any> {
