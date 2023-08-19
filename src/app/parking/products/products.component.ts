@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProductsService } from 'src/app/service/products.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 
 
 @Component({
@@ -30,15 +31,22 @@ export class ProductsComponent {
     'Valet Curbside - Oversized'
   ];
   public productType: string = 'Self Uncovered';
-  constructor(private _productService: ProductsService) { }
+  spinner = false
+  constructor(private _productService: ProductsService,private _snackbarService: SnackbarService) { }
   public createProduct() {
-    const data = { type: this.productType }
+    const data = {
+      type: this.productType,
+      property: localStorage.getItem('detailsId')
+    }
     this._productService.createProduct(data).subscribe({
       next: (res) => {
         console.log(res)
+        localStorage.setItem('productId',res.id)
+        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.modalElement.nativeElement.click();
       },
       error: (error) => {
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
         console.log(error)
       }
     })

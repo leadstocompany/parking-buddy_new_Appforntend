@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignInPageComponent {
   signInForm!: FormGroup;
-
+  spinner: boolean = false
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -20,6 +20,7 @@ export class SignInPageComponent {
 
   submitForm() {
     if (this.signInForm?.valid) {
+      this.spinner = true
     }
   }
 }

@@ -33,7 +33,10 @@
                     </select>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" (click)="createProduct()">Create Product</button>
+                    <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <button type="button" class="btn btn-primary" (click)="createProduct()"  *ngIf="spinner==false">Create Product</button>
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal" #staticBackdrop>cancel</button>
                 </div>
             </div>

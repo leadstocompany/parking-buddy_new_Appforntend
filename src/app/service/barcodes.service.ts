@@ -14,8 +14,9 @@ export class BarcodesService {
     return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
   }
 
-  createBlackouts(data:FormData): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+  createBlackouts(data:any): Observable<any> {
+    console.log(data)
+    return this._http.post(`http://139.84.137.166/parking_location/add/blackout/`,data)
   }
 
 }

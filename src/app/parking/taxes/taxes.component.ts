@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 import { TaxesService } from 'src/app/service/taxes.service';
 
 @Component({
@@ -49,7 +50,8 @@ export class TaxesComponent {
     'Trip Fee'
   ];
   taxes!: FormGroup
-  constructor(private _formBuilder: FormBuilder, private _taxeService: TaxesService) { }
+  spinner = false
+  constructor(private _formBuilder: FormBuilder, private _taxeService: TaxesService,private _snackbarService: SnackbarService) { }
   
   ngOnInit() {
     this.taxes = this._formBuilder.group({
@@ -62,19 +64,33 @@ export class TaxesComponent {
     })
   }
   public createTax(): void {
-    const formData = new FormData();
-    formData.append('', this.taxes.controls[''].value)
-    formData.append('', this.taxes.controls[''].value)
-    formData.append('', this.taxes.controls[''].value)
-    formData.append('', this.taxes.controls[''].value)
-    formData.append('', this.taxes.controls[''].value)
-    formData.append('', this.taxes.controls[''].value)
-    this._taxeService.createTaxService(formData).subscribe({
+    // const formData = new FormData();
+    // formData.append('', this.taxes.controls[''].value)
+    // formData.append('', this.taxes.controls[''].value)
+    // formData.append('', this.taxes.controls[''].value)
+    // formData.append('', this.taxes.controls[''].value)
+    // formData.append('', this.taxes.controls[''].value)
+    // formData.append('', this.taxes.controls[''].value)
+    this.spinner = true
+    const data = {
+      "category": this.taxes.controls['category'].value,
+      "amount_type": this.taxes.controls['amountType'].value,
+      "amount": this.taxes.controls['amount'].value,
+      "type": this.taxes.controls['type'].value,
+      "apply": this.taxes.controls['applyTax'].value,
+      "property":localStorage.getItem('detailsId')
+  }
+  
+    this._taxeService.createTaxService(data).subscribe({
       next: (res) => {
         console.log(res)
+        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+        this.spinner = false
       },
       error: (error) => {
         console.log(error)
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this.spinner = false
       }
     })
   }
