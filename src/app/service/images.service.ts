@@ -10,15 +10,16 @@ export class ImagesService {
 
   constructor(private _http: HttpClient) { }
 
-  createBasicDetailsService(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+  createImages(data:any): Observable<any> {
+    console.log(data)
+    return this._http.post(`${environment.URL}/parking_location/add/images/`,data)
   }
 
   createOperatingHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+    return this._http.post(`${environment.URL}`, { withCredentials: true })
   }
 
   createShuttleHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+    return this._http.post(`${environment.URL}`, { withCredentials: true })
   }
 }

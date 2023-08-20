@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class DetailsComponent {
   public selectedTabIndex: number = 0
 
+
 }

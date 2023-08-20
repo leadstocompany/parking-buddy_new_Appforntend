@@ -11,7 +11,7 @@ export class DescriptionsService {
   constructor(private _http: HttpClient) { }
   createDescriptions(data:any): Observable<any> {
     
-    return this._http.post(`http://139.84.137.166/parking_location/add/description/`,data)
+    return this._http.post(`${environment.URL}/parking_location/add/description/`,data)
   }
 
 }

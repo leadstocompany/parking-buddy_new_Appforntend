@@ -7,18 +7,8 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root'
 })
 export class NotificationsService {
-
   constructor(private _http: HttpClient) { }
-
-  createBasicDetailsService(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
-  }
-
-  createOperatingHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
-  }
-
-  createShuttleHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+  createNotificationService(data: any): Observable<any> {
+    return this._http.post(`${environment.URL}/parking_location/add/notification/`, data)
   }
 }

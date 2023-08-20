@@ -60,8 +60,6 @@ export class OperatingHoursComponent {
 
     ]
   }
-
-
   initForm() {
     this.operatingForm = this._formBuilder.group({
       operationHours: ['limited'],
@@ -138,4 +136,5 @@ export class OperatingHoursComponent {
   get value() {
     return this.operatingForm.get('operationHours')?.value;
   }
+  
 }

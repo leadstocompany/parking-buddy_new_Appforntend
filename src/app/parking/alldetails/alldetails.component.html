@@ -1,0 +1,68 @@
+<div class="container-fluid py-3" style="width:95vw;">
+    <div class="row d-flex justify-content-center align-items-center gap-5" >
+        <div class="col-md-4 activeTab tab">
+            <div class="tab-child">
+                <h1>Total</h1>
+            </div>
+            <div class="tab-child">
+                <h1 style="font-size: 5rem; text-align: center;">{{data.length}}</h1>
+            </div>
+        </div>
+        <div class="col-md-4 tab cerate-new" [routerLink]="['create']">
+            <div class="tab-child d-flex justify-content-center align-items-center" style="height: 100%;">
+                <h1>+ Create New</h1>
+            </div>
+        </div>
+    </div>
+    <!-- <mat-divider class="mt-4" style="background-color:white"></mat-divider> -->
+    <div class="row">
+        <div class="col-12" id="checkInContent" style="box-sizing: border-box; width:100%;">
+            <div class="table-responsive text-nowrap mt-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Country</th>
+                            <th>State</th>
+                            <th>City</th>
+                            <th>street</th>
+                            <th>Zipcode</th>
+                            <th>Edit</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of displayedData; let i=index">
+                            <td>{{i+1+((currentPage-1)*itemsPerPage)}}</td>
+                            <td>{{data.country}}</td>
+                            <td>{{data.state}}</td>
+                            <td>{{data.city}}</td>
+                            <td>{{data.street}}</td>
+                            <td>{{data.zipcode}}</td>
+                            <td>
+                                <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                                    style="background-color: blue;" (click)="openDialog(data)">
+                                    <mat-icon style="color:white">edit</mat-icon>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-switch d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="flexSwitchCheckChecked" checked>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination mt-3">
+                <li class="page-item" (click)="previousPage()"><a class="page-link">Previous</a></li>
+                <li class="page-item" *ngFor="let pageNumber of pageNumbers"
+                    [class.active]="pageNumber === currentPage" (click)="changePage(pageNumber)"><a
+                        class="page-link">{{ pageNumber }}</a>
+                </li>
+                <li class="page-item" (click)="nextPage()"><a class="page-link">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

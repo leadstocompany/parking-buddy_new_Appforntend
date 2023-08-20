@@ -7,10 +7,9 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root'
 })
 export class TaxesService {
-
   constructor(private _http: HttpClient) { }
   createTaxService(data: any): Observable<any> {
     console.log(data)
-    return this._http.post(`http://139.84.137.166/parking_location/add/taxesfees/`, data)
+    return this._http.post(`${environment.URL}/parking_location/add/taxesfees/`, data)
   }
 }

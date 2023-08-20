@@ -1,0 +1,28 @@
+<div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">X</button>
+</div>
+<div class="div">
+    <div class="table-responsive table-container text-nowrap mt-4" style="max-height: 65vh;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Type</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let route of routingOption; let i=index">
+                    <td>{{i}}</td>
+                    <td>{{route.name}}</td>
+                    <td class="d-flex justify-content-center" (click)="openDialog(route)">
+                        <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                            style="background-color: blue; width:70px;">
+                            <mat-icon style="color:white">edit</mat-icon>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
