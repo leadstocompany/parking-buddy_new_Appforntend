@@ -34,7 +34,6 @@ export class GeneralComponent {
       shuttleBus: ['',]
     })
   }
-
   public saveForm(event: any) {
     this.validate(event)
     if (!this.generalForm.invalid) {
@@ -74,12 +73,10 @@ export class GeneralComponent {
       })
     }
   }
-
   onCountryChange(event: any) {
     const selectedCountryCode = this.generalForm.get('country')!.value;
     this.state = this.allState[selectedCountryCode]
   }
-
   getAllGeneralDetails() {
     console.log('call function')
     this._detailService.getAllBasicDetailsService().subscribe({
@@ -94,8 +91,6 @@ export class GeneralComponent {
       }
     })
   }
-
-
   validate(event: any) {
     var form = document.getElementsByClassName('needs-validation')[0] as HTMLFormElement;
     if (form.checkValidity() === false) {
@@ -104,4 +99,5 @@ export class GeneralComponent {
     }
     form.classList.add('was-validated');
   }
+  
 }

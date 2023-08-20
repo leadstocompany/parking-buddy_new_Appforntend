@@ -9,7 +9,6 @@ export class CalenderComponent {
   isCheckInActive = true;
   isCheckOutActive = false;
   activeTab = 'checkIn';
-
   showCheckIn() {
     this.isCheckInActive = true;
     this.isCheckOutActive = false;

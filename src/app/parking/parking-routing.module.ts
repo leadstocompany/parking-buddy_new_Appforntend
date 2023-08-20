@@ -17,50 +17,57 @@ import { ShuttleHoursComponent } from './details/shuttle-hours/shuttle-hours.com
 import { AllBlackoutsComponent } from './blackouts/all-blackouts/all-blackouts.component';
 import { SettingComponent } from './blackouts/setting/setting.component';
 import { CalenderComponent } from './calender/calender.component';
+import { CreateParkingPlotComponent } from './create-parking-plot/create-parking-plot.component';
+import { AlldetailsComponent } from './alldetails/alldetails.component';
 const routes: Routes = [
   {
     path: '', component: ParkingComponent, children: [
-      { path: '', redirectTo: 'Details', pathMatch: 'full' },
-      { path: 'Calender',component:CalenderComponent},
+      { path: '', component: AlldetailsComponent },
       {
-        path: 'Details', component: DetailsComponent, children: [
+        path: 'create', component: CreateParkingPlotComponent, children: [
+          { path: '', redirectTo: "Calender", pathMatch: 'full' },
+          { path: 'Calender', component: CalenderComponent },
           {
-            path: '', redirectTo: 'General', pathMatch: 'full'
+            path: 'Details', component: DetailsComponent, children: [
+              {
+                path: '', redirectTo: 'General', pathMatch: 'full'
+              },
+              {
+                path: 'General', component: GeneralComponent
+              },
+              {
+                path: 'OperatingHours',
+                component: OperatingHoursComponent
+              },
+              {
+                path: 'ShuttleHours',
+                component: ShuttleHoursComponent
+              }
+            ]
           },
+          { path: 'Products', component: ProductsComponent },
+          { path: 'Pricing', component: PricingComponent },
           {
-            path: 'General', component: GeneralComponent
+            path: 'Blackouts', component: BlackoutsComponent, children: [
+              {
+                path: '', redirectTo: 'AllBlackouts', pathMatch: 'full'
+              },
+              {
+                path: 'AllBlackouts', component: AllBlackoutsComponent
+              },
+              {
+                path: 'Setting', component: SettingComponent
+              }
+            ]
           },
-          {
-            path: 'OperatingHours',
-            component: OperatingHoursComponent
-          },
-          {
-            path: 'ShuttleHours',
-            component: ShuttleHoursComponent
-          }
+          { path: 'TaxesAndFees', component: TaxesComponent },
+          { path: 'Amenities', component: AmenitiesComponent },
+          { path: 'Descriptions', component: DescriptionsComponent },
+          { path: 'Images', component: ImagesComponent },
+          { path: 'Notifications', component: NotificationsComponent },
+          { path: 'Barcodes', component: BarcodesComponent }
         ]
       },
-      { path: 'Products', component: ProductsComponent },
-      { path: 'Pricing', component: PricingComponent },
-      {
-        path: 'Blackouts', component: BlackoutsComponent, children: [
-          {
-            path: '', redirectTo: 'AllBlackouts', pathMatch: 'full'
-          },
-          {
-            path: 'AllBlackouts', component: AllBlackoutsComponent
-          },
-          {
-            path: 'Setting', component: SettingComponent
-          }
-        ]
-      },
-      { path: 'TaxesAndFees', component: TaxesComponent },
-      { path: 'Amenities', component: AmenitiesComponent },
-      { path: 'Descriptions', component: DescriptionsComponent },
-      { path: 'Images', component: ImagesComponent },
-      { path: 'Notifications', component: NotificationsComponent },
-      { path: 'Barcodes', component: BarcodesComponent }
     ]
   },
 

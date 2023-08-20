@@ -11,14 +11,14 @@ export class CalenderService {
   constructor(private _http: HttpClient) { }
 
   createBasicDetailsService(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+    return this._http.post(`${environment.URL}`, { withCredentials: true })
   }
 
   createOperatingHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+    return this._http.post(`${environment.URL}`, { withCredentials: true })
   }
 
   createShuttleHours(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+    return this._http.post(`${environment.URL}`, { withCredentials: true })
   }
 }

@@ -1,0 +1,275 @@
+<div class="container-fluid main-container">
+    <div class="container-fluid valid">
+        <h2 class="title">PRICING</h2>
+        <P>please enter rates</P>
+        <div class="d-flex flex-row gap-2 align-items-center">
+            <span>Calendar Day Price</span>
+            <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" [(ngModel)]="calender_day_price"
+                    value="Yes" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio1">Yes</label>
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" [(ngModel)]="calender_day_price"
+                    value="No" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">No&nbsp;</label>
+            </div>
+        </div>
+        <div class="d-flex flex-row justify-content-between align-items-center flex-wrap mt-4">
+            <p>(if checked,reservations always rounded up to nearest day and hourly rate calculation are not used)</p>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="createRate()"> + Add Rate</button>
+        </div>
+        <div class="table-responsive text-nowrap mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Daily Rate</th>
+                        <th>Hourly</th>
+                        <th>Day</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>code</th>
+                        <th>Active</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of document">
+                        <td>{{data.id}}</td>
+                        <td>{{data.dailyRate}}</td>
+                        <td>{{data.hourlyRate}}</td>
+                        <td>day</td>
+                        <td>{{data.date[0] | date:'dd-MM-yyyy' }}</td>
+                        <td>{{data.date[1] | date:'dd-MM-yyyy' }}</td>
+                        <td>{{data.code}}</td>
+                        <td>{{data.active}}</td>
+                        <td>
+                            <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                                style="background-color: blue; cursor: pointer;" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
+                                <mat-icon style="color:white">edit</mat-icon>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Modal -->
+        <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="staticBackdropLabel">Add Rate</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-1">
+                        <form [formGroup]='addRate'>
+                            <div class="row">
+                                <div class="col-12 d-flex flex-row align-items-center gap-4">
+                                    <label for="country" class="form-label text-nowrap">Product&nbsp; &nbsp;
+                                        &nbsp; &nbsp; </label>
+                                    <select class="form-select" id="country" required="" formControlName="product">
+                                        <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 d-flex flex-row align-items-center gap-4 mb-3">
+                                    <label for="date" class="form-label text-nowrap">Date &nbsp; &nbsp;
+                                        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</label>
+                                    <input type="text" id="date" class="form-control"
+                                        placeholder="Pick Start and End Date" bsDaterangepicker autocapitalize="off"
+                                        formControlName="date">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-8 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Daily Rate &nbsp;&nbsp; </label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" formControlName="dailyRate"
+                                            placeholder="Enter your daily rate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-10 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Hourly Rate</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" formControlName="hourlyRate"
+                                            placeholder="Enter your hourlyrate">
+                                    </div>
+                                    <span>optional</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-10 d-flex flex-row align-items-center gap-4">
+                                    <label for="code" class="form-label text-nowrap">code &nbsp; &nbsp; &nbsp; &nbsp;
+                                        &nbsp;
+                                        &nbsp; </label>
+                                    <input type="text" class="form-control" formControlName="code"
+                                        placeholder="Enter your daily code">
+                                    <span>optional</span>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-7">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                            formControlName="supplyWeeklyRate">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Supply weekly Rate
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3" *ngIf="addRate.get('supplyWeeklyRate')!.value==true">
+                                <div class="col-8 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Weekly Rate &nbsp;&nbsp; </label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" formControlName="weeklyRate"
+                                            placeholder="Enter your Weekly Rate rate">
+                                    </div>
+                                </div>
+                                <div class="col-8 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Monthly Rate &nbsp;</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" formControlName="monthlyRate"
+                                            placeholder="Enter your monthly rate">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="submitForm()" *ngIf="spinner==false">Create Rate</button>
+                        <button type="button" #staticBackdrop class="btn btn-warning"
+                            data-bs-dismiss="modal">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal Edit  -->
+        <div class=" modal fade" id="staticBackdropEdit" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="staticBackdropLabel">Add Rate</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-1">
+                        <form [formGroup]='addRate'>
+                            <div class="row">
+                                <div class="col-12 d-flex flex-row align-items-center gap-4">
+                                    <label for="country" class="form-label text-nowrap">Product&nbsp; &nbsp;
+                                        &nbsp; &nbsp; </label>
+                                    <select class="form-select" id="country" required="" formControlName="product">
+                                        <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="row mt-3">
+                                <div class="col-12 d-flex flex-row align-items-center gap-4 mb-3">
+                                    <label for="date" class="form-label text-nowrap">Date &nbsp; &nbsp;
+                                        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</label>
+                                    <input type="text" id="date" class="form-control"
+                                        placeholder="Pick Start and End Date" bsDaterangepicker autocapitalize="off"
+                                        formControlName="date">
+                                </div>
+                            </div> -->
+                            <div class="row mt-3">
+                                <div class="col-8 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Daily Rate &nbsp;&nbsp; </label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" formControlName="dailyRate"
+                                            placeholder="Enter your daily rate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-10 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Hourly Rate</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" formControlName="hourlyRate"
+                                            placeholder="Enter your hourlyrate">
+                                    </div>
+                                    <span>optional</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-10 d-flex flex-row align-items-center gap-4">
+                                    <label for="code" class="form-label text-nowrap">code &nbsp; &nbsp; &nbsp; &nbsp;
+                                        &nbsp;
+                                        &nbsp; </label>
+                                    <input type="text" class="form-control" formControlName="code"
+                                        placeholder="Enter your daily code">
+                                    <span>optional</span>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-7">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                            formControlName="supplyWeeklyRate">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Supply weekly Rate
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3" *ngIf="addRate.get('supplyWeeklyRate')!.value==true">
+                                <div class="col-8 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Weekly Rate &nbsp;&nbsp; </label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" formControlName="weeklyRate"
+                                            placeholder="Enter your Weekly Rate rate">
+                                    </div>
+                                </div>
+                                <div class="col-8 d-flex flex-row align-items-center gap-4">
+                                    <label for="" class="text-nowrap">Monthly Rate &nbsp;</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" formControlName="monthlyRate"
+                                            placeholder="Enter your monthly rate">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="submitForm()"  *ngIf="spinner==false">Edit Rate</button>
+                        <button type="button" #staticBackdropEdit class="btn btn-warning"
+                            data-bs-dismiss="modal">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid expried">
+        <h2 class="title">EXPIRED RATES</h2>
+        <P>Below are rates which have been deleted or expired within the last 12 months</P>
+    </div>
+</div>

@@ -28,7 +28,11 @@
                     <button type="button" class="btn" style="position: absolute; top:0px;left:0px" (click)="removeLogo()"><mat-icon style="color:red">cancel</mat-icon></button>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" [disabled]="selectedFiles.length === 0">Upload Images</button>
+
+            <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <button *ngIf="spinner==false" type="submit" class="btn btn-primary" [disabled]="selectedFiles.length === 0">Upload Images</button>
         </form>
     </div>
 

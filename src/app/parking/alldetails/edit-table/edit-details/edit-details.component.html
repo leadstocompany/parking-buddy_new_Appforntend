@@ -1,0 +1,269 @@
+<div class="container-fluid">
+    <h2 class="title">Details</h2>
+    <ul class="nav nav-pills mb-4 gap-4" id="pillNav" role="tablist">
+        <li class="nav-item" role="presentation" (click)="changeIndex(0)">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" type="button" role="tab"
+                aria-selected="true">
+                <mat-icon>home</mat-icon>
+                <span>General</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation" (click)="changeIndex(1)">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" type="button" role="tab"
+                aria-selected="false" tabindex="-1">
+                <mat-icon>person</mat-icon>
+                <span>Operating Hours</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation" (click)="changeIndex(2)">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" type="button" role="tab"
+                aria-selected="false" tabindex="-1">
+                <mat-icon>schedule</mat-icon>
+                <span>Shuttle Hours</span>
+            </button>
+        </li>
+    </ul>
+    <mat-divider class="mt-2"></mat-divider>
+    <div class="container-fluid" class="mt-2">
+        <div class="container" *ngIf="selectedTabIndex==0">
+            <form [formGroup]='generalForm' class="form g-3 needs-validation" novalidate (ngSubmit)="saveForm($event)">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="country" class="form-label">Country *</label>
+                        <select class="form-select" id="country" formControlName="country" required=""
+                            (change)="onCountryChange($event)">
+                            <option *ngFor="let country of countries | keyvalue" [value]="country.key">
+                                {{ country.value }}
+                            </option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select Country
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="state" class="form-label">State *</label>
+                        <select class="form-select" id="state" formControlName="state" required="">
+                            <option *ngFor="let st of state" [value]="st.name">{{st.name}}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select State
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="city" class="form-label">City *</label>
+                        <input type="text" class="form-control" id="city" placeholder="Enter city"
+                            formControlName="city" required="">
+                        <div class="invalid-feedback">
+                            Please Enter City
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="street" class="form-label"> Street *</label>
+                        <input type="text" class="form-control" id="street" placeholder="Enter Street"
+                            formControlName="street" required="">
+                        <div class="invalid-feedback">
+                            Please Enter Street
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Zipcode" class="form-label">Zip code *</label>
+                        <input type="text" class="form-control" id="Zipcode" placeholder="Enter Zip code"
+                            formControlName="zipCode" required="">
+                        <div class="invalid-feedback">
+                            Please Enter Zipcode
+                        </div>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="phoneNumber" class="form-label"> Phone Number *</label>
+                        <input type="number" class="form-control no-spinner" id="phoneNumber" min="1000000000"
+                            max="9999999999" placeholder="Enter phone number" formControlName="phoneNumber" required="">
+                        <div class="invalid-feedback">
+                            Please Enter Valid Phone Number
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="shuttleNumber" class="form-label">Shuttle Phone Number *</label>
+                        <input type="number" class="form-control no-spinner" id="shuttleNumber"
+                            placeholder="Enter shuttle phone number" formControlName="shuttleNumber" required="">
+                        <div class="invalid-feedback">
+                            Please Enter Shuttle Phone Number
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="flexNumber" class="form-label">Fax Number *</label>
+                        <input type="text" class="form-control no-spinner" id="flexNumber"
+                            placeholder="Enter Fax Number" formControlName="flexNumber" required="">
+                        <div class="invalid-feedback">
+                            Please Enter Fax Number
+                        </div>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="bu" class="form-label">people Allowed on Shuttle Bus</label>
+                        <input type="text" class="form-control" id="bus" placeholder="people Allowed on Shuttle Bus"
+                            formControlName="shuttleBus">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <button *ngIf="spinner==false" type="submit" class="btn btn-success" #saveButton>Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container" *ngIf="selectedTabIndex==1">
+            <form [formGroup]="operatingForm" class="form g-3 needs-validation" novalidate
+                (ngSubmit)="saveOperatingForm($event)">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="operationHours" class="form-label">
+                            Operation Hours *
+                        </label>
+                        <select class="form-select" id="operationHours" formControlName="operationHours" required="">
+                            <option value="24/7">24/7</option>
+                            <option value="limited">Limited</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please Select Operation Hours
+                        </div>
+                    </div>
+                </div>
+                <mat-divider class="mt-4"></mat-divider>
+                <div class="table-responsive text-nowrap mt-4">
+                    <table class="table" *ngIf="value == 'limited'">
+                        <thead>
+                            <tr>
+                                <th scope="col">Day</th>
+                                <th scope="col">Open</th>
+                                <th scope="col">Closed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of operationTime; let i=index">
+                                <th scope="row"> <span>{{data.day}}</span></th>
+                                <td>
+                                    <div class="d-flex flex-row position-relative">
+                                        <input class="input-" [ngxTimepicker]="toggleTimepicker" [disableClick]="true"
+                                            readonly formControlName="openTime{{i}}" (click)="toggleTimepicker.open()"
+                                            [format]="24">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker" buttonAlign="left"
+                                            class="position-absolute"
+                                            style="margin-top:5px;"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker
+                                            [format]="24"></ngx-material-timepicker>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-row position-relative">
+                                        <input class="input-" [ngxTimepicker]="toggleTimepicker1" [disableClick]="true"
+                                            readonly formControlName="closeTime{{i}}" (click)="toggleTimepicker1.open()"
+                                            [format]="24">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker1"
+                                            class="position-absolute"
+                                            style="margin-top:5px;"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker1
+                                            [format]="24"></ngx-material-timepicker>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row pb-3 mt-2">
+                    <div class="col-2">
+                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid"
+                            *ngIf="spinner==false">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container" *ngIf="selectedTabIndex==2">
+            <form [formGroup]="operatingForm" class="form g-3 needs-validation" novalidate
+                (ngSubmit)="saveOperatingForm($event)">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="operationHours" class="form-label">
+                            Operation Hours *
+                        </label>
+                        <select class="form-select" id="operationHours" formControlName="operationHours" required="">
+                            <option value="24/7">24/7</option>
+                            <option value="limited">Limited</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please Select Operation Hours
+                        </div>
+                    </div>
+                </div>
+                <mat-divider class="mt-4"></mat-divider>
+                <div class="table-responsive text-nowrap mt-4">
+                    <table class="table" *ngIf="value == 'limited'">
+                        <thead>
+                            <tr>
+                                <th scope="col">Day</th>
+                                <th scope="col">Open</th>
+                                <th scope="col">Closed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of operationTime; let i=index">
+                                <th scope="row"> <span>{{data.day}}</span></th>
+                                <td>
+                                    <div class="d-flex flex-row position-relative">
+                                        <input class="input-" [ngxTimepicker]="toggleTimepicker" [disableClick]="true"
+                                            readonly formControlName="openTime{{i}}" (click)="toggleTimepicker.open()"
+                                            [format]="24">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker" buttonAlign="left"
+                                            class="position-absolute"
+                                            style="margin-top:5px;"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker
+                                            [format]="24"></ngx-material-timepicker>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-row position-relative">
+                                        <input class="input-" [ngxTimepicker]="toggleTimepicker1" [disableClick]="true"
+                                            readonly formControlName="closeTime{{i}}" (click)="toggleTimepicker1.open()"
+                                            [format]="24">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker1"
+                                            class="position-absolute"
+                                            style="margin-top:5px;"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker1
+                                            [format]="24"></ngx-material-timepicker>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row pb-3 mt-2">
+                    <div class="col-2">
+                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid"
+                            *ngIf="spinner==false">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

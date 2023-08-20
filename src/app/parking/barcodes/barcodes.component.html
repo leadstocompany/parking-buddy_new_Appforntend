@@ -67,7 +67,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" (click)="createBarcode()">Create Barcode</button>
+                    <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <button *ngIf="spinner==false" type="button" class="btn btn-primary" (click)="createBarcode()">Create Barcode</button>
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
                 </div>
             </div>

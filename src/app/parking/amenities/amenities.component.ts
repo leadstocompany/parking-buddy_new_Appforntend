@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AmentitiesService } from 'src/app/service/amentities.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+
 @Component({
   selector: 'app-amenities',
   templateUrl: './amenities.component.html',

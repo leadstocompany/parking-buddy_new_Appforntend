@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ImagesService } from 'src/app/service/images.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 interface SelectedFile {
   file: File | string;
   url: any;
@@ -29,6 +31,9 @@ export class ImagesComponent {
     file: '',
     url: ''
   }
+  spinner = false
+
+  constructor(private _imageService: ImagesService, private _snackbarService: SnackbarService) { }
 
   onFilesSelected(event: any) {
     this.selectedFiles = [];
@@ -54,16 +59,38 @@ export class ImagesComponent {
   }
 
   uploadImages() {
-    if (this.selectedFiles.length > 0) {
-      console.log('Uploading images:', this.selectedFiles);
-      console.log('uploading logo', this.logo)
-      this.selectedFiles = [];
+    if (this.selectedFiles.length > 0 && this.logo.url) {
+      // console.log('Uploading images:', this.selectedFiles);
+      // console.log('uploading logo', this.logo)
+      this.spinner = true
+      const data = {
+        "logo": this.logo,
+        "images": this.selectedFiles,
+        "property": localStorage.getItem('detailsId')
+      }
+      this._imageService.createImages(data).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.spinner = false
+          this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+          this.selectedFiles = [];
+          this.removeLogo()
+        },
+        error: (error) => {
+          console.log(error)
+          this._snackbarService.openSnackbar('❌ Internal Server Error')
+          this.spinner = false
+        }
+      })
+    } else {
+      this._snackbarService.openSnackbar('Please Select both Images and Logo')
     }
   }
 
   removeImage(index: number) {
     this.selectedFiles.splice(index, 1);
   }
+
   removeLogo() {
     this.logo = {
       file: '',

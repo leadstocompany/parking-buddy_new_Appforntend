@@ -10,13 +10,13 @@ export class BarcodesService {
 
   constructor(private _http: HttpClient) { }
 
-  createBasicDetailsService(): Observable<any> {
-    return this._http.post(`${environment.baseUrl}`, { withCredentials: true })
+  createBarCodes(data:any): Observable<any> {
+    return this._http.post(`${environment.URL}/parking_location/add/barcode/`,data)
   }
 
-  createBlackouts(data:any): Observable<any> {
+  createBlackouts(data: any): Observable<any> {
     console.log(data)
-    return this._http.post(`http://139.84.137.166/parking_location/add/blackout/`,data)
+    return this._http.post(`${environment.URL}/parking_location/add/blackout/`, data)
   }
 
 }

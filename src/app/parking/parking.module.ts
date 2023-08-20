@@ -1,4 +1,4 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ParkingRoutingModule } from './parking-routing.module';
 import { ParkingComponent } from './parking.component';
@@ -25,6 +25,20 @@ import { FormsModule } from '@angular/forms';
 import { CalenderComponent } from './calender/calender.component'; 
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AlldetailsComponent } from './alldetails/alldetails.component';
+import { CreateParkingPlotComponent } from './create-parking-plot/create-parking-plot.component';
+import { EditTableComponent } from './alldetails/edit-table/edit-table.component';
+import { EditDetailsComponent } from './alldetails/edit-table/edit-details/edit-details.component';
+import { EditProductsComponent } from './alldetails/edit-table/edit-products/edit-products.component';
+import { EditPricingComponent } from './alldetails/edit-table/edit-pricing/edit-pricing.component';
+import { EditBlackoutsComponent } from './alldetails/edit-table/edit-blackouts/edit-blackouts.component';
+import { EditTaxesAndFessComponent } from './alldetails/edit-table/edit-taxes-and-fess/edit-taxes-and-fess.component';
+import { MatListModule } from '@angular/material/list';
+import { EditAmenitiesComponent } from './alldetails/edit-table/edit-amenities/edit-amenities.component';
+import { EditDescriptionsComponent } from './alldetails/edit-table/edit-descriptions/edit-descriptions.component';
+import { EditBarcodesComponent } from './alldetails/edit-table/edit-barcodes/edit-barcodes.component';
+import { EditNotificationsComponent } from './alldetails/edit-table/edit-notifications/edit-notifications.component';
+import { EditImageComponent } from './alldetails/edit-table/edit-image/edit-image.component';
 @NgModule({
   declarations: [
     SidebarComponent,
@@ -45,6 +59,19 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     AllBlackoutsComponent,
     SettingComponent,
     CalenderComponent,
+    AlldetailsComponent,
+    CreateParkingPlotComponent,
+    EditTableComponent,
+    EditDetailsComponent,
+    EditProductsComponent,
+    EditPricingComponent,
+    EditBlackoutsComponent,
+    EditTaxesAndFessComponent,
+    EditAmenitiesComponent,
+    EditDescriptionsComponent,
+    EditBarcodesComponent,
+    EditNotificationsComponent,
+    EditImageComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +82,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     CKEditorModule,
     NgxMaterialTimepickerModule,
     BsDatepickerModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    MatListModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

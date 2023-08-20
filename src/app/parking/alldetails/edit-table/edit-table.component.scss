@@ -1,0 +1,23 @@
+table th,
+table td {
+    text-align: center;
+}
+
+table th {
+    color: white;
+    background-color: blue;
+}
+
+.table-container {
+    position: relative;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table thead th {
+    position: sticky;
+    top: 0;
+  }

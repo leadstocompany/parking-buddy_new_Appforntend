@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PricingService } from 'src/app/service/pricing.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+
 @Component({
   selector: 'app-pricing',
   templateUrl: './pricing.component.html',
@@ -78,8 +79,7 @@ export class PricingComponent {
     monthlyRate: null,
     active: true
   }]
-  constructor(private _formBuilder: FormBuilder, private _pricingService: PricingService,private _snackbarService: SnackbarService) { }
-
+  constructor(private _formBuilder: FormBuilder, private _pricingService: PricingService, private _snackbarService: SnackbarService) { }
   ngOnInit() {
     this.addRate = this._formBuilder.group({
       product: ['Self Uncovered'],
@@ -107,15 +107,16 @@ export class PricingComponent {
     // formData.append('', this.addRate.controls['weeklyRate'].value)
     // formData.append('', thisS.addRate.controls['monthlyRate'].value)
     const data = {
-      "dail_rate":this.addRate.controls['dailyRate'].value,
+      "dail_rate": this.addRate.controls['dailyRate'].value,
       "hourly_rate": this.addRate.controls['hourlyRate'].value,
       "weekly_rate": this.addRate.controls['weeklyRate'].value,
-      "monthly_rate":this.addRate.controls['monthlyRate'].value,
+      "monthly_rate": this.addRate.controls['monthlyRate'].value,
       "code": this.addRate.controls['code'].value,
-      "property":localStorage.getItem('detailsId'),
-      "product": localStorage.getItem('productId')
-  }
-
+      "property": localStorage.getItem('detailsId'),
+      "product": localStorage.getItem('productId'),
+      "start_date": new Date(this.addRate.controls['date'].value[0]).toISOString().split('T')[0],
+      "end_date": new Date(this.addRate.controls['date'].value[1]).toISOString().split('T')[0],
+    }
 
     this._pricingService.createPricing(data).subscribe({
       next: (res) => {
