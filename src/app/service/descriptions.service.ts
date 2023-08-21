@@ -10,11 +10,11 @@ export class DescriptionsService {
 
   constructor(private _http: HttpClient) { }
   createDescriptions(data:any): Observable<any> { 
-    return this._http.post(`${environment.URL}/parking_location/add/description/`,data)
+    return this._http.post(`${environment.URL}/parking_location/add/description/`,data,{ withCredentials: true })
   }
 
   getDescriptionsById(id:string):Observable<any>{
-    return this._http.get(`${environment.URL}/parking_location/description/?id=${id}`)
+    return this._http.get(`${environment.URL}/parking_location/description/?id=${id}`,{ withCredentials: true })
   }
 
 }

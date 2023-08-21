@@ -9,6 +9,6 @@ import { environment } from 'src/environments/environment.prod';
 export class NotificationsService {
   constructor(private _http: HttpClient) { }
   createNotificationService(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/parking_location/add/notification/`, data)
+    return this._http.post(`${environment.URL}/parking_location/add/notification/`, data,{ withCredentials: true })
   }
 }

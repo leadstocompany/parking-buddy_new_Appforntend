@@ -10,20 +10,20 @@ export class DetailsService {
   constructor(private _http: HttpClient) { }
 
   createBasicDetailsService(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/parking_location/create/property/`, data)
+    return this._http.post(`${environment.URL}/parking_location/create/property/`, data,{ withCredentials: true })
   }
 
   getAllBasicDetailsService(): Observable<any> {
-    return this._http.get(`${environment.URL}/parking_location/get/all_property/`)
+    return this._http.get(`${environment.URL}/parking_location/get/all_property/`,{ withCredentials: true })
   }
 
   getDetailsBasisOfUser():Observable<any>{
-    return this._http.get(`${environment.URL}/parking_location/property/filtered_data/`)
+    return this._http.get(`${environment.URL}/parking_location/property/filtered_data/`,{ withCredentials: true })
   }
 
   createOperatingHours(data: any): Observable<any> {
     console.log(data)
-    return this._http.put(`${environment.URL}/parking_location/add/operating_hour/${data.id}/`,data.data)
+    return this._http.put(`${environment.URL}/parking_location/add/operating_hour/${data.id}/`,data.data,{ withCredentials: true })
   }
 
   createShuttleHours(data: FormData): Observable<any> {
