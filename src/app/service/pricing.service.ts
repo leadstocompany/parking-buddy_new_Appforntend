@@ -16,5 +16,9 @@ export class PricingService {
     return this._http.post(`${environment.URL}`, data.data, { withCredentials: true })
   }
 
+  getPricingById(id:string):Observable<any>{
+    return this._http.get(`${environment.URL}/parking_location/pricing/?id=${id}`)
+  }
+
 
 }

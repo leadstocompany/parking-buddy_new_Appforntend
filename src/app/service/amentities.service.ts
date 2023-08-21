@@ -15,4 +15,8 @@ export class AmentitiesService {
     return this._http.post(`${environment.URL}/parking_location/add/amenities/`,data)
   }
 
+  getAmenitiesById(id:string):Observable<any>{
+    return this._http.get(`${environment.URL}/parking_location/amenities/?id=${id}`)
+  }
+
 }

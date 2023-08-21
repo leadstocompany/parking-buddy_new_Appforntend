@@ -19,4 +19,8 @@ export class BarcodesService {
     return this._http.post(`${environment.URL}/parking_location/add/blackout/`, data)
   }
 
+  getBlackoutsById(id:string):Observable<any>{
+    return this._http.get(`${environment.URL}/parking_location/blackout/?id=${id}`)
+  }
+
 }

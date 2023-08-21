@@ -12,4 +12,8 @@ export class TaxesService {
     console.log(data)
     return this._http.post(`${environment.URL}/parking_location/add/taxesfees/`, data)
   }
+
+  getTaxesfeesById(id:string):Observable<any>{
+    return this._http.get(`${environment.URL}/parking_location/taxesfees/?id=${id}`)
+  }
 }
