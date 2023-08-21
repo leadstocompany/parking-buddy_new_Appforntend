@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment.prod';
 export class TaxesService {
   constructor(private _http: HttpClient) { }
   createTaxService(data: any): Observable<any> {
-    console.log(data)
     return this._http.post(`${environment.URL}/parking_location/add/taxesfees/`, data, { withCredentials: true })
   }
 
