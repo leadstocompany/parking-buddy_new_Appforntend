@@ -9,25 +9,30 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 export class DetailsService {
   constructor(private _http: HttpClient) { }
 
+
+  headers = new HttpHeaders({
+    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+  });
+
   createBasicDetailsService(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/parking_location/create/property/`, data,{ withCredentials: true })
+    return this._http.post(`${environment.URL}/parking_location/create/property/`, data,{headers: this.headers, withCredentials: true })
   }
 
   getAllBasicDetailsService(): Observable<any> {
-    return this._http.get(`${environment.URL}/parking_location/get/all_property/`,{ withCredentials: true })
+    return this._http.get(`${environment.URL}/parking_location/get/all_property/`,{ headers: this.headers,withCredentials: true })
   }
 
   getDetailsBasisOfUser():Observable<any>{
-    return this._http.get(`${environment.URL}/parking_location/property/filtered_data/`,{ withCredentials: true })
+    return this._http.get(`${environment.URL}/parking_location/property/filtered_data/`,{headers: this.headers, withCredentials: true })
   }
 
   createOperatingHours(data: any): Observable<any> {
     console.log(data)
-    return this._http.put(`${environment.URL}/parking_location/add/operating_hour/${data.id}/`,data.data,{ withCredentials: true })
+    return this._http.put(`${environment.URL}/parking_location/add/operating_hour/${data.id}/`,data.data,{headers: this.headers,withCredentials: true })
   }
 
   createShuttleHours(data: FormData): Observable<any> {
-    return this._http.post(`${environment.URL}`, data, { withCredentials: true })
+    return this._http.post(`${environment.URL}`, data, {headers: this.headers, withCredentials: true })
   }
 
 }

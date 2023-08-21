@@ -17,7 +17,7 @@
             <p>(if checked,reservations always rounded up to nearest day and hourly rate calculation are not used)</p>
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="createRate()"> + Add Rate</button>
         </div>
-        <div class="table-responsive text-nowrap mt-4">
+        <!-- <div class="table-responsive text-nowrap mt-4">
             <table class="table">
                 <thead>
                     <tr>
@@ -29,7 +29,7 @@
                         <th>End Date</th>
                         <th>code</th>
                         <th>Active</th>
-                        <!-- <th></th> -->
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,17 +42,17 @@
                         <td>{{data.date[1] | date:'dd-MM-yyyy' }}</td>
                         <td>{{data.code}}</td>
                         <td>{{data.active}}</td>
-                        <!-- <td>
+                        <td>
                             <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
                                 style="background-color: blue; cursor: pointer;" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
                                 <mat-icon style="color:white">edit</mat-icon>
                             </div>
-                        </td> -->
+                        </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> -->
         <!-- Modal -->
         <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">

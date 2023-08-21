@@ -28,10 +28,12 @@ export class SignInPageComponent {
         "username": this.signInForm.value.email,
         "password": this.signInForm.value.password
       }
-      
+
       this._authService.loginUser(data).subscribe({
         next: (res) => {
           console.log(res)
+          localStorage.setItem('accessToken', res.data.auth_token.access)
+
           this.spinner = false
           this._snackBarService.openSnackbar('✔ Successfully logged In')
           this._router.navigate(['/parking'])
