@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
@@ -8,7 +8,10 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class NotificationsService {
   constructor(private _http: HttpClient) { }
+  headers = new HttpHeaders({
+    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+  });
   createNotificationService(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/parking_location/add/notification/`, data,{ withCredentials: true })
+    return this._http.post(`${environment.URL}/parking_location/add/notification/`, data,{headers: this.headers, withCredentials: true })
   }
 }
