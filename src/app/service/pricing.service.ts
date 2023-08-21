@@ -9,11 +9,15 @@ import { environment } from 'src/environments/environment.prod';
 export class PricingService {
   constructor(private _http: HttpClient) { }
   createPricing(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/parking_location/add/pricing/`, data)
+    return this._http.post(`${environment.URL}/parking_location/add/pricing/`, data,{ withCredentials: true })
   }
 
   editPricing(data: { data: FormData, _id: string }): Observable<any> {
     return this._http.post(`${environment.URL}`, data.data, { withCredentials: true })
+  }
+
+  getPricingById(id:string):Observable<any>{
+    return this._http.get(`${environment.URL}/parking_location/pricing/?id=${id}`,{ withCredentials: true })
   }
 
 

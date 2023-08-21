@@ -22,7 +22,9 @@ export class AlldetailsComponent {
   }
   getAllGeneralDetails() {
     console.log('call function')
-    this._detailService.getDetailsBasisOfUser().subscribe({
+    // getAllBasicDetailsService
+    // getDetailsBasisOfUser
+    this._detailService.getAllBasicDetailsService().subscribe({
       next: (res) => {
         console.log(res)
         this.data = res

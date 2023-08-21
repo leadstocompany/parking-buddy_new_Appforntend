@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductsService } from 'src/app/service/products.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 
@@ -33,7 +34,20 @@ export class EditProductsComponent {
   ];
   public productType: string = 'Self Uncovered';
   spinner = false
-  constructor(private _productService: ProductsService, private _snackbarService: SnackbarService) { }
+  constructor(
+    private _productService: ProductsService,
+    private _snackbarService: SnackbarService,
+    private dialogRef: MatDialogRef<EditProductsComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: any
+  ) { }
+
+  ngOnInit() {
+    this.getData(this.data.id)
+  }
+
+  /**
+   * Update Products
+   */
   public createProduct() {
     const data = {
       type: this.productType,
@@ -51,7 +65,17 @@ export class EditProductsComponent {
         console.log(error)
       }
     })
+  }
 
+  public getData(id: string) {
+    this._productService.getProductById(id).subscribe({
+      next: (res) => {
+        console.log(res, 'response')
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
 
 }

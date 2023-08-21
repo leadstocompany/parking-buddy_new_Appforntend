@@ -184,4 +184,5 @@ export class EditPricingComponent {
       monthlyRate: null,
     });
   }
+  
 }

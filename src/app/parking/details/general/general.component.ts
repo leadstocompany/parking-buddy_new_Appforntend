@@ -67,6 +67,7 @@ export class GeneralComponent {
           this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         },
         error: (error: HttpErrorResponse) => {
+          console.log(error)
           this.spinner = false
           this._snackbarService.openSnackbar('❌ Internal Server Error')
         }

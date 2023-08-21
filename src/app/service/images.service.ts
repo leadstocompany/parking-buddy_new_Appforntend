@@ -12,7 +12,7 @@ export class ImagesService {
 
   createImages(data:any): Observable<any> {
     console.log(data)
-    return this._http.post(`${environment.URL}/parking_location/add/images/`,data)
+    return this._http.post(`${environment.URL}/parking_location/add/images/`,data,{ withCredentials: true })
   }
 
   createOperatingHours(): Observable<any> {

@@ -9,10 +9,10 @@ export class AuthService {
   constructor(private _http: HttpClient) { }
   registerUser(data: any): Observable<any> {
     console.log(data)
-    return this._http.post(`${environment.URL}/users/register/`, data)
+    return this._http.post(`${environment.URL}/users/register/`, ,{ withCredentials: true })
   }
   loginUser(data: any): Observable<any> {
     console.log(data)
-    return this._http.post(`${environment.URL}/users/login/`, data,)
+    return this._http.post(`${environment.URL}/users/login/`, data, { withCredentials: true })
   }
 }
