@@ -21,7 +21,7 @@ export class ProductsService {
     return this._http.post(`${environment.URL}/parking_location/update/product/<id_product>/`, data,{headers: this.headers, withCredentials: true })
   }
 
-  getProductById(id: string): Observable<any> {
+  getProductById(id: any): Observable<any> {
     console.log(id, 'id')
     return this._http.get(`${environment.URL}/parking_location/product/?id=${id}`,{headers: this.headers, withCredentials: true })
   }

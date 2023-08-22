@@ -12,15 +12,15 @@ export class PricingService {
     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
   });
   createPricing(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/parking_location/add/pricing/`, data,{headers: this.headers, withCredentials: true })
+    return this._http.post(`${environment.URL}/parking_location/add/pricing/`, data, { headers: this.headers, withCredentials: true })
   }
 
   editPricing(data: { data: FormData, _id: string }): Observable<any> {
-    return this._http.post(`${environment.URL}`, data.data, {headers: this.headers, withCredentials: true })
+    return this._http.post(`${environment.URL}`, data.data, { headers: this.headers, withCredentials: true })
   }
 
-  getPricingById(id:string):Observable<any>{
-    return this._http.get(`${environment.URL}/parking_location/pricing/?id=${id}`,{headers: this.headers, withCredentials: true })
+  getPricingById(id: any): Observable<any> {
+    return this._http.get(`${environment.URL}/parking_location/pricing/?id=${id}`, { headers: this.headers, withCredentials: true })
   }
 
 

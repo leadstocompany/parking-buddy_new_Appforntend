@@ -16,7 +16,7 @@ export class TaxesService {
     return this._http.post(`${environment.URL}/parking_location/add/taxesfees/`, data, {headers: this.headers, withCredentials: true })
   }
 
-  getTaxesfeesById(id: string): Observable<any> {
+  getTaxesfeesById(id: any): Observable<any> {
     return this._http.get(`${environment.URL}/parking_location/taxesfees/?id=${id}`, {headers: this.headers, withCredentials: true })
   }
 }

@@ -15,44 +15,45 @@
         </div>
         <div class="d-flex flex-row justify-content-between align-items-center flex-wrap mt-4">
             <p>(if checked,reservations always rounded up to nearest day and hourly rate calculation are not used)</p>
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="createRate()"> + Add Rate</button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                (click)="createRate()"> + Add Rate</button>
         </div>
-        <!-- <div class="table-responsive text-nowrap mt-4">
+        <div class="table-responsive text-nowrap mt-4">
             <table class="table">
                 <thead>
                     <tr>
                         <th>Product</th>
                         <th>Daily Rate</th>
                         <th>Hourly</th>
-                        <th>Day</th>
+                        <th>Weekly Rate</th>
+                        <th>Monthly Rate</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>code</th>
-                        <th>Active</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let data of document">
                         <td>{{data.id}}</td>
-                        <td>{{data.dailyRate}}</td>
-                        <td>{{data.hourlyRate}}</td>
-                        <td>day</td>
-                        <td>{{data.date[0] | date:'dd-MM-yyyy' }}</td>
-                        <td>{{data.date[1] | date:'dd-MM-yyyy' }}</td>
+                        <td>{{data.dail_rate}}</td>
+                        <td>{{data.hourly_rate}}</td>
+                        <td>{{data.weekly_rate}}</td>
+                        <td>{{data.monthly_rate}}</td>
+                        <td>{{data.start_date | date:'dd-MM-yyyy' }}</td>
+                        <td>{{data.end_date | date:'dd-MM-yyyy' }}</td>
                         <td>{{data.code}}</td>
-                        <td>{{data.active}}</td>
-                        <td>
+                        <!-- <td>{{data.active}}</td> -->
+                        <!-- <td>
                             <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
                                 style="background-color: blue; cursor: pointer;" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
                                 <mat-icon style="color:white">edit</mat-icon>
                             </div>
-                        </td>
+                        </td> -->
                     </tr>
                 </tbody>
             </table>
-        </div> -->
+        </div> 
         <!-- Modal -->
         <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -69,7 +70,7 @@
                                     <label for="country" class="form-label text-nowrap">Product&nbsp; &nbsp;
                                         &nbsp; &nbsp; </label>
                                     <select class="form-select" id="country" required="" formControlName="product">
-                                        <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
+                                        <option *ngFor="let value of parkingOptions" [value]="value.type">{{value.type}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -152,7 +153,8 @@
                         <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="submitForm()" *ngIf="spinner==false">Create Rate</button>
+                        <button type="button" class="btn btn-primary" (click)="submitForm()"
+                            *ngIf="spinner==false">Create Rate</button>
                         <button type="button" #staticBackdrop class="btn btn-warning"
                             data-bs-dismiss="modal">cancel</button>
                     </div>
@@ -177,7 +179,8 @@
                                     <label for="country" class="form-label text-nowrap">Product&nbsp; &nbsp;
                                         &nbsp; &nbsp; </label>
                                     <select class="form-select" id="country" required="" formControlName="product">
-                                        <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
+                                        <option *ngFor="let value of parkingOptions" [value]="value.type">{{value.type}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -260,7 +263,8 @@
                         <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="submitForm()"  *ngIf="spinner==false">Edit Rate</button>
+                        <button type="button" class="btn btn-primary" (click)="submitForm()" *ngIf="spinner==false">Edit
+                            Rate</button>
                         <button type="button" #staticBackdropEdit class="btn btn-warning"
                             data-bs-dismiss="modal">cancel</button>
                     </div>

@@ -1,7 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PricingService } from 'src/app/service/pricing.service';
+import { ProductsService } from 'src/app/service/products.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+
 
 @Component({
   selector: 'app-pricing',
@@ -14,72 +16,9 @@ export class PricingComponent {
   @ViewChild('staticBackdrop') modalElement!: ElementRef;
   public calender_day_price: string = "No";
   spinner: boolean = false
-  public parkingOptions: string[] = [
-    'Self Uncovered',
-    'Self Rooftop',
-    'Self Indoor',
-    'Valet Indoor',
-    'Valet Covered',
-    'Valet Ur',
-    'Valet Rooftop',
-    'Valet Curbside',
-    'Self Uncovered - Oversized',
-    'Self Covered - Oversized',
-    'Self Indoor - Oversized',
-    'Self Rooftop - Oversized',
-    'Self Curbside - Oversized',
-    'Valet Uncovered - Oversized',
-    'Valet Covered - Oversized',
-    'Valet Indoor - Oversized',
-    'Valet Rooftop - Oversized',
-    'Valet Curbside - Oversized'
-  ];
-  public document: Array<{
-    id: number | null,
-    product: string | null
-    dailyRate: number | null,
-    hourlyRate: number | null,
-    code: number | null,
-    supplyWeeklyRate: boolean | null,
-    weeklyRate: number | null,
-    monthlyRate: number | null,
-    date: any[],
-    active: boolean
-  }> = [{
-    id: 1,
-    date: [new Date(), new Date()],
-    product: 'Self Uncovered',
-    dailyRate: 100,
-    hourlyRate: 20,
-    code: 42,
-    supplyWeeklyRate: false,
-    weeklyRate: null,
-    monthlyRate: null,
-    active: true
-  }, {
-    id: 2,
-    date: [new Date(), new Date()],
-    product: 'Self Uncovered',
-    dailyRate: 100,
-    hourlyRate: 20,
-    code: 42,
-    supplyWeeklyRate: false,
-    weeklyRate: null,
-    monthlyRate: null,
-    active: true
-  }, {
-    id: 3,
-    date: [new Date(), new Date()],
-    product: 'Self Uncovered',
-    dailyRate: 100,
-    hourlyRate: 20,
-    code: 42,
-    supplyWeeklyRate: false,
-    weeklyRate: null,
-    monthlyRate: null,
-    active: true
-  }]
-  constructor(private _formBuilder: FormBuilder, private _pricingService: PricingService, private _snackbarService: SnackbarService) { }
+  public parkingOptions: any = []
+  public document: any = [];
+  constructor(private _formBuilder: FormBuilder, private _pricingService: PricingService, private _productService: ProductsService, private _snackbarService: SnackbarService) { }
   ngOnInit() {
     this.addRate = this._formBuilder.group({
       product: ['Self Uncovered'],
@@ -91,6 +30,8 @@ export class PricingComponent {
       weeklyRate: [null],
       monthlyRate: [null],
     })
+    this.getProduct()
+    this.getPricing()
   }
 
   public submitForm(): void {
@@ -123,6 +64,7 @@ export class PricingComponent {
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.modalElement.nativeElement.click();
+        this.getPricing()
       },
       error: (error) => {
         this.spinner = false
@@ -182,5 +124,29 @@ export class PricingComponent {
       weeklyRate: null,
       monthlyRate: null,
     });
+  }
+
+  public getProduct() {
+    this._productService.getProductById(localStorage.getItem('detailsId')).subscribe({
+      next: (res) => {
+        console.log(res, 'get values')
+        this.parkingOptions = res
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  public getPricing() {
+    this._pricingService.getPricingById(localStorage.getItem('detailsId')).subscribe({
+      next: (res) => {
+        console.log(res, 'get pricing')
+        this.document = res
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
 }
