@@ -10,7 +10,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { RequestInterceptor } from './interceptors/requestInterceptor';
+import { ResponseInterceptor } from './interceptors/responseInterceptor';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,13 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     CKEditorModule,
     HttpClientModule,
-    BsDatepickerModule.forRoot()
-
+    BsDatepickerModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
