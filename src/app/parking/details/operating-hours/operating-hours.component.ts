@@ -115,7 +115,7 @@ export class OperatingHoursComponent {
       "saturday_close_time": this.operatingForm.controls['closeTime5'].value,
       "sunday_open_time": this.operatingForm.controls['openTime6'].value,
       "sunday_close_time": this.operatingForm.controls['closeTime6'].value,
-      "all_days": this.operatingForm.controls['operationHours'].value == 'limit' ? true : false,
+      "all_days": this.operatingForm.controls['operationHours'].value == 'limited' ? true : false,
   },
   id:localStorage.getItem('detailsId')
 }

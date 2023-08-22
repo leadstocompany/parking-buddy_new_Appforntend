@@ -57,8 +57,8 @@ export class EditTableComponent {
   ]
 
   constructor(
-    private dialogRef: MatDialogRef<EditTableComponent>,
     private _dialog: MatDialog,
+    private dialogRef: MatDialogRef<EditTableComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) { }
 

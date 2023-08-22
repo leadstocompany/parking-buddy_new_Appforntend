@@ -33,6 +33,7 @@ export class EditProductsComponent {
     'Valet Curbside - Oversized'
   ];
   public productType: string = 'Self Uncovered';
+  public products: any = [];
   spinner = false
   constructor(
     private _productService: ProductsService,
@@ -42,7 +43,7 @@ export class EditProductsComponent {
   ) { }
 
   ngOnInit() {
-    this.getData(this.data.id)
+    this.getData()
   }
 
   /**
@@ -51,14 +52,14 @@ export class EditProductsComponent {
   public createProduct() {
     const data = {
       type: this.productType,
-      property: localStorage.getItem('detailsId')
+      property: this.data.id
     }
     this._productService.createProduct(data).subscribe({
       next: (res) => {
         console.log(res)
-        localStorage.setItem('productId', res.id)
-        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+        this._snackbarService.openSnackbar('✔ Form Successfully Updated')
         this.modalElement.nativeElement.click();
+        this.getData()
       },
       error: (error) => {
         this._snackbarService.openSnackbar('❌ Internal Server Error')
@@ -67,9 +68,10 @@ export class EditProductsComponent {
     })
   }
 
-  public getData(id: string) {
-    this._productService.getProductById(id).subscribe({
+  public getData() {
+    this._productService.getProductById(this.data.id).subscribe({
       next: (res) => {
+        this.products = res
         console.log(res, 'response')
       },
       error: (error) => {

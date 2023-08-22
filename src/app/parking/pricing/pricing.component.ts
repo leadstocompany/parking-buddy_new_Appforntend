@@ -13,6 +13,7 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
 export class PricingComponent {
   addRate!: FormGroup;
   editId: string = ''
+  amountIcon='₹'
   @ViewChild('staticBackdrop') modalElement!: ElementRef;
   public calender_day_price: string = "No";
   spinner: boolean = false

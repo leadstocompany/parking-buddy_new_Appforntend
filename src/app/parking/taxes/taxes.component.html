@@ -70,7 +70,10 @@
                                     <label for="" class="text-nowrap">Amount</label>
                                     <div class="input-group">
                                         <!-- *ngIf="getText.amountType=='Fixed'" -->
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text"
+                                            *ngIf="this.taxes.get('amountType')?.value == 'Fixed'">$</span>
+                                        <span class="input-group-text"
+                                            *ngIf="this.taxes.get('amountType')?.value == 'Percentage'">%</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="amount">
                                     </div>

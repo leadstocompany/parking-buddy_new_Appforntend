@@ -53,7 +53,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div> 
+        </div>
         <!-- Modal -->
         <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -70,7 +70,8 @@
                                     <label for="country" class="form-label text-nowrap">Product&nbsp; &nbsp;
                                         &nbsp; &nbsp; </label>
                                     <select class="form-select" id="country" required="" formControlName="product">
-                                        <option *ngFor="let value of parkingOptions" [value]="value.type">{{value.type}}</option>
+                                        <option *ngFor="let value of parkingOptions" [value]="value.type">{{value.type}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -87,7 +88,7 @@
                                 <div class="col-8 d-flex flex-row align-items-center gap-4">
                                     <label for="" class="text-nowrap">Daily Rate &nbsp;&nbsp; </label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{amountIcon}}</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="dailyRate"
                                             placeholder="Enter your daily rate">
@@ -98,7 +99,7 @@
                                 <div class="col-10 d-flex flex-row align-items-center gap-4">
                                     <label for="" class="text-nowrap">Hourly Rate</label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{amountIcon}}</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="hourlyRate"
                                             placeholder="Enter your hourlyrate">
@@ -131,7 +132,7 @@
                                 <div class="col-8 d-flex flex-row align-items-center gap-4">
                                     <label for="" class="text-nowrap">Weekly Rate &nbsp;&nbsp; </label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{amountIcon}}</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="weeklyRate"
                                             placeholder="Enter your Weekly Rate rate">
@@ -140,7 +141,7 @@
                                 <div class="col-8 d-flex flex-row align-items-center gap-4">
                                     <label for="" class="text-nowrap">Monthly Rate &nbsp;</label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{amountIcon}}</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="monthlyRate"
                                             placeholder="Enter your monthly rate">
@@ -184,7 +185,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <!-- <div class="row mt-3">
+                            <div class="row mt-3">
                                 <div class="col-12 d-flex flex-row align-items-center gap-4 mb-3">
                                     <label for="date" class="form-label text-nowrap">Date &nbsp; &nbsp;
                                         &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</label>
@@ -192,12 +193,12 @@
                                         placeholder="Pick Start and End Date" bsDaterangepicker autocapitalize="off"
                                         formControlName="date">
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="row mt-3">
                                 <div class="col-8 d-flex flex-row align-items-center gap-4">
                                     <label for="" class="text-nowrap">Daily Rate &nbsp;&nbsp; </label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{amountIcon}}</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="dailyRate"
                                             placeholder="Enter your daily rate">
@@ -208,7 +209,7 @@
                                 <div class="col-10 d-flex flex-row align-items-center gap-4">
                                     <label for="" class="text-nowrap">Hourly Rate</label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{amountIcon}}</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="hourlyRate"
                                             placeholder="Enter your hourlyrate">
@@ -241,7 +242,7 @@
                                 <div class="col-8 d-flex flex-row align-items-center gap-4">
                                     <label for="" class="text-nowrap">Weekly Rate &nbsp;&nbsp; </label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{amountIcon}}</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="weeklyRate"
                                             placeholder="Enter your Weekly Rate rate">
@@ -250,7 +251,7 @@
                                 <div class="col-8 d-flex flex-row align-items-center gap-4">
                                     <label for="" class="text-nowrap">Monthly Rate &nbsp;</label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{amountIcon}}</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="monthlyRate"
                                             placeholder="Enter your monthly rate">

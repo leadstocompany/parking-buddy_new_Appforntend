@@ -1,7 +1,7 @@
 <div class="container-fluid main-container">
     <div class="container-fluid valid">
         <h2 class="title">TAXES</h2>
-        <div class="table-responsive text-nowrap mt-4">
+        <!-- <div class="table-responsive text-nowrap mt-4">
             <table class="table">
                 <thead>
                     <tr>
@@ -23,6 +23,39 @@
                             </div>
                         </td>
                     </tr>
+                </tbody>
+            </table>
+        </div> -->
+        <div class="table-responsive text-nowrap mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sr.</th>
+                        <th>Category</th>
+                        <th>Amount Type</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Apply</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of taxData; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{data.category}}</td>
+                        <td>{{data.amount_type}}</td>
+                        <td>{{data.amount}}</td>
+                        <td>{{data.type}}</td>
+                        <td>{{data.apply}}</td>
+                        <td>
+                            <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                                style="background-color: blue; width:70px;" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop" (click)="openEditModal(data)">
+                                <mat-icon style="color:white">edit</mat-icon>
+                            </div>
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -63,7 +96,10 @@
                                 <div class="col-12">
                                     <label for="" class="text-nowrap">Amount</label>
                                     <div class="input-group">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text"
+                                            *ngIf="this.taxes.get('amountType')?.value == 'Fixed'">$</span>
+                                        <span class="input-group-text"
+                                            *ngIf="this.taxes.get('amountType')?.value == 'Percentage'">%</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="amount">
                                     </div>

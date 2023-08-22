@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { DescriptionsService } from 'src/app/service/descriptions.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
@@ -10,6 +11,7 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
 })
 export class EditDescriptionsComponent {
   public Editor = ClassicEditor;
+  desId: any
   public modal = {
     temporary: '',
     checkInInformation: '<p>The lot is located at,Gloucester</p> <p> Please pull right in,An attendant will greet you and assist you.<p><b>Note: All over sized vehicles (example:vehicle/trailer that takes more than one spot) are subject to additional charges to be paid at the lot.</b><p>',
@@ -21,9 +23,10 @@ export class EditDescriptionsComponent {
   }
 
   spinner = false
-  constructor(private _descriptionService: DescriptionsService, private _snackbarService: SnackbarService) { }
+  constructor(private _descriptionService: DescriptionsService, private _snackbarService: SnackbarService, @Inject(MAT_DIALOG_DATA) private data: any) { }
   ngOnInit() {
     console.log(this.modal.temporary)
+    this.getDescription()
   }
 
   submitForm(): void {
@@ -34,14 +37,18 @@ export class EditDescriptionsComponent {
       "pickup_info": this.modal.pickupInformation,
       "customer_feedback": this.modal.customerFeedback,
       "email_instruction": this.modal.emailInstruction,
-      "property": localStorage.getItem('detailsId')
+      "property": this.data.id
     }
     this.spinner = true
-    this._descriptionService.createDescriptions(data).subscribe({
+    const fd = {
+      data: data,
+      id: this.desId
+    }
+    this._descriptionService.updateDescriptionsById(fd).subscribe({
       next: (res) => {
         console.log(res)
         this.spinner = false
-        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+        this._snackbarService.openSnackbar('✔ Form Successfully Updated')
       },
       error: (error) => {
         console.log(error)
@@ -49,5 +56,31 @@ export class EditDescriptionsComponent {
         this._snackbarService.openSnackbar('❌ Internal Server Error')
       }
     })
+  }
+
+  getDescription() {
+    console.log('enter')
+    this._descriptionService.getDescriptionsById(this.data.id).subscribe({
+      next: (res) => {
+        console.log(res)
+        this.desId = res[0].id
+        this.setValue(res[0])
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  setValue(data: any) {
+    this.modal = {
+      temporary: data.temporary_message,
+      checkInInformation: data.checkin_info,
+      airportShuttleInformation: data.shuttle_info,
+      pickupInformation: data.pickup_info,
+      customerFeedback: data.customer_feedback,
+      emailInstruction: data.email_instruction,
+      safety: true
+    }
   }
 }
