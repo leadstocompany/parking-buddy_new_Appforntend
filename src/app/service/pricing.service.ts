@@ -15,6 +15,10 @@ export class PricingService {
     return this._http.post(`${environment.URL}/parking_location/add/pricing/`, data, { headers: this.headers, withCredentials: true })
   }
 
+  updatePricing(data: any): Observable<any> {
+    return this._http.put(`${environment.URL}/parking_location/update/pricing/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
+  }
+
   editPricing(data: { data: FormData, _id: string }): Observable<any> {
     return this._http.post(`${environment.URL}`, data.data, { headers: this.headers, withCredentials: true })
   }

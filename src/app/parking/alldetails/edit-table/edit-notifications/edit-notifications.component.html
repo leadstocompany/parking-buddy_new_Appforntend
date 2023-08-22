@@ -3,18 +3,19 @@
     <div class="d-flex flex-md-row flex-column  justify-content-md-between align-items-md-center">
         <p style="font-size: 13px;">You can setup email address to receive notification for various subject and add as
             many email addresses as needed for each notification subject</p>
-        <button class="btn btn-success" style="font-size: 13px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add
+        <button class="btn btn-success" style="font-size: 13px;" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"> + Add
             Notification</button>
     </div>
 
     <div>
         <div class="content">
-            <div class="row mt-4">
-                <span class="h2-heading">PrePaid Weekly Report</span>
+            <div class="row mt-4" *ngFor="let not of allNotification">
+                <span class="h2-heading">{{not.category}}</span>
                 <div class="col-12 d-flex flex-row justify-content-between align-items-center p-1 rounded-2"
                     style="background-color: whitesmoke;">
-                    <span>abhishek@gmail.com</span>
-                    <div class="editbtn d-flex flex-row p-1">
+                    <span>{{not.email}}</span>
+                    <!-- <div class="editbtn d-flex flex-row p-1">
                         <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
                             style="background-color: blue;">
                             <mat-icon style="color:white">edit</mat-icon>
@@ -23,41 +24,7 @@
                             style="background-color: red;">
                             <mat-icon style="color:white">cancel</mat-icon>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <span class="h2-heading">PrePaid Weekly Report</span>
-                <div class="col-12 d-flex flex-row justify-content-between align-items-center p-1 rounded-2"
-                    style="background-color: whitesmoke;">
-                    <span>abhishek@gmail.com</span>
-                    <div class="editbtn d-flex flex-row p-1">
-                        <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
-                            style="background-color: blue;">
-                            <mat-icon style="color:white">edit</mat-icon>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center p-1 rounded-2"
-                            style="background-color: red;">
-                            <mat-icon style="color:white">cancel</mat-icon>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <span class="h2-heading">PrePaid Weekly Report</span>
-                <div class="col-12 d-flex flex-row justify-content-between align-items-center p-1 rounded-2"
-                    style="background-color: whitesmoke;">
-                    <span>abhishek@gmail.com</span>
-                    <div class="editbtn d-flex flex-row p-1">
-                        <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
-                            style="background-color: blue;">
-                            <mat-icon style="color:white">edit</mat-icon>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center p-1 rounded-2"
-                            style="background-color: red;">
-                            <mat-icon style="color:white">cancel</mat-icon>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -75,7 +42,7 @@
                     <div class="row">
                         <div class="col-8">
                             <label for="country" class="form-label text-nowrap">Category</label>
-                            <select class="form-select" id="country" required="">
+                            <select class="form-select" id="country" required="" [(ngModel)]="category">
                                 <option value="add_to_all_categories">Add to all categories</option>
                                 <option value="prePaid_weekly_report">PrePaid weekly report</option>
                                 <option value="sales_checking_report">sales checking report</option>
@@ -86,12 +53,16 @@
                     <div class="row">
                         <div class="col-8">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email">
+                            <input type="email" class="form-control" id="email" [(ngModel)]="email" required="">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Create Notification</button>
+                    <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <button *ngIf="spinner==false" type="button" class="btn btn-primary"
+                        (click)="createNotification()">Create Notification</button>
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
                 </div>
             </div>

@@ -12,12 +12,18 @@ export class DescriptionsService {
   });
 
   constructor(private _http: HttpClient) { }
-  createDescriptions(data:any): Observable<any> { 
-    return this._http.post(`${environment.URL}/parking_location/add/description/`,data,{headers: this.headers, withCredentials: true })
+  createDescriptions(data: any): Observable<any> {
+    return this._http.post(`${environment.URL}/parking_location/add/description/`, data, { headers: this.headers, withCredentials: true })
   }
 
-  getDescriptionsById(id:string):Observable<any>{
-    return this._http.get(`${environment.URL}/parking_location/description/?id=${id}`,{headers: this.headers, withCredentials: true })
+  getDescriptionsById(id: string): Observable<any> {
+    return this._http.get(`${environment.URL}/parking_location/description/?id=${id}`, { headers: this.headers, withCredentials: true })
   }
+
+  updateDescriptionsById(data: any): Observable<any> {
+    return this._http.put(`${environment.URL}/parking_location/update/description/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
+  }
+
+
 
 }

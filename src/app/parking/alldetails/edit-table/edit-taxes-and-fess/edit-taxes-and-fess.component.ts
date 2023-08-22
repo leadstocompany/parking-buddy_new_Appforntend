@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 import { TaxesService } from 'src/app/service/taxes.service';
 
@@ -9,7 +10,7 @@ import { TaxesService } from 'src/app/service/taxes.service';
   styleUrls: ['./edit-taxes-and-fess.component.scss']
 })
 export class EditTaxesAndFessComponent {
-  
+
   public taxList: string[] = [
     '✓ 10% Airport Tax',
     '10% City of Chicago Tax',
@@ -52,8 +53,14 @@ export class EditTaxesAndFessComponent {
   ];
   taxes!: FormGroup
   spinner = false
-  constructor(private _formBuilder: FormBuilder, private _taxeService: TaxesService,private _snackbarService: SnackbarService) { }
-  
+  taxData: any = []
+  taxId: any
+  constructor(private _formBuilder: FormBuilder,
+    private _taxeService: TaxesService,
+    private _snackbarService: SnackbarService,
+    @Inject(MAT_DIALOG_DATA) private data: any
+  ) { }
+
   ngOnInit() {
     this.taxes = this._formBuilder.group({
       category: [null],
@@ -63,6 +70,7 @@ export class EditTaxesAndFessComponent {
       applyTax: [null],
       postTaxCal: [null]
     })
+    this.getText()
   }
   public createTax(): void {
     // const formData = new FormData();
@@ -74,15 +82,18 @@ export class EditTaxesAndFessComponent {
     // formData.append('', this.taxes.controls[''].value)
     this.spinner = true
     const data = {
-      "category": this.taxes.controls['category'].value,
-      "amount_type": this.taxes.controls['amountType'].value,
-      "amount": this.taxes.controls['amount'].value,
-      "type": this.taxes.controls['type'].value,
-      "apply": this.taxes.controls['applyTax'].value,
-      "property":localStorage.getItem('detailsId')
-  }
-  
-    this._taxeService.createTaxService(data).subscribe({
+      data: {
+        "category": this.taxes.controls['category'].value,
+        "amount_type": this.taxes.controls['amountType'].value,
+        "amount": this.taxes.controls['amount'].value,
+        "type": this.taxes.controls['type'].value,
+        "apply": this.taxes.controls['applyTax'].value,
+        "property": this.data.id
+      },
+      id: this.taxId
+    }
+
+    this._taxeService.updateTaxesfess(data).subscribe({
       next: (res) => {
         console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
@@ -93,6 +104,30 @@ export class EditTaxesAndFessComponent {
         this._snackbarService.openSnackbar('❌ Internal Server Error')
         this.spinner = false
       }
+    })
+  }
+
+  public getText() {
+    this._taxeService.getTaxesfeesById(this.data.id).subscribe({
+      next: (res) => {
+        console.log(res, 'get taxes ---')
+        this.taxData = res
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  public openEditModal(data: any) {
+    this.taxId = data.id
+    this.taxes.setValue({
+      category: data.category,
+      amountType: data.amount_type,
+      amount: data.amount,
+      type: data.type,
+      applyTax: data.apply,
+      postTaxCal: '',
     })
   }
 

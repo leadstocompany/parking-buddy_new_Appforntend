@@ -27,4 +27,12 @@ export class AmentitiesService {
       { headers: this.headers, withCredentials: true }
     );
   }
+
+  updateAmenities(data: any): Observable<any> {
+    return this._http.put(
+      `${environment.URL}/parking_location/update/amenities/${data.id}/`,
+      data.data,
+      { headers: this.headers, withCredentials: true }
+    );
+  }
 }
