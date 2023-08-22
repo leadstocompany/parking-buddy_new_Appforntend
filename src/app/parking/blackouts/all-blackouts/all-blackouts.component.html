@@ -1,7 +1,6 @@
 <div class="d-flex flex-row justify-content-end align-items-center flex-wrap mt-4">
     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Blackout</button>
 </div>
-
 <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -16,7 +15,7 @@
                         <div class="col-md-10 d-flex flex-row align-items-center gap-4">
                             <label for="country" class="form-label text-nowrap">Product</label>
                             <select class="form-select" id="country" required=""formControlName='product'>
-                                <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
+                                <option *ngFor="let value of parkingOptions" [value]="value.type">{{value.type}}</option>
                             </select>
                         </div>
                     </div>

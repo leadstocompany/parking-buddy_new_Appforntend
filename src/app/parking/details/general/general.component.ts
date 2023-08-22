@@ -5,6 +5,7 @@ import countryState from './country-states.json'
 import { DetailsService } from 'src/app/service/details.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+
 interface Country {
   [code: string]: string;
 };
@@ -30,7 +31,7 @@ export class GeneralComponent {
       zipCode: ['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       shuttleNumber: ['', Validators.required],
-      flexNumber: ['', Validators.required],
+      flexNumber: ['',],
       shuttleBus: ['',]
     })
   }
@@ -100,5 +101,5 @@ export class GeneralComponent {
     }
     form.classList.add('was-validated');
   }
-  
+
 }

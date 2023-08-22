@@ -7,40 +7,31 @@
         <div class="d-flex flex-row justify-content-end align-items-center flex-wrap mt-4">
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Tax</button>
         </div>
-        <!-- <div class="table-responsive text-nowrap mt-4">
+        <div class="table-responsive text-nowrap mt-4">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Type</th>
-                        <th>Tax on</th>
+                        <th>Sr.</th>
+                        <th>Category</th>
+                        <th>Amount Type</th>
                         <th>Amount</th>
-                        <th></th>
+                        <th>Type</th>
+                        <th>Apply</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Fixed Amount</td>
-                        <td>Subtotal</td>
-                        <td>13.00%</td>
-                        <td>
-                            <div class="d-flex justify-content-around">
-                                <mat-icon>edit</mat-icon> <mat-icon>cancel</mat-icon>
-                            </div>
-                        </td>
+                    <tr *ngFor="let data of taxData; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{data.category}}</td>
+                        <td>{{data.amount_type}}</td>
+                        <td>{{data.amount}}</td>
+                        <td>{{data.type}}</td>
+                        <td>{{data.apply}}</td>
                     </tr>
-                    <tr>
-                        <td>Fixed Amount</td>
-                        <td>Subtotal</td>
-                        <td>10.00%</td>
-                        <td>
-                            <div class="d-flex justify-content-around">
-                                <mat-icon>edit</mat-icon> <mat-icon>cancel</mat-icon>
-                            </div>
-                        </td>
-                    </tr>
+
                 </tbody>
             </table>
-        </div> -->
+        </div>
         <!-- Modal -->
         <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -78,6 +69,7 @@
                                 <div class="col-12">
                                     <label for="" class="text-nowrap">Amount</label>
                                     <div class="input-group">
+                                        <!-- *ngIf="getText.amountType=='Fixed'" -->
                                         <span class="input-group-text">$</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" formControlName="amount">
@@ -141,7 +133,8 @@
                         <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="createTax()"  *ngIf="spinner==false">Create Tax</button>
+                        <button type="button" class="btn btn-primary" (click)="createTax()"
+                            *ngIf="spinner==false">Create Tax</button>
                         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
                     </div>
                 </div>

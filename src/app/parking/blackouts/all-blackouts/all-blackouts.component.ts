@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BarcodesService } from 'src/app/service/barcodes.service';
+import { ProductsService } from 'src/app/service/products.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+
 
 @Component({
   selector: 'app-all-blackouts',
@@ -9,76 +11,67 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
   styleUrls: ['./all-blackouts.component.scss']
 })
 export class AllBlackoutsComponent {
-  public parkingOptions: string[] = [
-    'Self Uncovered',
-    'Self Rooftop',
-    'Self Indoor',
-    'Valet Indoor',
-    'Valet Covered',
-    'Valet Ur',
-    'Valet Rooftop',
-    'Valet Curbside',
-    'Self Uncovered - Oversized',
-    'Self Covered - Oversized',
-    'Self Indoor - Oversized',
-    'Self Rooftop - Oversized',
-    'Self Curbside - Oversized',
-    'Valet Uncovered - Oversized',
-    'Valet Covered - Oversized',
-    'Valet Indoor - Oversized',
-    'Valet Rooftop - Oversized',
-    'Valet Curbside - Oversized'
-  ];
+  public parkingOptions: any = []
   blackouts!: FormGroup
   spinner = false
-  constructor(private _formBuilder: FormBuilder,private _barAndBlackService:BarcodesService,private _snackbarService: SnackbarService) { }
+  constructor(private _formBuilder: FormBuilder, private _barAndBlackService: BarcodesService, private _productService: ProductsService, private _snackbarService: SnackbarService) { }
   ngOnInit() {
     this.blackouts = this._formBuilder.group({
-      product:[null],
-      blackoutsType:[null],
-      date:[new Date(),new Date()],
-      cars:[null],
-      recurrence:['On'],
-      allowedDay:[null]
+      product: [null],
+      blackoutsType: [null],
+      date: [new Date(), new Date()],
+      cars: [null],
+      recurrence: ['On'],
+      allowedDay: [null]
+    })
+    this.getProduct()
+  }
+
+  public createBlackout(): void {
+    // const formData = new FormData();
+    // formData.append('',this.blackouts.controls['product'].value)
+    // formData.append('',this.blackouts.controls['blackoutsType'].value)
+    // formData.append('',this.blackouts.controls['date'].value)
+    // formData.append('',this.blackouts.controls['cars'].value)
+    // formData.append('',this.blackouts.controls['recurrence'].value)
+    // formData.append('',this.blackouts.controls['allowedDay'].value)
+    // console.log(this.blackouts.controls['date'].value[0])
+    // console.log(this.blackouts.controls['date'].value[1])
+    this.spinner = true
+    const data = {
+      "product": this.blackouts.controls['product'].value,
+      "type": this.blackouts.controls['blackoutsType'].value,
+      "start_date": new Date(this.blackouts.controls['date'].value[0]).toISOString().split('T')[0],
+      "end_date": new Date(this.blackouts.controls['date'].value[1]).toISOString().split('T')[0],
+      "cars": this.blackouts.controls['cars'].value,
+      "recurrence_rule": this.blackouts.controls['recurrence'].value == 'On' ? true : false,
+      "parking_allowed": this.blackouts.controls['allowedDay'].value,
+      "property": localStorage.getItem('detailsId')
+    }
+    this._barAndBlackService.createBlackouts(data).subscribe({
+      next: (res) => {
+        console.log(res)
+        this.spinner = false
+        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+      },
+      error: (error) => {
+        console.log(error)
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this.spinner = false
+
+      }
     })
   }
 
-public createBlackout ():void{
-  // const formData = new FormData();
-  // formData.append('',this.blackouts.controls['product'].value)
-  // formData.append('',this.blackouts.controls['blackoutsType'].value)
-  // formData.append('',this.blackouts.controls['date'].value)
-  // formData.append('',this.blackouts.controls['cars'].value)
-  // formData.append('',this.blackouts.controls['recurrence'].value)
-  // formData.append('',this.blackouts.controls['allowedDay'].value)
-  // console.log(this.blackouts.controls['date'].value[0])
-  // console.log(this.blackouts.controls['date'].value[1])
-  this.spinner = true
-  const data = {
-    "product":this.blackouts.controls['product'].value,
-    "type":this.blackouts.controls['blackoutsType'].value,
-    "start_date": new Date(this.blackouts.controls['date'].value[0]).toISOString().split('T')[0],
-    "end_date":  new Date(this.blackouts.controls['date'].value[1]).toISOString().split('T')[0],
-    "cars":this.blackouts.controls['cars'].value,
-    "recurrence_rule": this.blackouts.controls['recurrence'].value=='On'?true:false,
-    "parking_allowed":this.blackouts.controls['allowedDay'].value,
-    "property": localStorage.getItem('detailsId')
-}
-  this._barAndBlackService.createBlackouts(data).subscribe({
-    next:(res)=>{
-      console.log(res)
-      this.spinner = false
-      this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
-    },
-    error:(error)=>{
-      console.log(error)
-      this._snackbarService.openSnackbar('❌ Internal Server Error')
-      this.spinner = false
-
-    }
-  })
-
-}
-
-
+  public getProduct() {
+    this._productService.getProductById(localStorage.getItem('detailsId')).subscribe({
+      next: (res) => {
+        console.log(res, 'get values')
+        this.parkingOptions = res
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
 }

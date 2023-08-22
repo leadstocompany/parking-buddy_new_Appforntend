@@ -51,8 +51,8 @@ export class TaxesComponent {
   ];
   taxes!: FormGroup
   spinner = false
+  taxData:any=[]
   constructor(private _formBuilder: FormBuilder, private _taxeService: TaxesService,private _snackbarService: SnackbarService) { }
-  
   ngOnInit() {
     this.taxes = this._formBuilder.group({
       category: [null],
@@ -62,6 +62,8 @@ export class TaxesComponent {
       applyTax: [null],
       postTaxCal: [null]
     })
+
+    this.getText()
   }
   public createTax(): void {
     // const formData = new FormData();
@@ -86,6 +88,7 @@ export class TaxesComponent {
         console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.spinner = false
+        this.getText()
       },
       error: (error) => {
         console.log(error)
@@ -93,6 +96,18 @@ export class TaxesComponent {
         this.spinner = false
       }
     })
+  }
+
+  public getText(){
+      this._taxeService.getTaxesfeesById(localStorage.getItem('detailsId')).subscribe({
+        next: (res) => {
+          console.log(res, 'get taxes ---')
+          this.taxData = res
+        },
+        error: (error) => {
+          console.log(error)
+        }
+      })
   }
 
 }

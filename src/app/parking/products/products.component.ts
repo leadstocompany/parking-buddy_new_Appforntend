@@ -3,6 +3,7 @@ import { ProductsService } from 'src/app/service/products.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 
 
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -31,8 +32,14 @@ export class ProductsComponent {
     'Valet Curbside - Oversized'
   ];
   public productType: string = 'Self Uncovered';
+  public products: any = [];
   spinner = false
-  constructor(private _productService: ProductsService,private _snackbarService: SnackbarService) { }
+  constructor(private _productService: ProductsService, private _snackbarService: SnackbarService) { }
+
+  ngOnInit() {
+    this.getProduct()
+  }
+
   public createProduct() {
     const data = {
       type: this.productType,
@@ -41,9 +48,10 @@ export class ProductsComponent {
     this._productService.createProduct(data).subscribe({
       next: (res) => {
         console.log(res)
-        localStorage.setItem('productId',res.id)
+        localStorage.setItem('productId', res.id)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.modalElement.nativeElement.click();
+        this.getProduct()
       },
       error: (error) => {
         this._snackbarService.openSnackbar('❌ Internal Server Error')
@@ -51,5 +59,18 @@ export class ProductsComponent {
       }
     })
 
+  }
+
+  public getProduct() {
+    this._productService.getProductById(localStorage.getItem('detailsId')).subscribe({
+      next: (res) => {
+        console.log(res, 'get values')
+        this.products = res
+        console.log(this.products, '====================')
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
 }
