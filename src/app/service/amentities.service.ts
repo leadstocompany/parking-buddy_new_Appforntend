@@ -1,26 +1,26 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AmentitiesService {
-
-  headers = new HttpHeaders({
-    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-  });
-
-  constructor(private _http: HttpClient) { }
+  //
+  constructor(private _http: HttpClient) {}
 
   createAmenities(data: any): Observable<any> {
-    console.log(data)
-    return this._http.post(`${environment.URL}/parking_location/add/amenities/`, data, { headers: this.headers, withCredentials: true })
+    console.log(data);
+    return this._http.post(
+      `${environment.URL}/parking_location/add/amenities/`,
+      data
+    );
   }
 
   getAmenitiesById(id: string): Observable<any> {
-    return this._http.get(`${environment.URL}/parking_location/amenities/?id=${id}`, { headers: this.headers, withCredentials: true })
+    return this._http.get(
+      `${environment.URL}/parking_location/amenities/?id=${id}`
+    );
   }
-
 }

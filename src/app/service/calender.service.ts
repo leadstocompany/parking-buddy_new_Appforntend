@@ -4,25 +4,20 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CalenderService {
-
-  headers = new HttpHeaders({
-    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-  });
-
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
 
   createBasicDetailsService(): Observable<any> {
-    return this._http.post(`${environment.URL}`, {headers: this.headers, withCredentials: true })
+    return this._http.post(`${environment.URL}`, {});
   }
 
   createOperatingHours(): Observable<any> {
-    return this._http.post(`${environment.URL}`, {headers: this.headers, withCredentials: true })
+    return this._http.post(`${environment.URL}`, {});
   }
 
   createShuttleHours(): Observable<any> {
-    return this._http.post(`${environment.URL}`, {headers: this.headers, withCredentials: true })
+    return this._http.post(`${environment.URL}`, {});
   }
 }
