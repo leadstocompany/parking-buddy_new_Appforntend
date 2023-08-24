@@ -48,7 +48,7 @@ export class ProductsComponent {
   public createProduct() {
     const data = {
       type: this.productType,
-      property: this._saveService.getPropertyId()
+      property: this.editData.edit?this.editData.id:this._saveService.getPropertyId()
     }
     this._productService.createProduct(data).subscribe({
       next: (res) => {
