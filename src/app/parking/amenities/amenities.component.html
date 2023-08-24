@@ -17,5 +17,6 @@
     <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
         <span class="visually-hidden">Loading...</span>
     </div>
-    <button class="btn btn-primary mt-3" (click)="onFormSubmit()"  *ngIf="spinner==false">save</button>
+    <button class="btn btn-primary mt-3" (click)="onFormSubmit()"  *ngIf="spinner==false && editOption==false">save</button>
+    <button class="btn btn-primary mt-3" (click)="updateSubmit()"  *ngIf="spinner==false && editOption==true ">Save</button>
 </div>

@@ -22,6 +22,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Product</th>
                         <th>Daily Rate</th>
                         <th>Hourly</th>
@@ -30,11 +31,14 @@
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>code</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of document">
-                        <td>{{data.id}}</td>
+                    <tr *ngFor="let data of document;let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{data.product.type}}</td>
                         <td>{{data.dail_rate}}</td>
                         <td>{{data.hourly_rate}}</td>
                         <td>{{data.weekly_rate}}</td>
@@ -42,14 +46,20 @@
                         <td>{{data.start_date | date:'dd-MM-yyyy' }}</td>
                         <td>{{data.end_date | date:'dd-MM-yyyy' }}</td>
                         <td>{{data.code}}</td>
-                        <!-- <td>{{data.active}}</td> -->
-                        <!-- <td>
+                        <td>
                             <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
                                 style="background-color: blue; cursor: pointer;" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
                                 <mat-icon style="color:white">edit</mat-icon>
                             </div>
-                        </td> -->
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                                style="background-color: red; cursor: pointer;" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
+                                <mat-icon style="color:white">cancel</mat-icon>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -264,8 +274,7 @@
                         <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="submitForm()" *ngIf="spinner==false">Edit
-                            Rate</button>
+                        <button type="button" class="btn btn-primary" (click)="editPricing()" *ngIf="spinner==false">Save</button>
                         <button type="button" #staticBackdropEdit class="btn btn-warning"
                             data-bs-dismiss="modal">cancel</button>
                     </div>

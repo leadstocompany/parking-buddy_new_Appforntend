@@ -15,7 +15,8 @@
                 </span>
                 <div class="form-check d-flex flex-row align-items-center">
                     <label for="flexCheckDefault" class="form-check-label form-text">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [(ngModel)]="modal.safety">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                            [(ngModel)]="modal.safety">
                         Specify if this tax amount should be used to calculate on POST tax
                         calculation
                     </label>
@@ -47,5 +48,8 @@
     <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
         <span class="visually-hidden">Loading...</span>
     </div>
-    <button class="btn btn-primary mt-3 mb-4" (click)="submitForm()"  *ngIf="spinner==false">save</button>
+    <button class="btn btn-primary mt-3 mb-4" (click)="submitForm()"
+        *ngIf="spinner==false && editValue==false">Save</button>
+    <button class="btn btn-primary mt-3 mb-4" (click)="UpdateValue()"
+        *ngIf="spinner==false && editValue==true">Save</button>
 </div>

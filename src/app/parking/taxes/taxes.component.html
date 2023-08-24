@@ -11,12 +11,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Sr.</th>
+                        <th>#</th>
                         <th>Category</th>
                         <th>Amount Type</th>
                         <th>Amount</th>
                         <th>Type</th>
                         <th>Apply</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +29,19 @@
                         <td>{{data.amount}}</td>
                         <td>{{data.type}}</td>
                         <td>{{data.apply}}</td>
+                        <td>
+                            <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                                style="background-color: blue; cursor: pointer;" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
+                                <mat-icon style="color:white">edit</mat-icon>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                                style="background-color: red; cursor: pointer;" (click)="openEditModal(data)">
+                                <mat-icon style="color:white">cancel</mat-icon>
+                            </div>
+                        </td>
                     </tr>
 
                 </tbody>
@@ -67,7 +82,11 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <label for="" class="text-nowrap">Amount</label>
+                                    <!-- <label for="" class="text-nowrap">Amount</label> -->
+                                    <label for="" class="text-nowrap"
+                                        *ngIf="this.taxes.get('amountType')?.value == 'Fixed'|| !this.taxes.get('amountType')?.value">Amount</label>
+                                    <label for="" class="text-nowrap"
+                                        *ngIf="this.taxes.get('amountType')?.value == 'Percentage'">Percent</label>
                                     <div class="input-group">
                                         <!-- *ngIf="getText.amountType=='Fixed'" -->
                                         <span class="input-group-text"
@@ -138,6 +157,120 @@
                         </div>
                         <button type="button" class="btn btn-primary" (click)="createTax()"
                             *ngIf="spinner==false">Create Tax</button>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Edit  Modal -->
+        <div class=" modal fade" id="staticBackdropEdit" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="staticBackdropLabel">Add Tex</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form [formGroup]="taxes">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="country" class="form-label text-nowrap">Category</label>
+                                    <select class="form-select" id="country" required="" formControlName="category">
+                                        <option *ngFor="let value of taxList " [value]="value">{{value}}</option>
+                                    </select>
+                                    <div class="form-text">choose the appropriate category type for the applied fee/tax
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="" class="text-nowrap">Amount Type</label>
+                                    <select class="form-select" id="country" required="" formControlName="amountType">
+                                        <option value="Fixed">Fixed</option>
+                                        <option value="Percentage">Percentage</option>
+                                    </select>
+                                    <div class="form-text">Specify whether the fee/tax is a percentage of dollar amount.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="" class="text-nowrap"
+                                        *ngIf="this.taxes.get('amountType')?.value == 'Fixed'|| !this.taxes.get('amountType')?.value">Amount</label>
+                                    <label for="" class="text-nowrap"
+                                        *ngIf="this.taxes.get('amountType')?.value == 'Percentage'">Percent</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"
+                                            *ngIf="this.taxes.get('amountType')?.value == 'Fixed'">$</span>
+                                        <span class="input-group-text"
+                                            *ngIf="this.taxes.get('amountType')?.value == 'Percentage'">%</span>
+                                        <input type="text" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" formControlName="amount">
+                                    </div>
+                                    <div class="form-text">Enter the fee/tax amount.</div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="country" class="form-label text-nowrap">Type</label>
+                                    <select class="form-select" id="country" required="" formControlName="type">
+                                        <option value="fixed_amount">Fixed Amount</option>
+                                        <option value="per_day">Per Day</option>
+                                        <option value="per_calendar_day">Per Calendar Day</option>
+                                    </select>
+                                    <div class="form-text">Specify how often this fee/tax applied.</div>
+                                    <div class="form-text">- <u><i>Fixed:</i></u> applied once per reservation</div>
+                                    <div class="form-text">- <u><i>Per Day:</i></u> applied once per 24 hour period
+                                    </div>
+                                    <div class="form-text">- <u><i>Per Calendar Day:</i></u> applied once per calendar
+                                        date
+                                        parked</div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="country" class="form-label text-nowrap">When To Apply</label>
+                                    <select class="form-select" id="country" required="" formControlName="applyTax">
+                                        <option value="per_tax">Pre Tax</option>
+                                        <option value="post_tax">Post Tax</option>
+                                    </select>
+                                    <div class="form-text">Specify whether or not taxable amount includes other taxes
+                                        and
+                                        fees.</div>
+                                    <div class="form-text">- <u><i>Pre tax:</i></u> applied before other taxes and fees.
+                                        (most common)</div>
+                                    <div class="form-text">- <u><i>Post tax:</i></u> applied once per 24 hour period
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <span>
+                                        Used on Post Tax <br> Calculation
+                                    </span>
+                                    <div class="form-check d-flex flex-row align-items-center">
+                                        <label for="flexCheckDefault" class="form-check-label form-text">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault" formControlName="postTaxCal">
+                                            Specify if this tax amount should be used to calculate on POST tax
+                                            calculation
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="updateTex()"
+                            *ngIf="spinner==false">save</button>
                         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
                     </div>
                 </div>
