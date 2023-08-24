@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ImagesService } from 'src/app/service/images.service';
+import { SaveidService } from 'src/app/service/saveID/saveid.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 interface SelectedFile {
   file: File | string;
@@ -33,7 +34,7 @@ export class ImagesComponent {
   }
   spinner = false
 
-  constructor(private _imageService: ImagesService, private _snackbarService: SnackbarService) { }
+  constructor(private _saveService: SaveidService,private _imageService: ImagesService, private _snackbarService: SnackbarService) { }
 
   onFilesSelected(event: any) {
     this.selectedFiles = [];
@@ -66,7 +67,7 @@ export class ImagesComponent {
       const data = {
         "logo": this.logo,
         "images": this.selectedFiles,
-        "property": localStorage.getItem('detailsId')
+        "property":this._saveService.getPropertyId() 
       }
       this._imageService.createImages(data).subscribe({
         next: (res) => {

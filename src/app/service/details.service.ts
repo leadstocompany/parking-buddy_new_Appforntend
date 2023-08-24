@@ -27,6 +27,7 @@ export class DetailsService {
     return this._http.get(`${environment.URL}/parking_location/update/property/${id}/`, { headers: this.headers, withCredentials: true })
   }
   udpateSingleBasicDetailsService(data: any): Observable<any> {
+    console.log(data)
     return this._http.put(`${environment.URL}/parking_location/update/property/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
   }
 

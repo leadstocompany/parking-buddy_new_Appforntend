@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetailsService } from 'src/app/service/details.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 import { EditTableComponent } from './edit-table/edit-table.component';
+import { Router } from '@angular/router';
+import { SaveidService } from 'src/app/service/saveID/saveid.service';
 
 @Component({
   selector: 'app-alldetails',
@@ -16,7 +18,7 @@ export class AlldetailsComponent {
   itemsPerPage = 10;
   currentPage = 1;
   pageNumbers: number[] = [];
-  constructor(private _dialog: MatDialog, private _detailService: DetailsService, private _snackbarService: SnackbarService) { }
+  constructor(private _dialog: MatDialog, private _detailService: DetailsService, private _snackbarService: SnackbarService, private _router: Router, private _saveService: SaveidService) { }
   ngOnInit() {
     this.getAllGeneralDetails();
   }
@@ -38,12 +40,12 @@ export class AlldetailsComponent {
   }
 
   // edit dialog
-  openDialog(data:any) {
+  openDialog(data: any) {
     const dialogRef = this._dialog.open(EditTableComponent, {
       height: '80vh',
       width: '40vw',
-      data: { id: data.id},
-      disableClose: true 
+      data: { id: data.id },
+      disableClose: true
     });
     dialogRef.afterClosed().subscribe(() => {
       console.log(`Dialog result:`);
@@ -77,6 +79,32 @@ export class AlldetailsComponent {
     if (this.currentPage < this.pageNumbers.length) {
       this.currentPage++;
       this.updateTableContent();
+    }
+  }
+
+
+
+  /**
+   * Create New item
+   */
+
+  public createNew(data: any) {
+    if (data) {
+      this._saveService.setSharedData(
+        {
+          id: data.id,
+          edit: true
+        }
+      )
+      this._router.navigate(['/parking/create/Details/General'])
+    } else {
+      this._saveService.setSharedData(
+        {
+          id: '',
+          edit: false
+        }
+      )
+      this._router.navigate(['/parking/create'])
     }
   }
 }

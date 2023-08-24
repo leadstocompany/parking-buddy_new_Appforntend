@@ -17,6 +17,47 @@
         </div>
     </div>
 
+    <div class="table-responsive text-nowrap mt-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Barcode Version</th>
+                    <th>Barcode Text</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of barcodeData;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{data.product.type}}</td>
+                    <td>{{data.version}}</td>
+                    <td>{{data.text}}</td>
+                    <td>{{data.date | date:'dd-MM-yyyy' }}</td>
+                    <td>
+                        <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                            style="background-color: blue; cursor: pointer;" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
+                            <mat-icon style="color:white">edit</mat-icon>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                            style="background-color: red; cursor: pointer;" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdropEdit">
+                            <mat-icon style="color:white">cancel</mat-icon>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Model -->
+
     <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
@@ -32,7 +73,7 @@
                             <div class="col-12">
                                 <label for="country" class="form-label text-nowrap">Product</label>
                                 <select class="form-select" id="country" required="" formControlName="product">
-                                    <option *ngFor="let value of parkingOptions" [value]="value">{{value}}</option>
+                                    <option *ngFor="let value of parkingOptions" [value]="value.id">{{value.type}}</option>
                                 </select>
                                 <div class="form-text">optional, applies to all products if not selected
                                 </div>
@@ -57,9 +98,10 @@
                                     <option value="Regular express">Regular express</option>
                                 </select>
                             </div>
-                            <div class="col-12 mt-3 overflow-auto" >
+                            <div class="col-12 mt-3 overflow-auto">
                                 <label for="code" class="form-label text-nowrap">Date</label>
-                                <input type="text" class="form-control z-3" bsDatepicker [bsConfig]="{ adaptivePosition: true }" formControlName="date">
+                                <input type="text" class="form-control z-3" bsDatepicker
+                                    [bsConfig]="{ adaptivePosition: true }" formControlName="date">
                                 <div class="form-text">optional, applies to all date if not selected</div>
                             </div>
                         </div>
@@ -70,7 +112,72 @@
                     <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                         <span class="visually-hidden">Loading...</span>
                     </div>
-                    <button *ngIf="spinner==false" type="button" class="btn btn-primary" (click)="createBarcode()">Create Barcode</button>
+                    <button *ngIf="spinner==false" type="button" class="btn btn-primary"
+                        (click)="createBarcode()">Create Barcode</button>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Model -->
+
+    <div class=" modal fade" id="staticBackdropEdit" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="staticBackdropLabel">Add Barcode</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form [formGroup]="barCodes">
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="country" class="form-label text-nowrap">Product</label>
+                                <select class="form-select" id="country" required="" formControlName="product">
+                                    <option *ngFor="let value of parkingOptions" [value]="value.id">{{value.type}}</option>
+                                </select>
+                                <div class="form-text">optional, applies to all products if not selected
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <label for="country" class="form-label text-nowrap">Barcode Version</label>
+                                <select class="form-select" id="country" required="" formControlName="barcodeVersion">
+                                    <option value="code39_default">Code 39 (default)</option>
+                                    <option value="qr_code">QR Code</option>
+                                    <option value="code39">Code 39</option>
+                                    <option value="code128">Code 128</option>
+                                    <option value="codebar">Codebar</option>
+                                    <option value="ltf14">Itf14 </option>
+                                    <option value="leitcode">Leitcode</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <label for="country" class="form-label text-nowrap">Barcode Text</label>
+                                <select class="form-select" id="country" required="" formControlName="barcodeText">
+                                    <option value="Customer Reservation ID">Customer Reservation ID</option>
+                                    <option value="Custom Text">Custom Text</option>
+                                    <option value="Regular express">Regular express</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-3 overflow-auto">
+                                <label for="code" class="form-label text-nowrap">Date</label>
+                                <input type="text" class="form-control z-3" bsDatepicker
+                                    [bsConfig]="{ adaptivePosition: true }" formControlName="date">
+                                <div class="form-text">optional, applies to all date if not selected</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <button *ngIf="spinner==false" type="button" class="btn btn-primary"
+                        (click)="updateBarCode()">Save</button>
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
                 </div>
             </div>

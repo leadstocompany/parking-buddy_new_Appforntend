@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NotificationsService } from 'src/app/service/notifications.service';
+import { SaveidService } from 'src/app/service/saveID/saveid.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 
 
@@ -13,21 +14,27 @@ export class NotificationsComponent {
   category: string = '';
   spinner = false
   allNotification: any = []
-  constructor(private _notificationService: NotificationsService, private _snackbarService: SnackbarService) { }
+  editData: any;
+  constructor(private _notificationService: NotificationsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
 
   createNotification() {
     this.spinner = true
     const data = {
       "category": this.category,
       "email": this.email,
-      "property": localStorage.getItem('detailsId')
+      "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
     this._notificationService.createNotificationService(data).subscribe({
       next: (res) => {
         console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
-        this.getNotification()
+        if (this.editData.edit) {
+          this.getNotification(this.editData.id)
+        } else {
+          this.getNotification(this._saveService.getPropertyId())
+        }
+
       },
       error: (error) => {
         console.log(error)
@@ -38,14 +45,22 @@ export class NotificationsComponent {
 
   }
 
+
   ngOnInit() {
-    this.getNotification()
+    // Check edit or not 
+    this.editData = this._saveService.getSharedData()
+    if (this.editData.edit) {
+      this.getNotification(this.editData.id)
+
+    } else if (this.editData.edit === false) {
+      this.getNotification(this._saveService.getPropertyId())
+
+    }
   }
 
-  public getNotification() {
-    this._notificationService.getNotification(localStorage.getItem('detailsId')).subscribe({
+  public getNotification(id: any) {
+    this._notificationService.getNotification(id).subscribe({
       next: (res) => {
-        console.log(res, 'get Notification')
         this.allNotification = res
       },
       error: (error) => {

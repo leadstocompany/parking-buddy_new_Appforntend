@@ -1,6 +1,55 @@
 <div class="d-flex flex-row justify-content-end align-items-center flex-wrap mt-4">
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Blackout</button>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="clearBlackout()"> +
+        Add Blackout</button>
 </div>
+
+<div class="table-responsive text-nowrap mt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Product</th>
+                <th>Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Cars</th>
+                <th>Recurrence Rule</th>
+                <th>Stay Exception</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of document;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{data.product.type}}</td>
+                <td>{{data.type}}</td>
+                <td>{{data.start_date | date:'dd-MM-yyyy' }}</td>
+                <td>{{data.end_date | date:'dd-MM-yyyy' }}</td>
+                <td>{{data.cars}}</td>
+                <td>{{data.recurrence_rule}}</td>
+                <td>{{data.parking_allowed}}</td>
+
+                <td>
+                    <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                        style="background-color: blue; cursor: pointer;" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
+                        <mat-icon style="color:white">edit</mat-icon>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
+                        style="background-color: red; cursor: pointer;" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
+                        <mat-icon style="color:white">cancel</mat-icon>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Open Modal -->
 <div class=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -14,8 +63,9 @@
                     <div class="row">
                         <div class="col-md-10 d-flex flex-row align-items-center gap-4">
                             <label for="country" class="form-label text-nowrap">Product</label>
-                            <select class="form-select" id="country" required=""formControlName='product'>
-                                <option *ngFor="let value of parkingOptions" [value]="value.type">{{value.type}}</option>
+                            <select class="form-select" id="country" required="" formControlName='product'>
+                                <option *ngFor="let value of parkingOptions" [value]="value.type">{{value.type}}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -48,10 +98,12 @@
                     </div>
                     <div class="d-flex flex-row gap-2 align-items-center mt-3">
                         <span>Recurrence Rule</span>
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group" >
-                            <input type="radio" class="btn-check" id="btnradio1" autocomplete="off" formControlName="recurrence" value="On">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" id="btnradio1" autocomplete="off"
+                                formControlName="recurrence" value="On">
                             <label class="btn btn-outline-secondary" for="btnradio1">On&nbsp;</label>
-                            <input type="radio" class="btn-check"  id="btnradio2" autocomplete="off" checked formControlName="recurrence" value="Off">
+                            <input type="radio" class="btn-check" id="btnradio2" autocomplete="off" checked
+                                formControlName="recurrence" value="Off">
                             <label class="btn btn-outline-secondary" for="btnradio2">Off</label>
                         </div>
                     </div>
@@ -82,7 +134,101 @@
                 <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                     <span class="visually-hidden">Loading...</span>
                 </div>
-                <button type="button" class="btn btn-primary" (click)="createBlackout()"  *ngIf="spinner==false">Create Blackout</button>
+                <button type="button" class="btn btn-primary" (click)="createBlackout()" *ngIf="spinner==false">Create
+                    Blackout</button>
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Modal -->
+<div class=" modal fade" id="staticBackdropEdit" data-bs-backdrop="static" data-bs-keyboard="false"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">Add Blackout</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="blackouts">
+                <div class="modal-body d-flex flex-column gap-1">
+                    <div class="row">
+                        <div class="col-md-10 d-flex flex-row align-items-center gap-4">
+                            <label for="country" class="form-label text-nowrap">Product</label>
+                            <select class="form-select" id="country" required="" formControlName='product'>
+                                <option *ngFor="let value of parkingOptions" [value]="value.id">{{value.type}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 d-flex flex-row align-items-center gap-4 mt-2">
+                            <label for="country"
+                                class="form-label text-nowrap">type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <select class="form-select" id="country" required="" formControlName="blackoutsType">
+                                <option value="Check In">Check In</option>
+                                <option value="Block All Parking">Block All Parking</option>
+                                <option value="Max Cars Per Day">Max Cars Per Day</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 d-flex flex-row align-items-center gap-4 mt-2">
+                            <label for="code"
+                                class="form-label text-nowrap">Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input type="text" id="date" class="form-control" placeholder="Pick Start and End Date"
+                                bsDaterangepicker autocapitalize="off" formControlName="date">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 d-flex flex-row align-items-center gap-4 mt-2">
+                            <label for="code"
+                                class="form-label text-nowrap">Cars&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input type="text" class="form-control" formControlName="cars">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row gap-2 align-items-center mt-3">
+                        <span>Recurrence Rule</span>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" id="btnradio1" autocomplete="off"
+                                formControlName="recurrence" value="On">
+                            <label class="btn btn-outline-secondary" for="btnradio1">On&nbsp;</label>
+                            <input type="radio" class="btn-check" id="btnradio2" autocomplete="off" checked
+                                formControlName="recurrence" value="Off">
+                            <label class="btn btn-outline-secondary" for="btnradio2">Off</label>
+                        </div>
+                    </div>
+                    <mat-divider class="mt-2"></mat-divider>
+                    <div class="row mt-3">
+                        <span>Optional</span>
+                        <span>Add a long stay exception:</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex flex-row align-items-center gap-4 mt-2">
+                            <label for="days" class="form-label fs">Parking allowed if # of parking Days is:</label>
+                            <select class="form-select" id="days" required="" formControlName="allowedDay">
+                                <option value="7+">7+</option>
+                                <option value="8+">8+</option>
+                                <option value="9+">9+</option>
+                                <option value="10+">10+</option>
+                                <option value="11+">11+</option>
+                                <option value="12+">12+</option>
+                                <option value="13+">13+</option>d
+                                <option value="14+">14+</option>
+                            </select>
+                            <span class="fs">This will override the blackout added above</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="UpdateBlackout()" *ngIf="spinner==false">Save</button>
                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
             </div>
         </div>

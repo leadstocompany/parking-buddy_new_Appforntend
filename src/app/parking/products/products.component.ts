@@ -1,8 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProductsService } from 'src/app/service/products.service';
+import { SaveidService } from 'src/app/service/saveID/saveid.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
-
-
 
 @Component({
   selector: 'app-products',
@@ -34,39 +33,41 @@ export class ProductsComponent {
   public productType: string = 'Self Uncovered';
   public products: any = [];
   spinner = false
-  constructor(private _productService: ProductsService, private _snackbarService: SnackbarService) { }
-
+  editData: any
+  constructor(private _productService: ProductsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
-    this.getProduct()
+    this.editData = this._saveService.getSharedData()
+    console.log(this._saveService.getPropertyId())
+    if (this.editData.edit) {
+      this.getProduct(this.editData.edit)
+    } else if (this.editData.edit === false) {
+      this.getProduct(this._saveService.getPropertyId())
+    }
   }
 
   public createProduct() {
     const data = {
       type: this.productType,
-      property: localStorage.getItem('detailsId')
+      property: this._saveService.getPropertyId()
     }
     this._productService.createProduct(data).subscribe({
       next: (res) => {
-        console.log(res)
-        localStorage.setItem('productId', res.id)
+        this._saveService.setProductId(res.id)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.modalElement.nativeElement.click();
-        this.getProduct()
+        this.getProduct(this._saveService.getPropertyId())
       },
       error: (error) => {
         this._snackbarService.openSnackbar('❌ Internal Server Error')
         console.log(error)
       }
     })
-
   }
 
-  public getProduct() {
-    this._productService.getProductById(localStorage.getItem('detailsId')).subscribe({
+  public getProduct(id: any) {
+    this._productService.getProductById(id).subscribe({
       next: (res) => {
-        console.log(res, 'get values')
         this.products = res
-        console.log(this.products, '====================')
       },
       error: (error) => {
         console.log(error)

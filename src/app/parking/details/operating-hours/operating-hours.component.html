@@ -32,7 +32,10 @@
                                 <input class="input-" [ngxTimepicker]="toggleTimepicker" [disableClick]="true" readonly
                                     formControlName="openTime{{i}}" (click)="toggleTimepicker.open()" [format]="24">
                                 <ngx-material-timepicker-toggle [for]="toggleTimepicker" buttonAlign="left"
-                                    class="position-absolute" style="margin-top:5px;"></ngx-material-timepicker-toggle>
+                                    class="position-absolute" style="top:7px;"></ngx-material-timepicker-toggle>
+                                <mat-icon style="margin-top:7px; margin-left: 5px; color: red; cursor: pointer;"
+                                    (click)="removeDate('openTime' + i)"
+                                    *ngIf="operatingForm.get('openTime'+i)!.value">cancel</mat-icon>
                                 <ngx-material-timepicker #toggleTimepicker [format]="24"></ngx-material-timepicker>
                             </div>
                         </td>
@@ -42,6 +45,8 @@
                                     formControlName="closeTime{{i}}" (click)="toggleTimepicker1.open()" [format]="24">
                                 <ngx-material-timepicker-toggle [for]="toggleTimepicker1" class="position-absolute"
                                     style="margin-top:5px;"></ngx-material-timepicker-toggle>
+                                <mat-icon style="margin-top:7px; margin-left: 5px; color: red; cursor: pointer;"
+                                    (click)="removeDate('closeTime{{i}}')" *ngIf="operatingForm.get('closeTime'+i)!.value">cancel</mat-icon>
                                 <ngx-material-timepicker #toggleTimepicker1 [format]="24"></ngx-material-timepicker>
                             </div>
                         </td>
@@ -54,7 +59,8 @@
                 <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                     <span class="visually-hidden">Loading...</span>
                 </div>
-                <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid"  *ngIf="spinner==false">Save</button>
+                <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid"
+                    *ngIf="spinner==false">Save</button>
             </div>
         </div>
     </form>

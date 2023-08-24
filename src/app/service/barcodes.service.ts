@@ -33,6 +33,7 @@ export class BarcodesService {
   }
 
   getBlackoutsById(id: string): Observable<any> {
+    console.log('id',id)
     return this._http.get(`${environment.URL}/parking_location/blackout/?id=${id}`, { headers: this.headers, withCredentials: true })
   }
 

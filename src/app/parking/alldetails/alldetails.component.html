@@ -8,7 +8,7 @@
                 <h1 style="font-size: 5rem; text-align: center;">{{data.length}}</h1>
             </div>
         </div>
-        <div class="col-md-4 tab cerate-new" [routerLink]="['create']">
+        <div class="col-md-4 tab cerate-new" (click)="createNew('')">
             <div class="tab-child d-flex justify-content-center align-items-center" style="height: 100%;">
                 <h1>+ Create New</h1>
             </div>
@@ -40,8 +40,9 @@
                             <td>{{data.street}}</td>
                             <td>{{data.zipcode}}</td>
                             <td>
+                                <!-- (click)="openDialog(data)" -->
                                 <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
-                                    style="background-color: blue;" (click)="openDialog(data)">
+                                    style="background-color: blue;" (click)="createNew(data)">
                                     <mat-icon style="color:white">edit</mat-icon>
                                 </div>
                             </td>

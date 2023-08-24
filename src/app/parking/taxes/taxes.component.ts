@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SaveidService } from 'src/app/service/saveID/saveid.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 import { TaxesService } from 'src/app/service/taxes.service';
 
@@ -51,8 +52,10 @@ export class TaxesComponent {
   ];
   taxes!: FormGroup
   spinner = false
-  taxData:any=[]
-  constructor(private _formBuilder: FormBuilder, private _taxeService: TaxesService,private _snackbarService: SnackbarService) { }
+  taxData: any = []
+  editData: any;
+  taxId: any
+  constructor(private _formBuilder: FormBuilder, private _taxeService: TaxesService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.taxes = this._formBuilder.group({
       category: [null],
@@ -63,16 +66,17 @@ export class TaxesComponent {
       postTaxCal: [null]
     })
 
-    this.getText()
+    // Check edit or not 
+    this.editData = this._saveService.getSharedData()
+    if (this.editData.edit) {
+      this.getText(this.editData.id)
+    } else if (this.editData.edit === false) {
+      this.getText(this._saveService.getPropertyId())
+    }
   }
+
+  // Create tex 
   public createTax(): void {
-    // const formData = new FormData();
-    // formData.append('', this.taxes.controls[''].value)
-    // formData.append('', this.taxes.controls[''].value)
-    // formData.append('', this.taxes.controls[''].value)
-    // formData.append('', this.taxes.controls[''].value)
-    // formData.append('', this.taxes.controls[''].value)
-    // formData.append('', this.taxes.controls[''].value)
     this.spinner = true
     const data = {
       "category": this.taxes.controls['category'].value,
@@ -80,15 +84,15 @@ export class TaxesComponent {
       "amount": this.taxes.controls['amount'].value,
       "type": this.taxes.controls['type'].value,
       "apply": this.taxes.controls['applyTax'].value,
-      "property":localStorage.getItem('detailsId')
-  }
-  
+      "property": this._saveService.getPropertyId()
+    }
+
     this._taxeService.createTaxService(data).subscribe({
       next: (res) => {
         console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.spinner = false
-        this.getText()
+        this.getText(this._saveService.getPropertyId())
       },
       error: (error) => {
         console.log(error)
@@ -98,16 +102,101 @@ export class TaxesComponent {
     })
   }
 
-  public getText(){
-      this._taxeService.getTaxesfeesById(localStorage.getItem('detailsId')).subscribe({
-        next: (res) => {
-          console.log(res, 'get taxes ---')
-          this.taxData = res
-        },
-        error: (error) => {
-          console.log(error)
+  // get tex 
+  public getText(id: any) {
+    this._taxeService.getTaxesfeesById(id).subscribe({
+      next: (res) => {
+        console.log(res, 'get taxes ---')
+        this.taxData = res
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+
+
+  //  Update text 
+  public updateTax(): void {
+    this.spinner = true
+    const data = {
+      data: {
+        "category": this.taxes.controls['category'].value,
+        "amount_type": this.taxes.controls['amountType'].value,
+        "amount": this.taxes.controls['amount'].value,
+        "type": this.taxes.controls['type'].value,
+        "apply": this.taxes.controls['applyTax'].value,
+        "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
+      },
+      id: this.taxId
+    }
+
+    this._taxeService.updateTaxesfess(data).subscribe({
+      next: (res) => {
+        console.log(res)
+        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+        this.spinner = false
+        if (this.editData.edit) {
+          this.getText(this.editData.id)
+        } else {
+          this.getText(this._saveService.getPropertyId())
         }
-      })
+      },
+      error: (error) => {
+        console.log(error)
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this.spinner = false
+      }
+    })
+  }
+
+  // set values
+  public openEditModal(data: any) {
+    console.log(data)
+    this.taxId = data.id
+    this.taxes.setValue({
+      category: data.category,
+      amountType: data.amount_type,
+      amount: data.amount,
+      type: data.type,
+      applyTax: data.apply,
+      postTaxCal: '',
+    })
+  }
+
+
+  public updateTex(): void {
+    this.spinner = true
+    const data = {
+      data: {
+        "category": this.taxes.controls['category'].value,
+        "amount_type": this.taxes.controls['amountType'].value,
+        "amount": this.taxes.controls['amount'].value,
+        "type": this.taxes.controls['type'].value,
+        "apply": this.taxes.controls['applyTax'].value,
+        "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
+      },
+      id: this.taxId
+    }
+
+    this._taxeService.updateTaxesfess(data).subscribe({
+      next: (res) => {
+        console.log(res)
+        if (this.editData.edit) {
+          this.getText(this.editData.id)
+        } else {
+          this.getText(this._saveService.getPropertyId())
+        }
+        this._snackbarService.openSnackbar('✔ Form Successfully updated')
+        this.spinner = false
+      },
+      error: (error) => {
+        console.log(error)
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this.spinner = false
+      }
+    })
   }
 
 }
