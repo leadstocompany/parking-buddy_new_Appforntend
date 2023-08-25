@@ -36,6 +36,7 @@
                     <textarea matInput formControlName="bio" placeholder="Bio"></textarea>
                 </mat-form-field>
             </div>
+            
             <div class="col-12">
                 <input type="file" (change)="onFileChange($event)" accept="image/*">
                 <img *ngIf="previewImage" [src]="previewImage" alt="Preview" width="100px">
