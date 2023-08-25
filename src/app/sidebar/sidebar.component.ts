@@ -51,8 +51,8 @@ export class SidebarComponent {
   openProfileDialog() {
     this.dialog.open(EditProfileComponent, {
       width: '500px',
-      height:'60vh',
-      maxHeight: '80vh',
+      height:'65vh',
+      maxHeight: '90vh',
     });
   }
 
