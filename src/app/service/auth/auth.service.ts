@@ -21,4 +21,9 @@ export class AuthService {
   getUser():Observable<any>{
     return this._http.get(`${environment.URL}/users/get/userprofile/`,{ headers: this.headers, withCredentials: true })
   }
+
+  UpdateUser(data:any):Observable<any>{
+    console.log(data,'dddddddddddddddddddddddddd')
+    return this._http.put(`${environment.URL}/users/update/user-profile/`,data,{ headers: this.headers, withCredentials: true })
+  }
 }

@@ -44,33 +44,50 @@ export class EditProfileComponent implements OnInit {
   }
 
 
-onSubmit() {
-  const formData = new FormData();
-  formData.append('profileImage', this.selectedFile);
-  console.log(this.profileForm.value)
-  this.closeDialog()
-}
+  onSubmit() {
+    const formData = new FormData();
+    console.log(this.selectedFile);
+    console.log(this.profileForm.value)
+    console.log(this.previewImage)
 
-closeDialog() {
-  this.dialogRef.close();
-}
+    const data = {
+      "first_name": this.profileForm.value.fname,
+      "last_name": this.profileForm.value.lname,
+      "email": this.profileForm.value.email,
+      "mobile": this.profileForm.value.phone,
+      "bio": this.profileForm.value.bio,
+      "image": this.selectedFile
+    }
+    this._auth.UpdateUser(data).subscribe({
+      next: (res) => {
+        this.getUserData()
+        this.closeDialog()
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
 
   public getUserData() {
-  this._auth.getUser().subscribe({
-    next: (res) => {
-      console.log(res, 'user data')
-      // this.fullName = res.first_name + ' ' + res.last_name
-      this.profileForm.setValue({
-        fname: res.first_name,
-        lname: res.last_name,
-        phone: res.mobile,
-        email: res.email,
-        bio: res.bio ? res.bio : '',
-      })
-    },
-    error: (error) => {
-      console.log(error)
-    }
-  })
-}
+    this._auth.getUser().subscribe({
+      next: (res) => {
+        this.profileForm.setValue({
+          fname: res.first_name,
+          lname: res.last_name,
+          phone: res.mobile,
+          email: res.email,
+          bio: res.bio ? res.bio : '',
+        })
+        // this.previewImage = res.image ? res.image : ''
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
 }

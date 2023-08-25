@@ -46,7 +46,8 @@
                                 <ngx-material-timepicker-toggle [for]="toggleTimepicker1" class="position-absolute"
                                     style="margin-top:5px;"></ngx-material-timepicker-toggle>
                                 <mat-icon style="margin-top:7px; margin-left: 5px; color: red; cursor: pointer;"
-                                    (click)="removeDate('closeTime'+i)" *ngIf="operatingForm.get('closeTime'+i)!.value">cancel</mat-icon>
+                                    (click)="removeDate('closeTime'+i)"
+                                    *ngIf="operatingForm.get('closeTime'+i)!.value">cancel</mat-icon>
                                 <ngx-material-timepicker #toggleTimepicker1 [format]="24"></ngx-material-timepicker>
                             </div>
                         </td>
@@ -60,7 +61,9 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
                 <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid"
-                    *ngIf="spinner==false">Save</button>
+                    *ngIf="spinner==false && updated==false">Save</button>
+                <button class="mb-4" type="button" class="btn btn-success" [disabled]="operatingForm.invalid"
+                    *ngIf="spinner==false && updated==true" (click)="UpdateValue()">save</button>
             </div>
         </div>
     </form>

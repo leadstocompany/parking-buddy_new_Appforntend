@@ -40,8 +40,24 @@ export class DetailsService {
     return this._http.put(`${environment.URL}/parking_location/add/operating_hour/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
   }
 
-  createShuttleHours(data: FormData): Observable<any> {
-    return this._http.post(`${environment.URL}`, data, { headers: this.headers, withCredentials: true })
+  // shuttleHours ===========
+  // /parking_location/shuttlehours/?id=
+
+  createShuttleHours(data: any): Observable<any> {
+
+    console.log(data,'create hours')
+    return this._http.post(`${environment.URL}/parking_location/add/shuttlehours/`,data, { headers: this.headers, withCredentials: true })
+  }
+
+  UpdateShuttleHours(data: any): Observable<any> {
+    console.log(data,'update data')
+    return this._http.put(`${environment.URL}/parking_location/update/shuttlehours/${data.id}/`,data.data, { headers: this.headers, withCredentials: true })
+  }
+
+
+  getShuttleHours(id: any): Observable<any> {
+    console.log(id,'--->id')
+    return this._http.get(`${environment.URL}/parking_location/shuttlehours/?id=${id}`, { headers: this.headers, withCredentials: true })
   }
 
   deleteDetailsById(id: string): Observable<any> {
