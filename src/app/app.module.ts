@@ -11,12 +11,14 @@ import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule } from '@angular/common/http';
+import { EditProfileComponent } from './sidebar/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpPageComponent,
     SignInPageComponent,
+    EditProfileComponent,
     // SidebarComponent
   ],
   imports: [

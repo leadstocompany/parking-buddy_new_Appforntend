@@ -26,7 +26,7 @@ export class PricingComponent {
   constructor(private _formBuilder: FormBuilder, private _pricingService: PricingService, private _productService: ProductsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.addRate = this._formBuilder.group({
-      product: ['Self Uncovered'],
+      product: [''],
       date: [],
       dailyRate: [null],
       hourlyRate: [null],
@@ -35,7 +35,7 @@ export class PricingComponent {
       weeklyRate: [null],
       monthlyRate: [null],
     })
-    
+
     this.editData = this._saveService.getSharedData()
     if (this.editData.edit) {
       this.getProduct(this.editData.id)
@@ -54,7 +54,8 @@ export class PricingComponent {
       "monthly_rate": this.addRate.controls['monthlyRate'].value,
       "code": this.addRate.controls['code'].value,
       "property": this._saveService.getPropertyId(),
-      "product": this._saveService.getProductId(),
+      // "product": this._saveService.getProductId(),
+      "product": this.addRate.value.product,
       "start_date": new Date(this.addRate.controls['date'].value[0]).toISOString().split('T')[0],
       "end_date": new Date(this.addRate.controls['date'].value[1]).toISOString().split('T')[0],
     }
@@ -83,7 +84,7 @@ export class PricingComponent {
         "monthly_rate": this.addRate.controls['monthlyRate'].value,
         "code": this.addRate.controls['code'].value,
         "property": this.editData.id,
-        "product": this.productId,
+        "product": this.addRate.value.product,
         "start_date": new Date(this.addRate.controls['date'].value[0]).toISOString().split('T')[0],
         "end_date": new Date(this.addRate.controls['date'].value[1]).toISOString().split('T')[0],
       }
@@ -96,7 +97,7 @@ export class PricingComponent {
         "monthly_rate": this.addRate.controls['monthlyRate'].value,
         "code": this.addRate.controls['code'].value,
         "property": this._saveService.getPropertyId(),
-        "product": this._saveService.getProductId(),
+        "product": this.addRate.value.product,
         "start_date": new Date(this.addRate.controls['date'].value[0]).toISOString().split('T')[0],
         "end_date": new Date(this.addRate.controls['date'].value[1]).toISOString().split('T')[0],
       }
@@ -131,7 +132,7 @@ export class PricingComponent {
     this.pricingId = data.id
     this.productId = data.product.id;
     this.addRate.setValue({
-      product: data.product.type,
+      product: data.product.id,
       dailyRate: data.dail_rate,
       hourlyRate: data.hourly_rate,
       date: [new Date(data.start_date), new Date(data.end_date)],
@@ -173,6 +174,23 @@ export class PricingComponent {
       next: (res) => {
         console.log(res, 'get pricing')
         this.document = res
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  public deletePricing(id: any) {
+    this._pricingService.deletePricingById(id).subscribe({
+      next: (res) => {
+        if (this.editData.edit) {
+          this.getPricing(this.editData.id)
+        } else {
+          this.getPricing(this._saveService.getPropertyId())
+        }
+
+        this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
       },
       error: (error) => {
         console.log(error)

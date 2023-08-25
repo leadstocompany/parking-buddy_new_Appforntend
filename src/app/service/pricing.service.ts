@@ -27,5 +27,10 @@ export class PricingService {
     return this._http.get(`${environment.URL}/parking_location/pricing/?id=${id}`, { headers: this.headers, withCredentials: true })
   }
 
+  deletePricingById(id: string): Observable<any> {
+    console.log('id',id)
+    return this._http.delete(`${environment.URL}/parking_location/pricing/${id}/delete`, { headers: this.headers, withCredentials: true })
+  }
+
 
 }

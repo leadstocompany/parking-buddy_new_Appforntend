@@ -44,4 +44,9 @@ export class DetailsService {
     return this._http.post(`${environment.URL}`, data, { headers: this.headers, withCredentials: true })
   }
 
+  deleteDetailsById(id: string): Observable<any> {
+    console.log('id',id)
+    return this._http.delete(`${environment.URL}/parking_location/property/${id}/delete`, { headers: this.headers, withCredentials: true })
+  }
+
 }

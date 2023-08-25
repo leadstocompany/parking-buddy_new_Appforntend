@@ -24,4 +24,9 @@ export class TaxesService {
   updateTaxesfess(data: any): Observable<any> {
     return this._http.put(`${environment.URL}/parking_location/update/taxesfees/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
   }
+
+  deleteTexById(id: string): Observable<any> {
+    console.log('id',id)
+    return this._http.delete(`${environment.URL}/parking_location/taxesfees/${id}/delete`, { headers: this.headers, withCredentials: true })
+  }
 }

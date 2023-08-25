@@ -9,13 +9,19 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/21/21104.png" alt="User Icon">
                 </div>
                 <div class="profile-info">
-                    <h4 class="profile-name">John Doe</h4>
-                    <button class="btn btn-link">Edit</button>
+                    <h4 class="profile-name">{{fullName}}</h4>
+                    <button class="btn btn-link" (click)='openProfileDialog()'>Edit</button>
                 </div>
             </div>
-
+            <a mat-list-item [routerLink]="['/parking']">
+                <span style="text-decoration: underline; color:'blue'">Dashboard</span>
+            </a>
             <a mat-list-item *ngFor="let link of myActiveRoute" [ngClass]="link.active?'active':'unActive'"
                 [routerLink]="[link.name]" (click)="findActiveTab(link.name)">{{link.name}}</a>
+
+            <a mat-list-item [routerLink]="['/']">
+                <span style="text-decoration: underline; color:'blue'">Logout</span>
+            </a>
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content class="mat-drawer-content">

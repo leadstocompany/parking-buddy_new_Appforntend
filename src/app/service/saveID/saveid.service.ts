@@ -11,8 +11,8 @@ export class SaveidService {
   private product = 'productId';
   constructor(private _cookieService: CookieService) { }
 
-
   setSharedData(data: { id: string, edit: boolean }) {
+    this.deleteSaveCookie()
     this._cookieService.set(this.cookieKey, JSON.stringify(data))
   }
   getSharedData() {
@@ -33,6 +33,10 @@ export class SaveidService {
     return this._cookieService.get(this.property)
   }
 
-
+  deleteSaveCookie() {
+    this._cookieService.delete(this.cookieKey);
+    this._cookieService.delete(this.property);
+    this._cookieService.delete(this.product);
+  }
 
 }

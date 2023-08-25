@@ -287,9 +287,9 @@ export class GeneralComponent {
 
     if (this.editData.edit) {
       this.getSingleValues(this.editData.id)
-    } else if (this.editData.edit === false) {
+    } else if (this.editData.edit === false && this._saveService.getPropertyId()) {
       // this.getSingleValues(localStorage.getItem('detailsId'))
-      console.log(this._saveService.getPropertyId())
+      console.log(this._saveService.getPropertyId(), 'get property ')
       this.getSingleValues(this._saveService.getPropertyId())
     }
   }
@@ -383,11 +383,13 @@ export class GeneralComponent {
    * Get single product
   */
   getSingleValues(id: any) {
+    console.log('id0000000000000000000000',id)
     this._detailService.getSingleBasicDetailsService(id).subscribe({
       next: (res) => {
         this.setValues(res)
       },
       error: (error: HttpErrorResponse) => {
+        console.log(error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌ Internal Server Error')
       }

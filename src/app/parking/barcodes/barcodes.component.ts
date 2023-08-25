@@ -42,7 +42,7 @@ export class BarcodesComponent {
   barcodeData: any;
   ngOnInit(): void {
     this.barCodes = this._formBuilder.group({
-      product: ['Self Uncovered'],
+      product: [null],
       barcodeVersion: ['code39_default'],
       barcodeText: ['Customer Reservation ID'],
       date: [new Date()]
@@ -64,7 +64,7 @@ export class BarcodesComponent {
       "text": this.barCodes.value.barcodeText,
       "date": new Date(this.barCodes.value.date).toISOString().split('T')[0],
       "property": this._saveService.getPropertyId(),
-      "product": this._saveService.getProductId()
+      "product": this.barCodes.value.product
     }
 
     this._barCodeService.createBarCodes(data).subscribe({
@@ -94,10 +94,9 @@ export class BarcodesComponent {
   }
 
   public getBarcode(id: any) {
-    console.log(id, '---------id')
     this._barCodeService.getBarCodesById(id).subscribe({
       next: (res) => {
-        console.log(res, '-----------11111111111111111')
+        console.log(res, 'bar code response')
         this.barcodeData = res
       },
       error: (error) => {
@@ -140,13 +139,29 @@ export class BarcodesComponent {
   }
 
   public openEditModal(data: any) {
-    console.log(data)
+    console.log(data, 'data----------------------------')
     this.barId = data.id
     this.barCodes.setValue({
-      product: data.product,
+      product: data.product.id,
       barcodeVersion: data.version,
       barcodeText: data.text,
       date: new Date(data.date)
+    })
+  }
+
+  public deleteBarcodes(id: any) {
+    this._barCodeService.deleteBarcodes(id).subscribe({
+      next: (res) => {
+        this._snackbarService.openSnackbar('✔  Successfully Delted')
+        if (this.editData.edit) {
+          this.getBarcode(this.editData.id)
+        } else {
+          this.getBarcode(this._saveService.getPropertyId())
+        }
+      },
+      error: (error) => {
+        console.log(error)
+      }
     })
   }
 }

@@ -69,5 +69,21 @@ export class NotificationsComponent {
     })
   }
 
+  public deleteNotification(id: any) {
+    this._notificationService.deleteNotificationById(id).subscribe({
+      next: (res) => {
+        this._snackbarService.openSnackbar('✔  Successfully Delted')
+        if (this.editData.edit) {
+          this.getNotification(this.editData.id)
+        } else {
+          this.getNotification(this._saveService.getPropertyId())
+        }
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
 
 }
