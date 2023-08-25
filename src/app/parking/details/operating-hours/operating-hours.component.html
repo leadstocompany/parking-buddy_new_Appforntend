@@ -46,7 +46,7 @@
                                 <ngx-material-timepicker-toggle [for]="toggleTimepicker1" class="position-absolute"
                                     style="margin-top:5px;"></ngx-material-timepicker-toggle>
                                 <mat-icon style="margin-top:7px; margin-left: 5px; color: red; cursor: pointer;"
-                                    (click)="removeDate('closeTime{{i}}')" *ngIf="operatingForm.get('closeTime'+i)!.value">cancel</mat-icon>
+                                    (click)="removeDate('closeTime'+i)" *ngIf="operatingForm.get('closeTime'+i)!.value">cancel</mat-icon>
                                 <ngx-material-timepicker #toggleTimepicker1 [format]="24"></ngx-material-timepicker>
                             </div>
                         </td>

@@ -18,11 +18,15 @@ export class ImagesService {
     return this._http.post(`${environment.URL}/parking_location/add/images/`,data,{headers: this.headers,withCredentials: true })
   }
 
-  createOperatingHours(): Observable<any> {
-    return this._http.post(`${environment.URL}`, {headers: this.headers, withCredentials: true })
+  updateImages(data:any): Observable<any> {
+    console.log(data)
+    return this._http.put(`${environment.URL}/parking_location/update/images/${data.id}/`,data.data,{headers: this.headers,withCredentials: true })
   }
 
-  createShuttleHours(): Observable<any> {
-    return this._http.post(`${environment.URL}`, {headers: this.headers, withCredentials: true })
-  }
+  // getImages(id:any):Observable<any>{
+  //   console.log(id)
+  //   return this._http.put(`${environment.URL}/parking_location/update/images/${data.id}/`,{headers: this.headers,withCredentials: true })
+
+  // }
+  
 }

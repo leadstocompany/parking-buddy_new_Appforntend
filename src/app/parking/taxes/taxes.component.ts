@@ -199,4 +199,22 @@ export class TaxesComponent {
     })
   }
 
+
+  public deleteTex(id: any) {
+    this._taxeService.deleteTexById(id).subscribe({
+      next: (res) => {
+        if (this.editData.edit) {
+          this.getText(this.editData.id)
+        } else {
+          this.getText(this._saveService.getPropertyId())
+        }
+
+        this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
 }

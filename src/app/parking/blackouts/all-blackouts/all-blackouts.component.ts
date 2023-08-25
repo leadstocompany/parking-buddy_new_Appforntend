@@ -57,8 +57,8 @@ export class AllBlackoutsComponent {
       next: (res) => {
         console.log(res)
         this.spinner = false
+        this.getBlackouts(this._saveService.getPropertyId())
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
-        this.getBlackouts(this._saveService.getProductId)
       },
       error: (error) => {
         console.log(error)
@@ -69,7 +69,7 @@ export class AllBlackoutsComponent {
     })
   }
 
-  public getProduct(id:any) {
+  public getProduct(id: any) {
     this._productService.getProductById(id).subscribe({
       next: (res) => {
         this.parkingOptions = res
@@ -85,7 +85,7 @@ export class AllBlackoutsComponent {
     this.saveBlackout(data)
   }
 
-  public getBlackouts(id:any) {
+  public getBlackouts(id: any) {
     this._barAndBlackService.getBlackoutsById(id).subscribe({
       next: (res) => {
         this.document = res
@@ -124,7 +124,7 @@ export class AllBlackoutsComponent {
         "cars": this.blackouts.controls['cars'].value,
         "recurrence_rule": this.blackouts.controls['recurrence'].value == 'On' ? true : false,
         "parking_allowed": this.blackouts.controls['allowedDay'].value,
-        "property": this.editData.edit?this.editData.id:this._saveService.getPropertyId()
+        "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
       },
       id: this.blId
     }
@@ -132,9 +132,9 @@ export class AllBlackoutsComponent {
       next: (res) => {
         console.log(res)
         this.spinner = false
-        if(this.editData.edit){
+        if (this.editData.edit) {
           this.getBlackouts(this.editData.id)
-        }else{
+        } else {
           this.getBlackouts(this._saveService.getPropertyId())
         }
         this._snackbarService.openSnackbar('✔ Form Successfully Updated')
@@ -147,5 +147,22 @@ export class AllBlackoutsComponent {
       }
     })
 
+  }
+
+  public deleteBlackout(id: any) {
+    this._barAndBlackService.deleteBlackoutsById(id).subscribe({
+      next: (res) => {
+        if (this.editData.edit) {
+          this.getBlackouts(this.editData.id)
+        } else {
+          this.getBlackouts(this._saveService.getPropertyId())
+        }
+
+        this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
 }

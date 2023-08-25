@@ -39,6 +39,7 @@ import { EditDescriptionsComponent } from './alldetails/edit-table/edit-descript
 import { EditBarcodesComponent } from './alldetails/edit-table/edit-barcodes/edit-barcodes.component';
 import { EditNotificationsComponent } from './alldetails/edit-table/edit-notifications/edit-notifications.component';
 import { EditImageComponent } from './alldetails/edit-table/edit-image/edit-image.component';
+import { EditProfileComponent } from './sidebar/edit-profile/edit-profile.component';
 @NgModule({
   declarations: [
     SidebarComponent,
@@ -71,7 +72,8 @@ import { EditImageComponent } from './alldetails/edit-table/edit-image/edit-imag
     EditDescriptionsComponent,
     EditBarcodesComponent,
     EditNotificationsComponent,
-    EditImageComponent
+    EditImageComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,

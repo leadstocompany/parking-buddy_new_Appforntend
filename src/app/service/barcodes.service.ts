@@ -41,4 +41,15 @@ export class BarcodesService {
     return this._http.put(`${environment.URL}/parking_location/update/blackout/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
   }
 
+  deleteBlackoutsById(id: string): Observable<any> {
+    console.log('id',id)
+    return this._http.delete(`${environment.URL}/parking_location/blackout/${id}/delete`, { headers: this.headers, withCredentials: true })
+  }
+
+
+  deleteBarcodes(id: string): Observable<any> {
+    console.log('id',id)
+    return this._http.delete(`${environment.URL}/parking_location/barcode/${id}/delete`, { headers: this.headers, withCredentials: true })
+  }
+
 }

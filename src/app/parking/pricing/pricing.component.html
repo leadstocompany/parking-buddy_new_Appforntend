@@ -55,8 +55,7 @@
                         </td>
                         <td>
                             <div class="d-flex justify-content-center align-items-center p-1 rounded-2 mx-3"
-                                style="background-color: red; cursor: pointer;" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdropEdit" (click)="openEditModal(data)">
+                                style="background-color: red; cursor: pointer;" (click)="deletePricing(data.id)">
                                 <mat-icon style="color:white">cancel</mat-icon>
                             </div>
                         </td>
@@ -80,7 +79,7 @@
                                     <label for="country" class="form-label text-nowrap">Product&nbsp; &nbsp;
                                         &nbsp; &nbsp; </label>
                                     <select class="form-select" id="country" required="" formControlName="product">
-                                        <option *ngFor="let value of parkingOptions" [value]="value.type">{{value.type}}
+                                        <option *ngFor="let value of parkingOptions" [value]="value.id">{{value.type}}
                                         </option>
                                     </select>
                                 </div>
@@ -190,7 +189,7 @@
                                     <label for="country" class="form-label text-nowrap">Product&nbsp; &nbsp;
                                         &nbsp; &nbsp; </label>
                                     <select class="form-select" id="country" required="" formControlName="product">
-                                        <option *ngFor="let value of parkingOptions" [value]="value.type">{{value.type}}
+                                        <option *ngFor="let value of parkingOptions" [value]="value.id">{{value.type}}
                                         </option>
                                     </select>
                                 </div>
@@ -274,7 +273,8 @@
                         <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="editPricing()" *ngIf="spinner==false">Save</button>
+                        <button type="button" class="btn btn-primary" (click)="editPricing()"
+                            *ngIf="spinner==false">Save</button>
                         <button type="button" #staticBackdropEdit class="btn btn-warning"
                             data-bs-dismiss="modal">cancel</button>
                     </div>

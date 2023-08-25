@@ -39,7 +39,7 @@ export class ProductsComponent {
     this.editData = this._saveService.getSharedData()
     console.log(this._saveService.getPropertyId())
     if (this.editData.edit) {
-      this.getProduct(this.editData.edit)
+      this.getProduct(this.editData.id)
     } else if (this.editData.edit === false) {
       this.getProduct(this._saveService.getPropertyId())
     }
@@ -48,7 +48,7 @@ export class ProductsComponent {
   public createProduct() {
     const data = {
       type: this.productType,
-      property: this.editData.edit?this.editData.id:this._saveService.getPropertyId()
+      property: this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
     this._productService.createProduct(data).subscribe({
       next: (res) => {
@@ -68,6 +68,24 @@ export class ProductsComponent {
     this._productService.getProductById(id).subscribe({
       next: (res) => {
         this.products = res
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  public deleteProduct(id: any) {
+    this._productService.deleteProductById(id).subscribe({
+      next: (res) => {
+        this.products = res
+        if (this.editData.edit) {
+          this.getProduct(this.editData.id)
+        } else {
+          this.getProduct(this._saveService.getPropertyId())
+        }
+
+        this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
       },
       error: (error) => {
         console.log(error)

@@ -19,4 +19,9 @@ export class NotificationsService {
     console.log(id, 'id')
     return this._http.get(`${environment.URL}/parking_location/notification/?id=${id}`,{headers: this.headers, withCredentials: true })
   }
+
+  deleteNotificationById(id: string): Observable<any> {
+    console.log('id',id)
+    return this._http.delete(`${environment.URL}/parking_location/notification/${id}/delete`, { headers: this.headers, withCredentials: true })
+  }
 }

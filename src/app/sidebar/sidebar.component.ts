@@ -1,6 +1,9 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { AuthService } from '../service/auth/auth.service';
 
 
 
@@ -13,9 +16,10 @@ export class SidebarComponent {
   @Input() routerOption: Array<{ name: string, router: string, active: boolean }> = []
   public myActiveRoute: Array<{ name: string, router: string, active: boolean }> = [];
   showFiller = false;
+  fullName:string='';
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
-  constructor(private router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(private router: Router, changeDetectorRef: ChangeDetectorRef,private _auth:AuthService, media: MediaMatcher, private dialog: MatDialog) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -23,6 +27,7 @@ export class SidebarComponent {
 
   ngOnInit(): void {
     this.findActiveTab(this.router.url.split('/')[2])
+    this.getUserData()
   }
 
   ngOnDestroy(): void {
@@ -39,6 +44,26 @@ export class SidebarComponent {
     this.myActiveRoute.forEach((e) => {
       if (e.name === name) {
         e.active = true
+      }
+    })
+  }
+
+  openProfileDialog() {
+    this.dialog.open(EditProfileComponent, {
+      width: '500px',
+      height:'60vh',
+      maxHeight: '80vh',
+    });
+  }
+
+  public getUserData (){
+    this._auth.getUser().subscribe({
+      next:(res)=>{
+        console.log(res,'user data')
+        this.fullName = res.first_name+' '+res.last_name
+      },
+      error:(error)=>{
+        console.log(error)
       }
     })
   }

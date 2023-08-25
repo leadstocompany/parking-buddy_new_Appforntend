@@ -107,4 +107,16 @@ export class AlldetailsComponent {
       this._router.navigate(['/parking/create'])
     }
   }
+
+  public deleteProperty(id:any){
+      this._detailService.deleteDetailsById(id).subscribe({
+        next: (res) => {
+          this.getAllGeneralDetails()
+          this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
+        },
+        error: (error) => {
+          console.log(error)
+        }
+      })
+  }
 }

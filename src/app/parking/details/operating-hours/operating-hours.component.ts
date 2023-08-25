@@ -157,8 +157,12 @@ export class OperatingHoursComponent {
     this._detailService.createOperatingHours(fd).subscribe({
       next: (res) => {
         this.spinner = false
-        this.getSingleValues(this._saveService.getPropertyId())
-        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+        if (this.editData.edit) {
+          this.getSingleValues(this.editData.id)
+        } else {
+          this.getSingleValues(this._saveService.getPropertyId())
+        }
+        this._snackbarService.openSnackbar('✔ Form Successfully Updated')
       },
       error: (error) => {
         console.log(error)
@@ -230,7 +234,7 @@ export class OperatingHoursComponent {
     }
 
   }
-  
+
   public removeDate(data: any) {
     console.log(data)
     this.operatingForm.controls[data].setValue(null)

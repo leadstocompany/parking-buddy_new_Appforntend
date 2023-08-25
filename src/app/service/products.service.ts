@@ -25,4 +25,9 @@ export class ProductsService {
     console.log(id, 'id------------------>')
     return this._http.get(`${environment.URL}/parking_location/product/?id=${id}`,{headers: this.headers, withCredentials: true })
   }
+
+  deleteProductById(id: string): Observable<any> {
+    console.log('id',id)
+    return this._http.delete(`${environment.URL}/parking_location/product/${id}/delete`, { headers: this.headers, withCredentials: true })
+  }
 }
