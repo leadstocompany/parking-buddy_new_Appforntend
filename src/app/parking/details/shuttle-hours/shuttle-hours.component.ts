@@ -20,6 +20,8 @@ export class ShuttleHoursComponent {
   }> = []
   spinner = false
   editData: any;
+  shuttleId: any;
+  updated: boolean = false;
   constructor(private _formBuilder: FormBuilder, private _detailService: DetailsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.initForm();
@@ -97,47 +99,45 @@ export class ShuttleHoursComponent {
     let data: any;
     if (this.operatingForm.controls['operationHours'].value == 'limited') {
       data = {
-        "monday_open_time": this.operatingForm.controls['openTime0'].value,
-        "monday_close_time": this.operatingForm.controls['closeTime0'].value,
-        "tuesday_open_time": this.operatingForm.controls['openTime1'].value,
-        "tuesday_close_time": this.operatingForm.controls['closeTime1'].value,
-        "wednesday_open_time": this.operatingForm.controls['openTime2'].value,
-        "wednesday_close_time": this.operatingForm.controls['closeTime2'].value,
-        "thursday_open_time": this.operatingForm.controls['openTime3'].value,
-        "thursday_close_time": this.operatingForm.controls['closeTime3'].value,
-        "friday_open_time": this.operatingForm.controls['openTime4'].value,
-        "friday_close_time": this.operatingForm.controls['closeTime4'].value,
-        "saturday_open_time": this.operatingForm.controls['openTime5'].value,
-        "saturday_close_time": this.operatingForm.controls['closeTime5'].value,
-        "sunday_open_time": this.operatingForm.controls['openTime6'].value,
-        "sunday_close_time": this.operatingForm.controls['closeTime6'].value,
-        "all_days": false,
+        "shuttle_monday_open_time": this.operatingForm.controls['openTime0'].value,
+        "shuttle_monday_close_time": this.operatingForm.controls['closeTime0'].value,
+        "shuttle_tuesday_open_time": this.operatingForm.controls['openTime1'].value,
+        "shuttle_tuesday_close_time": this.operatingForm.controls['closeTime1'].value,
+        "shuttle_wednesday_open_time": this.operatingForm.controls['openTime2'].value,
+        "shuttle_wednesday_close_time": this.operatingForm.controls['closeTime2'].value,
+        "shuttle_thursday_open_time": this.operatingForm.controls['openTime3'].value,
+        "shuttle_thursday_close_time": this.operatingForm.controls['closeTime3'].value,
+        "shuttle_friday_open_time": this.operatingForm.controls['openTime4'].value,
+        "shuttle_friday_close_time": this.operatingForm.controls['closeTime4'].value,
+        "shuttle_saturday_open_time": this.operatingForm.controls['openTime5'].value,
+        "shuttle_saturday_close_time": this.operatingForm.controls['closeTime5'].value,
+        "shuttle_sunday_open_time": this.operatingForm.controls['openTime6'].value,
+        "shuttle_sunday_close_time": this.operatingForm.controls['closeTime6'].value,
+        "shuttle_all_days": false,
+        "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
       }
     } else {
       data = {
-        "monday_open_time": null,
-        "monday_close_time": null,
-        "tuesday_open_time": null,
-        "tuesday_close_time": null,
-        "wednesday_open_time": null,
-        "wednesday_close_time": null,
-        "thursday_open_time": null,
-        "thursday_close_time": null,
-        "friday_open_time": null,
-        "friday_close_time": null,
-        "saturday_open_time": null,
-        "saturday_close_time": null,
-        "sunday_open_time": null,
-        "sunday_close_time": null,
-        "all_days": true,
+        "shuttle_monday_open_time": this.operatingForm.controls['openTime0'].value,
+        "shuttle_monday_close_time": this.operatingForm.controls['closeTime0'].value,
+        "shuttle_tuesday_open_time": this.operatingForm.controls['openTime1'].value,
+        "shuttle_tuesday_close_time": this.operatingForm.controls['closeTime1'].value,
+        "shuttle_wednesday_open_time": this.operatingForm.controls['openTime2'].value,
+        "shuttle_wednesday_close_time": this.operatingForm.controls['closeTime2'].value,
+        "shuttle_thursday_open_time": this.operatingForm.controls['openTime3'].value,
+        "shuttle_thursday_close_time": this.operatingForm.controls['closeTime3'].value,
+        "shuttle_friday_open_time": this.operatingForm.controls['openTime4'].value,
+        "shuttle_friday_close_time": this.operatingForm.controls['closeTime4'].value,
+        "shuttle_saturday_open_time": this.operatingForm.controls['openTime5'].value,
+        "shuttle_saturday_close_time": this.operatingForm.controls['closeTime5'].value,
+        "shuttle_sunday_open_time": this.operatingForm.controls['openTime6'].value,
+        "shuttle_sunday_close_time": this.operatingForm.controls['closeTime6'].value,
+        "shuttle_all_days": false,
+        "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
       }
     }
 
-    const fd = {
-      data: data,
-      id: this.editData.edit?this.editData.id:this._saveService.getPropertyId()
-    }
-    this._detailService.createOperatingHours(fd).subscribe({
+    this._detailService.createShuttleHours(data).subscribe({
       next: (res) => {
         this.spinner = false
         if (this.editData.edit) {
@@ -159,6 +159,71 @@ export class ShuttleHoursComponent {
   }
 
 
+  public UpdateValue() {
+    this.spinner = true
+    let data: any;
+    if (this.operatingForm.controls['operationHours'].value == 'limited') {
+      data = {
+        "shuttle_monday_open_time": this.operatingForm.controls['openTime0'].value,
+        "shuttle_monday_close_time": this.operatingForm.controls['closeTime0'].value,
+        "shuttle_tuesday_open_time": this.operatingForm.controls['openTime1'].value,
+        "shuttle_tuesday_close_time": this.operatingForm.controls['closeTime1'].value,
+        "shuttle_wednesday_open_time": this.operatingForm.controls['openTime2'].value,
+        "shuttle_wednesday_close_time": this.operatingForm.controls['closeTime2'].value,
+        "shuttle_thursday_open_time": this.operatingForm.controls['openTime3'].value,
+        "shuttle_thursday_close_time": this.operatingForm.controls['closeTime3'].value,
+        "shuttle_friday_open_time": this.operatingForm.controls['openTime4'].value,
+        "shuttle_friday_close_time": this.operatingForm.controls['closeTime4'].value,
+        "shuttle_saturday_open_time": this.operatingForm.controls['openTime5'].value,
+        "shuttle_saturday_close_time": this.operatingForm.controls['closeTime5'].value,
+        "shuttle_sunday_open_time": this.operatingForm.controls['openTime6'].value,
+        "shuttle_sunday_close_time": this.operatingForm.controls['closeTime6'].value,
+        "shuttle_all_days": false,
+        "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
+      }
+    } else {
+      data = {
+        "shuttle_monday_open_time": this.operatingForm.controls['openTime0'].value,
+        "shuttle_monday_close_time": this.operatingForm.controls['closeTime0'].value,
+        "shuttle_tuesday_open_time": this.operatingForm.controls['openTime1'].value,
+        "shuttle_tuesday_close_time": this.operatingForm.controls['closeTime1'].value,
+        "shuttle_wednesday_open_time": this.operatingForm.controls['openTime2'].value,
+        "shuttle_wednesday_close_time": this.operatingForm.controls['closeTime2'].value,
+        "shuttle_thursday_open_time": this.operatingForm.controls['openTime3'].value,
+        "shuttle_thursday_close_time": this.operatingForm.controls['closeTime3'].value,
+        "shuttle_friday_open_time": this.operatingForm.controls['openTime4'].value,
+        "shuttle_friday_close_time": this.operatingForm.controls['closeTime4'].value,
+        "shuttle_saturday_open_time": this.operatingForm.controls['openTime5'].value,
+        "shuttle_saturday_close_time": this.operatingForm.controls['closeTime5'].value,
+        "shuttle_sunday_open_time": this.operatingForm.controls['openTime6'].value,
+        "shuttle_sunday_close_time": this.operatingForm.controls['closeTime6'].value,
+        "shuttle_all_days": false,
+        "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
+      }
+    }
+    let fd = {
+      data: data,
+      id: this.shuttleId
+    }
+    this._detailService.UpdateShuttleHours(fd).subscribe({
+      next: (res) => {
+        this.spinner = false
+        if (this.editData.edit) {
+          this.getSingleValues(this.editData.id)
+        } else {
+          this.getSingleValues(this._saveService.getPropertyId())
+        }
+        this._snackbarService.openSnackbar('✔ Form Successfully Updated')
+      },
+      error: (error) => {
+        console.log(error)
+        this.spinner = false
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
+      }
+    })
+  }
+
+
 
   // update Service
   /**
@@ -166,10 +231,17 @@ export class ShuttleHoursComponent {
  */
 
   getSingleValues(id: any) {
-    this._detailService.getSingleBasicDetailsService(id).subscribe({
+    this._detailService.getShuttleHours(id).subscribe({
       next: (res) => {
         console.log(res, 'single data')
-        this.setValues(res)
+        if (res.length) {
+          console.log(res.length)
+          this.shuttleId = res[0].id
+          this.setValues(res[0])
+          this.updated = true
+        } else {
+          this.updated = false
+        }
       },
       error: (error: HttpErrorResponse) => {
         this.spinner = false
@@ -180,21 +252,21 @@ export class ShuttleHoursComponent {
 
   setValues(data: any) {
     this.operatingForm.setValue({
-      operationHours: !data.all_days ? 'limited' : '24/7',
-      openTime0: this.convertToShortTimeFormat(data.monday_open_time),
-      openTime1: this.convertToShortTimeFormat(data.tuesday_open_time),
-      openTime2: this.convertToShortTimeFormat(data.wednesday_open_time),
-      openTime3: this.convertToShortTimeFormat(data.thursday_open_time),
-      openTime4: this.convertToShortTimeFormat(data.friday_open_time),
-      openTime5: this.convertToShortTimeFormat(data.saturday_open_time),
-      openTime6: this.convertToShortTimeFormat(data.sunday_open_time),
-      closeTime0: this.convertToShortTimeFormat(data.monday_close_time),
-      closeTime1: this.convertToShortTimeFormat(data.tuesday_close_time),
-      closeTime2: this.convertToShortTimeFormat(data.wednesday_close_time),
-      closeTime3: this.convertToShortTimeFormat(data.thursday_close_time),
-      closeTime4: this.convertToShortTimeFormat(data.friday_close_time),
-      closeTime5: this.convertToShortTimeFormat(data.saturday_close_time),
-      closeTime6: this.convertToShortTimeFormat(data.sunday_close_time),
+      operationHours: !data.shuttle_all_days ? 'limited' : '24/7',
+      openTime0: this.convertToShortTimeFormat(data.shuttle_monday_open_time),
+      openTime1: this.convertToShortTimeFormat(data.shuttle_tuesday_open_time),
+      openTime2: this.convertToShortTimeFormat(data.shuttle_wednesday_open_time),
+      openTime3: this.convertToShortTimeFormat(data.shuttle_thursday_open_time),
+      openTime4: this.convertToShortTimeFormat(data.shuttle_friday_open_time),
+      openTime5: this.convertToShortTimeFormat(data.shuttle_saturday_open_time),
+      openTime6: this.convertToShortTimeFormat(data.shuttle_sunday_open_time),
+      closeTime0: this.convertToShortTimeFormat(data.shuttle_monday_close_time),
+      closeTime1: this.convertToShortTimeFormat(data.shuttle_tuesday_close_time),
+      closeTime2: this.convertToShortTimeFormat(data.shuttle_wednesday_close_time),
+      closeTime3: this.convertToShortTimeFormat(data.shuttle_thursday_close_time),
+      closeTime4: this.convertToShortTimeFormat(data.shuttle_friday_close_time),
+      closeTime5: this.convertToShortTimeFormat(data.shuttle_saturday_close_time),
+      closeTime6: this.convertToShortTimeFormat(data.shuttle_sunday_close_time),
     })
 
   }

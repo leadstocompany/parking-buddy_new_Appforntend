@@ -9,12 +9,12 @@
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field>
-                    <input matInput type="text" formControlName="fname" placeholder="Name">
+                    <input matInput type="text" formControlName="fname" placeholder="First Name">
                 </mat-form-field>
             </div>
             <div class="col-md-6">
                 <mat-form-field>
-                    <input matInput type="text" formControlName="lname" placeholder="Email">
+                    <input matInput type="text" formControlName="lname" placeholder="Last Name">
                 </mat-form-field>
             </div>
         </div>
@@ -36,11 +36,11 @@
                     <textarea matInput formControlName="bio" placeholder="Bio"></textarea>
                 </mat-form-field>
             </div>
-            
-            <div class="col-12">
+
+            <!-- <div class="col-12">
                 <input type="file" (change)="onFileChange($event)" accept="image/*">
                 <img *ngIf="previewImage" [src]="previewImage" alt="Preview" width="100px">
-            </div>
+            </div> -->
         </div>
         <button class="mt-4" mat-raised-button color="primary" type="submit">Save</button>
     </form>

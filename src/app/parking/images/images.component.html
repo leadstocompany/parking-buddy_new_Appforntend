@@ -5,7 +5,7 @@
         <h1>Image Upload</h1>
         <form (ngSubmit)="uploadImages()" enctype="multipart/form-data">
             <div class="mb-3">
-                <label for="imageUpload" class="form-label">Choose images</label>
+                <label for="imageUpload" class="form-label" style="font-size: 18; font-weight: bolder;">Choose images</label>
                 <input type="file" class="form-control" id="imageUpload" (change)="onFilesSelected($event)"
                     accept="image/*" multiple>
             </div>
@@ -19,7 +19,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="logo" class="form-label">Upload Logo</label>
+                <label for="logo" class="form-label" style="font-size: 18; font-weight: bolder;">Upload Logo</label>
                 <input type="file" class="form-control" id="logo" (change)="onLogoSelected($event)" accept="image/*">
             </div>
             <div *ngIf="logo.url" class="row d-flex flex-row gap-4">

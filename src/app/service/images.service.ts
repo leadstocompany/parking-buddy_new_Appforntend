@@ -13,20 +13,25 @@ export class ImagesService {
     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
   });
 
-  createImages(data:any): Observable<any> {
+  createImages(data: any): Observable<any> {
     console.log(data)
-    return this._http.post(`${environment.URL}/parking_location/add/images/`,data,{headers: this.headers,withCredentials: true })
+    return this._http.post(`${environment.URL}/parking_location/add/images/`, data, { headers: this.headers, withCredentials: true })
   }
 
-  updateImages(data:any): Observable<any> {
+  updateImages(data: any): Observable<any> {
     console.log(data)
-    return this._http.put(`${environment.URL}/parking_location/update/images/${data.id}/`,data.data,{headers: this.headers,withCredentials: true })
+    return this._http.put(`${environment.URL}/parking_location/update/images/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
   }
 
-  // getImages(id:any):Observable<any>{
-  //   console.log(id)
-  //   return this._http.put(`${environment.URL}/parking_location/update/images/${data.id}/`,{headers: this.headers,withCredentials: true })
+// /parking_location/imagesbylogo/?id=7114a9ae-0d2d-47a4-aca3-ac1e372a075f
+  getIMages(id: any): Observable<any> {
+    console.log(id, '--->id')
+    return this._http.get(`${environment.URL}/parking_location/images/?id=${id}`, { headers: this.headers, withCredentials: true })
+  }
 
-  // }
-  
+  getAllIMages(id: any): Observable<any> {
+    console.log(id, '--->id')
+    return this._http.get(`${environment.URL}/parking_location/imagesbylogo/?id=${id}`, { headers: this.headers, withCredentials: true })
+  }
+
 }

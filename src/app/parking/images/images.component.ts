@@ -33,8 +33,18 @@ export class ImagesComponent {
     url: ''
   }
   spinner = false
+  editData: any;
+  constructor(private _saveService: SaveidService, private _imageService: ImagesService, private _snackbarService: SnackbarService) { }
 
-  constructor(private _saveService: SaveidService,private _imageService: ImagesService, private _snackbarService: SnackbarService) { }
+  ngOnInit() {
+    // Check edit or not 
+    this.editData = this._saveService.getSharedData()
+    if (this.editData.edit) {
+      this.getImages(this.editData.id)
+    } else if (this.editData.edit === false && this._saveService.getPropertyId()) {
+      this.getImages(this._saveService.getPropertyId())
+    }
+  }
 
   onFilesSelected(event: any) {
     this.selectedFiles = [];
@@ -61,13 +71,11 @@ export class ImagesComponent {
 
   uploadImages() {
     if (this.selectedFiles.length > 0 && this.logo.url) {
-      // console.log('Uploading images:', this.selectedFiles);
-      // console.log('uploading logo', this.logo)
       this.spinner = true
       const data = {
         "logo": this.logo,
         "images": this.selectedFiles,
-        "property":this._saveService.getPropertyId() 
+        "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
       }
       this._imageService.createImages(data).subscribe({
         next: (res) => {
@@ -76,6 +84,11 @@ export class ImagesComponent {
           this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
           this.selectedFiles = [];
           this.removeLogo()
+          if(this.editData.edit){
+            this.getImages(this.editData.id)
+          }else{
+            this.getImages(this._saveService.getPropertyId())
+          }
         },
         error: (error) => {
           console.log(error)
@@ -99,5 +112,40 @@ export class ImagesComponent {
     }
   }
 
+
+  getImages(id: any) {
+    this._imageService.getIMages(id).subscribe({
+      next: (res) => {
+        console.log(res)
+        if (res.length) {
+          this.setLogo(res[0].logo)
+          this._imageService.getAllIMages(res[0].id).subscribe({
+            next: (res) => {
+              console.log(res, 'images-----------')
+              this.selectedFiles = res.map((item: any, i: any) => ({
+                // You can customize how the 'icon' value is created
+                file: i,
+                url: item.images,
+              }));
+            },
+            error: (error) => {
+              console.log(error)
+            }
+          })
+        }
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+
+  setLogo(img: any) {
+    this.logo = {
+      file: '',
+      url: img
+    }
+  }
 }
 
