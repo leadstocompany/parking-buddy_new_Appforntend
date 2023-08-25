@@ -1,10 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DetailsService } from 'src/app/service/details.service';
 import { PricingService } from 'src/app/service/pricing.service';
 import { ProductsService } from 'src/app/service/products.service';
 import { SaveidService } from 'src/app/service/saveID/saveid.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
-
+import currency from '../ACurrency.json'
 
 @Component({
   selector: 'app-pricing',
@@ -23,7 +25,8 @@ export class PricingComponent {
   editData: any;
   pricingId: any;
   productId: any;
-  constructor(private _formBuilder: FormBuilder, private _pricingService: PricingService, private _productService: ProductsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
+  currency: any = currency?.currency
+  constructor(private _detailService: DetailsService, private _formBuilder: FormBuilder, private _pricingService: PricingService, private _productService: ProductsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.addRate = this._formBuilder.group({
       product: [''],
@@ -40,9 +43,11 @@ export class PricingComponent {
     if (this.editData.edit) {
       this.getProduct(this.editData.id)
       this.getPricing(this.editData.id)
+      this.getProperty(this.editData.id)
     } else if (this.editData.edit === false) {
       this.getProduct(this._saveService.getPropertyId())
       this.getPricing(this._saveService.getPropertyId())
+      this.getProperty(this._saveService.getPropertyId())
     }
   }
   public submitForm(): void {
@@ -53,7 +58,7 @@ export class PricingComponent {
       "weekly_rate": this.addRate.controls['weeklyRate'].value,
       "monthly_rate": this.addRate.controls['monthlyRate'].value,
       "code": this.addRate.controls['code'].value,
-      "property": this._saveService.getPropertyId(),
+      "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId(),
       // "product": this._saveService.getProductId(),
       "product": this.addRate.value.product,
       "start_date": new Date(this.addRate.controls['date'].value[0]).toISOString().split('T')[0],
@@ -64,7 +69,12 @@ export class PricingComponent {
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.modalElement.nativeElement.click();
-        this.getPricing(this._saveService.getPropertyId())
+        if (this.editData.edit) {
+          this.getPricing(this.editData.id)
+        } else {
+          this.getPricing(this._saveService.getPropertyId())
+        }
+
       },
       error: (error) => {
         this.spinner = false
@@ -75,32 +85,16 @@ export class PricingComponent {
   }
 
   public editPricing(): void {
-    let data: any;
-    if (this.editData.edit) {
-      data = {
-        "dail_rate": this.addRate.controls['dailyRate'].value,
-        "hourly_rate": this.addRate.controls['hourlyRate'].value,
-        "weekly_rate": this.addRate.controls['weeklyRate'].value,
-        "monthly_rate": this.addRate.controls['monthlyRate'].value,
-        "code": this.addRate.controls['code'].value,
-        "property": this.editData.id,
-        "product": this.addRate.value.product,
-        "start_date": new Date(this.addRate.controls['date'].value[0]).toISOString().split('T')[0],
-        "end_date": new Date(this.addRate.controls['date'].value[1]).toISOString().split('T')[0],
-      }
-
-    } else {
-      data = {
-        "dail_rate": this.addRate.controls['dailyRate'].value,
-        "hourly_rate": this.addRate.controls['hourlyRate'].value,
-        "weekly_rate": this.addRate.controls['weeklyRate'].value,
-        "monthly_rate": this.addRate.controls['monthlyRate'].value,
-        "code": this.addRate.controls['code'].value,
-        "property": this._saveService.getPropertyId(),
-        "product": this.addRate.value.product,
-        "start_date": new Date(this.addRate.controls['date'].value[0]).toISOString().split('T')[0],
-        "end_date": new Date(this.addRate.controls['date'].value[1]).toISOString().split('T')[0],
-      }
+    let data = {
+      "dail_rate": this.addRate.controls['dailyRate'].value,
+      "hourly_rate": this.addRate.controls['hourlyRate'].value,
+      "weekly_rate": this.addRate.controls['weeklyRate'].value,
+      "monthly_rate": this.addRate.controls['monthlyRate'].value,
+      "code": this.addRate.controls['code'].value,
+      "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId(),
+      "product": this.addRate.value.product,
+      "start_date": new Date(this.addRate.controls['date'].value[0]).toISOString().split('T')[0],
+      "end_date": new Date(this.addRate.controls['date'].value[1]).toISOString().split('T')[0],
     }
 
     const fd = {
@@ -194,6 +188,21 @@ export class PricingComponent {
       },
       error: (error) => {
         console.log(error)
+      }
+    })
+  }
+
+
+  public getProperty(id: any) {
+    this._detailService.getSingleBasicDetailsService(id).subscribe({
+      next: (res) => {
+        console.log(res, 'res')
+        this.amountIcon = this.currency[`${res.country}`]
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error)
+        this.spinner = false
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
       }
     })
   }

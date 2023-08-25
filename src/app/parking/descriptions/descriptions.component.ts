@@ -43,7 +43,7 @@ export class DescriptionsComponent {
       "pickup_info": this.modal.pickupInformation,
       "customer_feedback": this.modal.customerFeedback,
       "email_instruction": this.modal.emailInstruction,
-      "property": this._saveService.getPropertyId()
+      "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
     this.spinner = true
     this._descriptionService.createDescriptions(data).subscribe({
@@ -51,7 +51,11 @@ export class DescriptionsComponent {
         console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
-        this.getDescription(this._saveService.getPropertyId())
+        if (this.editData.edit) {
+          this.getDescription(this.editData.id)
+        } else {
+          this.getDescription(this._saveService.getPropertyId())
+        }
       },
       error: (error) => {
         console.log(error)
@@ -64,9 +68,9 @@ export class DescriptionsComponent {
   getDescription(id: any) {
     this._descriptionService.getDescriptionsById(id).subscribe({
       next: (res) => {
-        this.desId = res[0].id
-        this.setValue(res[0])
         if (res.length) {
+          this.desId = res[res.length - 1].id
+          this.setValue(res[res.length - 1])
           this.editValue = true
         }
       },

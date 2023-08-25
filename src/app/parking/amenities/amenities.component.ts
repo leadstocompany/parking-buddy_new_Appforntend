@@ -50,6 +50,7 @@ export class AmenitiesComponent {
   editOption: boolean = false;
   ngOnInit() {
     this.editData = this._saveService.getSharedData()
+    console.log(this.editData, 'edit_____data')
     if (this.editData.edit) {
       this.getAmenities(this.editData.id)
       this.editOption = true
@@ -65,7 +66,7 @@ export class AmenitiesComponent {
       "security_cameras": false,
       "exterior_fence": false,
       "ev_charging": false,
-      "property": this._saveService.getPropertyId()
+      "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
     this.selectedAmenities.forEach(item => {
       if (item.value in data) {
@@ -76,7 +77,11 @@ export class AmenitiesComponent {
       next: (res) => {
         console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
-        this.getAmenities(this._saveService.getPropertyId())
+        if (this.editData.edit) {
+          this.getAmenities(this.editData.id)
+        } else {
+          this.getAmenities(this._saveService.getPropertyId())
+        }
         this.editOption = true
         this.spinner = false
       },
@@ -89,11 +94,14 @@ export class AmenitiesComponent {
   }
 
   getAmenities(id: any) {
+    console.log(id, 'update amenetiles')
     this._amenitiesService.getAmenitiesById(id).subscribe({
       next: (res) => {
         this.allAmenities = res
         console.log(this.allAmenities)
-        this.ameId = res[0].id
+        if (res.length) {
+          this.ameId = res[res.length-1].id
+        }
         this.setAmenitiesVlue()
       },
       error: (error) => {
@@ -112,6 +120,7 @@ export class AmenitiesComponent {
       "ev_charging": false,
       "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
+    console.log('---------updateeeeeeeeeeeeeeeee')
     this.selectedAmenities.forEach(item => {
       if (item.value in data) {
         data[item.value] = true;
@@ -127,7 +136,7 @@ export class AmenitiesComponent {
       next: (res) => {
         console.log(res)
 
-        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+        this._snackbarService.openSnackbar('✔ Successfully Updated')
         this.spinner = false
       },
       error: (error) => {
@@ -140,9 +149,15 @@ export class AmenitiesComponent {
 
 
   setAmenitiesVlue() {
-    this.selectedAmenities = this.amenities.filter(item => this.allAmenities[0][item.value] === true);
-    if (this.selectedAmenities.length) {
-      this.editOption = true
+    if (this.allAmenities.length) {
+      this.selectedAmenities = this.amenities.filter(item => this.allAmenities[this.allAmenities.length-1][item.value] === true);
+      if (this.selectedAmenities.length) {
+        this.editOption = true
+      } else {
+        this.editOption = false
+      }
+    } else {
+      this.editOption = false
     }
   }
 }

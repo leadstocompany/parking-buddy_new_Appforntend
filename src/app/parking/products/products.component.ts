@@ -37,7 +37,6 @@ export class ProductsComponent {
   constructor(private _productService: ProductsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.editData = this._saveService.getSharedData()
-    console.log(this._saveService.getPropertyId())
     if (this.editData.edit) {
       this.getProduct(this.editData.id)
     } else if (this.editData.edit === false) {
@@ -55,7 +54,11 @@ export class ProductsComponent {
         this._saveService.setProductId(res.id)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.modalElement.nativeElement.click();
-        this.getProduct(this._saveService.getPropertyId())
+        if(this.editData.edit){
+          this.getProduct(this.editData.id)
+        }else{
+          this.getProduct(this._saveService.getPropertyId())
+        }
       },
       error: (error) => {
         this._snackbarService.openSnackbar('❌ Internal Server Error')

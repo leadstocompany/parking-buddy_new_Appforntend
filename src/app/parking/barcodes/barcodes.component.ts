@@ -63,7 +63,7 @@ export class BarcodesComponent {
       "version": this.barCodes.value.barcodeVersion,
       "text": this.barCodes.value.barcodeText,
       "date": new Date(this.barCodes.value.date).toISOString().split('T')[0],
-      "property": this._saveService.getPropertyId(),
+      "property": this.editData.edit?this.editData.id:this._saveService.getPropertyId(),
       "product": this.barCodes.value.product
     }
 
@@ -72,7 +72,11 @@ export class BarcodesComponent {
         console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
-        this.getBarcode(this._saveService.getPropertyId())
+        if(this.editData.edit){
+          this.getBarcode(this.editData.id)
+        }else{
+          this.getBarcode(this._saveService.getPropertyId())
+        }
       },
       error: (error) => {
         console.log(error)
@@ -96,7 +100,6 @@ export class BarcodesComponent {
   public getBarcode(id: any) {
     this._barCodeService.getBarCodesById(id).subscribe({
       next: (res) => {
-        console.log(res, 'bar code response')
         this.barcodeData = res
       },
       error: (error) => {

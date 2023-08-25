@@ -90,7 +90,7 @@
                                     <div class="input-group">
                                         <!-- *ngIf="getText.amountType=='Fixed'" -->
                                         <span class="input-group-text"
-                                            *ngIf="this.taxes.get('amountType')?.value == 'Fixed'">$</span>
+                                            *ngIf="this.taxes.get('amountType')?.value == 'Fixed'">{{amountIcon}}</span>
                                         <span class="input-group-text"
                                             *ngIf="this.taxes.get('amountType')?.value == 'Percentage'">%</span>
                                         <input type="text" class="form-control"
@@ -204,7 +204,7 @@
                                         *ngIf="this.taxes.get('amountType')?.value == 'Percentage'">Percent</label>
                                     <div class="input-group">
                                         <span class="input-group-text"
-                                            *ngIf="this.taxes.get('amountType')?.value == 'Fixed'">$</span>
+                                            *ngIf="this.taxes.get('amountType')?.value == 'Fixed' || !this.taxes.get('amountType')?.value">{{amountIcon}}</span>
                                         <span class="input-group-text"
                                             *ngIf="this.taxes.get('amountType')?.value == 'Percentage'">%</span>
                                         <input type="text" class="form-control"
