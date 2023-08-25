@@ -14,13 +14,15 @@
                 </div>
             </div>
             <a mat-list-item [routerLink]="['/parking']">
-                <span style="text-decoration: underline; color:'blue'">Dashboard</span>
+                <span>Dashboard</span>
             </a>
             <a mat-list-item *ngFor="let link of myActiveRoute" [ngClass]="link.active?'active':'unActive'"
                 [routerLink]="[link.name]" (click)="findActiveTab(link.name)">{{link.name}}</a>
 
             <a mat-list-item [routerLink]="['/']">
-                <span style="text-decoration: underline; color:'blue'">Logout</span>
+                <span class="d-flex flex-row align-items-center gap-2">
+                    <span style="color:'blue'">Logout</span><mat-icon>exit_to_app</mat-icon>
+                </span>
             </a>
         </mat-nav-list>
     </mat-drawer>

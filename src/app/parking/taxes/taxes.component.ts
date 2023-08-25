@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SaveidService } from 'src/app/service/saveID/saveid.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 import { TaxesService } from 'src/app/service/taxes.service';
-
+import currency from '../ACurrency.json'
+import { DetailsService } from 'src/app/service/details.service';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-taxes',
   templateUrl: './taxes.component.html',
@@ -55,7 +57,9 @@ export class TaxesComponent {
   taxData: any = []
   editData: any;
   taxId: any
-  constructor(private _formBuilder: FormBuilder, private _taxeService: TaxesService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
+  amountIcon = '₹'
+  currency: any = currency?.currency
+  constructor(private _detailService: DetailsService,private _formBuilder: FormBuilder, private _taxeService: TaxesService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.taxes = this._formBuilder.group({
       category: [null],
@@ -70,8 +74,10 @@ export class TaxesComponent {
     this.editData = this._saveService.getSharedData()
     if (this.editData.edit) {
       this.getText(this.editData.id)
+      this.getProperty(this.editData.id)
     } else if (this.editData.edit === false) {
       this.getText(this._saveService.getPropertyId())
+      this.getProperty(this._saveService.getPropertyId())
     }
   }
 
@@ -84,7 +90,7 @@ export class TaxesComponent {
       "amount": this.taxes.controls['amount'].value,
       "type": this.taxes.controls['type'].value,
       "apply": this.taxes.controls['applyTax'].value,
-      "property": this._saveService.getPropertyId()
+      "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
 
     this._taxeService.createTaxService(data).subscribe({
@@ -92,7 +98,11 @@ export class TaxesComponent {
         console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.spinner = false
-        this.getText(this._saveService.getPropertyId())
+        if (this.editData.edit) {
+          this.getText(this.editData.id)
+        } else {
+          this.getText(this._saveService.getPropertyId())
+        }
       },
       error: (error) => {
         console.log(error)
@@ -213,6 +223,20 @@ export class TaxesComponent {
       },
       error: (error) => {
         console.log(error)
+      }
+    })
+  }
+
+  public getProperty(id: any) {
+    this._detailService.getSingleBasicDetailsService(id).subscribe({
+      next: (res) => {
+        console.log(res, 'res')
+        this.amountIcon = this.currency[`${res.country}`]
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error)
+        this.spinner = false
+        this._snackbarService.openSnackbar('❌ Internal Server Error')
       }
     })
   }

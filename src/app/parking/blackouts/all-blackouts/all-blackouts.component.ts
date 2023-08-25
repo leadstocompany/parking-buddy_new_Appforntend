@@ -50,14 +50,18 @@ export class AllBlackoutsComponent {
       "cars": this.blackouts.controls['cars'].value,
       "recurrence_rule": this.blackouts.controls['recurrence'].value == 'On' ? true : false,
       "parking_allowed": this.blackouts.controls['allowedDay'].value,
-      "property": this._saveService.getPropertyId()
+      "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
 
     this._barAndBlackService.createBlackouts(data).subscribe({
       next: (res) => {
         console.log(res)
         this.spinner = false
-        this.getBlackouts(this._saveService.getPropertyId())
+        if (this.editData.edit) {
+          this.getBlackouts(this.editData.id)
+        } else {
+          this.getBlackouts(this._saveService.getPropertyId())
+        }
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
       },
       error: (error) => {

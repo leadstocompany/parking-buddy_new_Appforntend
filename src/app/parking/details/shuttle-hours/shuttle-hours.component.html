@@ -30,19 +30,24 @@
                         <td>
                             <div class="d-flex flex-row position-relative">
                                 <input class="input-" [ngxTimepicker]="toggleTimepicker" [disableClick]="true" readonly
-                                    formControlName="openTime{{i}}" (click)="toggleTimepicker.open()">
+                                    formControlName="openTime{{i}}" (click)="toggleTimepicker.open()" [format]="24">
                                 <ngx-material-timepicker-toggle [for]="toggleTimepicker" buttonAlign="left"
-                                    class="position-absolute" style="margin-top:5px;"></ngx-material-timepicker-toggle>
-                                <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+                                    class="position-absolute" style="top:7px;"></ngx-material-timepicker-toggle>
+                                <mat-icon style="margin-top:7px; margin-left: 5px; color: red; cursor: pointer;"
+                                    (click)="removeDate('openTime' + i)"
+                                    *ngIf="operatingForm.get('openTime'+i)!.value">cancel</mat-icon>
+                                <ngx-material-timepicker #toggleTimepicker [format]="24"></ngx-material-timepicker>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex flex-row position-relative">
                                 <input class="input-" [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" readonly
-                                    formControlName="closeTime{{i}}" (click)="toggleTimepicker1.open()">
+                                    formControlName="closeTime{{i}}" (click)="toggleTimepicker1.open()" [format]="24">
                                 <ngx-material-timepicker-toggle [for]="toggleTimepicker1" class="position-absolute"
                                     style="margin-top:5px;"></ngx-material-timepicker-toggle>
-                                <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
+                                <mat-icon style="margin-top:7px; margin-left: 5px; color: red; cursor: pointer;"
+                                    (click)="removeDate('closeTime'+i)" *ngIf="operatingForm.get('closeTime'+i)!.value">cancel</mat-icon>
+                                <ngx-material-timepicker #toggleTimepicker1 [format]="24"></ngx-material-timepicker>
                             </div>
                         </td>
                     </tr>
@@ -51,7 +56,11 @@
         </div>
         <div class="row pb-3 mt-2">
             <div class="col-2">
-                <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid">Save</button>
+                <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <button class="mb-4" type="submit" class="btn btn-success" [disabled]="operatingForm.invalid"
+                    *ngIf="spinner==false">Save</button>
             </div>
         </div>
     </form>

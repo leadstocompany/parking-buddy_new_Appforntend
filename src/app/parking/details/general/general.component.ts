@@ -380,7 +380,7 @@ export class GeneralComponent {
   // update Service
 
   /**
-   * Get single product
+   * Get single property
   */
   getSingleValues(id: any) {
     console.log('id0000000000000000000000',id)

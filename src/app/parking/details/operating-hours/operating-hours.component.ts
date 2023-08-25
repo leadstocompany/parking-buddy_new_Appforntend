@@ -152,7 +152,7 @@ export class OperatingHoursComponent {
 
     const fd = {
       data: data,
-      id: this._saveService.getPropertyId()
+      id: this.editData.edit?this.editData.id:this._saveService.getPropertyId()
     }
     this._detailService.createOperatingHours(fd).subscribe({
       next: (res) => {
