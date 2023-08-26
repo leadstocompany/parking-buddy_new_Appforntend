@@ -68,12 +68,13 @@ export class PricingComponent {
       next: (res) => {
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
-        this.modalElement.nativeElement.click();
         if (this.editData.edit) {
           this.getPricing(this.editData.id)
         } else {
           this.getPricing(this._saveService.getPropertyId())
         }
+        this.modalElement.nativeElement.click();
+        this.addRate.reset()
 
       },
       error: (error) => {

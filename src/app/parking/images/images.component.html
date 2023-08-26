@@ -5,13 +5,15 @@
         <h1>Image Upload</h1>
         <form (ngSubmit)="uploadImages()" enctype="multipart/form-data">
             <div class="mb-3">
-                <label for="imageUpload" class="form-label" style="font-size: 18; font-weight: bolder;">Choose images</label>
+                <label for="imageUpload" class="form-label" style="font-size: 18; font-weight: bolder;">Choose
+                    images</label>
                 <input type="file" class="form-control" id="imageUpload" (change)="onFilesSelected($event)"
                     accept="image/*" multiple>
             </div>
             <div *ngIf="selectedFiles.length > 0" class="row d-flex flex-row gap-4">
                 <div *ngFor="let file of selectedFiles; let i = index" class="col-md-3" style=" position: relative;">
-                    <img [src]="file.url" alt="Selected Image {{ i }}" class="img-fluid mb-3" style="max-height: 150px;">
+                    <img [src]="file.url" alt="Selected Image {{ i }}" class="img-fluid mb-3"
+                        style="max-height: 150px;">
                     <button type="button" class="btn" (click)="removeImage(i)"
                         style="position: absolute; top:0px;left:0px"><mat-icon
                             style="color:red">cancel</mat-icon></button>
@@ -25,14 +27,19 @@
             <div *ngIf="logo.url" class="row d-flex flex-row gap-4">
                 <div class="col-md-3" style=" position: relative;">
                     <img [src]="logo.url" class="img-fluid mb-3" style="max-height: 150px;">
-                    <button type="button" class="btn" style="position: absolute; top:0px;left:0px" (click)="removeLogo()"><mat-icon style="color:red">cancel</mat-icon></button>
+                    <button type="button" class="btn" style="position: absolute; top:0px;left:0px"
+                        (click)="removeLogo()"><mat-icon style="color:red">cancel</mat-icon></button>
                 </div>
             </div>
 
             <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <button *ngIf="spinner==false" type="submit" class="btn btn-primary" [disabled]="selectedFiles.length === 0">Upload Images</button>
+            <button *ngIf="spinner==false && updateImage==false" type="submit" class="btn btn-primary"
+                [disabled]="selectedFiles.length === 0">Upload Images</button>
+            <button (click)="upDateImages()" *ngIf="spinner==false && updateImage==true" type="submit"
+                class="btn btn-primary">upload
+                images</button>
         </form>
     </div>
 
