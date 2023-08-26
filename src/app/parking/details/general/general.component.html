@@ -79,6 +79,24 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col-md-4">
+                <label for="latitude" class="form-label">Latitude *</label>
+                <input type="number" class="form-control no-spinner" id="latitude"
+                    placeholder="Enter Your Parking Latitude" formControlName="latitude" required="">
+                <div class="invalid-feedback">
+                    Please Enter Parking latitude 
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="longitude" class="form-label">Longitude *</label>
+                <input type="number" class="form-control no-spinner" id="longitude"
+                    placeholder="Enter Your Parking Longitude" formControlName="longitude" required="">
+                <div class="invalid-feedback">
+                    Please Enter Parking longitude
+                </div>
+            </div>
+           
+            <div class="col-md-4">
                 <label for="bu" class="form-label">people Allowed on Shuttle Bus</label>
                 <input type="text" class="form-control" id="bus" placeholder="people Allowed on Shuttle Bus"
                     formControlName="shuttleBus">

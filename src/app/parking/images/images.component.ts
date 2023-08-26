@@ -34,6 +34,8 @@ export class ImagesComponent {
   }
   spinner = false
   editData: any;
+  imagesID: any;
+  updateImage: boolean = false;
   constructor(private _saveService: SaveidService, private _imageService: ImagesService, private _snackbarService: SnackbarService) { }
 
   ngOnInit() {
@@ -84,9 +86,9 @@ export class ImagesComponent {
           this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
           this.selectedFiles = [];
           this.removeLogo()
-          if(this.editData.edit){
+          if (this.editData.edit) {
             this.getImages(this.editData.id)
-          }else{
+          } else {
             this.getImages(this._saveService.getPropertyId())
           }
         },
@@ -118,13 +120,16 @@ export class ImagesComponent {
       next: (res) => {
         console.log(res)
         if (res.length) {
+          this.updateImage = true
+          console.log(res[res.length - 1].id, 'iiiiiiiiiiiiiiiii')
           this.setLogo(res[0].logo)
-          this._imageService.getAllIMages(res[0].id).subscribe({
+          this.imagesID = res[res.length - 1].id
+          this._imageService.getAllIMages(res[res.length - 1].id).subscribe({
             next: (res) => {
               console.log(res, 'images-----------')
               this.selectedFiles = res.map((item: any, i: any) => ({
                 // You can customize how the 'icon' value is created
-                file: i,
+                file: {},
                 url: item.images,
               }));
             },
@@ -147,5 +152,49 @@ export class ImagesComponent {
       url: img
     }
   }
+
+
+  upDateImages() {
+    if (this.selectedFiles.length > 0 && this.logo.url) {
+      this.spinner = true
+      const data = {
+        "logo": this.logo,
+        "images": this.selectedFiles,
+        "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
+      }
+
+      const fd = {
+        data: data,
+        id: this.imagesID
+      }
+      this._imageService.updateImages(fd).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.spinner = false
+          this._snackbarService.openSnackbar('✔ Form Successfully Updated')
+          this.selectedFiles = [];
+          this.removeLogo()
+          if (this.editData.edit) {
+            this.getImages(this.editData.id)
+          } else {
+            this.getImages(this._saveService.getPropertyId())
+          }
+        },
+        error: (error) => {
+          console.log(error)
+          this._snackbarService.openSnackbar('❌ Internal Server Error')
+          this.spinner = false
+        }
+      })
+    } else {
+      this._snackbarService.openSnackbar('Please Select both Images and Logo')
+    }
+  }
 }
+
+
+
+
+
+
 

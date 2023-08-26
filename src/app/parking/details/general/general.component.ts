@@ -279,6 +279,8 @@ export class GeneralComponent {
       zipCode: ['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       shuttleNumber: ['', Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
       flexNumber: ['',],
       shuttleBus: ['',]
     })
@@ -308,6 +310,8 @@ export class GeneralComponent {
         "phone_number": (this.generalForm.controls['phoneNumber'].value).toString(),
         "shuttle_phone_number": (this.generalForm.controls['shuttleNumber'].value).toString(),
         "fax_number": (this.generalForm.controls['flexNumber'].value).toString(),
+        "latitude": (this.generalForm.controls['latitude'].value).toString(),
+        "longitude": (this.generalForm.controls['longitude'].value).toString(),
         "user": null
       }
       if (this.editData.edit == true || (this.editData.edit == false && this._saveService.getPropertyId())) {
@@ -366,6 +370,8 @@ export class GeneralComponent {
   // }
 
 
+
+
   // apply Validate
 
   validate(event: any) {
@@ -383,7 +389,7 @@ export class GeneralComponent {
    * Get single property
   */
   getSingleValues(id: any) {
-    console.log('id0000000000000000000000',id)
+    console.log('id0000000000000000000000', id)
     this._detailService.getSingleBasicDetailsService(id).subscribe({
       next: (res) => {
         this.setValues(res)
@@ -406,7 +412,9 @@ export class GeneralComponent {
       phoneNumber: data.phone_number,
       shuttleNumber: data.shuttle_phone_number,
       flexNumber: data.fax_number,
-      shuttleBus: data.shuttle_phone_number
+      shuttleBus: data.shuttle_phone_number,
+      latitude: data.latitude ? data.latitude : '',
+      longitude: data.longitude ? data.longitude : ''
     });
   }
 
