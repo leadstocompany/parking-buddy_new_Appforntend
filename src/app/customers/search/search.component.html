@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row p-2">
+        <div class="col-12 col-md-6 d-flex align-items-center">
+            <div class="d-flex gap-3 ancherTag" style="color:rgb(54, 113, 224); font-size: 16px;">
+                <span style="font-size: 26px; color: white;">Parking Plot</span>
+                <a>Profile</a>
+                <a>Sign-In</a>
+                <a>Sign-Up</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <section class="hero">
+                <div class="container" style="text-align: center;">
+                    <div class="">
+                        <h1>Find Parking Anywhere, Anytime</h1>
+                        <p>Search and book parking spaces near your destination.</p>
+                    </div>
+                    <form class="d-flex flex-column gap-3">
+                        <div class="d-flex flex-row gap-3 search-form" style="width:95vw">
+                            <div class="search-form">
+                                <!-- [minDate]="minDate" [maxDate]="maxDate" [(bsValue)]="myDateValue" -->
+                                <input type="text" #dp="bsDatepicker" placeholder="Check-In" bsDatepicker>
+                                <button style="background-color: inherit; border: 0.5px solid gray;"
+                                    disabled>Check-In</button>
+                            </div>
+                            <div class="search-form">
+                                <!-- [minDate]="minDate" [maxDate]="maxDate" [(bsValue)]="myDateValue" -->
+                                <input type="text" #dp="bsDatepicker" placeholder="Check-In" bsDatepicker>
+                                <button style="background-color: inherit;  border: 0.5px solid gray;"
+                                    disabled>Check-Out</button>
+                            </div>
+                        </div>
+                        <div class="search-form" style="width:95vw">
+                            <input type="text" style="width: 500px;" placeholder="Enter location">
+                            <button type="submit" [routerLink]="['result']">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <section class="features">
+                <div class="container">
+                    <div class="feature">
+                        <h2>Easy to Use</h2>
+                        <p>Our platform makes it simple to find and reserve parking spots.</p>
+                    </div>
+                    <div class="feature">
+                        <h2>Wide Selection</h2>
+                        <p>Choose from a variety of parking options to suit your needs.</p>
+                    </div>
+                    <div class="feature">
+                        <h2>Secure Booking</h2>
+                        <p>Your payment and booking information is kept safe and secure.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <section class="contact" style="color:white">
+                <div class="container">
+                    <h2>Contact Us</h2>
+                    <p>Have questions? Reach out to us at <a
+                            href="mailto:info@parkingsearch.com">info@parkingsearch.com</a></p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <footer>
+                <div class="container">
+                    <p>&copy; 2023 Parking Search. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>F
