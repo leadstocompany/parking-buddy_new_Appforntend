@@ -1,0 +1,283 @@
+<div class="container-fluid">
+    <div class="row p-2" style="background-color:rgb(189, 180, 180);position: sticky; z-index: 9999;">
+        <div class="col-md-3">
+            <p>Departure Airport</p>
+            <p class="fs-4">New Yark jt.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-3">
+                    <p>Parking Check-In</p>
+                    <p class="fs-4">Mon,Jul 15</p>
+                </div>
+                <div class="col-1">
+                    <p>&nbsp;</p>
+                    <p><mat-icon class="fs-4">arrow_right_alt</mat-icon></p>
+                </div>
+                <div class="col-3">
+                    <p>Parking Check-Out</p>
+                    <p class="fs-4">Mon,Jul 15</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-center">
+            <form class="search-form">
+                <input type="text" placeholder="Enter location">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- (change)="onCountryChange($event)" -->
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class='col-4'>
+                            <select class="form-select" id="country">
+                                <option value="dsfsd" disabled selected>
+                                    Filter Parking Types
+                                </option>
+                                <option value="d">demo1</option>
+                                <option value="d2e">demo1</option>
+                                <option value="d2">demo1</option>
+                                <option value="dee">demo1</option>
+                                <option value="de">demo1</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <select class="form-select" id="country">
+                                <option disabled selected>
+                                    Sort By
+                                </option>
+                                <option value="d">demo1</option>
+                                <option value="d2e">demo1</option>
+                                <option value="d2">demo1</option>
+                                <option value="dee">demo1</option>
+                                <option value="de">demo1</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <mat-divider class="mt-4" style="background-color: rgb(197, 193, 193);"></mat-divider> -->
+            <div class="row mt-3">
+                <div class="col-12" style="border-bottom: 0.5px solid whitesmoke;">
+                    <p style="color:white"><strong>11 places to park available.</strong>Your Parking dates are popular -
+                        1 place to park is
+                        sold out. Book now !</p>
+                </div>
+            </div>
+            <div class="row" style="max-height: 70vh; overflow: auto;">
+                <div class="col-12">
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt="" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <div class="col-6" style="color:white; font-size: 12px;">
+                            <p>Radisson Hotel JFK Airport</p>
+                            <p>* * * * Great (958 Ratings)</p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>
+                                    Additional Saferty Measure Taken
+                                </span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Parking Types: Valet Uncovered,Valet Covered</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>1 miles to JFK</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open Free Shuttle</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open 24/7</span>
+                            </p>
+                        </div>
+                        <div class="col-3 p-3">
+                            <div class="d-flex flex-column gap-3">
+                                <div style="color:white; font-size: 16px;">
+                                    $<sup></sup><span>28</span><sup>99</sup><sub>Per
+                                        Day</sub></div>
+                                <button class="btn bg-danger">Park Here</button>
+                                <button class="btn btn-link">✔ Free Cancellation</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt="" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <div class="col-6" style="color:white; font-size: 12px;">
+                            <p>Radisson Hotel JFK Airport</p>
+                            <p>* * * * Great (958 Ratings)</p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>
+                                    Additional Saferty Measure Taken
+                                </span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Parking Types: Valet Uncovered,Valet Covered</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>1 miles to JFK</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open Free Shuttle</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open 24/7</span>
+                            </p>
+                        </div>
+                        <div class="col-3 p-3">
+                            <div class="d-flex flex-column gap-3">
+                                <div style="color:white; font-size: 16px;">
+                                    $<sup></sup><span>28</span><sup>99</sup><sub>Per
+                                        Day</sub></div>
+                                <button class="btn bg-danger">Park Here</button>
+                                <button class="btn btn-link">✔ Free Cancellation</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt="" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <div class="col-6" style="color:white; font-size: 12px;">
+                            <p>Radisson Hotel JFK Airport</p>
+                            <p>* * * * Great (958 Ratings)</p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>
+                                    Additional Saferty Measure Taken
+                                </span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Parking Types: Valet Uncovered,Valet Covered</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>1 miles to JFK</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open Free Shuttle</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open 24/7</span>
+                            </p>
+                        </div>
+                        <div class="col-3 p-3">
+                            <div class="d-flex flex-column gap-3">
+                                <div style="color:white; font-size: 16px;">
+                                    $<sup></sup><span>28</span><sup>99</sup><sub>Per
+                                        Day</sub></div>
+                                <button class="btn bg-danger">Park Here</button>
+                                <button class="btn btn-link">✔ Free Cancellation</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt="" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <div class="col-6" style="color:white; font-size: 12px;">
+                            <p>Radisson Hotel JFK Airport</p>
+                            <p>* * * * Great (958 Ratings)</p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>
+                                    Additional Saferty Measure Taken
+                                </span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Parking Types: Valet Uncovered,Valet Covered</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>1 miles to JFK</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open Free Shuttle</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open 24/7</span>
+                            </p>
+                        </div>
+                        <div class="col-3 p-3">
+                            <div class="d-flex flex-column gap-3">
+                                <div style="color:white; font-size: 16px;">
+                                    $<sup></sup><span>28</span><sup>99</sup><sub>Per
+                                        Day</sub></div>
+                                <button class="btn bg-danger">Park Here</button>
+                                <button class="btn btn-link">✔ Free Cancellation</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt="" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <div class="col-6" style="color:white; font-size: 12px;">
+                            <p>Radisson Hotel JFK Airport</p>
+                            <p>* * * * Great (958 Ratings)</p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>
+                                    Additional Saferty Measure Taken
+                                </span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Parking Types: Valet Uncovered,Valet Covered</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>1 miles to JFK</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open Free Shuttle</span>
+                            </p>
+                            <p class="flx">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open 24/7</span>
+                            </p>
+                        </div>
+                        <div class="col-3 p-3">
+                            <div class="d-flex flex-column gap-3">
+                                <div style="color:white; font-size: 16px;">
+                                    $<sup></sup><span>28</span><sup>99</sup><sub>Per
+                                        Day</sub></div>
+                                <button class="btn bg-danger">Park Here</button>
+                                <button class="btn btn-link">✔ Free Cancellation</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <google-map height="80vh" width="100%" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
+                (mapMousemove)="move($event)">
+            </google-map>
+        </div>
+    </div>
+</div>

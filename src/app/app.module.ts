@@ -12,7 +12,7 @@ import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { EditProfileComponent } from './sidebar/edit-profile/edit-profile.component';
-
+import { GoogleMapsModule } from '@angular/google-maps';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +29,8 @@ import { EditProfileComponent } from './sidebar/edit-profile/edit-profile.compon
     ReactiveFormsModule,
     CKEditorModule,
     HttpClientModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    GoogleMapsModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
