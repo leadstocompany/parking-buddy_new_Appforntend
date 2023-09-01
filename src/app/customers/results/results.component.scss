@@ -26,5 +26,24 @@
     display: flex;
     // justify-content: center;
     align-items: center;
-    gap:2px
+    gap: 2px
+}
+
+
+
+// Rating ------
+.star-rating {
+    font-size: 24px;
+    /* Adjust size as needed */
+    cursor: pointer;
+}
+
+.star-rating span {
+    color: #ddd;
+    /* Empty star color */
+}
+
+.filled {
+    color: #f39c12;
+    /* Filled star color */
 }

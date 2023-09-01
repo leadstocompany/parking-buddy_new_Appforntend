@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomersComponent } from './customers.component';
 import { ResultsComponent } from './results/results.component';
-
+import { SingleDetailsComponent } from './results/single-details/single-details.component';
+import { PaymentpageComponent } from './paymentpage/paymentpage.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 const routes: Routes = [
   {
     path: '', children: [
@@ -10,7 +12,20 @@ const routes: Routes = [
         path: '', component: CustomersComponent
       },
       {
-        path: 'result', component: ResultsComponent
+        path: 'result', children: [
+          {
+            path: '', component: ResultsComponent
+          },
+          {
+            path: 'details/:id', component: SingleDetailsComponent
+          }
+        ]
+      },
+      {
+        path: 'payment/:id', component: PaymentpageComponent
+      },
+      {
+        path: 'user-profile', component: UserProfileComponent
       }
     ]
   },

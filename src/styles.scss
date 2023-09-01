@@ -17,6 +17,7 @@ body {
     padding: 0;
     margin: 0;
     background-color: #1e3441;
+    // margin: auto
 }
 
 
@@ -34,14 +35,14 @@ body {
 .modal-backdrop {
     --bs-backdrop-zindex: -1 !important;
 }
-.success{
+
+.success {
     background-color: green;
     background: green;
     color: white;
 }
 
 
-
-
-
-
+.timepicker-overlay {
+    z-index: 99999 !important;
+}

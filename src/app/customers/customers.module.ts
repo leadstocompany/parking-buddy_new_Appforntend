@@ -15,12 +15,18 @@ import { MaterialModule } from '../material/material.module';
 import { ResultsComponent } from './results/results.component';
 import { SearchComponent } from './search/search.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { SingleDetailsComponent } from './results/single-details/single-details.component';
+import { PaymentpageComponent } from './paymentpage/paymentpage.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     CustomersComponent,
     ResultsComponent,
-    SearchComponent
+    SearchComponent,
+    SingleDetailsComponent,
+    PaymentpageComponent,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
