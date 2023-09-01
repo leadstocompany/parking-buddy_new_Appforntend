@@ -1,0 +1,292 @@
+<div class="container-fluid d-flex flex-row">
+    <div class="left">
+        <div class="row d-flex flex-column gap-3">
+            <div class="col-12 p-2">
+                <div class="row">
+                    <div class="col-2 align-content-center">
+                        <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt=""
+                            style="max-width: 100%; max-height: 100%;">
+                    </div>
+                    <div class="col-10">
+                        <h1>Radisson Hotel JFK Airport Parking- JohnF. ken International Airport</h1>
+                        <p class="d-flex flex-row align-content-center"> <span
+                                *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
+                                <mat-icon class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
+                            </span><b>Great</b><span>(960 Reviews) | 135-30 140th St, Jamaica, New York,US
+                                11436</span></p>
+                        <div class="d-flex flex-row flex-wrap gap-4">
+                            <p class="d-flex flex-row align-items-center justify-content-center">
+                                <mat-icon style="font-size: 15px;">local_airport</mat-icon>
+                                <span>1.0 miles to JFK</span>
+                            </p>
+
+                            <p class="d-flex flex-row justify-content-center align-items-center">
+                                <mat-icon style="font-size: 15px;">directions_bus</mat-icon>
+                                <span>Free Shuttle</span>
+                            </p>
+                            <p class="d-flex flex-row justify-content-center align-items-center">
+                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <span>Open 24/7</span>
+                            </p>
+                            <p class="d-flex flex-row justify-content-center align-items-center">
+                                <mat-icon style="font-size: 15px;">directions_car</mat-icon>
+                                <span>Parking Types: Valet Uncovered,Valet Covered</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <mat-divider style="height: 2px;"></mat-divider>
+            <div class="col-12" style="background-color: #033552; padding:20px; color:white; border-radius: 10px;">
+                <p>Announcement from Radisson Hotel JFK Airport:</p>
+                <ul>
+                    <li>Shuttle runs daily from 5:00am - 11:00pm</li>
+                    <li>Customers who need airport Transportation outside of these hours will have to arrange their own
+                        rides at their expense</li>
+                    <li>random details</li>
+                    <li>random details</li>
+                    <li>random details</li>
+                </ul>
+            </div>
+            <div class="col-12">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="true">Overview</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                            aria-selected="false">Amenities</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                            aria-selected="false">Location</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled"
+                            aria-selected="false">Details</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-review-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-review"
+                            aria-selected="false">Reviews</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                        aria-labelledby="pills-home-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-7">
+                                <div id="carouselExample" class="carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="/assets/camra.png" class="d-block w-100" alt="/assets/camra.png">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="/assets/camra.png" class="d-block w-100" alt="/assets/camra.png">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="/assets/camra.png" class="d-block w-100" alt="/assets/camra.png">
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExample" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExample" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <p>Overall Rating</p>
+                                <h1>Great</h1>
+                                <h3>4.0/5</h3>
+                                <p class="d-flex flex-row align-content-center"> <span
+                                        *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
+                                        <mat-icon
+                                            class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
+                                    </span><span>(Based on 958 ratings)</span></p>
+                                <p>Lot Review Summary</p>
+                                <p class="d-flex flex-row gap-4"><span>Shuttle Speed</span> <span
+                                        *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
+                                        <mat-icon
+                                            class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
+                                    </span>
+                                    <span>3.3</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+                        tabindex="0">
+                        <div class="amenities">
+                            <div class="amenities">
+                                <ng-container *ngFor="let amenity of amenities">
+                                    <div class="amenity">
+                                        <mat-icon [ngStyle]="{'color': amenity.iconColor}">{{ amenity.iconName
+                                            }}</mat-icon>
+                                        {{ amenity.name }}
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
+                        tabindex="0">
+                        <div id="map"></div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab"
+                        tabindex="0">...DDDD</div>
+
+                    <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab"
+                        tabindex="0">review...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="upper" style="border: 0.5px solid gray; min-height: 10vh;">
+            <div class="row">
+                <div class="col-12 d-flex flex-row justify-content-between">
+                    <p>Starting from</p>
+                    <p>$25.99 per day</p>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <div class="in">
+                        <span>Check In</span>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="out">
+                        <span>Check Out</span>
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-danger" style="width: 90%;" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"> Reserve Parking</button>
+                </div>
+                <div class="col-12">
+                    <button class="btn-link btn" style="width: 90%;"> ✔ Reserve Parking</button>
+                </div>
+            </div>
+        </div>
+        <div class="lowwer">
+            <div class="title">
+                <h3>Other Popular JFK Parking Options</h3>
+            </div>
+            <div class="options" style="max-height: 70vh;overflow-y: auto;">
+                <div *ngFor="let v of ['a','b','c','a','b','c','a','b','c']" class="row mt-3">
+                    <div class="col-3">
+                        <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt=""
+                            style="max-width: 100%; max-height: 100%;">
+                    </div>
+                    <div class="col-6" style="color:black; font-size: 12px;">
+                        <p>Radisson Hotel JFK Airport</p>
+                        <p>* * * * Great (958 Ratings)</p>
+                        <p class="d-flex flex-row align-content-center align-items-center">
+                            <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                            <span>
+                                Additional Saferty
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-3 p-3">
+                        <div class="d-flex flex-column gap-3">
+                            <div style="color:black; font-size: 16px;">
+                                $<sup></sup><span>28</span><sup>99</sup><sub><br> Per
+                                    Day</sub></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="exampleModalLabel">Select Parking Times and Types</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <mat-stepper orientation="vertical">
+                            <mat-step>
+                                <ng-template matStepLabel>Parking Times <br> <span style="font-size:small">Select your
+                                        parking check-In and
+                                        check-Out times.</span></ng-template>
+
+                                <ng-template matStepContent>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="toggleTimepicker">Check In</label>
+                                            <div class="d-flex flex-row position-relative">
+                                                <input class="input-" [ngxTimepicker]="toggleTimepicker"
+                                                    [disableClick]="true" readonly (click)="toggleTimepicker.open()"
+                                                    [format]="24">
+                                                <ngx-material-timepicker-toggle [for]="toggleTimepicker"
+                                                    buttonAlign="left" class="position-absolute"
+                                                    style="top:7px;"></ngx-material-timepicker-toggle>
+                                                <ngx-material-timepicker #toggleTimepicker
+                                                    [format]="24"></ngx-material-timepicker>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="toggleTimepicker1">Check Out</label>
+                                            <div class="d-flex flex-row position-relative">
+                                                <input class="input-" [ngxTimepicker]="toggleTimepicker1"
+                                                    [disableClick]="true" readonly (click)="toggleTimepicker1.open()"
+                                                    [format]="24">
+                                                <ngx-material-timepicker-toggle [for]="toggleTimepicker1"
+                                                    buttonAlign="left" class="position-absolute"
+                                                    style="top:7px;"></ngx-material-timepicker-toggle>
+                                                <ngx-material-timepicker #toggleTimepicker1
+                                                    [format]="24"></ngx-material-timepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger mt-3" matStepperNext>Continue</button>
+                                </ng-template>
+                            </mat-step>
+                            <mat-step>
+                                <ng-template matStepLabel>Parking Type <br> <span style="font-size:small">This lot has 2
+                                        parking types,please select one.</span></ng-template>
+                                <ng-template matStepContent>
+                                    <mat-selection-list #shoes [multiple]="false"
+                                        style="max-height: 40vh; overflow: auto;">
+                                        <mat-list-option class="d-flex align-items-center"
+                                            *ngFor="let shoe of typesOfShoes" [value]="shoe">
+                                            <span class="d-flex flex-row justify-content-between align-item-center">
+                                                <p
+                                                    class="d-flex flex-row justify-content-between align-item-center gap-3">
+                                                    <mat-icon>directions_car</mat-icon> {{shoe.name}}
+                                                </p>
+                                                <p>${{shoe.price}} per day</p>
+                                            </span>
+                                        </mat-list-option>
+                                    </mat-selection-list>
+                                    <!-- <button mat-button matStepperPrevious>Back</button> -->
+                                    <!-- <button mat-button matStepperNext>Next</button> -->
+                                    <button class="btn btn-danger mt-4 align-self-center"
+                                        (click)="redirectToPayment()">Proceed to Checkout</button>
+                                </ng-template>
+                            </mat-step>
+                        </mat-stepper>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,150 @@
+<div class="container-fluid" style="width:100%; min-height: 100%; background-color: white;">
+    <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="logOut($event)">
+        <mat-tab label="My Reservation">
+            <div class="container mt-4">
+                <h1 style="text-align: center;">My Reservation</h1>
+                <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+                    <mat-tab label="Open Reservation">
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Location</th>
+                                        <th>License Plate</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2023-09-01</td>
+                                        <td>10:00 AM</td>
+                                        <td>Lot A</td>
+                                        <td>ABC123</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>2023-09-01</td>
+                                        <td>10:00 AM</td>
+                                        <td>Lot A</td>
+                                        <td>ABC123</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2023-09-01</td>
+                                        <td>10:00 AM</td>
+                                        <td>Lot A</td>
+                                        <td>ABC123</td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Past Reservation">
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Location</th>
+                                        <th>License Plate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2023-09-01</td>
+                                        <td>10:00 AM</td>
+                                        <td>Lot A</td>
+                                        <td>ABC123</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </mat-tab>
+        <mat-tab label="Edit">
+            <div class="container mt-4">
+                <form [formGroup]="profileForm" class="profile-form d-flex flex-column gap-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="text" class="form-control" id="email" formControlName="email"
+                                placeholder="Enter email">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="fname" class="form-label">First Name *</label>
+                            <input type="text" class="form-control" formControlName="fname" placeholder="First Name">
+                        </div>
+                        <div class="col-md-4">
+
+                            <label for="lname" class="form-label">Last Name *</label>
+                            <input type="text" class="form-control" formControlName="lname" placeholder="Last Name">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <label for="zipcode" class="form-label">Zip Code</label>
+                            <input type="text" class="form-control" formControlName="zipcode" placeholder="Zip Code">
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" formControlName="phone" placeholder="Phone Number">
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="mobile" class="form-label">Mobile Number</label>
+                            <input type="text" class="form-control" formControlName="mobile"
+                                placeholder="Mobile Number">
+
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input type="text" class="form-control" formControlName="currentPassword"
+                                placeholder="Current Password">
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <label for="nPassword" class="form-label">New Password</label>
+                            <input type="text" class="form-control" formControlName="nPassword"
+                                placeholder="New Password">
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="confirmPassword" class="form-label">confirm new password</label>
+                            <input type="text" class="form-control" formControlName="confirmPassword"
+                                placeholder="Conform Password">
+
+                        </div>
+                        <div class="perference mt-3 d-flex flex-column gap-2">
+                            <h3>Update Your Preference</h3>
+                            <mat-slide-toggle>Get Discount and Latest Update Via Email</mat-slide-toggle>
+                            <mat-slide-toggle>Get Exclusive SMS Discount and Promotion</mat-slide-toggle>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <button class="mt-4 btn btn-danger" type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Logout"></mat-tab>
+    </mat-tab-group>
+</div>

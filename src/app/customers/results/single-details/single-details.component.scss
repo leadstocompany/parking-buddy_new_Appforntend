@@ -1,0 +1,100 @@
+.container-fluid {
+    min-height: 100vh;
+    gap: 20px;
+    background-color: white;
+}
+
+.left {
+    width: 70%;
+    height: 100%;
+}
+
+.right {
+    width: 25%;
+    border: 2px solid white;
+    height: 100%;
+}
+
+.example-tab-icon {
+    margin-right: 8px;
+}
+
+
+
+
+
+/* Customize carousel container */
+#carouselExample {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Adjust image size */
+.carousel-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black;
+    background-size: 100%, 100%;
+    padding: 15px;
+    border-radius: 50%;
+}
+
+
+.input- {
+    border-color: rgb(0, 119, 255);
+    background-color: #f8f8f8;
+    color: #333;
+    font-size: 14px;
+    padding: 10px;
+    padding-left: 30%;
+    border-radius: 8px;
+    border: 1px solid rgb(0, 119, 255);
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    width: 100%;
+}
+
+// Rating ------
+.star-rating {
+    font-size: 24px;
+    /* Adjust size as needed */
+    cursor: pointer;
+}
+
+.star-rating span {
+    color: #ddd;
+    /* Empty star color */
+}
+
+.filled {
+    color: #f39c12;
+    /* Filled star color */
+}
+
+
+// Amenities
+
+.amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* Adjust the spacing between amenities */
+}
+
+.amenity {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+mat-icon {
+    font-size: 24px;
+    margin-right: 8px;
+}
