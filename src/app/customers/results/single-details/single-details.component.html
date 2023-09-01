@@ -1,35 +1,35 @@
 <div class="container-fluid d-flex flex-row">
     <div class="left">
         <div class="row d-flex flex-column gap-3">
-            <div class="col-12 p-2">
+            <div class="col-md-12 p-2">
                 <div class="row">
                     <div class="col-2 align-content-center">
                         <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt=""
                             style="max-width: 100%; max-height: 100%;">
                     </div>
                     <div class="col-10">
-                        <h1>Radisson Hotel JFK Airport Parking- JohnF. ken International Airport</h1>
-                        <p class="d-flex flex-row align-content-center"> <span
+                        <h1 class="m-0 p-0">Radisson Hotel JFK Airport Parking- JohnF. ken International Airport</h1>
+                        <p class="m-0 p-0 d-flex flex-row align-content-center"> <span
                                 *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
                                 <mat-icon class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
                             </span><b>Great</b><span>(960 Reviews) | 135-30 140th St, Jamaica, New York,US
                                 11436</span></p>
-                        <div class="d-flex flex-row flex-wrap gap-4">
+                        <div class="d-flex flex-row flex-wrap gap-3">
                             <p class="d-flex flex-row align-items-center justify-content-center">
-                                <mat-icon style="font-size: 15px;">local_airport</mat-icon>
+                                <mat-icon>local_airport</mat-icon>
                                 <span>1.0 miles to JFK</span>
                             </p>
 
                             <p class="d-flex flex-row justify-content-center align-items-center">
-                                <mat-icon style="font-size: 15px;">directions_bus</mat-icon>
+                                <mat-icon>directions_bus</mat-icon>
                                 <span>Free Shuttle</span>
                             </p>
                             <p class="d-flex flex-row justify-content-center align-items-center">
-                                <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                                <mat-icon>schedule</mat-icon>
                                 <span>Open 24/7</span>
                             </p>
                             <p class="d-flex flex-row justify-content-center align-items-center">
-                                <mat-icon style="font-size: 15px;">directions_car</mat-icon>
+                                <mat-icon>directions_car</mat-icon>
                                 <span>Parking Types: Valet Uncovered,Valet Covered</span>
                             </p>
                         </div>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <mat-divider style="height: 2px;"></mat-divider>
-            <div class="col-12" style="background-color: #033552; padding:20px; color:white; border-radius: 10px;">
+            <div class="col-md-12" style="background-color: #033552; padding:20px; color:white; border-radius: 10px;">
                 <p>Announcement from Radisson Hotel JFK Airport:</p>
                 <ul>
                     <li>Shuttle runs daily from 5:00am - 11:00pm</li>
@@ -48,7 +48,7 @@
                     <li>random details</li>
                 </ul>
             </div>
-            <div class="col-12">
+            <div class="col-md-12">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
@@ -80,7 +80,7 @@
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab" tabindex="0">
                         <div class="row">
-                            <div class="col-7">
+                            <div class="col-5">
                                 <div id="carouselExample" class="carousel slide">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
@@ -105,20 +105,25 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-5">
                                 <p>Overall Rating</p>
-                                <h1>Great</h1>
-                                <h3>4.0/5</h3>
-                                <p class="d-flex flex-row align-content-center"> <span
-                                        *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
+                                <h1 style="margin: 0px;"> Great</h1>
+                                <h3 style="margin: 0px;"> 4.0/5</h3>
+                                <p><span *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
                                         <mat-icon
                                             class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
-                                    </span><span>(Based on 958 ratings)</span></p>
-                                <p>Lot Review Summary</p>
-                                <p class="d-flex flex-row gap-4"><span>Shuttle Speed</span> <span
-                                        *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
-                                        <mat-icon
-                                            class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
+                                    </span>
+                                    <br><span>(Based on 958 ratings)</span>
+                                </p>
+                                <h2>Lot Review Summary</h2>
+                                <p class="d-flex flex-row justify-content-between align-items-center m-0"
+                                    *ngFor="let star of ['0','1','2','3']; let i = index">
+                                    <span>Shuttle Speed</span>
+                                    <span>
+                                        <span *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
+                                            <mat-icon
+                                                class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
+                                        </span>
                                     </span>
                                     <span>3.3</span>
                                 </p>
@@ -152,14 +157,14 @@
             </div>
         </div>
     </div>
-    <div class="right">
-        <div class="upper" style="border: 0.5px solid gray; min-height: 10vh;">
-            <div class="row">
-                <div class="col-12 d-flex flex-row justify-content-between">
-                    <p>Starting from</p>
-                    <p>$25.99 per day</p>
-                </div>
-                <div class="col-12 d-flex flex-row">
+    <div class="right" style="border: 0.5px solid gray;">
+        <div class="upper" style="min-height: 10vh;">
+            <div class="d-flex flex-row justify-content-between align-items-center" style="background-color: lightslategray; padding:10px; color:white">
+                <p>Starting from</p>
+                <p>$25.99 per day</p>
+            </div>
+            <div class="row d-flex flex-column gap-2 p-2">
+                <div class="col-md-12 d-flex flex-row justify-content-between">
                     <div class="in">
                         <span>Check In</span>
                         <input type="date" class="form-control">
@@ -169,33 +174,41 @@
                         <input type="date" class="form-control">
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-md-12 mt-2 d-flex justify-content-center">
                     <button class="btn btn-danger" style="width: 90%;" data-bs-toggle="modal"
                         data-bs-target="#exampleModal"> Reserve Parking</button>
                 </div>
-                <div class="col-12">
-                    <button class="btn-link btn" style="width: 90%;"> ✔ Reserve Parking</button>
+                <div class="col-md-12">
+                    <button class="btn-link btn" style="width: 90%; text-decoration: none; color:green"> ✔ Free
+                        Cancellation</button>
                 </div>
             </div>
         </div>
-        <div class="lowwer">
+        <div class="container-fluid lowwer">
             <div class="title">
                 <h3>Other Popular JFK Parking Options</h3>
             </div>
-            <div class="options" style="max-height: 70vh;overflow-y: auto;">
-                <div *ngFor="let v of ['a','b','c','a','b','c','a','b','c']" class="row mt-3">
+            <div class="container-fluid" style="max-height: 70vh;overflow-y: auto;">
+                <div *ngFor="let v of ['a','b','c','a','b','c','a','b','c']" class="row mt-3 p-0">
                     <div class="col-3">
                         <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt=""
                             style="max-width: 100%; max-height: 100%;">
                     </div>
                     <div class="col-6" style="color:black; font-size: 12px;">
                         <p>Radisson Hotel JFK Airport</p>
-                        <p>* * * * Great (958 Ratings)</p>
-                        <p class="d-flex flex-row align-content-center align-items-center">
-                            <mat-icon style="font-size: 15px;">schedule</mat-icon>
+                        <p class="d-flex flex-row align-content-center">
                             <span>
-                                Additional Saferty
+                                <span *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
+                                    <mat-icon class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
+                                </span>
                             </span>
+                            <span>
+                                Great (958 Ratings)
+                            </span>
+                        </p>
+                        <p class="d-flex flex-row align-content-center align-items-center">
+                            <mat-icon>schedule</mat-icon>
+                            Additional Saferty
                         </p>
                     </div>
                     <div class="col-3 p-3">
@@ -205,6 +218,7 @@
                                     Day</sub></div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -287,6 +301,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

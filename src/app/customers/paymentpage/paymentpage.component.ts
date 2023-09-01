@@ -7,15 +7,15 @@ import { Component } from '@angular/core';
 })
 export class PaymentpageComponent {
   step = 0;
-
+  ngOnInit() {
+    this.setStep(0)
+  }
   setStep(index: number) {
     this.step = index;
   }
-
   nextStep() {
     this.step++;
   }
-
   prevStep() {
     this.step--;
   }

@@ -1,9 +1,10 @@
-<div class="" style="background-color: lightgrey; min-height:100vh; width:100%; margin:0px; padding:0px">
-    <div class="row d-flex flex-row" style="gap:30px">
+<div class="container-fluid d-flex justify-content-center"
+    style="background-color: lightgrey; min-height:100vh; width:100%; margin:0px; padding:0px ">
+    <div class="row d-flex flex-row justify-content-around">
         <div class="col-md-7" style="background-color: white;">
             <mat-stepper orientation="vertical">
                 <mat-step>
-                    <ng-template matStepLabel>Guest Details<span style="font-size:small">Emails</span></ng-template>
+                    <ng-template matStepLabel>Guest Details<span style="font-size:small">  Emails</span></ng-template>
                     <ng-template matStepContent>
                         <div class="row mt-4">
                             <div class="col-md-6">
@@ -22,103 +23,106 @@
                     </ng-template>
                 </mat-step>
                 <mat-step>
-                    <ng-template matStepLabel>Payment,Method</ng-template>
+                    <ng-template matStepLabel>Payment   Method</ng-template>
                     <ng-template matStepContent>
-                        <section class="mt-4">
-                            <form class="d-flex flex-column gap-3">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="fname" class="form-label">First Name On Card</label>
-                                        <input type="text" class="form-control" id="fname"
-                                            placeholder="Enter First Name">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="lname" class="form-label">Last Name On Card</label>
-                                        <input type="text" class="form-control" id="lname"
-                                            placeholder="Enter Last Name">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label for="zipcode" class="form-label">Zipcode</label>
-                                        <input type="Number" class="form-control" id="zipcode"
-                                            placeholder="Enter Zip Code">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label for="phoneNumber" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" id="phoneNumber"
-                                            placeholder="Enter Phone Number">
-                                    </div>
-                                </div>
-                                <mat-checkbox class="example-margin" [labelPosition]="'after'">
-                                    Get discounts and update via SMS
-                                </mat-checkbox>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label for="driver" class="form-label">Add driver's Name (optional)</label>
-                                        <input type="text" class="form-control" id="driver" placeholder="Enter email">
-                                    </div>
-                                </div>
-                            </form>
-                        </section>
-                        <section class="mt-4">
-                            <mat-accordion class="example-headers-align">
-                                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-                                    <mat-expansion-panel-header>
-                                        <mat-panel-title>
-                                            Card
-                                        </mat-panel-title>
-                                        <mat-panel-description>
-                                            &nbsp;
-                                            <mat-icon>payment</mat-icon>
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
-                                    <form class="d-flex flex-column gap-3">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label for="cardNumber" class="form-label">Card Number</label>
-                                                <input type="Number" class="form-control" id="cardNumber"
-                                                    placeholder="Enter Zip Card Number">
-                                            </div>
+                        <div class="container-fluid" style="min-height: 40vh;">
+                            <section class="mt-4">
+                                <form class="d-flex flex-column gap-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="fname" class="form-label">First Name On Card</label>
+                                            <input type="text" class="form-control" id="fname"
+                                                placeholder="Enter First Name">
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="date" class="form-label">Expired Date</label>
-                                                <input type="date" class="form-control" id="date"
-                                                    placeholder="Enter Expired Date">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="cvv" class="form-label">cvv</label>
-                                                <input type="text" class="form-control" id="cvv"
-                                                    placeholder="Enter CVV">
-                                            </div>
+                                        <div class="col-md-6">
+                                            <label for="lname" class="form-label">Last Name On Card</label>
+                                            <input type="text" class="form-control" id="lname"
+                                                placeholder="Enter Last Name">
                                         </div>
-                                    </form>
-                                </mat-expansion-panel>
-                                <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-                                    <mat-expansion-panel-header>
-                                        <mat-panel-title>
-                                            PayPal
-                                        </mat-panel-title>
-                                        <mat-panel-description>
-                                            &nbsp;
-                                            <mat-icon>payment</mat-icon>
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
-                                </mat-expansion-panel>
-                            </mat-accordion>
-                        </section>
-                        <section class="mt-4" style="text-align: right;">
-                            <p>Pay <b>$203.80</b> today</p>
-                            <p>By selection Complete Reservation you agree to out <span>Terms of Use </span> and
-                                <span>Privacy Policy</span>
-                            </p>
-                        </section>
-                        <button class="btn btn-danger mt-4 align-self-center">Complete Reservation</button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="zipcode" class="form-label">Zipcode</label>
+                                            <input type="Number" class="form-control" id="zipcode"
+                                                placeholder="Enter Zip Code">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                                            <input type="text" class="form-control" id="phoneNumber"
+                                                placeholder="Enter Phone Number">
+                                        </div>
+                                    </div>
+                                    
+                                    <mat-checkbox class="example-margin" [labelPosition]="'after'">
+                                        Get discounts and update via SMS
+                                    </mat-checkbox>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="driver" class="form-label">Add driver's Name (optional)</label>
+                                            <input type="text" class="form-control" id="driver"
+                                                placeholder="Enter email">
+                                        </div>
+                                    </div>
+                                </form>
+                            </section>
+                            <section class="mt-4">
+                                <mat-accordion class="example-headers-align">
+                                    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Card
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                &nbsp;
+                                                <mat-icon>payment</mat-icon>
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <form class="d-flex flex-column gap-3">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <label for="cardNumber" class="form-label">Card Number</label>
+                                                    <input type="Number" class="form-control" id="cardNumber"
+                                                        placeholder="Enter Zip Card Number">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="date" class="form-label">Expired Date</label>
+                                                    <input type="date" class="form-control" id="date"
+                                                        placeholder="Enter Expired Date">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="cvv" class="form-label">cvv</label>
+                                                    <input type="text" class="form-control" id="cvv"
+                                                        placeholder="Enter CVV">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </mat-expansion-panel>
+                                    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                PayPal
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                &nbsp;
+                                                <mat-icon>payment</mat-icon>
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </section>
+                            <section class="mt-4" style="text-align: right;">
+                                <p>Pay <b>$203.80</b> today</p>
+                                <p>By selection Complete Reservation you agree to out <span>Terms of Use </span> and
+                                    <span>Privacy Policy</span>
+                                </p>
+                            </section>
+                            <button class="btn btn-danger mt-4 align-self-center">Complete Reservation</button>
+                        </div>
                     </ng-template>
                 </mat-step>
+                <mat-strp></mat-strp>
             </mat-stepper>
         </div>
         <div class="col-md-3" style="background-color: white;">
