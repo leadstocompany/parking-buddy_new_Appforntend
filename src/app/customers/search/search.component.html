@@ -1,44 +1,42 @@
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: darkorange;font-family: 'Poppins', sans-serif;;">
     <div class="row p-2">
         <div class="col-12 col-md-6 d-flex align-items-center">
             <div class="d-flex gap-3 ancherTag" style="color:rgb(54, 113, 224); font-size: 16px;">
-                <span style="font-size: 26px; color: white;">Parking Plot</span>
-                <a>Profile</a>
-                <a>Sign-In</a>
-                <a>Sign-Up</a>
+                <h1 style="font-size: 26px; color: white;display: inline; padding:10px">Parking Plot</h1>
+                <span (click)="changeRout('profile')">Profile</span>
+                <span (click)="changeRout('sign-In')">Sign-In</span>
+                <span (click)="changeRout('sign-up')">Sign-Up</span>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <section class="hero">
-                <div class="container" style="text-align: center;">
-                    <div class="">
-                        <h1>Find Parking Anywhere, Anytime</h1>
-                        <p>Search and book parking spaces near your destination.</p>
+        <div class="col-12 hero">
+            <div class="">
+                <h1>Find Parking Anywhere, Anytime</h1>
+                <p>Search and book parking spaces near your destination.</p>
+            </div>
+            <form class="d-flex flex-column gap-3">
+                <div class="d-flex flex-md-row flex-sm-column gap-3 search-form">
+                    <div class="search-form">
+
+                        <input type="text" #dp="bsDatepicker" placeholder="Check-In" bsDatepicker
+                            [ngModelOptions]="{ standalone: true }" [(ngModel)]="checkIn">
+                        <button style="background-color: inherit; border: 0.5px solid gray;" disabled>Check-In</button>
                     </div>
-                    <form class="d-flex flex-column gap-3">
-                        <div class="d-flex flex-row gap-3 search-form" style="width:95vw">
-                            <div class="search-form">
-                                <!-- [minDate]="minDate" [maxDate]="maxDate" [(bsValue)]="myDateValue" -->
-                                <input type="text" #dp="bsDatepicker" placeholder="Check-In" bsDatepicker>
-                                <button style="background-color: inherit; border: 0.5px solid gray;"
-                                    disabled>Check-In</button>
-                            </div>
-                            <div class="search-form">
-                                <!-- [minDate]="minDate" [maxDate]="maxDate" [(bsValue)]="myDateValue" -->
-                                <input type="text" #dp="bsDatepicker" placeholder="Check-Out" bsDatepicker>
-                                <button style="background-color: inherit;  border: 0.5px solid gray;"
-                                    disabled>Check-Out</button>
-                            </div>
-                        </div>
-                        <div class="search-form" style="width:95vw">
-                            <input type="text" style="width: 500px;" placeholder="Enter location">
-                            <button type="submit" [routerLink]="['result']">Search</button>
-                        </div>
-                    </form>
+                    <div class="search-form">
+                        <input type="text" #dp="bsDatepicker" placeholder="Check-Out" bsDatepicker
+                            [ngModelOptions]="{ standalone: true }" [(ngModel)]="checkout">
+                        <button style="background-color: inherit;  border: 0.5px solid gray;"
+                            disabled>Check-Out</button>
+                    </div>
                 </div>
-            </section>
+                <div class="search-form" style="width:95vw">
+                    <input #searchInput type="text" style="width: 500px;" placeholder="Enter location"
+                        [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchTerm" (input)="search($event)">
+                    <button (click)="submitForm()">Search</button>
+                </div>
+            </form>
+
         </div>
     </div>
     <div class="row">

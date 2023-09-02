@@ -1,7 +1,9 @@
-<div class="container-fluid" style="width:100%; min-height: 100%; background-color: white;">
+<div class="container-fluid"
+    style="min-height: 100vh;min-width:100vw; max-width:100vw; background-color: darkorange; box-sizing: border-box;">
+    <mat-icon style="color:white;cursor: pointer;" [routerLink]="['/customers']">arrow_back</mat-icon>
     <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="logOut($event)">
         <mat-tab label="My Reservation">
-            <div class="container mt-4">
+            <div class="container-fluid mt-4">
                 <h1 style="text-align: center;">My Reservation</h1>
                 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
                     <mat-tab label="Open Reservation">
@@ -69,67 +71,140 @@
                 </mat-tab-group>
             </div>
         </mat-tab>
-        <mat-tab label="Edit">
-            <div class="container mt-4">
-                <form [formGroup]="profileForm" class="profile-form d-flex flex-column gap-3">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="email" class="form-label">Email *</label>
-                            <input type="text" class="form-control" id="email" formControlName="email"
-                                placeholder="Enter email">
+        <mat-tab label="Profile">
+            <form [formGroup]="profileForm" class="profile-form mt-3" style=" max-height:85vh; overflow: auto;" (ngSubmit)="EditProfile()">
+                <h1>Edit Profile</h1>
+                <div class="container-fluid d-flex flex-column gap-3" style="width: 50vw;">
+                    <div class="row d-flex flex-column gap-3">
+                        <div class="col-md-12 d-flex flex-md-row flex-column  align-items-center gap-md-3">
+                            <label for="email" class="form-label input-label text-nowrap text-nowrap">Email *</label>
+                            <input type="text" class="form-control input-filed" id="email" formControlName="email"
+                                placeholder="Enter email"
+                                [ngClass]="{'is-invalid':profileForm.get('email')!.invalid && profileForm.get('email')!.touched}">
+                            <div *ngIf="profileForm.get('email')!.invalid && profileForm.get('email')!.touched"
+                                class="invalid-feedback">
+                                Please enter a valid Email.
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="fname" class="form-label">First Name *</label>
-                            <input type="text" class="form-control" formControlName="fname" placeholder="First Name">
+                        <div class="col-md-12 d-flex flex-md-row flex-column align-items-center gap-md-3">
+                            <label for="fname" class="form-label input-label text-nowrap">First Name *</label>
+                            <input type="text" class="form-control input-filed" formControlName="fname"
+                                placeholder="First Name"
+                                [ngClass]="{'is-invalid':profileForm.get('fname')!.invalid && profileForm.get('fname')!.touched}">
+                            <div *ngIf="profileForm.get('fname')!.invalid && profileForm.get('fname')!.touched"
+                                class="invalid-feedback">
+                                Please enter a First Name.
+                            </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12 d-flex flex-md-row flex-column align-items-center gap-md-3">
+                            <label for="lname" class="form-label input-label text-nowrap">Last Name *</label>
+                            <input type="text" class="form-control input-filed" formControlName="lname"
+                                placeholder="Last Name"
+                                [ngClass]="{'is-invalid':profileForm.get('lname')!.invalid && profileForm.get('lname')!.touched}">
 
-                            <label for="lname" class="form-label">Last Name *</label>
-                            <input type="text" class="form-control" formControlName="lname" placeholder="Last Name">
+                            <div *ngIf="profileForm.get('lname')!.invalid && profileForm.get('lname')!.touched"
+                                class="invalid-feedback">
+                                Please enter a Last Name.
+                            </div>
 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-
-                            <label for="zipcode" class="form-label">Zip Code</label>
-                            <input type="text" class="form-control" formControlName="zipcode" placeholder="Zip Code">
+                    <div class="row d-flex flex-column gap-3">
+                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                            <label for="zipcode" class="form-label input-label text-nowrap">Zip Code *</label>
+                            <input type="text" class="form-control input-filed" formControlName="zipcode"
+                                placeholder="Zip Code"
+                                [ngClass]="{'is-invalid':profileForm.get('zipcode')!.invalid && profileForm.get('zipcode')!.touched}">
+                            <div *ngIf="profileForm.get('zipcode')!.invalid && profileForm.get('zipcode')!.touched"
+                                class="invalid-feedback">
+                                Please enter a zipcode.
+                            </div>
 
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                            <label for="phone" class="form-label input-label text-nowrap">Phone Number *</label>
+                            <input type="text" class="form-control input-filed" formControlName="phone"
+                                placeholder="Phone Number"
+                                [ngClass]="{'is-invalid':profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched}">
 
-                            <label for="phone" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" formControlName="phone" placeholder="Phone Number">
+                            <div *ngIf="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched"
+                                class="invalid-feedback">
+                                Please enter a phone.
+                            </div>
 
                         </div>
-                        <div class="col-md-4">
-                            <label for="mobile" class="form-label">Mobile Number</label>
-                            <input type="text" class="form-control" formControlName="mobile"
-                                placeholder="Mobile Number">
+                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                            <label for="mobile" class="form-label input-label text-nowrap">Mobile Number *</label>
+                            <input type="text" class="form-control input-filed" formControlName="mobile"
+                                placeholder="Mobile Number"
+                                [ngClass]="{'is-invalid':profileForm.get('mobile')!.invalid && profileForm.get('mobile')!.touched}">
 
+                            <div *ngIf="profileForm.get('mobile')!.invalid && profileForm.get('mobile')!.touched"
+                                class="invalid-feedback">
+                                Please enter a mobile.
+                            </div>
+                        </div>
+                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                            <label for="plateNo" class="form-label input-label text-nowrap">Car Plate No *</label>
+                            <input type="text" class="form-control input-filed" formControlName="plateNo"
+                                placeholder="Car Plate Number"
+                                [ngClass]="{'is-invalid':profileForm.get('plateNo')!.invalid && profileForm.get('plateNo')!.touched}">
+
+                            <div *ngIf="profileForm.get('plateNo')!.invalid && profileForm.get('plateNo')!.touched"
+                                class="invalid-feedback">
+                                Please enter a Car Plate Number.
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                            <label for="state" class="form-label input-label text-nowrap">State/Province *</label>
+                            <input type="text" class="form-control input-filed" formControlName="state"
+                                placeholder="State/Province"
+                                [ngClass]="{'is-invalid':profileForm.get('state')!.invalid && profileForm.get('state')!.touched}">
+
+                            <div *ngIf="profileForm.get('state')!.invalid && profileForm.get('state')!.touched"
+                                class="invalid-feedback">
+                                Please enter a Car Plate state.
+                            </div>
                         </div>
                     </div>
                     <mat-divider></mat-divider>
-                    <div class="row">
-                        <div class="col-md-4">
+                    <div class="row d-flex flex-column gap-3">
+                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                            <label for="currentPassword" class="form-label input-label text-nowrap">Current
+                                Password *</label>
+                            <input type="text" class="form-control input-filed" formControlName="currentPassword"
+                                placeholder="Current Password"
+                                [ngClass]="{'is-invalid':profileForm.get('currentPassword')!.invalid && profileForm.get('currentPassword')!.touched}">
 
-                            <label for="currentPassword" class="form-label">Current Password</label>
-                            <input type="text" class="form-control" formControlName="currentPassword"
-                                placeholder="Current Password">
+                            <div *ngIf="profileForm.get('currentPassword')!.invalid && profileForm.get('currentPassword')!.touched"
+                                class="invalid-feedback">
+                                Please enter a current Password.
+                            </div>
 
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                            <label for="nPassword" class="form-label input-label text-nowrap">New Password *</label>
+                            <input type="text" class="form-control input-filed" formControlName="nPassword"
+                                placeholder="New Password"
+                                [ngClass]="{'is-invalid':profileForm.get('nPassword')!.invalid && profileForm.get('nPassword')!.touched}">
 
-                            <label for="nPassword" class="form-label">New Password</label>
-                            <input type="text" class="form-control" formControlName="nPassword"
-                                placeholder="New Password">
-
+                            <div *ngIf="profileForm.get('nPassword')!.invalid && profileForm.get('nPassword')!.touched"
+                                class="invalid-feedback">
+                                Please enter a New Password.
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="confirmPassword" class="form-label">confirm new password</label>
-                            <input type="text" class="form-control" formControlName="confirmPassword"
-                                placeholder="Conform Password">
+                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                            <label for="confirmPassword" class="form-label input-label text-nowrap">confirm new
+                                password *</label>
+                            <input type="text" class="form-control input-filed" formControlName="confirmPassword"
+                                placeholder="Conform Password"
+                                [ngClass]="{'is-invalid':profileForm.get('confirmPassword')!.invalid && profileForm.get('confirmPassword')!.touched}">
 
+                            <div *ngIf="profileForm.get('confirmPassword')!.invalid && profileForm.get('confirmPassword')!.touched"
+                                class="invalid-feedback">
+                                Please enter a Confirm Password.
+                            </div>
                         </div>
                         <div class="perference mt-3 d-flex flex-column gap-2">
                             <h3>Update Your Preference</h3>
@@ -139,11 +214,12 @@
                     </div>
                     <div class="row">
                         <div class="col-1">
-                            <button class="mt-4 btn btn-danger" type="submit">Save</button>
+                            <button class="mt-4 btn btn-danger" type="submit"
+                                [disabled]="profileForm.invalid">Save</button>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </mat-tab>
         <mat-tab label="Logout"></mat-tab>
     </mat-tab-group>

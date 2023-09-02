@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,18 +15,27 @@ export class UserProfileComponent {
 
   ngOnInit() {
     this.profileForm = this.fb.group({
-      fname: [''],
-      lname: [''],
-      phone: [''],
-      email: [''],
-      zipcode: [''],
-      mobile: [''],
-      currentPassword: [''],
+      fname: ['', [Validators.required]],
+      lname: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      email: ['', [Validators.required, Validators.email]],
+      zipcode: ['', [Validators.required]],
+      mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      currentPassword: ['', [Validators.required]],
+      nPassword: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+      plateNo: ['', [Validators.required]],
+      state: ['', [Validators.required]]
     });
   }
   logOut(event: any) {
     if (event == 2) {
       alert("log out")
     }
+  }
+
+  EditProfile() {
+    alert('enter')
+    console.log(this.profileForm.value)
   }
 }
