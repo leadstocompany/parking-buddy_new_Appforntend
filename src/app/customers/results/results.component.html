@@ -9,15 +9,15 @@
                 <div class="col-3">
                     <p>Parking Check-In</p>
                     <!-- Mon,Jul 15 -->
-                    <p class="fs-4">{{date.checkIn | date:'EEE, MMM d'}}</p>
+                    <p class="fs-5">{{date.checkIn | date:'EEE, MMM d'}}</p>
                 </div>
                 <div class="col-1">
                     <p>&nbsp;</p>
-                    <p><mat-icon class="fs-4">arrow_right_alt</mat-icon></p>
+                    <p><mat-icon class="fs-3">arrow_right_alt</mat-icon></p>
                 </div>
                 <div class="col-3">
                     <p>Parking Check-Out</p>
-                    <p class="fs-4">{{date.checkOut | date:'EEE, MMM d'}}</p>
+                    <p class="fs-5">{{date.checkOut | date:'EEE, MMM d'}}</p>
                 </div>
             </div>
         </div>
@@ -37,26 +37,21 @@
                     <div class="row">
                         <div class="col-4"></div>
                         <div class='col-4'>
-                            <select class="form-select" id="country">
-                                <option value="dsfsd" disabled selected>
-                                    Filter Parking Types
+                            <select class="form-select" id="country" [(ngModel)]="selecteType" (ngModelChange)="filterType()">
+                                <option value="" selected>
+                                    All
                                 </option>
-                                <option value="d">demo1</option>
-                                <option value="d2e">demo1</option>
-                                <option value="d2">demo1</option>
-                                <option value="dee">demo1</option>
-                                <option value="de">demo1</option>
+                                <option *ngFor="let op of filterData" [value]="op.type">{{op.type}}</option>
                             </select>
                         </div>
                         <div class="col-4">
-                            <select class="form-select" id="country">
-                                <option disabled selected>
+                            <select class="form-select" id="country" [(ngModel)]="sortType" (ngModelChange)="filterType()" >
+                                <option value="" selected>
                                     Sort By
                                 </option>
-                                <option value="low">Low to High (price)</option>
-                                <option value="high">High to Low (price)</option>
-                                <option value="highRating">High Rating</option>
-                                <option value="averageRating">Average Rating</option>
+                                <option value="Low to High">Low to High (price)</option>
+                                <option value="High to Low">High to Low (price)</option>
+                                <option value="High Rating">High Rating</option>
                             </select>
                         </div>
                     </div>
@@ -72,10 +67,11 @@
                 <div class="col-12">
                     <div class="row mt-3" *ngFor="let value of results; let j=index">
                         <div class="col-3">
-                            <img [src]="value.property_logo[0].logo" alt="" style="max-width: 100%; max-height: 100%;">
+                            <img [src]="value?.property_logo[0]?.logo" alt=""
+                                style="max-width: 100%; max-height: 100%;">
                         </div>
                         <div class="col-6" style="color:white; font-size: 12px;">
-                            <p>{{value.tittle?value.tittle:'Demo Radisson Hotel JFK Airport'}}</p>
+                            <p>{{value?.tittle?value.tittle:'Demo Radisson Hotel JFK Airport'}}</p>
                             <p class="d-flex flex-row align-content-center">
                                 <span *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
                                     <mat-icon class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
@@ -112,7 +108,7 @@
                                     {{currency[value.country]?currency[value.country]:'$'}}<sup></sup><span>{{value?.property_pricing[0]?.dail_rate?value.property_pricing[0].dail_rate:'00'}}</span><sub>
                                         Per
                                         Day</sub></div>
-                                <button class="btn bg-danger" (click)="redirectToDetails()">Park Here</button>
+                                <button class="btn bg-danger" (click)="redirectToDetails(value.id)">Park Here</button>
                                 <button class="btn btn-link"
                                     style="text-decoration: none; font-size: 12px; color: green;">✔ Free
                                     Cancellation</button>
@@ -122,12 +118,25 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center" *ngIf="results.length<=0">
-            <div class=""  style="text-align: center; max-width: 50%;">
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center"
+            *ngIf="results.length<=0 && spinner==false ">
+            <div class="" style="text-align: center; max-width: 50%;">
                 <img class="img-fluid" src="/assets/noData.jpg" alt="" style="max-width: 100%;">
                 <h1 class="" style="color:white">No Data Available</h1>
             </div>
         </div>
+
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center"
+            *ngIf="spinner==true && results.length<=0">
+            <div class="" style="text-align: center; max-width: 50%;">
+                <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="col-md-6">
             <google-map height="80vh" width="100%" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
                 (mapMousemove)="move($event)">

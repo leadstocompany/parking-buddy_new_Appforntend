@@ -18,6 +18,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { SingleDetailsComponent } from './results/single-details/single-details.component';
 import { PaymentpageComponent } from './paymentpage/paymentpage.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     SearchComponent,
     SingleDetailsComponent,
     PaymentpageComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ThankYouComponent
   ],
   imports: [
     CommonModule,

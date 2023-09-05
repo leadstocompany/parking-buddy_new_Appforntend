@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 
 @Component({
   selector: 'app-search',
@@ -18,15 +19,15 @@ export class SearchComponent {
   public checkIn: Date = new Date();
   public checkout: Date = new Date();
 
-  constructor(private _router: Router, private _customerService: CustomerService) {
+  constructor(private _router: Router, private _customerService: CustomerService, private _snackbarService: SnackbarService) {
   }
 
   public ngOnInit(): void {
     this.searchTerms
       .pipe(
-        debounceTime(2000),
+        debounceTime(1000),
         distinctUntilChanged(),
-        switchMap((searchTerm: any) => this._customerService.searchAddress(searchTerm)) // Custom function for making API call
+        switchMap((searchTerm: any) => this._customerService.searchAddress(searchTerm,'','')) // Custom function for making API call
       )
       .subscribe((data) => {
         this.searchData = data;
@@ -63,13 +64,14 @@ export class SearchComponent {
   public submitForm(): void {
     if (this.checkIn && this.checkout && this.searchData.length) {
       const queryParams = {
-        data: JSON.stringify(this.searchData),
+        // data: JSON.stringify(this.searchData),
+        data: this.searchTerm,
         checkIn: this.checkIn,
         checkout: this.checkout
       };
       this._router.navigate(['/customers/result'], { queryParams })
     } else {
-      alert('check in and check out required')
+      this._snackbarService.openSnackbar('❌ Result Not Found')
     }
 
   }

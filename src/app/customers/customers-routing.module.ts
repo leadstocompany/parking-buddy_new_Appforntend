@@ -5,6 +5,7 @@ import { ResultsComponent } from './results/results.component';
 import { SingleDetailsComponent } from './results/single-details/single-details.component';
 import { PaymentpageComponent } from './paymentpage/paymentpage.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 const routes: Routes = [
   {
     path: '', children: [
@@ -26,7 +27,8 @@ const routes: Routes = [
       },
       {
         path: 'user-profile', component: UserProfileComponent
-      }
+      },
+      { path: 'thank-you', component: ThankYouComponent },
     ]
   },
 ];

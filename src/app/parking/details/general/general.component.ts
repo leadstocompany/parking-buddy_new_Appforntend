@@ -272,6 +272,7 @@ export class GeneralComponent {
   constructor(private formBuilder: FormBuilder, private _detailService: DetailsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.generalForm = this.formBuilder.group({
+      tittle: ['', Validators.required],
       street: ['', Validators.required],
       city: ['', Validators.required],
       country: ['IN', Validators.required],
@@ -282,7 +283,7 @@ export class GeneralComponent {
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
       flexNumber: ['',],
-      shuttleBus: ['',]
+      shuttleBus: ['',],
     })
     // Check edit or not 
     this.editData = this._saveService.getSharedData()
@@ -302,6 +303,7 @@ export class GeneralComponent {
     if (!this.generalForm.invalid) {
       this.spinner = true
       const data = {
+        "tittle": this.generalForm.controls['tittle'].value,
         "street": this.generalForm.controls['street'].value,
         "city": this.generalForm.controls['city'].value,
         "country": this.countries[this.generalForm.controls['country'].value],
@@ -404,6 +406,7 @@ export class GeneralComponent {
   // set value in form data 
   setValues(data: any) {
     this.generalForm.setValue({
+      tittle:data.tittle,
       street: data.street,
       city: data.city,
       country: this.country_codes[`${data.country}`],

@@ -1,0 +1,33 @@
+.card {
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    background-color: darkorange;
+    color: white;
+    text-align: center;
+}
+
+.rating {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.star {
+    color: #ccc;
+    /* Initial color */
+    margin: 5px;
+    cursor: pointer;
+}
+
+.filled {
+    color: #f1c40f;
+    /* Filled star color (yellow) */
+}
+
+.selected-rating {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+}

@@ -31,9 +31,9 @@
                     </div>
                 </div>
                 <div class="search-form" style="width:95vw">
-                    <input #searchInput type="text" style="width: 500px;" placeholder="Enter location"
+                    <input #searchInput type="text" style="width: 500px;" placeholder="Search your location"
                         [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchTerm" (input)="search($event)">
-                    <button (click)="submitForm()">Search</button>
+                    <button (click)="submitForm()" id="submit">Submit</button>
                 </div>
             </form>
 
