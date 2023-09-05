@@ -10,7 +10,7 @@
 }
 
 .right {
-    width: 25%;
+    width: 30%;
     border: 2px solid white;
     height: 100%;
 }
@@ -26,7 +26,7 @@
 /* Customize carousel container */
 #carouselExample {
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
 }
 
 /* Adjust image size */
@@ -81,17 +81,27 @@
 .amenities {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
     /* Adjust the spacing between amenities */
 }
 
 .amenity {
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: #f0f0f0;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    height: 25vh;
+    transition: transform 0.3s ease;
+}
+
+.amenity:hover {
+    transform: scale(1.1);
 }
 
 mat-icon {

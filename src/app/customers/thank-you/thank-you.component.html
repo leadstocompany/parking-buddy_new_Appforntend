@@ -1,0 +1,22 @@
+<div class="container-fluid"
+    style="width:100vw;min-height:100vh; max-height:100vh">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Thank You!</h2>
+                </div>
+                <div class="card-body">
+                    <p>We appreciate your feedback. Please rate your experience:</p>
+                    <div class="rating">
+                        <span class="star" *ngFor="let star of stars" (click)="rate(star)"
+                            [ngClass]="{'filled': star <= selectedRating!}">&#9733;</span>
+                    </div>
+                    <p class="selected-rating">You rated: {{ selectedRating }} stars</p>
+                    <button class="btn btn-success mt-4" (click)="submitForm()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

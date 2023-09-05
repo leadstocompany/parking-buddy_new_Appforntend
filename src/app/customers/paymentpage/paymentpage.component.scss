@@ -6,3 +6,17 @@
 .example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
     margin-left: 8px;
 }
+
+.input- {   
+    border-color: rgb(0, 119, 255);
+    background-color: #f8f8f8;
+    color: #333;
+    font-size: 14px;
+    padding: 10px;
+    padding-left: 30%;
+    border-radius: 8px;
+    border: 1px solid rgb(0, 119, 255);
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    width: 100%;
+}

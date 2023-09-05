@@ -1,6 +1,16 @@
 <div class="container ">
     <form [formGroup]='generalForm' class="form g-3 needs-validation" novalidate (ngSubmit)="saveForm($event)">
         <div class="row">
+            <div class="col-md-6">
+                <label for="tittle" class="form-label">Property Tittle *</label>
+                <input type="text" class="form-control" id="tittle" placeholder="Enter tittle" formControlName="tittle"
+                    required="">
+                <div class="invalid-feedback">
+                    Please Enter Property Tittle
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-4">
                 <label for="country" class="form-label">Country *</label>
                 <select class="form-select" id="country" formControlName="country" required=""
