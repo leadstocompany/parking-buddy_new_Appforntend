@@ -31,6 +31,25 @@
 
 
 
+
+// ====================
+/* map.component.css */
+
+
+.setLabel {
+    background-color: #ffffff;
+    padding: 6px 12px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: red;
+}
+
+
+
+
 // Rating ------
 .star-rating {
     font-size: 24px;
@@ -46,4 +65,32 @@
 .filled {
     color: #f39c12;
     /* Filled star color */
+}
+
+
+
+/* Style for the map-info-window content */
+.info-window-content {
+    background-color: rgb(112, 62, 0);
+    /* Set the background color to white or your preferred color */
+    padding: 10px;
+    /* Add padding for spacing */
+    border: 1px solid #ccc;
+    /* Add a border if desired */
+    border-radius: 5px;
+    /* Add border radius for rounded corners */
+    max-width: 300px;
+    /* Set the maximum width of the info window */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Add a box shadow for depth */
+    /* Add other custom styles as needed */
+}
+
+/* Style for the content within the info window */
+.info-window-content p {
+    font-size: 16px;
+    /* Adjust the font size as needed */
+    color: white;
+    /* Set the text color */
+    /* Add other custom styles for text */
 }

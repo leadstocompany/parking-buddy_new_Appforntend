@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import currency from '../../../parking/ACurrency.json'
+import { TaxesService } from 'src/app/service/taxes.service';
 @Component({
   selector: 'app-single-details',
   templateUrl: './single-details.component.html',
@@ -30,11 +31,11 @@ export class SingleDetailsComponent {
   }
   parkingType!: any;
   value: any;
-  constructor(private route: ActivatedRoute, private router: Router, private _customerService: CustomerService) { }
+  constructor(private _taxeService: TaxesService, private route: ActivatedRoute, private router: Router, private _customerService: CustomerService) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id']; // Get the value of the 'id' parameter
-
+      this.getText(params['id'])
     });
     this.route.queryParams.subscribe((queryParams) => {
       this.date = {
@@ -69,7 +70,7 @@ export class SingleDetailsComponent {
       checkOutDate: this.checkOutTime,
       checkInDate: this.checkInTime,
       title: this.value.tittle ? this.value.tittle : 'demo title',
-      icon:this.currency[this.value.country]?this.currency[this.value.country]:'$'
+      icon: this.currency[this.value.country] ? this.currency[this.value.country] : '$'
     }
     this.router.navigate(['/customers/payment', this.id], { queryParams });
   }
@@ -83,6 +84,28 @@ export class SingleDetailsComponent {
         this.Images = res?.property_logo[0]?.image_by_logo
         this.amenities = this.amenities.filter((icon) => res.property_amenities[0][icon.key] === true)
         this.typesOfShoes = res?.property_pricing
+        console.log(this.typesOfShoes, 'fkdsjaflkjaldksjflkajdlfkjsalf')
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  isStep1Completed = false;
+  selectedStep = 0; // Track the currently selected step
+  onNextStep() {
+    if (this.isStep1Completed) {
+      this.selectedStep = 1; // Advance to step 2 (index 1)
+    }
+  }
+
+  // get tex 
+  public getText(id:any) {
+    console.log(id,'dsfadsaf000000000000000000000000000000000')
+    this._taxeService.getTaxesfeesById(id).subscribe({
+      next: (res) => {
+        console.log(res, 'get taxes 88888888888888888888---')
       },
       error: (error) => {
         console.log(error)

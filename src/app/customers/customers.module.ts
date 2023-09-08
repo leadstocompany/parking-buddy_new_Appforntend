@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+// import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { MatListModule } from '@angular/material/list';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -42,6 +42,7 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
     HttpClientModule,
     MatListModule,
     GoogleMapsModule,
+    // GooglePlaceModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

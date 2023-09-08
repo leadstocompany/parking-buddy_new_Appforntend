@@ -13,6 +13,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { EditProfileComponent } from './sidebar/edit-profile/edit-profile.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+// import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     CKEditorModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    GoogleMapsModule
+    GoogleMapsModule,
+    // GooglePlaceModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
