@@ -85,6 +85,8 @@ export class PaymentpageComponent {
       next: (res) => {
         const totalHours = this.getTotalHourse(this.time.checkIn, this.time.checkOut)
         res.forEach((taxeS:any) => {
+
+          console.log(taxeS,'demo taxesssssssssssssssss')
           if (taxeS.apply = "post_tax") {
             if (taxeS.type == "fixed_amount") {
               if (taxeS.amount_type = "Percentage") {
@@ -118,6 +120,7 @@ export class PaymentpageComponent {
               }
             }
             this.finaleTaxes += +this.singleTRupe
+            console.log(this.finaleTaxes,'2222252551dfadkfsjaafl2525')
           } else {
             if (taxeS.type == "fixed_amount") {
               if (taxeS.amount_type = "Percentage") {
@@ -151,6 +154,7 @@ export class PaymentpageComponent {
               }
             }
             this.finaleTaxes = +this.singleTRupe
+            console.log(this.finaleTaxes,'85858595585545fdsafadsfadff')
           }
         });
       },
