@@ -7,7 +7,7 @@
                         <img [src]="value?.property_logo[0]?.logo" alt="" style="max-width: 100%; max-height: 100%;">
                     </div>
                     <div class="col-10">
-                        <h1 class="m-0 p-0">{{value.tittle?value.tittle:'Demo Radisson Hotel JFK Airport'}}</h1>
+                        <h1 class="m-0 p-0">{{value.tittle}}</h1>
                         <p class="m-0 p-0 d-flex flex-row align-content-center"> <span
                                 *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
                                 <mat-icon class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
@@ -239,8 +239,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <mat-stepper orientation="vertical">
-                            <mat-step>
+                        <mat-stepper orientation="vertical" [selectedIndex]="selectedStep">
+                            <mat-step [completed]="isStep1Completed">
                                 <ng-template matStepLabel>Parking Times <br> <span style="font-size:small">Select your
                                         parking check-In and
                                         check-Out times.</span></ng-template>
@@ -274,7 +274,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-danger mt-3" matStepperNext>Continue</button>
+                                    <!-- matStepperNext -->
+                                    <button class="btn btn-danger mt-3" (click)="isStep1Completed = true; onNextStep()" >Continue</button>
                                 </ng-template>
                             </mat-step>
                             <mat-step>

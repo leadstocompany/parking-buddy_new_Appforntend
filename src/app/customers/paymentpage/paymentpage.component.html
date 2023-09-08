@@ -25,7 +25,7 @@
                 <mat-step>
                     <ng-template matStepLabel>Payment Method</ng-template>
                     <ng-template matStepContent>
-                        <div class="container-fluid" style="min-height: 20vh;max-height: 70vh; overflow-y: scroll;" >
+                        <div class="container-fluid" style="min-height: 20vh;max-height: 70vh; overflow-y: scroll;">
                             <section class="mt-4">
                                 <form class="d-flex flex-column gap-3">
                                     <div class="row">
@@ -118,7 +118,8 @@
                                     <span>Privacy Policy</span>
                                 </p>
                             </section>
-                            <button class="btn btn-danger mt-4 align-self-center" (click)="submitForm()">Complete Reservation</button>
+                            <button class="btn btn-danger mt-4 align-self-center" (click)="submitForm()">Complete
+                                Reservation</button>
                         </div>
                     </ng-template>
                 </mat-step>
@@ -136,7 +137,8 @@
                         <p>Check-In : {{date.checkIn | date:'EEE, MMM d'}}- {{time.checkIn}}</p>
                         <p>Check-Out : {{date.checkOut | date:'EEE, MMM d'}} -{{time.checkOut}}</p>
                         <p class="d-flex flex-row justify-content-between align-content-center"><span> {{day}} Days Of
-                                Parking</span> <span data-bs-toggle="modal" data-bs-target="#exampleModal" style="color:blue;cursor:pointer;">Edit
+                                Parking</span> <span data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                style="color:blue;cursor:pointer;">Edit
                                 Times</span></p>
                     </div>
                     <mat-divider></mat-divider>
@@ -147,12 +149,12 @@
                         <p class="d-flex flex-row justify-content-between align-content-center"><span>Service
                                 Charge</span> <span>{{icon}}6.49</span></p>
                         <p class="d-flex flex-row justify-content-between align-content-center"><span>Taxes &
-                                Fees</span> <span>{{icon}}15.38</span></p>
+                                Fees</span> <span>{{icon}}{{finaleTaxes}}</span></p>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="totalPrice p-3">
                         <p class="d-flex flex-row justify-content-between align-content-center"><span>total</span>
-                            <span>{{icon}}{{(day*type[0].dail_rate)+6.49+15.38 | number:'1.2-2'}}</span>
+                            <span>{{icon}}{{(day*type[0].dail_rate)+6.49+finaleTaxes | number:'1.2-2'}}</span>
                         </p>
                     </div>
                     <mat-divider></mat-divider>
@@ -194,7 +196,7 @@
                                     <div class="d-flex flex-row position-relative">
                                         <input class="input-" [ngxTimepicker]="toggleTimepicker" [disableClick]="true"
                                             readonly (click)="toggleTimepicker.open()" [format]="24"
-                                            [(ngModel)]="editTime.checkIn" >
+                                            [(ngModel)]="editTime.checkIn">
                                         <ngx-material-timepicker-toggle [for]="toggleTimepicker" buttonAlign="left"
                                             class="position-absolute" style="top:7px;"></ngx-material-timepicker-toggle>
                                         <ngx-material-timepicker #toggleTimepicker

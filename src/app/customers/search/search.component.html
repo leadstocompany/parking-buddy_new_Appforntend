@@ -31,8 +31,11 @@
                     </div>
                 </div>
                 <div class="search-form" style="width:95vw">
-                    <input #searchInput type="text" style="width: 500px;" placeholder="Search your location"
+                    <input #placesSearchInput type="text" style="width: 500px;" placeholder="Search your location"
                         [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchTerm" (input)="search($event)">
+                        <!-- [options]='options' -->
+                        <!-- <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
+                       
                     <button (click)="submitForm()" id="submit">Submit</button>
                 </div>
             </form>

@@ -23,9 +23,9 @@
                         <tr>
                             <th>#</th>
                             <th>Country</th>
+                            <th>Tittle</th>
                             <th>State</th>
                             <th>City</th>
-                            <th>street</th>
                             <th>Zipcode</th>
                             <th>Edit</th>
                             <th>Remove</th>
@@ -35,9 +35,10 @@
                         <tr *ngFor="let data of displayedData; let i=index">
                             <td>{{i+1+((currentPage-1)*itemsPerPage)}}</td>
                             <td>{{data.country}}</td>
+                            <td>{{data.tittle}}</td>
                             <td>{{data.state}}</td>
                             <td>{{data.city}}</td>
-                            <td>{{data.street}}</td>
+                            
                             <td>{{data.zipcode}}</td>
                             <td>
                                 <!-- (click)="openDialog(data)" -->

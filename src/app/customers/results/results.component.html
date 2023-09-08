@@ -37,7 +37,8 @@
                     <div class="row">
                         <div class="col-4"></div>
                         <div class='col-4'>
-                            <select class="form-select" id="country" [(ngModel)]="selecteType" (ngModelChange)="filterType()">
+                            <select class="form-select" id="country" [(ngModel)]="selecteType"
+                                (ngModelChange)="filterType()">
                                 <option value="" selected>
                                     All
                                 </option>
@@ -45,7 +46,8 @@
                             </select>
                         </div>
                         <div class="col-4">
-                            <select class="form-select" id="country" [(ngModel)]="sortType" (ngModelChange)="filterType()" >
+                            <select class="form-select" id="country" [(ngModel)]="sortType"
+                                (ngModelChange)="filterType()">
                                 <option value="" selected>
                                     Sort By
                                 </option>
@@ -138,9 +140,33 @@
 
 
         <div class="col-md-6">
+
             <google-map height="80vh" width="100%" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
                 (mapMousemove)="move($event)">
+                <!-- <map-marker #marker="mapMarker" *ngFor="let marker of results; let i=index"
+                    (mapMouseover)="openInfoWindow(marker)" [options]="markerOptions" [position]="markerPositions[i]">
+                </map-marker> -->
+                <!--  [icon]="{ url: marker.property_logo[0].logo,scaledSize:iconSize}"
+                [label]="currency[marker.country]+marker.property_pricing[0].dail_rate" -->
+                <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions; let i=index"
+                    [position]="markerPosition" (mapMouseover)="openInfoWindow(marker,i)"
+                    [icon]="{ url: results[i].property_logo[0].logo,scaledSize:iconSize}">
+                </map-marker>
+                <map-info-window>
+                    <!-- <div class="d-flex justify-content-center align-items-center"
+                        style="background-color: darkorange; width: 100%; height: 100%;">
+                        <p>{{someDynamicValue}}</p>
+                    </div> -->
+                    <div class="info-window-content">
+                        <p style="font-size: 18px;">{{this.dynamicTittle}}</p>
+                        <p style="font-size: 12px;">{{this.dynamicPrice}} Per Day</p>
+                        <address style="font-size: 12px;color:white">{{this.street}}</address>
+                        <button class="btn btn-danger" style="width: 100%;"  (click)="redirectToDetails(this.dynamicId)">Park Here</button>
+                    </div>
+                </map-info-window>
             </google-map>
         </div>
     </div>
 </div>
+
+<!-- [icon]="{ url: marker.property_logo[0].logo,scaledSize:iconSize}" -->
