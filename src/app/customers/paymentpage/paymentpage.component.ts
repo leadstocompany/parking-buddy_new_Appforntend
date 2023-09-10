@@ -149,9 +149,7 @@ export class PaymentpageComponent {
     })
   }
 
-
   private getUserDetails() {
-    console.log('hiefjlkdjfalkjdlsfjal')
     this._customer.getProfileDetails().subscribe({
       next: (res) => {
         console.log(res, 'use details')
