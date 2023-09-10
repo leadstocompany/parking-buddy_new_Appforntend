@@ -47,7 +47,7 @@ export class CustomerService {
   }
 
   getPastReservationDetails(): Observable<any> {
-    return this._http.get(`${environment.URL}/normal_user/pastbooking/?`, { headers: this.headers, withCredentials: true })
+    return this._http.get(`${environment.URL}/normal_user/pastbooking/`, { headers: this.headers, withCredentials: true })
   }
 
   getProfileDetails(): Observable<any> {
