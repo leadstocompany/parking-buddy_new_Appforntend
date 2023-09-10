@@ -56,7 +56,7 @@ export class SignInPageComponent {
           if (res.data.role == 'normal_user') {
             this._router.navigate(['/customers'])
           }
-          else if(res.data.role == 'admin'){
+          else if(res.data.role == 'vendor'){
           this._router.navigate(['/parking'])
           }
         },
