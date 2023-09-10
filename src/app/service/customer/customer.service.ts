@@ -33,7 +33,7 @@ export class CustomerService {
   }
 
   bookingPlot(data: any): Observable<any> {
-    console.log(data)
+    console.log(data,'booking-----------')
     return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`, data,{ headers: this.headers, withCredentials: true })
   }
 

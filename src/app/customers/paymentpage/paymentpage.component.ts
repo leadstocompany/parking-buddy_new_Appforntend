@@ -39,6 +39,7 @@ export class PaymentpageComponent {
   }
   step = 0;
   ngOnInit() {
+    this.getUserDetails()
     this.setStep(0)
     this.route.params.subscribe(params => {
       this.id = params['id']; // Get the value of the 'id' parameter
@@ -60,7 +61,7 @@ export class PaymentpageComponent {
       this.icon = queryParams['icon']
     })
     this._generateUrl()
-    this.getUserDetails()
+
   }
   setStep(index: number) {
     this.step = index;
@@ -114,13 +115,14 @@ export class PaymentpageComponent {
     let payload: any = {
       "parking_type": this.type[0]?.product,
       "guest_email": this.Email,
-      "check_in": this.date.checkIn,
-      "check_out": this.date.checkOut,
+      "check_in_date": this.date.checkIn,
+      'check_in_time': this.time.checkIn,
+      "check_out_date": this.date.checkOut,
+      "check_out_time": this.time.checkOut,
       "amount": this.type[0].dail_rate,
       "user": this.userID,
       "property": this.id,
     }
-
     const data = {
       title: this.tittle,
       parkingType: this.type[0]?.product,
@@ -149,10 +151,12 @@ export class PaymentpageComponent {
 
 
   private getUserDetails() {
+    console.log('hiefjlkdjfalkjdlsfjal')
     this._customer.getProfileDetails().subscribe({
       next: (res) => {
-        console.log(res)
+        console.log(res, 'use details')
         this.userID = res.id
+        this.Email = res.email
       },
       error: (error) => {
         this._snackbar.openSnackbar('❌ enternal error')
