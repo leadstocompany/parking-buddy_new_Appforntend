@@ -22,6 +22,7 @@ export class PaymentpageComponent {
   public tittle: any;
   public icon: any;
   Email: any = ''
+  userID: any = ''
   public editTime: any = {
     "checkIn": "13:15",
     "checkOut": "05:20"
@@ -59,6 +60,7 @@ export class PaymentpageComponent {
       this.icon = queryParams['icon']
     })
     this._generateUrl()
+    this.getUserDetails()
   }
   setStep(index: number) {
     this.step = index;
@@ -81,7 +83,7 @@ export class PaymentpageComponent {
       serviceCharge: `${this.icon}6.49`,
       taxes: `${this.icon}${this.finaleTaxes}`,
       total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
-      download:false,
+      download: false,
     }
     this._docService.generateOrderSummary(data)
     this._createBlob(this._docService.orderSummary as TDocumentDefinitions)
@@ -115,7 +117,7 @@ export class PaymentpageComponent {
       "check_in": this.date.checkIn,
       "check_out": this.date.checkOut,
       "amount": this.type[0].dail_rate,
-      "user": null,
+      "user": this.userID,
       "property": this.id,
     }
 
@@ -129,10 +131,9 @@ export class PaymentpageComponent {
       serviceCharge: `${this.icon}6.49`,
       taxes: `${this.icon}${this.finaleTaxes}`,
       total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
-      download:true,
+      download: true,
     }
     this._docService.generateOrderSummary(data)
-
     this._customer.bookingPlot(payload).subscribe({
       next: (res) => {
         console.log(res)
@@ -146,8 +147,20 @@ export class PaymentpageComponent {
     })
   }
 
-  // get tex 
 
+  private getUserDetails() {
+    this._customer.getProfileDetails().subscribe({
+      next: (res) => {
+        console.log(res)
+        this.userID = res.id
+      },
+      error: (error) => {
+        this._snackbar.openSnackbar('❌ enternal error')
+      }
+    }
+    )
+  }
+  // get tex 
   public taxeS: any;
   public singleTRupe: any;
   public finaleTaxes: number = 0;

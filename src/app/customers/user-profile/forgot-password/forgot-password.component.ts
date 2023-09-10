@@ -36,21 +36,26 @@ export class ForgotPasswordComponent {
   }
 
   public changePassword(): void {
-    const data = {
-      username:this.userData.userName,
-      old_password:this.profileForm.controls['currentPassword'].value,
-      new_password:this.profileForm.controls['nPassword'].value
+    if (this.profileForm.controls['nPassword'].value !== this.profileForm.controls['confirmPassword'].value) {
+      this._snackbarService.openSnackbar(`❌new password and confirm password not matched`)
+      return
+    } else {
+      const data = {
+        username: this.userData.userName,
+        old_password: this.profileForm.controls['currentPassword'].value,
+        new_password: this.profileForm.controls['nPassword'].value
+      }
+      this._customerService.changePassword(data).subscribe({
+        next: (res) => {
+          console.log('res ==>', res);
+          this._snackbarService.openSnackbar('✔ Password Change Successfully')
+          this._dialogRef.close()
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error);
+          this._snackbarService.openSnackbar(`❌ Internal Server Error`)
+        },
+      })
     }
-    this._customerService.changePassword(data).subscribe({
-      next: (res) => {
-        console.log('res ==>', res);
-        this._snackbarService.openSnackbar('✔ Password Change Successfully')
-        this._dialogRef.close()
-      },
-      error: (error: HttpErrorResponse) => {
-        console.log(error);
-        this._snackbarService.openSnackbar(`❌ Internal Server Error`)
-      },
-    })
   }
 }
