@@ -6,6 +6,7 @@ import { SingleDetailsComponent } from './results/single-details/single-details.
 import { PaymentpageComponent } from './paymentpage/paymentpage.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 const routes: Routes = [
   {
     path: '', children: [
@@ -27,6 +28,9 @@ const routes: Routes = [
       },
       {
         path: 'user-profile', component: UserProfileComponent
+      },
+      {
+        path: 'sing-up', component: CreateUserComponent
       },
       { path: 'thank-you', component: ThankYouComponent },
     ]

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, ObservableLike } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -29,6 +29,15 @@ export class CustomerService {
       `${environment.URL}/parking_location/property/${id}/list/
       `,
     );
+  }
+
+  bookingPlot(data: any): Observable<any> {
+    console.log(data)
+    return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`,data)
+  }
+
+  createUser(data:any):Observable<any>{
+    return this._http.post(`${environment.URL}/normal_user/user/register/`,data)
   }
 
 
