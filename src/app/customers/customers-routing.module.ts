@@ -7,6 +7,7 @@ import { PaymentpageComponent } from './paymentpage/paymentpage.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { SignInPageComponent } from '../sign-in-page/sign-in-page.component';
 const routes: Routes = [
   {
     path: '', children: [
@@ -30,7 +31,10 @@ const routes: Routes = [
         path: 'user-profile', component: UserProfileComponent
       },
       {
-        path: 'sing-up', component: CreateUserComponent
+        path: 'sign-up', component: CreateUserComponent
+      },
+      {
+        path: 'sign-in', component: SignInPageComponent 
       },
       { path: 'thank-you', component: ThankYouComponent },
     ]

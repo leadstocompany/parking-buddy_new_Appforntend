@@ -33,12 +33,35 @@ export class CustomerService {
 
   bookingPlot(data: any): Observable<any> {
     console.log(data)
-    return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`,data)
+    return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`, data)
   }
 
-  createUser(data:any):Observable<any>{
-    return this._http.post(`${environment.URL}/normal_user/user/register/`,data)
+  createUser(data: any): Observable<any> {
+    return this._http.post(`${environment.URL}/normal_user/user/register/`, data)
   }
 
 
+  getOpenReservationDetails(email: string): Observable<any> {
+    return this._http.get(`${environment.URL}/normal_user/openbooking/?email=${email}`, { withCredentials: true })
+  }
+
+  getPastReservationDetails(email: string): Observable<any> {
+    return this._http.get(`${environment.URL}/normal_user/pastbooking/?email=${email}`, { withCredentials: true })
+  }
+
+  getProfileDetails(): Observable<any> {
+    return this._http.get(`${environment.URL}/normal_user/get/user-profile/`, { withCredentials: true })
+  }
+
+  changePassword(data:any):Observable<any>{
+    return this._http.post(`${environment.URL}/users/change/password/`, data)
+  }
+
+  updateProfile(data:any):Observable<any>{
+    console.log('data==>',data);
+    return this._http.put(`${environment.URL}/normal_user/update/user-profile/`, data)
+  }
+
+  // payment
+  
 }

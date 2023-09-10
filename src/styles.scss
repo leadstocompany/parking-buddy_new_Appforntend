@@ -53,3 +53,8 @@ body {
 .gm-ui-hover-effect{
     outline: none;
 }
+
+.custom-dialog-container .mat-dialog-container {
+    padding: 0 !important;
+    margin: 0 !important;
+}

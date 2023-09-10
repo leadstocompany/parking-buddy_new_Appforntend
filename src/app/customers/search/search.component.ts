@@ -53,9 +53,9 @@ export class SearchComponent {
     if (rout === 'profile') {
       this._router.navigate(["/customers/user-profile"])
     } else if (rout === 'sign-In') {
-      this._router.navigate(['/'])
-    } else {
-      this._router.navigate(['/signUP'])
+      this._router.navigate(['/customers/sign-in'])
+    } else if(rout == 'sign-up') {
+      this._router.navigate(['/customers/sign-up'])
     }
   }//
 
