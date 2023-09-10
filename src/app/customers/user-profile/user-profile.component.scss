@@ -52,3 +52,15 @@ td:last-child {
 .invalid-feedback {
     color: red;
 }
+
+.forgot-password{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.forgot-password div{
+    width: fit-content;
+    color: #1469FD;
+    cursor: pointer;
+}

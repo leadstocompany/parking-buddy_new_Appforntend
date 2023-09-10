@@ -40,7 +40,7 @@ export class SignUpPageComponent {
           console.log(res)
           this.spinner = false
           this._snackBarService.openSnackbar('✔ Successfully Registered')
-          this._router.navigate(['/'])
+          this._router.navigate(['/signIN'])
         },
         error: (error) => {
           console.log(error)

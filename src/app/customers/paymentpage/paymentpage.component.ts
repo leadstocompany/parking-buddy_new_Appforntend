@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from 'src/app/service/customer/customer.service';
+import { DocumentService } from 'src/app/service/docs/document.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 import { TaxesService } from 'src/app/service/taxes.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
 
 @Component({
   selector: 'app-paymentpage',
@@ -10,6 +13,7 @@ import { TaxesService } from 'src/app/service/taxes.service';
   styleUrls: ['./paymentpage.component.scss']
 })
 export class PaymentpageComponent {
+  public formData = new FormData();
   public date: any;
   public time: any;
   public type: any; // this type is a product type of the price data
@@ -22,7 +26,14 @@ export class PaymentpageComponent {
     "checkIn": "13:15",
     "checkOut": "05:20"
   }
-  constructor(private _snackbar: SnackbarService, private _customer: CustomerService, private _taxeService: TaxesService, private route: ActivatedRoute, private _route: Router) {
+  constructor(
+    private _snackbar: SnackbarService,
+    private _customer: CustomerService,
+    private _taxeService: TaxesService,
+    private route: ActivatedRoute,
+    private _route: Router,
+    private _docService: DocumentService
+  ) {
 
   }
   step = 0;
@@ -47,6 +58,7 @@ export class PaymentpageComponent {
       this.tittle = queryParams['title']
       this.icon = queryParams['icon']
     })
+    this._generateUrl()
   }
   setStep(index: number) {
     this.step = index;
@@ -58,6 +70,29 @@ export class PaymentpageComponent {
     this.step--;
   }
 
+  private _generateUrl() {
+    const data = {
+      title: this.tittle,
+      parkingType: this.type[0]?.product,
+      checkIN: `${new Date(this.date.checkIn).toLocaleDateString('en-IN')} - ${this.time.checkIn}`,
+      checkOut: `${new Date(this.date.checkOut).toLocaleDateString('en-IN')} - ${this.time.checkOut}`,
+      days: this.day,
+      subTotal: `${this.icon}${this.day * this.type[0].dail_rate}`,
+      serviceCharge: `${this.icon}6.49`,
+      taxes: `${this.icon}${this.finaleTaxes}`,
+      total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
+      download:false,
+    }
+    this._docService.generateOrderSummary(data)
+    this._createBlob(this._docService.orderSummary as TDocumentDefinitions)
+  }
+
+  public _createBlob(docDefination: TDocumentDefinitions) {
+    const pdfDocGenerator = pdfMake.createPdf(docDefination);
+    pdfDocGenerator.getBlob((blob: Blob) => {
+      this.formData.append('order_summary', blob);
+    })
+  }
 
   public timeDiffrence(date1: any, date2: any): void {
     const timeDifference = date2 - date1;
@@ -84,6 +119,20 @@ export class PaymentpageComponent {
       "property": this.id,
     }
 
+    const data = {
+      title: this.tittle,
+      parkingType: this.type[0]?.product,
+      checkIN: `${new Date(this.date.checkIn).toLocaleDateString('en-IN')} - ${this.time.checkIn}`,
+      checkOut: `${new Date(this.date.checkOut).toLocaleDateString('en-IN')} - ${this.time.checkOut}`,
+      days: this.day,
+      subTotal: `${this.icon}${this.day * this.type[0].dail_rate}`,
+      serviceCharge: `${this.icon}6.49`,
+      taxes: `${this.icon}${this.finaleTaxes}`,
+      total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
+      download:true,
+    }
+    this._docService.generateOrderSummary(data)
+
     this._customer.bookingPlot(payload).subscribe({
       next: (res) => {
         console.log(res)
@@ -95,8 +144,6 @@ export class PaymentpageComponent {
         this._snackbar.openSnackbar('❌ enternal error')
       }
     })
-
-
   }
 
   // get tex 

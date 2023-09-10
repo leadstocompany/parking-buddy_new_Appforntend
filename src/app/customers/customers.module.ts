@@ -20,6 +20,7 @@ import { PaymentpageComponent } from './paymentpage/paymentpage.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { ForgotPasswordComponent } from './user-profile/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
     PaymentpageComponent,
     UserProfileComponent,
     ThankYouComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,

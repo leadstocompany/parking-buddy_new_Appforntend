@@ -12,13 +12,30 @@ import { Router } from '@angular/router';
 export class SignInPageComponent {
   signInForm!: FormGroup;
   spinner: boolean = false
-  constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _snackBarService: SnackbarService, private _router: Router) { }
+  public url: string = ''
+
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _authService: AuthService,
+    private _snackBarService: SnackbarService,
+    private _router: Router
+  ) { }
 
   ngOnInit(): void {
     this.signInForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(2)]]
     });
+    const currentUrl = this._router.url
+    if (currentUrl.includes('/customers')) {
+      this.url = '/customers/sign-up'
+    } else {
+      this.url = '/signUP'
+    }
+  }
+
+  public signUp(): void {
+
   }
 
   submitForm() {
@@ -36,8 +53,12 @@ export class SignInPageComponent {
 
           this.spinner = false
           this._snackBarService.openSnackbar('✔ Successfully logged In')
+          if (res.data.role == 'normal_user') {
+            this._router.navigate(['/customers'])
+          }
+          else if(res.data.role == 'admin'){
           this._router.navigate(['/parking'])
-
+          }
         },
         error: (error) => {
           console.log(error)
