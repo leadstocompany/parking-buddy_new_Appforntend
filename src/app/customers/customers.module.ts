@@ -19,6 +19,7 @@ import { SingleDetailsComponent } from './results/single-details/single-details.
 import { PaymentpageComponent } from './paymentpage/paymentpage.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
     SingleDetailsComponent,
     PaymentpageComponent,
     UserProfileComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    CreateUserComponent
   ],
   imports: [
     CommonModule,

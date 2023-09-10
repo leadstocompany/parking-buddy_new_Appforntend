@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CustomerService } from 'src/app/service/customer/customer.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 import { TaxesService } from 'src/app/service/taxes.service';
 
 @Component({
@@ -10,16 +12,17 @@ import { TaxesService } from 'src/app/service/taxes.service';
 export class PaymentpageComponent {
   public date: any;
   public time: any;
-  public type: any;
+  public type: any; // this type is a product type of the price data
   public id: any;
   public day: any;
   public tittle: any;
   public icon: any;
+  Email: any = 'dsfadf'
   public editTime: any = {
     "checkIn": "13:15",
     "checkOut": "05:20"
   }
-  constructor(private _taxeService: TaxesService, private route: ActivatedRoute, private _route: Router) {
+  constructor(private _snackbar: SnackbarService, private _customer: CustomerService, private _taxeService: TaxesService, private route: ActivatedRoute, private _route: Router) {
 
   }
   step = 0;
@@ -36,7 +39,6 @@ export class PaymentpageComponent {
       }
       this.time = JSON.parse(queryParams['parkingTimes'])
       this.type = JSON.parse(queryParams['parkingType'])
-      console.log(this.type, 'thdskjhfakhdska')
       this.editTime = {
         "checkIn": this.time.checkIn,
         "checkOut": this.time.checkOut
@@ -72,21 +74,41 @@ export class PaymentpageComponent {
   }
 
   public submitForm() {
-    this._route.navigate(['/customers/thank-you'])
+    let payload: any = {
+      "parking_type": this.type[0]?.product,
+      "guest_email": this.Email,
+      "check_in": this.date.checkIn,
+      "check_out": this.date.checkOut,
+      "amount": this.type[0].dail_rate,
+      "user": null,
+      "property": this.id,
+    }
+
+    this._customer.bookingPlot(payload).subscribe({
+      next: (res) => {
+        console.log(res)
+        this._snackbar.openSnackbar('✔ Plot Successfully Booking')
+        this._route.navigate(['/customers/thank-you'])
+      },
+      error: (error) => {
+        console.log(error)
+        this._snackbar.openSnackbar('❌ enternal error')
+      }
+    })
+
+
   }
 
   // get tex 
 
   public taxeS: any;
   public singleTRupe: any;
-  public finaleTaxes: number=0;
+  public finaleTaxes: number = 0;
   public getText(id: any) {
     this._taxeService.getTaxesfeesById(id).subscribe({
       next: (res) => {
         const totalHours = this.getTotalHourse(this.time.checkIn, this.time.checkOut)
-        res.forEach((taxeS:any) => {
-
-          console.log(taxeS,'demo taxesssssssssssssssss')
+        res.forEach((taxeS: any) => {
           if (taxeS.apply = "post_tax") {
             if (taxeS.type == "fixed_amount") {
               if (taxeS.amount_type = "Percentage") {
@@ -120,7 +142,7 @@ export class PaymentpageComponent {
               }
             }
             this.finaleTaxes += +this.singleTRupe
-            console.log(this.finaleTaxes,'2222252551dfadkfsjaafl2525')
+            console.log(this.finaleTaxes, '2222252551dfadkfsjaafl2525')
           } else {
             if (taxeS.type == "fixed_amount") {
               if (taxeS.amount_type = "Percentage") {
@@ -154,7 +176,7 @@ export class PaymentpageComponent {
               }
             }
             this.finaleTaxes = +this.singleTRupe
-            console.log(this.finaleTaxes,'85858595585545fdsafadsfadff')
+            console.log(this.finaleTaxes, '85858595585545fdsafadsfadff')
           }
         });
       },
@@ -163,6 +185,7 @@ export class PaymentpageComponent {
       }
     })
   }
+
 
 
   public getTotalHourse(time1: any, time2: any) {
