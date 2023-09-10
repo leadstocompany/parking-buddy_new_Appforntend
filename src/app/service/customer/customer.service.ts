@@ -20,7 +20,7 @@ export class CustomerService {
   filterProduct(code: string): Observable<any> {
     console.log(code)
     return this._http.get(
-      `${environment.URL}/parking_location/get/all_product/?search=${code}`,
+      `${environment.URL}/parking_location/get/all_product/?search=${code}`,{ headers: this.headers, withCredentials: true }
     );
   }
 
@@ -28,12 +28,13 @@ export class CustomerService {
     return this._http.get(
       `${environment.URL}/parking_location/property/${id}/list/
       `,
+      { headers: this.headers, withCredentials: true }
     );
   }
 
   bookingPlot(data: any): Observable<any> {
     console.log(data)
-    return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`, data)
+    return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`, data,{ headers: this.headers, withCredentials: true })
   }
 
   createUser(data: any): Observable<any> {
@@ -41,27 +42,27 @@ export class CustomerService {
   }
 
 
-  getOpenReservationDetails(email: string): Observable<any> {
-    return this._http.get(`${environment.URL}/normal_user/openbooking/?email=${email}`, { withCredentials: true })
+  getOpenReservationDetails(): Observable<any> {
+    return this._http.get(`${environment.URL}/normal_user/openbooking/`, { headers: this.headers, withCredentials: true })
   }
 
-  getPastReservationDetails(email: string): Observable<any> {
-    return this._http.get(`${environment.URL}/normal_user/pastbooking/?email=${email}`, { withCredentials: true })
+  getPastReservationDetails(): Observable<any> {
+    return this._http.get(`${environment.URL}/normal_user/pastbooking/?`, { headers: this.headers, withCredentials: true })
   }
 
   getProfileDetails(): Observable<any> {
-    return this._http.get(`${environment.URL}/normal_user/get/user-profile/`, { withCredentials: true })
+    return this._http.get(`${environment.URL}/normal_user/get/user-profile/`, { headers: this.headers, withCredentials: true })
   }
 
-  changePassword(data:any):Observable<any>{
-    return this._http.post(`${environment.URL}/users/change/password/`, data)
+  changePassword(data: any): Observable<any> {
+    return this._http.post(`${environment.URL}/users/change/password/`, data, { headers: this.headers, withCredentials: true })
   }
 
-  updateProfile(data:any):Observable<any>{
-    console.log('data==>',data);
-    return this._http.put(`${environment.URL}/normal_user/update/user-profile/`, data)
+  updateProfile(data: any): Observable<any> {
+    console.log('data==>', data);
+    return this._http.put(`${environment.URL}/normal_user/update/user-profile/`, data, { headers: this.headers, withCredentials: true })
   }
 
   // payment
-  
+
 }

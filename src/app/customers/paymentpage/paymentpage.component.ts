@@ -21,7 +21,7 @@ export class PaymentpageComponent {
   public day: any;
   public tittle: any;
   public icon: any;
-  Email: any = 'dsfadf'
+  Email: any = ''
   public editTime: any = {
     "checkIn": "13:15",
     "checkOut": "05:20"

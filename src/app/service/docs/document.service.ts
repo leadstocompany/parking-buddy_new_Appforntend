@@ -102,7 +102,7 @@ export class DocumentService {
           {
             columns: [
               {
-                text: 'Days Of Parking :',
+                text: 'Total Days:',
                 width: "20%",
               },
               {

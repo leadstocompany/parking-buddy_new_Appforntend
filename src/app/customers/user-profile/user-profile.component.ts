@@ -70,7 +70,7 @@ export class UserProfileComponent {
   }
 
   private _openReservationDetails(): void {
-    this._customerService.getOpenReservationDetails('abhishek2020@gmail.com').subscribe({
+    this._customerService.getOpenReservationDetails().subscribe({
       next: (res) => {
         console.log('res ==>', res);
         this.pastReservationData = []
@@ -84,7 +84,7 @@ export class UserProfileComponent {
   }
 
   private _pastReservationDetails(): void {
-    this._customerService.getPastReservationDetails('abhishek2020@gmail.com').subscribe({
+    this._customerService.getPastReservationDetails().subscribe({
       next: (res) => {
         console.log('past res ==>', res);
         this.openReservationData = []
