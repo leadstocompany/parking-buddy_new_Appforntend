@@ -51,8 +51,11 @@ export class SignInPageComponent {
           localStorage.setItem('accessToken', res.data.auth_token.access)
           this._snackBarService.openSnackbar('✔ Successfully logged In')
           if (res.data.role == 'normal_user') {
-              this.spinner = false
-              this._router.navigate(['/customers'])
+            const navigationExtras = {
+              queryParams: { user: true }
+            };
+            this.spinner = false
+            this._router.navigate(['/customers'],navigationExtras)
           }
           else if (res.data.role == 'vendor') {
             this._router.navigate(['/parking'])
