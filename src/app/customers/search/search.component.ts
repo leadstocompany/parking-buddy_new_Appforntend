@@ -34,12 +34,12 @@ export class SearchComponent {
     // Do some stuff
   }
   public ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      const userFlag = params['user'];
-      if (userFlag === 'true') {
-        this.userLogin = true
-      }
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   const userFlag = params['user'];
+    //   if (userFlag === 'true') {
+    //     this.userLogin = true
+    //   }
+    // });
     this.getUserDetails()
     this.searchTerms
       .pipe(
