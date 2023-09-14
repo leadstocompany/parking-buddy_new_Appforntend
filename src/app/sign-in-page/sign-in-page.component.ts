@@ -49,11 +49,10 @@ export class SignInPageComponent {
       this._authService.loginUser(data).subscribe({
         next: (res) => {
           localStorage.setItem('accessToken', res.data.auth_token.access)
-
-          this.spinner = false
           this._snackBarService.openSnackbar('✔ Successfully logged In')
           if (res.data.role == 'normal_user') {
-            this._router.navigate(['/customers'])
+              this.spinner = false
+              this._router.navigate(['/customers'])
           }
           else if (res.data.role == 'vendor') {
             this._router.navigate(['/parking'])
