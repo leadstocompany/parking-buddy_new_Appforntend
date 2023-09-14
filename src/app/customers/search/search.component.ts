@@ -34,8 +34,6 @@ export class SearchComponent {
     // Do some stuff
   }
   public ngOnInit(): void {
-    let userData: any = localStorage.getItem('accessToken')
-    console.log(userData, 'userData')
     this.getUserDetails()
     this.searchTerms
       .pipe(
