@@ -35,9 +35,8 @@ export class SearchComponent {
   }
   public ngOnInit(): void {
     let userData: any = localStorage.getItem('accessToken')
-    if (userData) {
-      this.getUserDetails()
-    }
+    console.log(userData, 'userData')
+    this.getUserDetails()
     this.searchTerms
       .pipe(
         debounceTime(1000),
@@ -46,7 +45,7 @@ export class SearchComponent {
       )
       .subscribe((data) => {
         this.searchData = data;
-        console.log(data)
+        this.getUserDetails()
       });
 
 
