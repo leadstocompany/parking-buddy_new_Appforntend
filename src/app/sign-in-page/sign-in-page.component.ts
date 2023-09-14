@@ -48,7 +48,6 @@ export class SignInPageComponent {
 
       this._authService.loginUser(data).subscribe({
         next: (res) => {
-          console.log(res)
           localStorage.setItem('accessToken', res.data.auth_token.access)
 
           this.spinner = false
@@ -56,8 +55,8 @@ export class SignInPageComponent {
           if (res.data.role == 'normal_user') {
             this._router.navigate(['/customers'])
           }
-          else if(res.data.role == 'vendor'){
-          this._router.navigate(['/parking'])
+          else if (res.data.role == 'vendor') {
+            this._router.navigate(['/parking'])
           }
         },
         error: (error) => {

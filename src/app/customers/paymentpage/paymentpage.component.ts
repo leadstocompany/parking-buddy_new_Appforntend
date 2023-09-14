@@ -157,7 +157,7 @@ export class PaymentpageComponent {
         this.Email = res.email
       },
       error: (error) => {
-        this._snackbar.openSnackbar('❌ enternal error')
+        console.log(error.error)
       }
     }
     )

@@ -20,7 +20,7 @@ export class CustomerService {
   filterProduct(code: string): Observable<any> {
     console.log(code)
     return this._http.get(
-      `${environment.URL}/parking_location/get/all_product/?search=${code}`,{ headers: this.headers, withCredentials: true }
+      `${environment.URL}/parking_location/get/all_product/?search=${code}`,{withCredentials: true }
     );
   }
 
@@ -28,13 +28,13 @@ export class CustomerService {
     return this._http.get(
       `${environment.URL}/parking_location/property/${id}/list/
       `,
-      { headers: this.headers, withCredentials: true }
+      { withCredentials: true }
     );
   }
 
   bookingPlot(data: any): Observable<any> {
     console.log(data,'booking-----------')
-    return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`, data,{ headers: this.headers, withCredentials: true })
+    return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`, data,{ withCredentials: true })
   }
 
   createUser(data: any): Observable<any> {

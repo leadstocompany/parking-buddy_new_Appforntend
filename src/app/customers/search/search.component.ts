@@ -4,7 +4,7 @@ import { CustomerService } from 'src/app/service/customer/customer.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
 import { SnackbarService } from 'src/app/service/snackbar.service';
-import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
+
 
 @Component({
   selector: 'app-search',
@@ -19,7 +19,9 @@ export class SearchComponent {
   public searchTerm: string = ''
   public checkIn: Date = new Date();
   public checkout: Date = new Date();
-  // @ViewChild("placesRef") placesRef : GooglePlaceDirective;
+
+  // initialize variable user login or not 
+  public userLogin = false
 
 
   @ViewChild('placesSearchInput') placesSearchInput!: ElementRef;
@@ -31,8 +33,11 @@ export class SearchComponent {
   public handleAddressChange(address: any) {
     // Do some stuff
   }
-
   public ngOnInit(): void {
+    let userData: any = localStorage.getItem('accessToken')
+    if (userData) {
+      this.getUserDetails()
+    }
     this.searchTerms
       .pipe(
         debounceTime(1000),
@@ -43,6 +48,8 @@ export class SearchComponent {
         this.searchData = data;
         console.log(data)
       });
+
+
   }
 
   public ngOnDestroy(): void {
@@ -54,8 +61,13 @@ export class SearchComponent {
       this._router.navigate(["/customers/user-profile"])
     } else if (rout === 'sign-In') {
       this._router.navigate(['/customers/sign-in'])
-    } else if(rout == 'sign-up') {
+    } else if (rout == 'sign-up') {
       this._router.navigate(['/customers/sign-up'])
+    } else if (rout == 'logOut') {
+      console.log('logout')
+      localStorage.removeItem('accessToken')
+      this.userLogin = false
+      this._router.navigate(['/'])
     }
   }//
 
@@ -87,31 +99,27 @@ export class SearchComponent {
   }
 
 
-
-
-
-
-
-
-
-  autocomplete!: google.maps.places.Autocomplete;
-  selectedPlace!: string | undefined;
-
-  ngAfterViewInit() {
-    this.autocomplete = new google.maps.places.Autocomplete(
-      this.placesSearchInput.nativeElement,
-      {
-        types: ['(cities)'],
-      }
-    );
-
-    this.autocomplete.addListener('place_changed', () => {
-      const place = this.autocomplete.getPlace();
-      this.selectedPlace = place.formatted_address;
-    });
-  }
-
   onInputChange() {
     // You can add custom logic for handling input changes here
+  }
+
+  /**
+   * @description get user details using token 
+   */
+  getUserDetails(): void {
+    this._customerService.getProfileDetails().subscribe({
+      next: (res) => {
+        console.log(res)
+        if (res.role == "normal_user") {
+          this.userLogin = true
+        } else {
+          localStorage.removeItem('accessToken')
+          this.userLogin = false
+        }
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
 }

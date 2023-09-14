@@ -1,12 +1,15 @@
 <div class="container-fluid" style="background-color: darkorange;font-family: 'Poppins', sans-serif;;">
-    <div class="row p-2">
-        <div class="col-12 col-md-6 d-flex align-items-center">
-            <div class="d-flex gap-3 ancherTag" style="color:rgb(54, 113, 224); font-size: 16px;">
-                <h1 style="font-size: 26px; color: white;display: inline; padding:10px">Parking Plot</h1>
-                <span (click)="changeRout('profile')">Profile</span>
-                <span (click)="changeRout('sign-In')">Sign-In</span>
-                <span (click)="changeRout('sign-up')">Sign-Up</span>
-            </div>
+    <div class="row p-3 navbar-tag">
+        <div class="col-md-3 title-tag">
+            <p style="font-size: 26px; color: white;display: inline; padding:10px">Parking Buddy</p>
+        </div>
+        <div class="col-md-9 d-flex gap-4 justify-content-end" *ngIf="userLogin==false">
+            <span (click)="changeRout('sign-In')">Sign-In</span>
+            <span (click)="changeRout('sign-up')">Sign-Up</span>
+        </div>
+        <div class="col-md-9 d-flex gap-4 justify-content-end" *ngIf="userLogin==true">
+            <span (click)="changeRout('profile')">Profile</span>
+            <span (click)="changeRout('logOut')">Log-Out</span>
         </div>
     </div>
     <div class="row">
@@ -33,9 +36,9 @@
                 <div class="search-form" style="width:95vw">
                     <input #placesSearchInput type="text" style="width: 500px;" placeholder="Search your location"
                         [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchTerm" (input)="search($event)">
-                        <!-- [options]='options' -->
-                        <!-- <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
-                       
+                    <!-- [options]='options' -->
+                    <!-- <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
+
                     <button (click)="submitForm()" id="submit">Submit</button>
                 </div>
             </form>
