@@ -84,8 +84,16 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
-
     /* Adjust the spacing between amenities */
+}
+
+.amenitie {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .amenity {
@@ -97,6 +105,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     height: 25vh;
+    width: 20vw;
     transition: transform 0.3s ease;
 }
 
