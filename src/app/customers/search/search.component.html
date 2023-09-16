@@ -21,13 +21,12 @@
             <form class="d-flex flex-column gap-3">
                 <div class="d-flex flex-md-row flex-sm-column gap-3 search-form">
                     <div class="search-form">
-
-                        <input type="text" #dp="bsDatepicker" placeholder="Check-In" bsDatepicker
-                            [ngModelOptions]="{ standalone: true }" [(ngModel)]="checkIn">
+                        <input type="text" #dp="bsDatepicker" [minDate]="minCheckInDate" placeholder="Check-In" bsDatepicker
+                            [ngModelOptions]="{ standalone: true }" [(ngModel)]="checkIn" (ngModelChange)="checkOutDate()">
                         <button style="background-color: inherit; border: 0.5px solid gray;" disabled>Check-In</button>
                     </div>
-                    <div class="search-form">
-                        <input type="text" #dp="bsDatepicker" placeholder="Check-Out" bsDatepicker
+                    <div class="search-form"> 
+                        <input type="text" #dp="bsDatepicker" [minDate]="minCheckOutDate" placeholder="Check-Out" bsDatepicker
                             [ngModelOptions]="{ standalone: true }" [(ngModel)]="checkout">
                         <button style="background-color: inherit;  border: 0.5px solid gray;"
                             disabled>Check-Out</button>

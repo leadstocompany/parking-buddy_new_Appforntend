@@ -13,7 +13,8 @@ export class SignInPageComponent {
   signInForm!: FormGroup;
   spinner: boolean = false
   public url: string = ''
-
+  public passwordHide: boolean = true;
+  
   constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,

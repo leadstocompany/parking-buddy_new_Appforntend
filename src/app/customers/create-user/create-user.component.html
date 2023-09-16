@@ -102,19 +102,65 @@
                         <div class="col-md-12 d-flex flex-row align-items-center gap-3">
                             <label for="currentPassword" class="form-label input-label text-nowrap">
                                 Password *</label>
-                            <input type="text" class="form-control input-filed" formControlName="currentPassword"
-                                placeholder="Enter Password"
-                                [ngClass]="{'is-invalid':profileForm.get('currentPassword')!.invalid && profileForm.get('currentPassword')!.touched}">
-
-                            <div *ngIf="profileForm.get('currentPassword')!.invalid && profileForm.get('currentPassword')!.touched"
-                                class="invalid-feedback">
-                                Please enter a Password.
+                            <div class="input-div">
+                                <input [type]="passwordHide ? 'password' : 'text'" class="form-control input-filed"
+                                    formControlName="currentPassword" placeholder="Enter Password"
+                                    [ngClass]="{'is-invalid':profileForm.get('currentPassword')!.invalid && profileForm.get('currentPassword')!.touched}">
+                                <div class="icons" (click)="passwordHide = !passwordHide">
+                                    <i class="fa fa-eye-slash icon password-icon" [hidden]="!passwordHide"></i>
+                                    <i class="fa fa fa-eye icon password-icon" [hidden]="passwordHide"></i>
+                                </div>
                             </div>
+                            <!-- <div *ngIf="profileForm.get('currentPassword')!.invalid && profileForm.get('currentPassword')!.touched"
+                                class="invalid-pass">
+                                Please enter a Password.
+                            </div> -->
+                            <div *ngIf="profileForm.controls['currentPassword'].hasError('required') && profileForm.get('currentPassword')!.touched"
+                                class="invalid-pass">
+                                Please enter a valid Password.
+                            </div>
+                            <div *ngIf="profileForm.controls['currentPassword'].hasError('pattern') && profileForm.get('currentPassword')!.touched"
+                                class="invalid-pass">
+                                Please enter a Password Include 1 Uppercase, 1 Lowercase, 1 Number & 1 Special
+                                character.
+                            </div>
+                            <div *ngIf="profileForm.controls['currentPassword'].hasError('minlength') && profileForm.get('currentPassword')!.touched"
+                                class="invalid-pass">
+                                Minimum Passwor Length Should be 8.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-column gap-3">
+                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                            <label for="confirmPassword" class="form-label input-label text-nowrap">
+                                Confirm Password *</label>
+                            <div class="input-div">
+                                <input [type]="confirmPasswordHide ? 'password' : 'text'"
+                                    class="form-control input-filed" formControlName="confirmPassword"
+                                    placeholder="Enter Password"
+                                    [ngClass]="{'is-invalid':profileForm.get('confirmPassword')!.invalid && profileForm.get('confirmPassword')!.touched}">
+                                <div class="icons" (click)="confirmPasswordHide = !confirmPasswordHide">
+                                    <i class="fa fa-eye-slash icon password-icon" [hidden]="!confirmPasswordHide"></i>
+                                    <i class="fa fa fa-eye icon password-icon" [hidden]="confirmPasswordHide"></i>
+                                </div>
+                            </div>
+
+                            <div *ngIf="profileForm.get('confirmPassword')!.invalid && profileForm.get('confirmPassword')!.touched"
+                                class="invalid-pass">
+                                Please enter a Confirm Password.
+                            </div>
+                            <div *ngIf="profileForm.controls['confirmPassword'].value != profileForm.controls['currentPassword'].value && profileForm.controls['confirmPassword'].value != '' && profileForm.get('confirmPassword')!.touched"
+                                class="invalid-pass">
+                                Please enter Same Password.
+                            </div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4 ">
-                            <button class="mt-4  btn btn-danger" type="submit" [disabled]="profileForm.invalid" style="margin-bottom: 30px;">Sing
+                            <button class="mt-4  btn btn-danger" type="submit"
+                                [disabled]="profileForm.invalid || profileForm.controls['confirmPassword'].value != profileForm.controls['currentPassword'].value "
+                                style="margin-bottom: 30px;">Sing
                                 Up</button>
                         </div>
                     </div>

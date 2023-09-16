@@ -12,6 +12,9 @@ import { AuthService } from '../service/auth/auth.service';
 export class SignUpPageComponent {
   signupForm!: FormGroup;
   spinner:boolean=false
+  public passwordHide: boolean = true;
+  public ConfirmPasswordHide: boolean = true;
+
   constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _snackBarService: SnackbarService, private _router: Router) { }
 
   ngOnInit(): void {
@@ -20,7 +23,8 @@ export class SignUpPageComponent {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/)]],
+      confirmPassword: ['', [Validators.required]]
     });
   }
 

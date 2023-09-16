@@ -19,7 +19,8 @@ export class SearchComponent {
   public searchTerm: string = ''
   public checkIn: Date = new Date();
   public checkout: Date = new Date();
-
+  public minCheckInDate: Date = new Date();
+  public minCheckOutDate: Date = new Date();
   // initialize variable user login or not 
   public userLogin = false
 
@@ -34,6 +35,7 @@ export class SearchComponent {
     // Do some stuff
   }
   public ngOnInit(): void {
+
     let userData: any = localStorage.getItem('accessToken')
     if (userData) {
       this.getUserDetails()
@@ -54,6 +56,12 @@ export class SearchComponent {
 
   public ngOnDestroy(): void {
     this.searchSubscription?.unsubscribe();
+  }
+
+  public checkOutDate():void{
+    const date = new Date(this.checkIn);
+    this.minCheckOutDate = date;
+    this.checkout = date;
   }
 
   public changeRout(rout: string): void {

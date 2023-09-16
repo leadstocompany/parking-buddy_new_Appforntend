@@ -11,13 +11,15 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
 })
 export class CreateUserComponent {
   profileForm!: FormGroup;
-  pymentPage!:boolean
+  pymentPage!: boolean
+  public passwordHide: boolean = true;
+  public confirmPasswordHide: boolean = true;
   constructor(
     private fb: FormBuilder,
-    private _customer:CustomerService,
-    private _snackBar:SnackbarService,
-    private _activeRoute:ActivatedRoute,
-    private _rout:Router
+    private _customer: CustomerService,
+    private _snackBar: SnackbarService,
+    private _activeRoute: ActivatedRoute,
+    private _rout: Router
   ) { }
 
   ngOnInit() {
@@ -39,7 +41,8 @@ export class CreateUserComponent {
       email: ['', [Validators.required, Validators.email]],
       zipcode: ['', [Validators.required]],
       mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      currentPassword: ['', [Validators.required]],
+      currentPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/)]],
+      confirmPassword: ['', [Validators.required]],
       plateNo: ['', [Validators.required]],
       state: ['', [Validators.required]]
     });
@@ -60,14 +63,14 @@ export class CreateUserComponent {
     }
 
     this._customer.createUser(pyload).subscribe({
-      next:(res)=>{
+      next: (res) => {
         console.log(res)
         this._snackBar.openSnackbar('✔ form Successfully Submitted')
         this._rout.navigate(['/customers'])
       },
-      error:(error)=>{
+      error: (error) => {
         console.log(error)
-        this._snackBar.openSnackbar('❌'+error.error.email[0])
+        this._snackBar.openSnackbar('❌' + error.error.email[0])
       }
     })
 

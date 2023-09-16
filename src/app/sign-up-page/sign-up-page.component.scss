@@ -42,6 +42,29 @@ h2 {
     background-color: #0056b3;
 }
 
+.input-div{
+    width:  100%;
+    display: flex;
+    gap: 0;
+}
+.input-div input{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.icons{
+    width: 30px;
+    color: #333;
+    background: #f8f8f8;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: grid;
+    place-items: center;
+}
+.invalid-pass{
+    color: #DC3544;
+    font-size: smaller;
+}
+
 @media (max-width: 768px) {
     .parking-image {
         visibility: hidden;

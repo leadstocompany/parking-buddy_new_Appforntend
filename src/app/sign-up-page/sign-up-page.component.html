@@ -44,21 +44,57 @@
                         </div>
 
                     </div>
-                    <div class="col-12 form-group">
+                    <div class="col-6 form-group">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" class="form-control" formControlName="password" [ngClass]="{
-                        'is-invalid': signupForm.get('password')!.invalid && signupForm.get('password')!.touched
-                      }" />
-                        <div *ngIf="signupForm.get('password')!.invalid && signupForm.get('password')!.touched"
-                            class="invalid-feedback">
+                        <div class="input-div">
+                            <input [type]="passwordHide ? 'password' : 'text'" id="password" class="form-control" formControlName="password" [ngClass]="{
+                                'is-invalid': signupForm.get('password')!.invalid && signupForm.get('password')!.touched
+                              }" />
+                            <div class="icons" (click)="passwordHide = !passwordHide">
+                                <i class="fa fa-eye-slash icon password-icon" [hidden]="!passwordHide"></i>
+                                <i class="fa fa fa-eye icon password-icon" [hidden]="passwordHide"></i>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="signupForm.controls['password'].hasError('required') && signupForm.get('password')!.touched"
+                            class="invalid-pass">
                             Please enter a valid password.
                         </div>
+                        <div *ngIf="signupForm.controls['password'].hasError('pattern') && signupForm.get('password')!.touched"
+                            class="invalid-pass">
+                            Please enter a password Include 1 Uppercase, 1 Lowercase, 1 Number & 1 Special character.
+                        </div>
+                        <div *ngIf="signupForm.controls['password'].hasError('minlength') && signupForm.get('password')!.touched"
+                            class="invalid-pass">
+                            Minimum Passwor Length Should be 8.
+                        </div>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="password" class="form-label">Confirm Password</label>
+                        <div class="input-div">
+                            <input [type]="ConfirmPasswordHide ? 'password' : 'text'" id="password" class="form-control" formControlName="confirmPassword" [ngClass]="{
+                                'is-invalid': signupForm.get('confirmPassword')!.invalid && signupForm.get('confirmPassword')!.touched
+                              }" />
+                            <div class="icons" (click)="ConfirmPasswordHide = !ConfirmPasswordHide">
+                                <i class="fa fa-eye-slash icon password-icon" [hidden]="!ConfirmPasswordHide"></i>
+                                <i class="fa fa fa-eye icon password-icon" [hidden]="ConfirmPasswordHide"></i>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="signupForm.get('confirmPassword')!.invalid && signupForm.get('confirmPassword')!.touched"
+                            class="invalid-pass">
+                            Please enter Confirm password.
+                        </div>
+                        <div *ngIf="signupForm.controls['confirmPassword'].value != signupForm.controls['password'].value && signupForm.controls['confirmPassword'].value != '' && signupForm.get('confirmPassword')!.touched"
+                                class="invalid-pass">
+                                Please enter Same Password.
+                            </div>
                     </div>
                     <div class="col-12 text-end mt-3">
                         <p style="color: white;">Already have an account? <a [routerLink]="['/signIN']">Sign In</a></p>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="signupForm.invalid">Sign-Up</button>
+                        <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="signupForm.invalid || signupForm.controls['confirmPassword'].value != signupForm.controls['password'].value">Sign-Up</button>
                     </div>
                 </div>
             </form>

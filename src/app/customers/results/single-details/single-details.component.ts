@@ -14,6 +14,8 @@ export class SingleDetailsComponent {
   public date!: { checkIn: Date, checkOut: Date }
   checkOutTime: string = new Date().toISOString().split('T')[0];;
   checkInTime: string = new Date().toISOString().split('T')[0];
+  public minCheckInDate: string = ''
+  public minCheckOutDate: string = ''
   amenities = [
     { iconName: 'accessible', iconColor: 'black', name: 'Handicap', key: 'handicap' },
     { iconName: 'drive_eta', iconColor: 'green', name: 'Car Care', key: 'car_care' },
@@ -33,6 +35,10 @@ export class SingleDetailsComponent {
   value: any;
   constructor(private _taxeService: TaxesService, private route: ActivatedRoute, private router: Router, private _customerService: CustomerService) { }
   ngOnInit() {
+    const date = new Date();
+    this.minCheckInDate = `${date.getUTCFullYear()}-${(date.getUTCMonth() + 1).toString().padStart(2, "0")}-${date.getUTCDate().toString().padStart(2, "0")}`;
+    this.minCheckOutDate = this.minCheckInDate
+
     this.route.params.subscribe(params => {
       this.id = params['id']; // Get the value of the 'id' parameter
       this.getText(params['id'])
@@ -101,8 +107,8 @@ export class SingleDetailsComponent {
   }
 
   // get tex 
-  public getText(id:any) {
-    console.log(id,'dsfadsaf000000000000000000000000000000000')
+  public getText(id: any) {
+    console.log(id, 'dsfadsaf000000000000000000000000000000000')
     this._taxeService.getTaxesfeesById(id).subscribe({
       next: (res) => {
         console.log(res, 'get taxes 88888888888888888888---')

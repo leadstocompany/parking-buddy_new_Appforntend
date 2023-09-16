@@ -172,11 +172,11 @@
                 <div class="col-md-12 d-flex flex-row justify-content-between">
                     <div class="in">
                         <span>Check In</span>
-                        <input type="date" class="form-control" [(ngModel)]="checkInTime">
+                        <input type="date" [min]="minCheckInDate" class="form-control" [(ngModel)]="checkInTime">
                     </div>
                     <div class="out">
                         <span>Check Out</span>
-                        <input type="date" class="form-control" [(ngModel)]="checkOutTime">
+                        <input type="date" [min]="minCheckOutDate" class="form-control" [(ngModel)]="checkOutTime">
                     </div>
                 </div>
                 <div class="col-md-12 mt-2 d-flex justify-content-center">
