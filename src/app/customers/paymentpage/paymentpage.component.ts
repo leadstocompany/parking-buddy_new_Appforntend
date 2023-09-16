@@ -211,77 +211,6 @@ export class PaymentpageComponent {
           }
         })
 
-        // res.forEach((taxeS: any) => {
-        //   console.log(taxeS, 'single taxes--')
-        //   if (taxeS.apply = "post_tax") {
-        //     if (taxeS.type == "fixed_amount") {
-        //       if (taxeS.amount_type = "Percentage") {
-        //         const taxes = (+this.type[0].dail_rate) * ((+taxeS.amount) / 100)
-        //         this.singleTRupe = this.day * taxes
-        //       } else {
-        //         const taxes = +taxeS.amount
-        //         this.singleTRupe = this.day * taxes
-        //       }
-        //     } else if (taxeS.type == 'per_day') {
-        //       if (taxeS.amount_type = "Percentage") {
-        //         let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-        //         taxes = this.day * taxes
-        //         this.singleTRupe = taxes
-        //       } else {
-        //         let taxes = +taxeS.amount
-        //         taxes = this.day * taxes
-        //         this.singleTRupe = taxes
-        //       }
-        //     } else if (taxeS.type == 'per_calendar_day') {
-        //       const totalCalenderHours = this.day * 24 - totalHours
-        //       const calenderDay = Math.floor(totalCalenderHours / 24)
-        //       if (taxeS.amount_type = "Percentage") {
-        //         let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-        //         taxes = calenderDay * taxes
-        //         this.singleTRupe = taxes
-        //       } else {
-        //         let taxes = +taxeS.amount
-        //         taxes = calenderDay * taxes
-        //         this.singleTRupe = taxes
-        //       }
-        //     }
-        //     this.finaleTaxes += +this.singleTRupe
-        //   } else {
-        //     if (taxeS.type == "fixed_amount") {
-        //       if (taxeS.amount_type = "Percentage") {
-        //         const taxes = (this.day * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-        //         this.singleTRupe = taxes
-        //       } else {
-        //         const taxes = +taxeS.amount
-        //         this.singleTRupe = taxes
-        //         console.log(this.singleTRupe, 'texes----')
-        //       }
-        //     } else if (taxeS.type == 'per_day') {
-        //       if (taxeS.amount_type = "Percentage") {
-        //         let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-        //         taxes = this.day * taxes
-        //         this.singleTRupe = taxes
-        //       } else {
-        //         let taxes = +taxeS.amount
-        //         taxes = this.day * taxes
-        //         this.singleTRupe = taxes
-        //       }
-        //     } else if (taxeS.type == 'per_calendar_day') {
-        //       const totalCalenderHours = this.day * 24 - totalHours
-        //       const calenderDay = Math.floor(totalCalenderHours / 24)
-        //       if (taxeS.amount_type = "Percentage") {
-        //         let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-        //         taxes = calenderDay * taxes
-        //         this.singleTRupe = taxes
-        //       } else {
-        //         let taxes = +taxeS.amount
-        //         taxes = calenderDay * taxes
-        //         this.singleTRupe = taxes
-        //       }
-        //     }
-        //     this.finaleTaxes = +this.singleTRupe
-        //   }
-        // });
       },
       error: (error) => {
         console.log(error)
@@ -289,22 +218,6 @@ export class PaymentpageComponent {
     })
   }
 
-
-
-  public getTotalHourse(time1: any, time2: any) {
-    // Split the times into hours and minutes
-    const [hours1, minutes1] = time1.split(":").map(Number);
-    const [hours2, minutes2] = time2.split(":").map(Number);
-    // Convert both times to minutes
-    const totalMinutes1 = hours1 * 60 + minutes1;
-    const totalMinutes2 = hours2 * 60 + minutes2;
-    // Calculate the time difference in minutes
-    const timeDifferenceMinutes = totalMinutes2 - totalMinutes1;
-    // Convert the time difference back to hours and minutes
-    const totalHours = Math.floor(timeDifferenceMinutes / 60);
-    const remainingMinutes = timeDifferenceMinutes % 60;
-    return totalHours
-  }
 
   /**
    * @description
@@ -315,9 +228,10 @@ export class PaymentpageComponent {
     // Define the check-in and check-out times and dates as strings
     const checkInTime = time.checkIn;
     const checkOutTime = time.checkOut;
-    const checkInDate = date.checkIn;
-    const checkOutDate = date.checkOut;
+    const checkInDate = new Date(date.checkIn).toISOString().split('T')[0];
+    const checkOutDate = new Date(date.checkOut).toISOString().split('T')[0];
     // Convert the time strings to JavaScript Date objects
+    console.log(checkInDate, checkOutDate, '==========>')
     const checkInDateTime: any = new Date(`${checkInDate}T${checkInTime}:00`);
     const checkOutDateTime: any = new Date(`${checkOutDate}T${checkOutTime}:00`);
     // Calculate the time difference in milliseconds
