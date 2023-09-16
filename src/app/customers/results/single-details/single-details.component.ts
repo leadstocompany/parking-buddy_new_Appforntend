@@ -12,10 +12,15 @@ export class SingleDetailsComponent {
   id!: string;
   currency: any = currency?.currency
   public date!: { checkIn: Date, checkOut: Date }
-  checkOutTime: string = new Date().toISOString().split('T')[0];;
-  checkInTime: string = new Date().toISOString().split('T')[0];
-  public minCheckInDate: string = ''
-  public minCheckOutDate: string = ''
+  // checkOutTime: string = new Date().toISOString().split('T')[0];
+  // checkInTime: string = new Date().toISOString().split('T')[0];
+  checkInTime: Date = new Date()
+  checkOutTime: Date = new Date()
+
+  // public minCheckInDate: string = ''
+  // public minCheckOutDate: string = ''
+  public minCheckInDate: Date = new Date();
+  public minCheckOutDate: Date = new Date();
   amenities = [
     { iconName: 'accessible', iconColor: 'black', name: 'Handicap', key: 'handicap' },
     { iconName: 'drive_eta', iconColor: 'green', name: 'Car Care', key: 'car_care' },
@@ -35,9 +40,9 @@ export class SingleDetailsComponent {
   value: any;
   constructor(private _taxeService: TaxesService, private route: ActivatedRoute, private router: Router, private _customerService: CustomerService) { }
   ngOnInit() {
-    const date = new Date();
-    this.minCheckInDate = `${date.getUTCFullYear()}-${(date.getUTCMonth() + 1).toString().padStart(2, "0")}-${date.getUTCDate().toString().padStart(2, "0")}`;
-    this.minCheckOutDate = this.minCheckInDate
+    // const date = new Date();
+    // this.minCheckInDate = `${date.getUTCFullYear()}-${(date.getUTCMonth() + 1).toString().padStart(2, "0")}-${date.getUTCDate().toString().padStart(2, "0")}`;
+    // this.minCheckOutDate = this.minCheckInDate
 
     this.route.params.subscribe(params => {
       this.id = params['id']; // Get the value of the 'id' parameter
@@ -48,8 +53,8 @@ export class SingleDetailsComponent {
         checkIn: queryParams['checkIn'],
         checkOut: queryParams['checkout']
       }
-      this.checkInTime = new Date(this.date.checkIn).toISOString().split('T')[0];
-      this.checkOutTime = new Date(this.date.checkOut).toISOString().split('T')[0]
+      this.checkInTime = new Date(this.date.checkIn)
+      this.checkOutTime = new Date(this.date.checkOut)
     });
     console.log(this.checkInTime)
     this.getSingleIdDetails()
@@ -117,4 +122,9 @@ export class SingleDetailsComponent {
   //     }
   //   })
   // }
+  public checkOutDate(): void {
+    const date = new Date(this.checkInTime);
+    this.minCheckOutDate = date;
+    this.checkOutTime = date;
+  }
 }

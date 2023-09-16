@@ -172,11 +172,17 @@
                 <div class="col-md-12 d-flex flex-row justify-content-between">
                     <div class="in">
                         <span>Check In</span>
-                        <input type="date" [min]="minCheckInDate" class="form-control"[ngModelOptions]="{ standalone: true }" [(ngModel)]="checkInTime">
+                        <input class="checkTime" type="text" #dp="bsDatepicker" [minDate]="minCheckInDate"
+                            placeholder="Check-In" bsDatepicker [ngModelOptions]="{ standalone: true }"
+                            [(ngModel)]="checkInTime" (ngModelChange)="checkOutDate()">
+                        <!-- <input type="date" [min]="minCheckInDate" class="form-control"[ngModelOptions]="{ standalone: true }" [(ngModel)]="checkInTime"> -->
                     </div>
                     <div class="out">
                         <span>Check Out</span>
-                        <input type="date" [min]="minCheckOutDate" class="form-control" [(ngModel)]="checkOutTime">
+                        <input class="checkTime" type="text" #dp="bsDatepicker" [minDate]="minCheckOutDate"
+                            placeholder="Check-Out" bsDatepicker [ngModelOptions]="{ standalone: true }"
+                            [(ngModel)]="checkOutTime">
+                        <!-- <input type="date" [min]="minCheckOutDate" class="form-control" [(ngModel)]="checkOutTime"> -->
                     </div>
                 </div>
                 <div class="col-md-12 mt-2 d-flex justify-content-center">
