@@ -41,7 +41,7 @@ export class SingleDetailsComponent {
 
     this.route.params.subscribe(params => {
       this.id = params['id']; // Get the value of the 'id' parameter
-      this.getText(params['id'])
+      // this.getText(params['id'])
     });
     this.route.queryParams.subscribe((queryParams) => {
       this.date = {
@@ -75,7 +75,7 @@ export class SingleDetailsComponent {
       parkingType: JSON.stringify(this.parkingType),
       checkOutDate: this.checkOutTime,
       checkInDate: this.checkInTime,
-      title: this.value.tittle ? this.value.tittle : 'demo title',
+      title: this.value.tittle ? this.value.tittle : '',
       icon: this.currency[this.value.country] ? this.currency[this.value.country] : '$'
     }
     this.router.navigate(['/customers/payment', this.id], { queryParams });
@@ -90,7 +90,6 @@ export class SingleDetailsComponent {
         this.Images = res?.property_logo[0]?.image_by_logo
         this.amenities = this.amenities.filter((icon) => res.property_amenities[0][icon.key] === true)
         this.typesOfShoes = res?.property_pricing
-        console.log(this.typesOfShoes, 'fkdsjaflkjaldksjflkajdlfkjsalf')
       },
       error: (error) => {
         console.log(error)
@@ -106,19 +105,16 @@ export class SingleDetailsComponent {
     }
   }
 
-  // get tex 
-  public getText(id: any) {
-    console.log(id, 'dsfadsaf000000000000000000000000000000000')
-    this._taxeService.getTaxesfeesById(id).subscribe({
-      next: (res) => {
-        console.log(res, 'get taxes 88888888888888888888---')
-      },
-      error: (error) => {
-        console.log(error)
-      }
-    })
-  }
-
-
-
+  // // get tex 
+  // public getText(id:any) {
+  //   console.log(id,'dsfadsaf000000000000000000000000000000000')
+  //   this._taxeService.getTaxesfeesById(id).subscribe({
+  //     next: (res) => {
+  //       console.log(res, 'get taxes 88888888888888888888---')
+  //     },
+  //     error: (error) => {
+  //       console.log(error)
+  //     }
+  //   })
+  // }
 }

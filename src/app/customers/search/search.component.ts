@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
@@ -27,7 +27,7 @@ export class SearchComponent {
 
   @ViewChild('placesSearchInput') placesSearchInput!: ElementRef;
 
-  constructor(private _router: Router, private _customerService: CustomerService, private _snackbarService: SnackbarService) {
+  constructor(private route: ActivatedRoute, private _router: Router, private _customerService: CustomerService, private _snackbarService: SnackbarService) {
   }
 
 
@@ -35,11 +35,13 @@ export class SearchComponent {
     // Do some stuff
   }
   public ngOnInit(): void {
-
-    let userData: any = localStorage.getItem('accessToken')
-    if (userData) {
-      this.getUserDetails()
-    }
+    // this.route.queryParams.subscribe(params => {
+    //   const userFlag = params['user'];
+    //   if (userFlag === 'true') {
+    //     this.userLogin = true
+    //   }
+    // });
+    this.getUserDetails()
     this.searchTerms
       .pipe(
         debounceTime(1000),
@@ -48,7 +50,7 @@ export class SearchComponent {
       )
       .subscribe((data) => {
         this.searchData = data;
-        console.log(data)
+        this.getUserDetails()
       });
 
 

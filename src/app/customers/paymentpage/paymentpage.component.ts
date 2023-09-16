@@ -109,6 +109,7 @@ export class PaymentpageComponent {
       "checkOut": this.editTime.checkOut
     }
     this.timeDiffrence(new Date(this.date.checkIn), new Date(this.date.checkOut))
+    this.getText(this.id)
   }
 
   public submitForm() {
@@ -169,78 +170,118 @@ export class PaymentpageComponent {
   public getText(id: any) {
     this._taxeService.getTaxesfeesById(id).subscribe({
       next: (res) => {
-        const totalHours = this.getTotalHourse(this.time.checkIn, this.time.checkOut)
-        res.forEach((taxeS: any) => {
-          if (taxeS.apply = "post_tax") {
-            if (taxeS.type == "fixed_amount") {
-              if (taxeS.amount_type = "Percentage") {
-                const taxes = (+this.type[0].dail_rate) * ((+taxeS.amount) / 100)
-                this.singleTRupe = this.day * taxes
-              } else {
-                const taxes = +taxeS.amount
-                this.singleTRupe = this.day * taxes
-              }
-            } else if (taxeS.type == 'per_day') {
-              if (taxeS.amount_type = "Percentage") {
-                let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-                taxes = this.day * taxes
-                this.singleTRupe = taxes
-              } else {
-                let taxes = +taxeS.amount
-                taxes = this.day * taxes
-                this.singleTRupe = taxes
-              }
-            } else if (taxeS.type == 'per_calendar_day') {
-              const totalCalenderHours = this.day * 24 - totalHours
-              const calenderDay = Math.floor(totalCalenderHours / 24)
-              if (taxeS.amount_type = "Percentage") {
-                let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-                taxes = calenderDay * taxes
-                this.singleTRupe = taxes
-              } else {
-                let taxes = +taxeS.amount
-                taxes = calenderDay * taxes
-                this.singleTRupe = taxes
-              }
+        this.finaleTaxes = 0
+        res.forEach((tax: any) => {
+          console.log(tax)
+          if (tax.type == "fixed_amount") {
+            if (tax.amount_type == "Fixed") {
+              this.finaleTaxes += +tax.amount
+              console.log('fiexedAmount', "feixed type")
+            } else {
+              const totalAmount = +this.day * +this.type[0].dail_rate
+              this.finaleTaxes += +totalAmount * Number(+tax.amount / 100)
+              console.log('fiexedAmount', "% type")
             }
-            this.finaleTaxes += +this.singleTRupe
-            console.log(this.finaleTaxes, '2222252551dfadkfsjaafl2525')
-          } else {
-            if (taxeS.type == "fixed_amount") {
-              if (taxeS.amount_type = "Percentage") {
-                const taxes = (this.day * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-                this.singleTRupe = taxes
-              } else {
-                const taxes = +taxeS.amount
-                this.singleTRupe = taxes
-              }
-            } else if (taxeS.type == 'per_day') {
-              if (taxeS.amount_type = "Percentage") {
-                let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-                taxes = this.day * taxes
-                this.singleTRupe = taxes
-              } else {
-                let taxes = +taxeS.amount
-                taxes = this.day * taxes
-                this.singleTRupe = taxes
-              }
-            } else if (taxeS.type == 'per_calendar_day') {
-              const totalCalenderHours = this.day * 24 - totalHours
-              const calenderDay = Math.floor(totalCalenderHours / 24)
-              if (taxeS.amount_type = "Percentage") {
-                let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
-                taxes = calenderDay * taxes
-                this.singleTRupe = taxes
-              } else {
-                let taxes = +taxeS.amount
-                taxes = calenderDay * taxes
-                this.singleTRupe = taxes
-              }
+          } else if (tax.type == 'per_day') {
+            const totalCalenderHours = this.totalHoursBtwDates(this.date, this.editTime)
+            const calenderDay = Math.ceil(+totalCalenderHours / 24)
+            if (tax.amount_type == "Percentage") {
+              let oneDayTax = (1 * (+this.type[0].dail_rate)) * ((+tax.amount) / 100)
+              let totalDayTax = +calenderDay * +oneDayTax
+              this.finaleTaxes += +totalDayTax
+              console.log('pre day', "%")
+            } else {
+              let oneDayTax = +tax.amount
+              let totalDayTax = +calenderDay * +oneDayTax
+              console.log(totalDayTax, "1", calenderDay, "11")
+              console.log(this.finaleTaxes, totalDayTax)
+              this.finaleTaxes += +totalDayTax
+              console.log('pre day', "Number")
             }
-            this.finaleTaxes = +this.singleTRupe
-            console.log(this.finaleTaxes, '85858595585545fdsafadsfadff')
+          } else if (tax.type == 'per_calendar_day') {
+            if (tax.amount_type == "Percentage") {
+              let oneDayTax = (1 * (+this.type[0].dail_rate)) * ((+tax.amount) / 100)
+              let totalDayTax = +this.day * +oneDayTax
+              this.finaleTaxes += totalDayTax
+            } else {
+              let oneDayTax = +tax.amount
+              let totalDayTax = +this.day * +oneDayTax
+              this.finaleTaxes += +totalDayTax
+            }
           }
-        });
+        })
+
+        // res.forEach((taxeS: any) => {
+        //   console.log(taxeS, 'single taxes--')
+        //   if (taxeS.apply = "post_tax") {
+        //     if (taxeS.type == "fixed_amount") {
+        //       if (taxeS.amount_type = "Percentage") {
+        //         const taxes = (+this.type[0].dail_rate) * ((+taxeS.amount) / 100)
+        //         this.singleTRupe = this.day * taxes
+        //       } else {
+        //         const taxes = +taxeS.amount
+        //         this.singleTRupe = this.day * taxes
+        //       }
+        //     } else if (taxeS.type == 'per_day') {
+        //       if (taxeS.amount_type = "Percentage") {
+        //         let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
+        //         taxes = this.day * taxes
+        //         this.singleTRupe = taxes
+        //       } else {
+        //         let taxes = +taxeS.amount
+        //         taxes = this.day * taxes
+        //         this.singleTRupe = taxes
+        //       }
+        //     } else if (taxeS.type == 'per_calendar_day') {
+        //       const totalCalenderHours = this.day * 24 - totalHours
+        //       const calenderDay = Math.floor(totalCalenderHours / 24)
+        //       if (taxeS.amount_type = "Percentage") {
+        //         let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
+        //         taxes = calenderDay * taxes
+        //         this.singleTRupe = taxes
+        //       } else {
+        //         let taxes = +taxeS.amount
+        //         taxes = calenderDay * taxes
+        //         this.singleTRupe = taxes
+        //       }
+        //     }
+        //     this.finaleTaxes += +this.singleTRupe
+        //   } else {
+        //     if (taxeS.type == "fixed_amount") {
+        //       if (taxeS.amount_type = "Percentage") {
+        //         const taxes = (this.day * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
+        //         this.singleTRupe = taxes
+        //       } else {
+        //         const taxes = +taxeS.amount
+        //         this.singleTRupe = taxes
+        //         console.log(this.singleTRupe, 'texes----')
+        //       }
+        //     } else if (taxeS.type == 'per_day') {
+        //       if (taxeS.amount_type = "Percentage") {
+        //         let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
+        //         taxes = this.day * taxes
+        //         this.singleTRupe = taxes
+        //       } else {
+        //         let taxes = +taxeS.amount
+        //         taxes = this.day * taxes
+        //         this.singleTRupe = taxes
+        //       }
+        //     } else if (taxeS.type == 'per_calendar_day') {
+        //       const totalCalenderHours = this.day * 24 - totalHours
+        //       const calenderDay = Math.floor(totalCalenderHours / 24)
+        //       if (taxeS.amount_type = "Percentage") {
+        //         let taxes = (1 * (+this.type[0].dail_rate)) * ((+taxeS.amount) / 100)
+        //         taxes = calenderDay * taxes
+        //         this.singleTRupe = taxes
+        //       } else {
+        //         let taxes = +taxeS.amount
+        //         taxes = calenderDay * taxes
+        //         this.singleTRupe = taxes
+        //       }
+        //     }
+        //     this.finaleTaxes = +this.singleTRupe
+        //   }
+        // });
       },
       error: (error) => {
         console.log(error)
@@ -262,6 +303,27 @@ export class PaymentpageComponent {
     // Convert the time difference back to hours and minutes
     const totalHours = Math.floor(timeDifferenceMinutes / 60);
     const remainingMinutes = timeDifferenceMinutes % 60;
+    return totalHours
+  }
+
+  /**
+   * @description
+   * 
+   */
+
+  totalHoursBtwDates(date: any, time: any): any {
+    // Define the check-in and check-out times and dates as strings
+    const checkInTime = time.checkIn;
+    const checkOutTime = time.checkOut;
+    const checkInDate = date.checkIn;
+    const checkOutDate = date.checkOut;
+    // Convert the time strings to JavaScript Date objects
+    const checkInDateTime: any = new Date(`${checkInDate}T${checkInTime}:00`);
+    const checkOutDateTime: any = new Date(`${checkOutDate}T${checkOutTime}:00`);
+    // Calculate the time difference in milliseconds
+    const timeDifferenceMillis: any = checkOutDateTime - checkInDateTime;
+    // Convert milliseconds to hours
+    const totalHours = timeDifferenceMillis / (1000 * 60 * 60);
     return totalHours
   }
 }

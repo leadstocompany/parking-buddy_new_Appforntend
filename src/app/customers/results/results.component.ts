@@ -80,7 +80,6 @@ export class ResultsComponent {
     this._customerService.filterProduct(value).subscribe({
       next: (data) => {
         this.filterData = data
-        console.log('Filter Prodouct')
       },
       error: (error: ErrorHandler) => {
         console.log(error)
@@ -101,6 +100,7 @@ export class ResultsComponent {
         this.spinner = false
         this.results = data;
         console.log(this.results, '===================>')
+        this.addMarker()
       },
       error: (error) => {
         this.spinner = false

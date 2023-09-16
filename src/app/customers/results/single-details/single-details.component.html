@@ -7,12 +7,12 @@
                         <img [src]="value?.property_logo[0]?.logo" alt="" style="max-width: 100%; max-height: 100%;">
                     </div>
                     <div class="col-10">
-                        <h1 class="m-0 p-0">{{value.tittle}}</h1>
+                        <h1 class="m-0 p-0">{{value?.tittle?value.tittle:''}}</h1>
                         <p class="m-0 p-0 d-flex flex-row align-content-center"> <span
                                 *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
                                 <mat-icon class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
                             </span><b>Great</b><span>(960 Reviews)
-                                |{{value.street}},{{value.city}},{{value.state}},{{value.zipcode}},</span></p>
+                                |{{value?.street}},{{value?.city}},{{value?.state}},{{value?.zipcode}},</span></p>
                         <div class="d-flex flex-row flex-wrap gap-3">
                             <p class="d-flex flex-row align-items-center justify-content-center">
                                 <mat-icon>local_airport</mat-icon>
@@ -27,12 +27,12 @@
                                 <mat-icon>schedule</mat-icon>
                                 <span>Open 24/7</span>
                             </p>
-                            <p class="flx" *ngIf="value.property_product.length>0">
+                            <p class="flx" *ngIf="value?.property_product?.length>0">
                                 <span>
                                     <mat-icon>directions_car</mat-icon>
                                 </span>
                                 <span>
-                                    Parking Types: <span *ngFor="let type of value.property_product">{{type.type}},
+                                    Parking Types: <span *ngFor="let type of value?.property_product">{{type?.type}},
                                     </span>
                                 </span>
                             </p>
@@ -41,10 +41,10 @@
                 </div>
             </div>
             <mat-divider style="height: 2px;"></mat-divider>
-            <div *ngIf="value.property_description[0].temporary_message" class="col-md-12"
+            <div *ngIf="value?.property_description[0]?.temporary_message" class="col-md-12"
                 style="background-color: #033552; padding:20px; color:white; border-radius: 10px;">
-                <p>Announcement from {{value.tittle}}</p>
-                <div [innerHTML]="value.property_description[0].temporary_message"></div>
+                <p>Announcement from {{value?.tittle}}</p>
+                <div [innerHTML]="value?.property_description[0]?.temporary_message"></div>
             </div>
             <div class="col-md-12">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -82,10 +82,10 @@
                                 <div id="carouselExample" class="carousel slide">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src={{Images[0].images}} class="d-block w-100" alt="image">
+                                            <img src={{Images[0]?.images}} class="d-block w-100" alt="image">
                                         </div>
                                         <div class="carousel-item" *ngFor="let img of Images; let i = index">
-                                            <img src={{img.images}} class="d-block w-100" alt="image">
+                                            <img src={{img?.images}} class="d-block w-100" alt="image">
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button"
@@ -275,7 +275,8 @@
                                         </div>
                                     </div>
                                     <!-- matStepperNext -->
-                                    <button class="btn btn-danger mt-3" (click)="isStep1Completed = true; onNextStep()" >Continue</button>
+                                    <button class="btn btn-danger mt-3"
+                                        (click)="isStep1Completed = true; onNextStep()">Continue</button>
                                 </ng-template>
                             </mat-step>
                             <mat-step>
@@ -291,7 +292,8 @@
                                                     class="d-flex flex-row justify-content-between align-item-center gap-3">
                                                     <mat-icon>directions_car</mat-icon> {{shoe.product}}
                                                 </p>
-                                                <p>{{currency[value.country]?currency[value.country]:'$'}}{{shoe.dail_rate}} per day</p>
+                                                <p>{{currency[value.country]?currency[value.country]:'$'}}{{shoe.dail_rate}}
+                                                    per day</p>
                                             </span>
                                         </mat-list-option>
                                     </mat-selection-list>
