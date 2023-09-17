@@ -21,6 +21,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ForgotPasswordComponent } from './user-profile/forgot-password/forgot-password.component';
+import { QuickSignInComponent } from './paymentpage/quick-sign-in/quick-sign-in.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ForgotPasswordComponent } from './user-profile/forgot-password/forgot-p
     UserProfileComponent,
     ThankYouComponent,
     CreateUserComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    QuickSignInComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,8 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
 import { TaxesService } from 'src/app/service/taxes.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { QuickSignInComponent } from './quick-sign-in/quick-sign-in.component';
 
 @Component({
   selector: 'app-paymentpage',
@@ -21,6 +23,7 @@ export class PaymentpageComponent {
   public day: any;
   public tittle: any;
   public icon: any;
+  public userLogin: boolean = false;
   Email: any = ''
   userID: any = ''
   public editTime: any = {
@@ -33,7 +36,8 @@ export class PaymentpageComponent {
     private _taxeService: TaxesService,
     private route: ActivatedRoute,
     private _route: Router,
-    private _docService: DocumentService
+    private _docService: DocumentService,
+    private _dialog: MatDialog
   ) {
 
   }
@@ -153,6 +157,9 @@ export class PaymentpageComponent {
   private getUserDetails() {
     this._customer.getProfileDetails().subscribe({
       next: (res) => {
+        if (res.role == "normal_user") {
+          this.userLogin = true
+        }
         console.log(res, 'use details')
         this.userID = res.id
         this.Email = res.email
@@ -239,5 +246,16 @@ export class PaymentpageComponent {
     // Convert milliseconds to hours
     const totalHours = timeDifferenceMillis / (1000 * 60 * 60);
     return totalHours
+  }
+
+  public quickSignInDialog(): void {
+    const dialogRef = this._dialog.open(QuickSignInComponent, {
+      autoFocus: false,
+      disableClose: true,
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      this.ngOnInit()
+    })
   }
 }

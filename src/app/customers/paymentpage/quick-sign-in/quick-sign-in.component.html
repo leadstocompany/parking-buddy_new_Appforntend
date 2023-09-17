@@ -1,0 +1,61 @@
+<div class="main">
+    <div class="user-header px-2">
+        <span>&nbsp;</span>
+        <h1>Sign In</h1>
+        <mat-icon aria-hidden="false" aria-label="close icon" class="close-icon" (click)="close()">close</mat-icon>
+    </div>
+    <mat-dialog-content>
+        <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="email-div">
+                        <input type="email" id="email" class="form-control" formControlName="email" [ngClass]="{
+                    'is-invalid': signInForm.get('email')!.invalid && signInForm.get('email')!.touched
+                  }" />
+                    </div>
+                    <div *ngIf="signInForm.get('email')!.invalid && signInForm.get('email')!.touched"
+                        class=" invalid-pass">
+                        Please enter a valid email address.
+                    </div>
+
+                </div>
+                <div class="col-12 mt-3 form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-div">
+                        <input [type]="passwordHide ? 'password' : 'text'" id="password" class="form-control"
+                            formControlName="password" [ngClass]="{
+                        'is-invalid': signInForm.get('password')!.invalid && signInForm.get('password')!.touched
+                      }" />
+                        <div class="icons" (click)="passwordHide = !passwordHide">
+                            <i class="fa fa-eye-slash icon password-icon" [hidden]="!passwordHide"></i>
+                            <i class="fa fa fa-eye icon password-icon" [hidden]="passwordHide"></i>
+                        </div>
+                    </div>
+                    <div *ngIf="signInForm.get('password')!.invalid && signInForm.get('password')!.touched"
+                        class="invalid-pass">
+                        Please enter a valid password.
+                    </div>
+                </div>
+                <!-- <div class="col-12 text-end mt-3">
+                    <p style="color: white;">Create new account? <a [routerLink]="['/customers/sign-up']">Sign Up</a></p>
+                </div> -->
+                <div class="col-12 mt-3">
+                    <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="signInForm.invalid"
+                        *ngIf="spinner==false" >Sign-In</button>
+                </div>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <!-- <mat-dialog-actions>
+        <div class="row">
+            <div class="col-1">
+                <button class="mt-4 btn btn-danger" type="submit" [disabled]="signInForm.invalid"
+                    (click)="signIn()">Sign-In</button>
+            </div>
+        </div>
+    </mat-dialog-actions> -->
+</div>

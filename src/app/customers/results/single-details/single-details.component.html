@@ -236,13 +236,13 @@
         <!-- modal -->
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        <div class="modal fade mt-5" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title" id="exampleModalLabel">Select Parking Times and Types</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modalClose()" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <mat-stepper orientation="vertical" [selectedIndex]="selectedStep">

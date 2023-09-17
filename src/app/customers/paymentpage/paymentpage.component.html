@@ -9,13 +9,14 @@
                         <div class="row mt-4">
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="Email">
+                                <input type="text" class="form-control" id="email" placeholder="Enter email"
+                                    [(ngModel)]="Email">
                             </div>
                             <mat-checkbox class="example-margin" [labelPosition]="'after'">
                                 Get discounts and the latest update via email
                             </mat-checkbox>
-                            <div class="col-12">
-                                <button class="btn btn-link" style="outline: none; text-decoration: none;">Sign in for
+                            <div class="col-12" [hidden]="userLogin == true">
+                                <button class="btn btn-link" style="outline: none; text-decoration: none;" (click)="quickSignInDialog()">Sign in for
                                     Faster Checkout</button>
                             </div>
                         </div>
@@ -113,7 +114,8 @@
                                 </mat-accordion>
                             </section>
                             <section class="mt-4" style="text-align: right;">
-                                <p>Pay <b>{{icon}}{{(day*type[0].dail_rate)+6.49+finaleTaxes | number:'1.2-2'}}</b> today</p>
+                                <p>Pay <b>{{icon}}{{(day*type[0].dail_rate)+6.49+finaleTaxes | number:'1.2-2'}}</b>
+                                    today</p>
                                 <p>By selection Complete Reservation you agree to out <span>Terms of Use </span> and
                                     <span>Privacy Policy</span>
                                 </p>

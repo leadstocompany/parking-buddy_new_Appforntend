@@ -1,5 +1,4 @@
-
-.input- {   
+.input- {
     border-color: rgb(0, 119, 255);
     background-color: #f8f8f8;
     color: #333;
@@ -12,19 +11,23 @@
     transition: border-color 0.3s ease-in-out;
     width: 100%;
 }
-.form-label{
-    width:150px
+
+.form-label {
+    width: 150px
 }
-.input-div{
-    width:  calc(100% - 30px);
+
+.input-div {
+    width: 100%;
     display: flex;
     gap: 0;
 }
-.input-div input{
+
+.input-div input {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
-.icons{
+
+.icons {
     width: 30px;
     color: #333;
     background: #f8f8f8;
@@ -33,7 +36,48 @@
     display: grid;
     place-items: center;
 }
-.invalid-pass{
+
+.invalid-pass {
     color: #DC3544;
     font-size: smaller;
+}
+
+
+.input-label {
+    width: 25%;
+}
+
+.input-field {
+    width: calc(100% - 25%);
+}
+
+
+@media screen and (min-width:768px) and (max-width:1200px) {
+    .input-label {
+        width: 35%;
+    }
+
+    .input-field {
+        width: calc(100% - 35%);
+    }
+}
+
+@media screen and (max-width:768px) {
+    .col-md-12 {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+
+    .mobile-view {
+        width: 100% !important;
+    }
+
+    .input-label,
+    .input-field {
+        width: 100%;
+    }
 }

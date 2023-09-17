@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import currency from '../../../parking/ACurrency.json'
 import { TaxesService } from 'src/app/service/taxes.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
   selector: 'app-single-details',
   templateUrl: './single-details.component.html',
@@ -38,7 +39,7 @@ export class SingleDetailsComponent {
   }
   parkingType!: any;
   value: any;
-  constructor(private _taxeService: TaxesService, private route: ActivatedRoute, private router: Router, private _customerService: CustomerService) { }
+  constructor(private _taxeService: TaxesService, private route: ActivatedRoute, private router: Router, private _customerService: CustomerService, private _snackbarService: SnackbarService) { }
   ngOnInit() {
     // const date = new Date();
     // this.minCheckInDate = `${date.getUTCFullYear()}-${(date.getUTCMonth() + 1).toString().padStart(2, "0")}-${date.getUTCDate().toString().padStart(2, "0")}`;
@@ -105,11 +106,19 @@ export class SingleDetailsComponent {
   isStep1Completed = false;
   selectedStep = 0; // Track the currently selected step
   onNextStep() {
-    if (this.isStep1Completed) {
+    const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
+    if (sameDate && parseInt(this.parkingTimes.checkIn.slice(0, 2)) >= parseInt(this.parkingTimes.checkOut.slice(0, 2))) {
+      this._snackbarService.openSnackbar('❌ Check-Out Time Should be greater than Check-In Time')
+      return
+    }
+    else if (this.isStep1Completed) {
       this.selectedStep = 1; // Advance to step 2 (index 1)
     }
   }
 
+  public modalClose():void{
+    this.selectedStep = 0
+  }
   // // get tex 
   // public getText(id:any) {
   //   console.log(id,'dsfadsaf000000000000000000000000000000000')

@@ -1,0 +1,105 @@
+.main {
+    width: 35lvw;
+    height: 100%;
+    background: #1E3441;
+}
+
+.mat-dialog-actions,
+.mat-dialog-content {
+    padding: 0;
+    margin: 0;
+}
+
+.mat-dialog-content {
+    padding: 0 1rem;
+    background-color: #1E3441;
+}
+
+.user-header {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    background: #1E3441;
+    color: white;
+}
+
+.close-icon-div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+h1 {
+    margin: 0;
+}
+
+.form-label {
+    color: white;
+}
+.form-control {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.invalid-feedback {
+    color: red;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.input-div{
+    width:  100%;
+    display: flex;
+    gap: 0;
+}
+.email-div{
+    width: 100%;
+}
+.input-div input{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.icons{
+    width: 30px;
+    color: #333;
+    background: #f8f8f8;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: grid;
+    place-items: center;
+}
+.invalid-pass{
+    color: #DC3544;
+    font-size: smaller;
+}
+
+
+@media screen and (min-width:768px) and (max-width:1200px) {
+    .main {
+        width: 45lvw;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .main {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+}
