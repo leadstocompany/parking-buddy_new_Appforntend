@@ -75,7 +75,6 @@ export class SingleDetailsComponent {
 
 
   redirectToPayment() {
-    console.log(this.parkingType)
     const queryParams = {
       parkingTimes: JSON.stringify(this.parkingTimes),
       parkingType: JSON.stringify(this.parkingType),
@@ -84,7 +83,11 @@ export class SingleDetailsComponent {
       title: this.value.tittle ? this.value.tittle : '',
       icon: this.currency[this.value.country] ? this.currency[this.value.country] : '$'
     }
-    this.router.navigate(['/customers/payment', this.id], { queryParams });
+    if (this.parkingType) {
+      this.router.navigate(['/customers/payment', this.id], { queryParams });
+    } else {
+      this._snackbarService.openSnackbar('❌ please select parking type')
+    }
   }
 
 
@@ -108,15 +111,18 @@ export class SingleDetailsComponent {
   onNextStep() {
     const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
     if (sameDate && parseInt(this.parkingTimes.checkIn.slice(0, 2)) >= parseInt(this.parkingTimes.checkOut.slice(0, 2))) {
+      this.isStep1Completed = false;
       this._snackbarService.openSnackbar('❌ Check-Out Time Should be greater than Check-In Time')
       return
     }
     else if (this.isStep1Completed) {
+      this.isStep1Completed = true;
       this.selectedStep = 1; // Advance to step 2 (index 1)
+
     }
   }
 
-  public modalClose():void{
+  public modalClose(): void {
     this.selectedStep = 0
   }
   // // get tex 

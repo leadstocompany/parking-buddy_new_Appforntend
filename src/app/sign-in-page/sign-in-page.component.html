@@ -36,6 +36,12 @@
                     </div>
                     <div class="col-12 text-end mt-3">
                         <p style="color: white;">Create new account? <a [routerLink]="[url]">Sign Up</a></p>
+                        <p style="color: white;"
+                            style="text-decoration: underline;color:rgb(116, 116, 247);cursor: pointer;"
+                            (click)="forgotPassword()">
+                            Forgot Password
+                            <!-- <a [routerLink]="['/reset-password']"> Forgot Password</a> -->
+                        </p>
                     </div>
                     <div class="col-12">
                         <div class="spinner-border text-success" role="status" *ngIf="spinner==true">

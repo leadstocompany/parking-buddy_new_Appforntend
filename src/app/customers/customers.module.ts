@@ -22,6 +22,7 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ForgotPasswordComponent } from './user-profile/forgot-password/forgot-password.component';
 import { QuickSignInComponent } from './paymentpage/quick-sign-in/quick-sign-in.component';
+import { QuickSignUpComponent } from './paymentpage/quick-sign-in/quick-sign-up/quick-sign-up.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { QuickSignInComponent } from './paymentpage/quick-sign-in/quick-sign-in.
     ThankYouComponent,
     CreateUserComponent,
     ForgotPasswordComponent,
-    QuickSignInComponent
+    QuickSignInComponent,
+    QuickSignUpComponent
   ],
   imports: [
     CommonModule,

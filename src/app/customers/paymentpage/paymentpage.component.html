@@ -16,7 +16,8 @@
                                 Get discounts and the latest update via email
                             </mat-checkbox>
                             <div class="col-12" [hidden]="userLogin == true">
-                                <button class="btn btn-link" style="outline: none; text-decoration: none;" (click)="quickSignInDialog()">Sign in for
+                                <button class="btn btn-link" style="outline: none; text-decoration: none;"
+                                    (click)="quickSignInDialog()">Sign in for
                                     Faster Checkout</button>
                             </div>
                         </div>
@@ -140,8 +141,7 @@
                         <p>Check-Out : {{date.checkOut | date:'EEE, MMM d'}} -{{time.checkOut}}</p>
                         <p class="d-flex flex-row justify-content-between align-content-center"><span> {{day}} Days Of
                                 Parking</span> <span data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                style="color:blue;cursor:pointer;">Edit
-                                Times</span></p>
+                                style="color:blue;cursor:pointer;">Edit</span></p>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="price p-3">
@@ -182,19 +182,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title" id="exampleModalLabel">Edit Parking Times</h1>
+                <h1 class="modal-title" id="exampleModalLabel">Edit Parking Date & Time</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <mat-stepper orientation="vertical">
                     <mat-step>
-                        <ng-template matStepLabel>Parking Times <br> <span style="font-size:small">Select your
+                        <ng-template matStepLabel>Parking Date & Times <br> <span style="font-size:small">Select your
                                 parking check-In and
-                                check-Out times.</span></ng-template>
+                                check-Out Date & Time.</span></ng-template>
                         <ng-template matStepContent>
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-md-6">
-                                    <label for="toggleTimepicker">Check In</label>
+                                    <label for="toggleTimepicker">Check In Time</label>
                                     <div class="d-flex flex-row position-relative">
                                         <input class="input-" [ngxTimepicker]="toggleTimepicker" [disableClick]="true"
                                             readonly (click)="toggleTimepicker.open()" [format]="24"
@@ -206,7 +206,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="toggleTimepicker1">Check Out</label>
+                                    <label for="toggleTimepicker1">Check Out Time</label>
                                     <div class="d-flex flex-row position-relative">
                                         <input class="input-" [ngxTimepicker]="toggleTimepicker1" [disableClick]="true"
                                             readonly (click)="toggleTimepicker1.open()" [format]="24"
@@ -215,6 +215,28 @@
                                             class="position-absolute" style="top:7px;"></ngx-material-timepicker-toggle>
                                         <ngx-material-timepicker #toggleTimepicker1
                                             [format]="24"></ngx-material-timepicker>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-3">
+                                    <div class="row d-flex flex-row justify-content-between">
+                                        <div class="col-md-6">
+                                            <span>Check In Date</span>
+                                            <input class="checkTime" type="text" #dp="bsDatepicker"
+                                                [minDate]="minCheckInDate" placeholder="Check-In" bsDatepicker
+                                                [ngModelOptions]="{ standalone: true }" [(ngModel)]="checkInTime"
+                                                [bsConfig]="{ adaptivePosition: true }"
+                                                (ngModelChange)="checkOutDate()">
+                                            <!-- <input type="date" [min]="minCheckInDate" class="form-control"[ngModelOptions]="{ standalone: true }" [(ngModel)]="checkInTime"> -->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span>Check Out Date</span>
+                                            <input class="checkTime" type="text" #dp="bsDatepicker"
+                                                [minDate]="minCheckOutDate" placeholder="Check-Out" bsDatepicker
+                                                [bsConfig]="{ adaptivePosition: true }"
+                                                [ngModelOptions]="{ standalone: true }" [(ngModel)]="checkOutTime">
+                                            <!-- <input type="date" [min]="minCheckOutDate" class="form-control" [(ngModel)]="checkOutTime"> -->
+                                        </div>
                                     </div>
                                 </div>
 

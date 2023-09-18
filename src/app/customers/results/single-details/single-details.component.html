@@ -195,45 +195,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="container-fluid lowwer">
-            <div class="title">
-                <h3>Other Popular JFK Parking Options</h3>
-            </div>
-            <div class="container-fluid" style="max-height: 70vh;overflow-y: auto;">
-                <div *ngFor="let v of ['a','b','c','a','b','c','a','b','c']" class="row mt-3 p-0">
-                    <div class="col-3">
-                        <img src="https://m.media-amazon.com/images/I/41wk+UiVnEL._SX300_SY300_.jpg" alt=""
-                            style="max-width: 100%; max-height: 100%;">
-                    </div>
-                    <div class="col-6" style="color:black; font-size: 12px;">
-                        <p>Radisson Hotel JFK Airport</p>
-                        <p class="d-flex flex-row align-content-center">
-                            <span>
-                                <span *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
-                                    <mat-icon class="filled">star</mat-icon>
-                                </span>
-                            </span>
-                            <span>
-                                Great (958 Ratings)
-                            </span>
-                        </p>
-                        <p class="d-flex flex-row align-content-center align-items-center">
-                            <mat-icon>schedule</mat-icon>
-                            Additional Saferty
-                        </p>
-                    </div>
-                    <div class="col-3 p-3">
-                        <div class="d-flex flex-column gap-3">
-                            <div style="color:black; font-size: 16px;">
-                                $<sup></sup><span>28</span><sup>99</sup><sub><br> Per
-                                    Day</sub></div>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div> -->
-        <!-- modal -->
 
         <!-- Modal -->
         <div class="modal fade mt-5" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -242,7 +204,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title" id="exampleModalLabel">Select Parking Times and Types</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modalClose()" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modalClose()"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <mat-stepper orientation="vertical" [selectedIndex]="selectedStep">
@@ -286,7 +249,8 @@
                                 </ng-template>
                             </mat-step>
                             <mat-step>
-                                <ng-template matStepLabel>Parking Type <br> <span style="font-size:small">This lot has 2
+                                <ng-template matStepLabel>Parking Type <br> <span style="font-size:small">This lot has
+                                        {{this.typesOfShoes.length}}
                                         parking types,please select one.</span></ng-template>
                                 <ng-template matStepContent>
                                     <mat-selection-list #shoes multiple="false" [(ngModel)]="parkingType"
@@ -305,8 +269,8 @@
                                     </mat-selection-list>
                                     <!-- <button mat-button matStepperPrevious>Back</button> -->
                                     <!-- <button mat-button matStepperNext>Next</button> -->
-                                    <button class="btn btn-danger mt-4 align-self-center"
-                                        (click)="redirectToPayment()">Proceed to Checkout</button>
+                                    <button class="btn btn-danger mt-4 align-self-center" (click)="redirectToPayment()"
+                                        [disabled]="!isStep1Completed">Proceed to Checkout</button>
                                 </ng-template>
                             </mat-step>
                         </mat-stepper>

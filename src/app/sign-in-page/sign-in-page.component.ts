@@ -14,7 +14,7 @@ export class SignInPageComponent {
   spinner: boolean = false
   public url: string = ''
   public passwordHide: boolean = true;
-  
+
   constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
@@ -65,6 +65,18 @@ export class SignInPageComponent {
           this._snackBarService.openSnackbar('❌' + error.error.message)
         }
       })
+    }
+  }
+
+  public forgotPassword() {
+    const currentUrl = this._router.url
+    if (currentUrl.includes('/customers')) {
+      this.url = '/customers/sign-up'
+      const queryParams = { user: 'CUSTOM77484ER85487548400UHGBVVGHJIHHGHHGHBNM45125445874FDC5844J' }
+      this._router.navigate(['/reset-password'], { queryParams })
+    } else {
+      const queryParams = { user: 'ADMIN77484ER85487548400UHGBVVGHJIHHGHHGHBNM45125445874FDC5844J' }
+      this._router.navigate(['/reset-password'], { queryParams })
     }
   }
 }

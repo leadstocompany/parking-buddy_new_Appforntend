@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+import { QuickSignUpComponent } from './quick-sign-up/quick-sign-up.component';
 
 @Component({
   selector: 'app-quick-sign-in',
@@ -20,6 +21,7 @@ export class QuickSignInComponent {
     private _dialogRef: MatDialogRef<QuickSignInComponent>,
     private _authService: AuthService,
     private _snackBarService: SnackbarService,
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -56,5 +58,17 @@ export class QuickSignInComponent {
         }
       })
     }
+  }
+
+
+  public quickSignInDialog(): void {
+    const dialogRef = this._dialog.open(QuickSignUpComponent, {
+      autoFocus: false,
+      disableClose: true,
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      this.ngOnInit()
+    })
   }
 }

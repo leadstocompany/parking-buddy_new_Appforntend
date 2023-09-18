@@ -23,6 +23,7 @@ export class SearchComponent {
   public minCheckOutDate: Date = new Date();
   // initialize variable user login or not 
   public userLogin = false
+  public spinner = false
 
 
   @ViewChild('placesSearchInput') placesSearchInput!: ElementRef;
@@ -60,7 +61,7 @@ export class SearchComponent {
     this.searchSubscription?.unsubscribe();
   }
 
-  public checkOutDate():void{
+  public checkOutDate(): void {
     const date = new Date(this.checkIn);
     this.minCheckOutDate = date;
     this.checkout = date;
@@ -94,18 +95,7 @@ export class SearchComponent {
   }
 
   public submitForm(): void {
-    if (this.checkIn && this.checkout && this.searchData.length) {
-      const queryParams = {
-        // data: JSON.stringify(this.searchData),
-        data: this.searchTerm,
-        checkIn: this.checkIn,
-        checkout: this.checkout
-      };
-      this._router.navigate(['/customers/result'], { queryParams })
-    } else {
-      this._snackbarService.openSnackbar('❌ Result Not Found')
-    }
-
+    this.getSearchResult()
   }
 
 
@@ -128,7 +118,35 @@ export class SearchComponent {
         }
       },
       error: (error) => {
-        console.log(error)
+        console.log(error.error)
+      }
+    })
+  }
+
+  getSearchResult(): void {
+    this.spinner = true
+    this._customerService.searchAddress(this.searchTerm, '', '').subscribe({
+      next: (data) => {
+        this.searchData = data;
+        this.getUserDetails()
+
+        if (this.checkIn && this.checkout && this.searchData.length) {
+          const queryParams = {
+            // data: JSON.stringify(this.searchData),
+            data: this.searchTerm,
+            checkIn: this.checkIn,
+            checkout: this.checkout
+          };
+          this._router.navigate(['/customers/result'], { queryParams })
+        } else {
+          this.spinner = false
+          this._snackbarService.openSnackbar('❌ Result Not Found')
+        }
+      },
+      error: (error) => {
+        console.log(error.error)
+        this.spinner = false
+        this._snackbarService.openSnackbar('❌' + error.error)
       }
     })
   }

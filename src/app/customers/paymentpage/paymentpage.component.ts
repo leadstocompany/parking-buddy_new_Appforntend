@@ -30,7 +30,13 @@ export class PaymentpageComponent {
     "checkIn": "13:15",
     "checkOut": "05:20"
   }
+  // this is a check in date 
+  checkInTime: Date = new Date()
+  checkOutTime: Date = new Date()
+  public minCheckInDate: Date = new Date();
+  public minCheckOutDate: Date = new Date();
   constructor(
+
     private _snackbar: SnackbarService,
     private _customer: CustomerService,
     private _taxeService: TaxesService,
@@ -54,6 +60,8 @@ export class PaymentpageComponent {
         checkIn: queryParams['checkInDate'],
         checkOut: queryParams['checkOutDate']
       }
+      this.checkInTime = new Date(queryParams['checkInDate'])
+      this.checkOutTime = new Date(queryParams['checkOutDate'])
       this.time = JSON.parse(queryParams['parkingTimes'])
       this.type = JSON.parse(queryParams['parkingType'])
       this.editTime = {
@@ -108,12 +116,23 @@ export class PaymentpageComponent {
   }
 
   public editTimes() {
-    this.time = {
-      "checkIn": this.editTime.checkIn,
-      "checkOut": this.editTime.checkOut
+    const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
+    if (sameDate && parseInt(this.editTime.checkIn.slice(0, 2)) >= parseInt(this.editTime.checkOut.slice(0, 2))) {
+      this._snackbar.openSnackbar('Check Out Time is Not Valid')
+      return
+    } else {
+      this.time = {
+        "checkIn": this.editTime.checkIn,
+        "checkOut": this.editTime.checkOut
+      }
+      this.date = {
+        checkIn: this.checkInTime,
+        checkOut: this.checkOutTime
+      }
+      this.timeDiffrence(new Date(this.date.checkIn), new Date(this.date.checkOut))
+      this.getText(this.id)
+
     }
-    this.timeDiffrence(new Date(this.date.checkIn), new Date(this.date.checkOut))
-    this.getText(this.id)
   }
 
   public submitForm() {
@@ -257,5 +276,11 @@ export class PaymentpageComponent {
     dialogRef.afterClosed().subscribe((res: any) => {
       this.ngOnInit()
     })
+  }
+
+  public checkOutDate(): void {
+    const date = new Date(this.checkInTime);
+    this.minCheckOutDate = date;
+    this.checkOutTime = date;
   }
 }

@@ -13,6 +13,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { EditProfileComponent } from './sidebar/edit-profile/edit-profile.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-password-page.component';
 // import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     SignUpPageComponent,
     SignInPageComponent,
     EditProfileComponent,
+    ForgotPasswordPageComponent,
     // SidebarComponent
   ],
   imports: [

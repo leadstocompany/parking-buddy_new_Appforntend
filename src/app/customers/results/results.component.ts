@@ -6,13 +6,14 @@ import { debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs
 import currency from '../../parking/ACurrency.json'
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent {
-  constructor(private router: Router, private _route: ActivatedRoute, private _customerService: CustomerService, private mapDirectionsService: MapDirectionsService) { }
+  constructor(private _snackbarService: SnackbarService, private router: Router, private _route: ActivatedRoute, private _customerService: CustomerService, private mapDirectionsService: MapDirectionsService) { }
   public results: Array<any> = [];
   public date!: { checkIn: Date, checkOut: Date }
   amountIcon = '₹'
@@ -37,7 +38,7 @@ export class ResultsComponent {
           this.results = data;
           console.log(this.results, '----------')
           this.center = { lat: +this.results[0].latitude, lng: +this.results[0].longitude }
-          this.zoom = 7;
+          this.zoom = 10;
           console.log({ lat: Number(this.results[0]?.latitude), lng: Number(this.results[0]?.longitude) })
           console.log(this.center)
           this.addMarker()
@@ -58,7 +59,6 @@ export class ResultsComponent {
       }
       this.searchInput();
     });
-    console.log(this.results[0])
   }
 
   public search(event: any) {
@@ -72,7 +72,8 @@ export class ResultsComponent {
   public searchInput(): void {
     console.log(this.searchTerm, '---------')
     this.spinner = true
-    this.searchTerms.next(this.searchTerm);
+    // this.searchTerms.next(this.searchTerm);
+    this.getSearchResult()
     this.FilterProduct(this.searchTerm)
   }
 
@@ -119,6 +120,29 @@ export class ResultsComponent {
   }
 
 
+  getSearchResult(): void {
+    this.spinner = true
+    this.spinner = true
+    this._customerService.searchAddress(this.searchTerm, '', '').subscribe({
+      next: (data) => {
+        this.spinner = false
+        this.results = data;
+        this.FilterProduct(this.searchTerm)
+        this.center = { lat: +this.results[0].latitude, lng: +this.results[0].longitude }
+        this.zoom = 10;
+        console.log({ lat: Number(this.results[0]?.latitude), lng: Number(this.results[0]?.longitude) })
+        console.log(this.center)
+        this.addMarker()
+      },
+      error: (error) => {
+        console.log(error.error)
+        this.spinner = false
+        this._snackbarService.openSnackbar('❌' + error.error)
+      }
+    })
+  }
+
+
 
   //  map code ============>
 
@@ -128,7 +152,7 @@ export class ResultsComponent {
   // center: google.maps.LatLngLiteral = { lat: 22.719568, lng: 75.857727 };
   center: google.maps.LatLngLiteral = { lat: Number(this.results[0]?.latitude), lng: Number(this.results[0]?.longitude) };
 
-  zoom = 7;
+  zoom = 15;
   iconSize: any = new google.maps.Size(40, 40)
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   markerOptions: google.maps.MarkerOptions = { draggable: false };

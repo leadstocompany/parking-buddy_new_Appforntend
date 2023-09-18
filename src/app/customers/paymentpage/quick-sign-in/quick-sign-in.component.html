@@ -37,6 +37,11 @@
                         Please enter a valid password.
                     </div>
                 </div>
+
+                <div class="col-12 text-end mt-3">
+                    <p style="color: rgb(78, 104, 221); cursor: pointer;" (click)="quickSignInDialog()">Create new
+                        account? Sign Up </p>
+                </div>
                 <!-- <div class="col-12 text-end mt-3">
                     <p style="color: white;">Create new account? <a [routerLink]="['/customers/sign-up']">Sign Up</a></p>
                 </div> -->
@@ -45,7 +50,7 @@
                         <span class="visually-hidden">Loading...</span>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="signInForm.invalid"
-                        *ngIf="spinner==false" >Sign-In</button>
+                        *ngIf="spinner==false">Sign-In</button>
                 </div>
             </div>
         </form>

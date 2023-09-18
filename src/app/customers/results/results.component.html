@@ -1,5 +1,5 @@
-<div class="container-fluid" style="max-width:100vw; min-width:99vw; box-sizing: border-box;">
-    <div class="row p-2" style="background-color:darkorange;position: sticky; z-index: 9999; color:white">
+<div class="container-fluid" style="max-width:100vw; min-width:97vw; box-sizing: border-box;">
+    <div class="row p-2" style="background-color:darkorange;position: sticky; z-index: 9999; color:white;">
         <!-- <div class="col-md-3">
             <p>Departure Airport</p>
             <p class="fs-4">New Yark jt.</p>
@@ -24,8 +24,12 @@
         <div class="col-md-6 d-flex  align-items-center">
             <form class="search-form">
                 <input #searchInput type="text" placeholder="search location" [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="searchTerm" (input)="search($event)">
-                <button type="button">Search</button>
+                    [(ngModel)]="searchTerm">
+                <!-- <button type="button" (click)="getSearchResult()">Searchs</button> -->
+                <button (click)="getSearchResult()" id="submit" *ngIf="spinner==false">Submit</button>
+                <div class="spinner-border text-bg-danger mx-2" role="status" *ngIf="spinner==true">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </form>
         </div>
     </div>
@@ -157,8 +161,10 @@
                         <p>{{someDynamicValue}}</p>
                     </div> -->
                     <div class="info-window-content">
-                        <p class="text-wrap" style="font-size:10px;padding: 0; margin: 0; font-weight: bold;">{{dynamicTittle}}</p>
-                        <p class="text-nowrap" style="font-size: 8px;padding: 0;margin: 0;  font-weight: bold;" >{{dynamicPrice}} Per
+                        <p class="text-wrap" style="font-size:10px;padding: 0; margin: 0; font-weight: bold;">
+                            {{dynamicTittle}}</p>
+                        <p class="text-nowrap" style="font-size: 8px;padding: 0;margin: 0;  font-weight: bold;">
+                            {{dynamicPrice}} Per
                             Day</p>
                         <p style="font-size:8px;color:black;padding: 0;margin: 0; font-weight: bold;">{{street}}</p>
                         <button class="btn-group-sm btn-danger rounded-1" style="width: 100%;"
