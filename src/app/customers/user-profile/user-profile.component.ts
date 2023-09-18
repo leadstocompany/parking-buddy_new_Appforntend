@@ -112,7 +112,7 @@ export class UserProfileComponent {
           zipcode: data.zipcode,
           plateNo: data.car_plate_no,
           state: data.state,
-          makeModle: data.make_modle ? data.make_modle : ""
+          makeModle: data.car_model ? data.car_model : ""
         })
       },
       error: (error: HttpErrorResponse) => {
@@ -146,7 +146,7 @@ export class UserProfileComponent {
       zipcode: this.profileForm.controls['zipcode'].value,
       car_plate_no: this.profileForm.controls['plateNo'].value,
       state: this.profileForm.controls['state'].value,
-      make_modle: this.profileForm.controls['makeModle'].value
+      car_model: this.profileForm.controls['makeModle'].value
     }
     this._customerService.updateProfile(data).subscribe({
       next: (res) => {

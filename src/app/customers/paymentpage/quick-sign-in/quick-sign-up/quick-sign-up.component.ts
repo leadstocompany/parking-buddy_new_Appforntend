@@ -54,7 +54,7 @@ export class QuickSignUpComponent {
       "state": this.profileForm.value.state,
       "password": this.profileForm.value.currentPassword,
       "user": 'customer',
-      "make_modle": this.profileForm.controls['makeModle'].value
+      "car_model": this.profileForm.controls['makeModle'].value
     }
 
     this._customer.createUser(pyload).subscribe({
