@@ -6,7 +6,8 @@
     </div>
     <mat-dialog-content>
         <form [formGroup]="profileForm" class="profile-form mt-3" (ngSubmit)="AddProfile()">
-            <div class="container-fluid d-flex flex-column gap-3 mobile-view" style="width: 50vw;height: 100%; color:white">
+            <div class="container-fluid d-flex flex-column gap-3 mobile-view"
+                style="width: 50vw;height: 100%; color:white">
                 <div class="row d-flex flex-column gap-3">
                     <div class="col-md-12 d-flex flex-md-row flex-column  align-items-center gap-md-3">
                         <label for="email" class="form-label input-label text-nowrap text-nowrap">Email *</label>
@@ -94,7 +95,23 @@
 
                             <div *ngIf="profileForm.get('plateNo')!.invalid && profileForm.get('plateNo')!.touched"
                                 class="invalid-feedback">
-                                Please enter a Car Plate Number.
+                                Why do I need to enter my license plate and phone number?
+                                This facility is monitored using your vehicle's license plate. Make sure it's correct in
+                                order to avoid being ticketed or towed
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 d-flex flex-md-row flex-column  align-items-md-center gap-md-3">
+                        <label for="makeModle" class="form-label input-label text-nowrap">Make & Model *</label>
+                        <div class="input-field">
+                            <input type="text" class="form-control input-filed" formControlName="makeModle"
+                                placeholder="Make & Model"
+                                [ngClass]="{'is-invalid':profileForm.get('makeModle')!.invalid && profileForm.get('makeModle')!.touched}">
+
+                            <div *ngIf="profileForm.get('makeModle')!.invalid && profileForm.get('makeModle')!.touched"
+                                class="invalid-feedback">
+                                Please enter Make & Modle.
                             </div>
                         </div>
                     </div>

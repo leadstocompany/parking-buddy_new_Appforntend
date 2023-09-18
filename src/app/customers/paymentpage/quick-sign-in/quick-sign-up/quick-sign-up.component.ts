@@ -37,7 +37,8 @@ export class QuickSignUpComponent {
       currentPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/)]],
       confirmPassword: ['', [Validators.required]],
       plateNo: ['', [Validators.required]],
-      state: ['', [Validators.required]]
+      state: ['', [Validators.required]],
+      makeModle: ['', Validators.required]
     });
   }
 
@@ -52,7 +53,8 @@ export class QuickSignUpComponent {
       "car_plate_no": this.profileForm.value.plateNo,
       "state": this.profileForm.value.state,
       "password": this.profileForm.value.currentPassword,
-      "user": 'customer'
+      "user": 'customer',
+      "make_modle": this.profileForm.controls['makeModle'].value
     }
 
     this._customer.createUser(pyload).subscribe({

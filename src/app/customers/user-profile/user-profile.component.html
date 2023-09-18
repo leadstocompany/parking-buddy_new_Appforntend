@@ -4,7 +4,7 @@
     <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="logOut($event)">
         <mat-tab label="My Reservation">
             <div class="container-fluid mt-4">
-                <h1 style="text-align: center;">My Reservation</h1> 
+                <h1 style="text-align: center;">My Reservation</h1>
                 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center"
                     (selectedTabChange)="onTabChangeReservation($event)">
                     <mat-tab label="Open Reservation">
@@ -157,11 +157,23 @@
                             <input type="text" class="form-control input-filed" formControlName="plateNo"
                                 placeholder="Car Plate Number"
                                 [ngClass]="{'is-invalid':profileForm.get('plateNo')!.invalid && profileForm.get('plateNo')!.touched}">
-
                             <div *ngIf="profileForm.get('plateNo')!.invalid && profileForm.get('plateNo')!.touched"
                                 class="invalid-feedback">
-                                Please enter a Car Plate Number.
+                                Why do I need to enter my license plate and phone number?
+                                This facility is monitored using your vehicle's license plate. Make sure it's correct in
+                                order to avoid being ticketed or towed
                             </div>
+                        </div>
+                        <div class="col-md-12 d-flex flex-md-row flex-column  align-items-md-center gap-md-3">
+                            <label for="makeModle" class="form-label input-label text-nowrap">Make & Model *</label>
+                            <input type="text" class="form-control input-filed" formControlName="makeModle"
+                                placeholder="Make & Model"
+                                [ngClass]="{'is-invalid':profileForm.get('makeModle')!.invalid && profileForm.get('makeModle')!.touched}">
+                            <div *ngIf="profileForm.get('makeModle')!.invalid && profileForm.get('makeModle')!.touched"
+                                class="invalid-feedback">
+                                Please enter Make & Modle.
+                            </div>
+
                         </div>
 
                         <div class="col-md-12 d-flex flex-md-row flex-column  align-items-md-center gap-md-3">
@@ -177,7 +189,7 @@
                         </div>
                     </div>
                     <mat-divider></mat-divider>
-                    <div class="row d-flex flex-column gap-3">  
+                    <div class="row d-flex flex-column gap-3">
                         <div class="forgot-password">
                             <div (click)="forgotPasswordDialog()">
                                 change Password

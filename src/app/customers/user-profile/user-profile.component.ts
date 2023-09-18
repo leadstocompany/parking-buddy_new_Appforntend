@@ -37,7 +37,8 @@ export class UserProfileComponent {
       // nPassword: ['', [Validators.required]],
       // confirmPassword: ['', [Validators.required]],
       plateNo: ['', [Validators.required]],
-      state: ['', [Validators.required]]
+      state: ['', [Validators.required]],
+      makeModle: ['', Validators.required]
     });
 
     this._openReservationDetails()
@@ -110,7 +111,8 @@ export class UserProfileComponent {
           phone: data.phone_number,
           zipcode: data.zipcode,
           plateNo: data.car_plate_no,
-          state: data.state
+          state: data.state,
+          makeModle: data.make_modle ? data.make_modle : ""
         })
       },
       error: (error: HttpErrorResponse) => {
@@ -143,7 +145,8 @@ export class UserProfileComponent {
       phone_number: this.profileForm.controls['phone'].value,
       zipcode: this.profileForm.controls['zipcode'].value,
       car_plate_no: this.profileForm.controls['plateNo'].value,
-      state: this.profileForm.controls['state'].value
+      state: this.profileForm.controls['state'].value,
+      make_modle: this.profileForm.controls['makeModle'].value
     }
     this._customerService.updateProfile(data).subscribe({
       next: (res) => {
