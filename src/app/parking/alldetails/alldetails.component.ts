@@ -33,8 +33,8 @@ export class AlldetailsComponent {
         this.calculatePageNumbers();
         this.updateTableContent();
       },
-      error: (error: HttpErrorResponse) => {
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+      error: (error:any) => {
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }

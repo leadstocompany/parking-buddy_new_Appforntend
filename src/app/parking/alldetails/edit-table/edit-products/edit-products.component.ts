@@ -62,7 +62,7 @@ export class EditProductsComponent {
         this.getData()
       },
       error: (error) => {
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
         console.log(error)
       }
     })

@@ -77,9 +77,8 @@ export class UserProfileComponent {
         this.pastReservationData = []
         this.openReservationData = res
       },
-      error: (error: HttpErrorResponse) => {
-        console.log(error);
-        this._snackbarService.openSnackbar(`❌ Internal Server Error`)
+      error: (error:any) => {
+        this._snackbarService.openSnackbar(`❌ `+error.error[0])
       },
     })
   }
@@ -91,9 +90,9 @@ export class UserProfileComponent {
         this.openReservationData = []
         this.pastReservationData = res
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         console.log(error);
-        this._snackbarService.openSnackbar(`❌ Internal Server Error`)
+        this._snackbarService.openSnackbar(`❌ `+error.error[0])
       },
     })
   }
@@ -115,9 +114,9 @@ export class UserProfileComponent {
           makeModle: data.car_model ? data.car_model : ""
         })
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         console.log(error);
-        this._snackbarService.openSnackbar(`❌ Internal Server Error`)
+        this._snackbarService.openSnackbar(`❌ `+error.error[0])
       },
     })
   }
@@ -153,9 +152,9 @@ export class UserProfileComponent {
         console.log('res ==>', res);
         this._snackbarService.openSnackbar('✔ Profile Update Successfully')
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         console.log(error);
-        this._snackbarService.openSnackbar(`❌ Internal Server Error`)
+        this._snackbarService.openSnackbar(`❌ `+error.error[0])
       },
     })
   }

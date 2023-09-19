@@ -370,9 +370,9 @@ export class EditDetailsComponent {
           localStorage.setItem('detailsId', res.id);
           this._snackbarService.openSnackbar('✔ Form Successfully Updated')
         },
-        error: (error: HttpErrorResponse) => {
+        error: (error:any) => {
           this.spinner = false
-          this._snackbarService.openSnackbar('❌ Internal Server Error')
+          this._snackbarService.openSnackbar('❌ '+error.error[0])
         }
       })
     }
@@ -389,9 +389,9 @@ export class EditDetailsComponent {
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }
@@ -456,7 +456,7 @@ export class EditDetailsComponent {
       error: (error) => {
         console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }
@@ -474,9 +474,9 @@ export class EditDetailsComponent {
         this.spinner = false
         this.setValues(res)
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }

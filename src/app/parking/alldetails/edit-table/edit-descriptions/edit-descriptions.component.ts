@@ -53,7 +53,7 @@ export class EditDescriptionsComponent {
       error: (error) => {
         console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }

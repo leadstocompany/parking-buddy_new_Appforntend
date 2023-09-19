@@ -167,7 +167,7 @@ export class OperatingHoursComponent {
       error: (error) => {
         console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }
@@ -188,9 +188,9 @@ export class OperatingHoursComponent {
         console.log(res, 'single data')
         this.setValues(res)
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }

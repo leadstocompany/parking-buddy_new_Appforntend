@@ -106,7 +106,7 @@ export class TaxesComponent {
       },
       error: (error) => {
         console.log(error)
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
     })
@@ -155,7 +155,7 @@ export class TaxesComponent {
       },
       error: (error) => {
         console.log(error)
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
     })
@@ -203,7 +203,7 @@ export class TaxesComponent {
       },
       error: (error) => {
         console.log(error)
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
     })
@@ -233,10 +233,10 @@ export class TaxesComponent {
         console.log(res, 'res')
         this.amountIcon = this.currency[`${res.country}`]
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }

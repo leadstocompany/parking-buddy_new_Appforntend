@@ -54,14 +54,14 @@ export class ProductsComponent {
         this._saveService.setProductId(res.id)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.modalElement.nativeElement.click();
-        if(this.editData.edit){
+        if (this.editData.edit) {
           this.getProduct(this.editData.id)
-        }else{
+        } else {
           this.getProduct(this._saveService.getPropertyId())
         }
       },
       error: (error) => {
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
         console.log(error)
       }
     })

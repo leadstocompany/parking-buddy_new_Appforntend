@@ -326,9 +326,9 @@ export class GeneralComponent {
             this.spinner = false
             this._snackbarService.openSnackbar('✔ Form Successfully Updated')
           },
-          error: (error: HttpErrorResponse) => {
+          error: (error:any) => {
             this.spinner = false
-            this._snackbarService.openSnackbar('❌ Internal Server Error')
+            this._snackbarService.openSnackbar('❌ '+error.error[0])
           }
         })
       } else {
@@ -339,10 +339,10 @@ export class GeneralComponent {
             this._saveService.setPropertyId(res.id)
             this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
           },
-          error: (error: HttpErrorResponse) => {
+          error: (error:any) => {
             console.log(error)
             this.spinner = false
-            this._snackbarService.openSnackbar('❌ Internal Server Error')
+            this._snackbarService.openSnackbar('❌ '+error.error[0])
           }
         })
       }
@@ -364,9 +364,9 @@ export class GeneralComponent {
   //       this.spinner = false
   //       this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
   //     },
-  //     error: (error: HttpErrorResponse) => {
+  //     error: (error:any) => {
   //       this.spinner = false
-  //       this._snackbarService.openSnackbar('❌ Internal Server Error')
+  //       this._snackbarService.openSnackbar('❌ '+error.error[0])
   //     }
   //   })
   // }
@@ -396,10 +396,10 @@ export class GeneralComponent {
       next: (res) => {
         this.setValues(res)
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }

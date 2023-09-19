@@ -79,7 +79,7 @@ export class PricingComponent {
       },
       error: (error) => {
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
         console.log(error)
       }
     })
@@ -117,7 +117,7 @@ export class PricingComponent {
       },
       error: (error) => {
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
         console.log(error)
       }
     })
@@ -200,10 +200,10 @@ export class PricingComponent {
         console.log(res, 'res')
         this.amountIcon = this.currency[`${res.country}`]
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }

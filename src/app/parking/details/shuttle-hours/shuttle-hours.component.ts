@@ -150,7 +150,7 @@ export class ShuttleHoursComponent {
       error: (error) => {
         console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }
@@ -218,7 +218,7 @@ export class ShuttleHoursComponent {
       error: (error) => {
         console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }
@@ -243,9 +243,9 @@ export class ShuttleHoursComponent {
           this.updated = false
         }
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error:any) => {
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ Internal Server Error')
+        this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
     })
   }
