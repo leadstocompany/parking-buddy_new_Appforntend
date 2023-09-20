@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+import { AuthService } from '../service/auth/auth.service';
 
 
 @Component({
@@ -12,40 +13,96 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
   styleUrls: ['./forgot-password-page.component.scss']
 })
 export class ForgotPasswordPageComponent {
-  selected = new FormControl(0);
-  profileForm!: FormGroup;
+  // Form groups for each step
+  emailForm!: FormGroup;
+  otpForm!: FormGroup;
+  passwordForm!: FormGroup;
+  otp!: FormControl
+  // Step tracking
+  currentStep: number = 1;
+  // Inside your PasswordResetComponent
+  passwordVisible: boolean = true;
+  confirmPasswordVisible: boolean = true;
   user!: string
+  otpSent: boolean = false
+  verifyOtp: boolean = false
   constructor(
     private fb: FormBuilder,
     private _customerService: CustomerService,
+    private _authService: AuthService,
     private _snackbarService: SnackbarService,
     private _router: Router,
     private _activeRouter: ActivatedRoute
-  ) { }
-
-  ngOnInit(): void {
-    this.profileForm = this.fb.group({
-      email: ['', [Validators.required]],
-      nPassword: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
+  ) {
+    // Initialize form groups with validation
+    this.emailForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
     });
-
+    this.otp = new FormControl('', [Validators.required]);
+    this.passwordForm = this.fb.group({
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/)]],
+      confirmPassword: ['', [Validators.required]]
+    });
+  }
+  ngOnInit(): void {
     this._activeRouter.queryParams.subscribe((queryParams) => {
-      // this.results = JSON.parse(queryParams['data']);
-      // queryParams['checkIn']
       this.user = queryParams['user']
     });
   }
-  public changePassword(): void {
-    if (this.profileForm.controls['nPassword'].value !== this.profileForm.controls['confirmPassword'].value) {
+  // Function to navigate to the next step
+  nextStep() {
+    this.currentStep++;
+  }
+  // Function to navigate to the previous step
+  prevStep() {
+    this.currentStep--;
+  }
+
+  public sendOtp(): void {
+    this._authService.sentOptOnEmail({ email: this.emailForm.controls['email'].value }).subscribe({
+      next: (res) => {
+        this.otpSent = true
+      },
+      error: (error) => {
+        this._snackbarService.openSnackbar('❌' + error.error[0])
+      }
+    })
+  }
+
+  public verifyEmail(): void {
+    this._authService.verifyOptOnEmail({ email: this.emailForm.controls['email'].value, otp: this.otp.value }).subscribe({
+      next: (res) => {
+        this.otpSent = true
+        this.verifyOtp = true
+      },
+      error: (error) => {
+        this._snackbarService.openSnackbar('❌' + error.error[0])
+      }
+    })
+  }
+
+  public wrongEmail(): void {
+    this.otpSent = false
+  }
+  
+  togglePasswordVisibility(field: string) {
+    if (field === 'password') {
+      this.passwordVisible = !this.passwordVisible;
+    } else if (field === 'confirmPassword') {
+      this.confirmPasswordVisible = !this.confirmPasswordVisible;
+    }
+  }
+
+  forgotPassword() {
+    if (this.passwordForm.controls['password'].value !== this.passwordForm.controls['confirmPassword'].value) {
       this._snackbarService.openSnackbar(`❌new password and confirm password not matched`)
       return
     } else {
       const data = {
-        email: this.profileForm.controls['email'].value,
-        new_password: this.profileForm.controls['nPassword'].value
+        email: this.emailForm.controls['email'].value,
+        new_password: this.passwordForm.controls['password'].value
       }
-      this._customerService.changePassword(data).subscribe({
+      this._authService.resetPassword(data).subscribe({
         next: (res) => {
           this._snackbarService.openSnackbar('✔ Password Change Successfully')
           if (this.user == 'CUSTOM77484ER85487548400UHGBVVGHJIHHGHHGHBNM45125445874FDC5844J') {
@@ -55,13 +112,12 @@ export class ForgotPasswordPageComponent {
           } else {
             this._router.navigate(['/customers'])
           }
-
         },
-        error: (error:any) => {
-          console.log(error);
-          this._snackbarService.openSnackbar(`❌ `+error.error[0])
-        },
+        error: (error) => {
+          this._snackbarService.openSnackbar('❌' + error.error[0])
+        }
       })
     }
   }
+
 }

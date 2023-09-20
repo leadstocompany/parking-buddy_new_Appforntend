@@ -1,46 +1,40 @@
-<div class="container-fluid" style="max-width:100vw; min-width:97vw; box-sizing: border-box;">
-    <div class="row p-2" style="background-color:darkorange;position: sticky; z-index: 9999; color:white;">
-        <!-- <div class="col-md-3">
-            <p>Departure Airport</p>
-            <p class="fs-4">New Yark jt.</p>
-        </div> -->
-        <div class="col-md-6">
+<div class="container-fluid" style="max-width:100vw; min-width:100vw; box-sizing: border-box; max-height:100vh;">
+    <div class="row navbar">
+        <div class="col-md-2 d-flex align-items-center text-align-center">
+            <h1 style="text-align: center;" [routerLink]="['/']">Parking Partners</h1>
+        </div>
+        <div class="col-md-7">
             <div class="row">
-                <div class="col-3">
+                <div class="col-md-3">
                     <p>Parking Check-In</p>
                     <!-- Mon,Jul 15 -->
                     <p class="fs-5">{{date.checkIn | date:'EEE, MMM d'}}</p>
                 </div>
-                <div class="col-1">
-                    <p>&nbsp;</p>
+                <div class="col-md-1">
+                    <!-- <p>&nbsp;</p> -->
                     <p><mat-icon class="fs-3">arrow_right_alt</mat-icon></p>
                 </div>
-                <div class="col-3">
+                <div class="col-md-3">
                     <p>Parking Check-Out</p>
                     <p class="fs-5">{{date.checkOut | date:'EEE, MMM d'}}</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 d-flex  align-items-center">
-            <form class="search-form">
-                <input #searchInput type="text" placeholder="search location" [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="searchTerm">
-                <!-- <button type="button" (click)="getSearchResult()">Searchs</button> -->
-                <button (click)="getSearchResult()" id="submit" *ngIf="spinner==false">Submit</button>
-                <div class="spinner-border text-bg-danger mx-2" role="status" *ngIf="spinner==true">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </form>
+        <div class="col-md-3 d-flex flex-md-row flex-column gap-3 align-content-center">
+            <input #searchInput type="text" placeholder="search location" [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="searchTerm">
+            <button (click)="getSearchResult()" id="submit" *ngIf="spinner==false">Search</button>
+            <div class="spinner-border text-bg-danger mx-2" role="status" *ngIf="spinner==true">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
     </div>
-    <div class="row" *ngIf="results.length>0">
+    <div class="row d-flex justify-content-around mt-3" *ngIf="results.length>0" style="max-width:98vw;">
         <div class="col-md-6" *ngIf="results.length>0">
-            <!-- (change)="onCountryChange($event)" -->
             <div class="row mt-2">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class='col-4'>
+                <div class="col-md-12">
+                    <div class="row gap-3">
+                        <div class='col-md-4'>
                             <select class="form-select" id="country" [(ngModel)]="selecteType"
                                 (ngModelChange)="filterType()">
                                 <option value="" selected>
@@ -49,7 +43,7 @@
                                 <option *ngFor="let op of filterData" [value]="op.type">{{op.type}}</option>
                             </select>
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-4">
                             <select class="form-select" id="country" [(ngModel)]="sortType"
                                 (ngModelChange)="filterType()">
                                 <option value="" selected>
@@ -63,24 +57,23 @@
                     </div>
                 </div>
             </div>
-            <!-- <mat-divider class="mt-4" style="background-color: rgb(197, 193, 193);"></mat-divider> -->
             <div class="row mt-3" *ngIf="results.length>0">
-                <div class="col-12" style="border-bottom: 0.5px solid whitesmoke;">
+                <div class="col-md-12" style="border-bottom: 0.5px solid whitesmoke;">
                     <p style="color:white"><strong>{{results.length}} places to park available.</strong> Book now !</p>
                 </div>
             </div>
             <div class="row" style="max-height: 70vh; overflow: auto;">
-                <div class="col-12">
+                <div class="col-md-12">
                     <div class="row mt-3" *ngFor="let value of results; let j=index">
-                        <div class="col-3">
+                        <div class="col-md-3">
                             <img [src]="value?.property_logo[0]?.logo" alt=""
                                 style="max-width: 100%; max-height: 100%;">
                         </div>
-                        <div class="col-6" style="color:white; font-size: 12px;">
+                        <div class="col-md-6" style="color:white; font-size: 12px;">
                             <p>{{value?.tittle?value.tittle:'Demo Radisson Hotel JFK Airport'}}</p>
                             <p class="d-flex flex-row align-content-center">
                                 <span *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
-                                    <mat-icon class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
+                                    <mat-icon class="filled">star</mat-icon>
                                 </span> <span class="mx-2">Great (958 Ratings)</span>
                             </p>
                             <p class="flx">
@@ -94,10 +87,6 @@
                                 <span>Parking Types: <span *ngFor="let type of value.property_product">{{type.type}},
                                     </span></span>
                             </p>
-                            <!-- <p class="flx">
-                                <mat-icon>airplanemode_active</mat-icon>
-                                <span>1 miles to JFK</span>
-                            </p> -->
                             <p class="flx">
                                 <mat-icon>schedule</mat-icon>
                                 <span>Open Free Shuttle</span>
@@ -107,8 +96,7 @@
                                 <span>Open 24/7</span>
                             </p>
                         </div>
-                        <!-- <sup>99</sup> -->
-                        <div class="col-3 p-3">
+                        <div class="col-md-3 p-3">
                             <div class="d-flex flex-column gap-3">
                                 <div style="color:white; font-size: 16px;">
                                     {{currency[value.country]?currency[value.country]:'$'}}<sup></sup><span>{{value?.property_pricing[0]?.dail_rate?value.property_pricing[0].dail_rate:'00'}}</span><sub>
@@ -131,7 +119,6 @@
                 <h1 class="" style="color:white">No Data Available</h1>
             </div>
         </div>
-
         <div class="col-md-6 d-flex flex-column justify-content-center align-items-center"
             *ngIf="spinner==true && results.length<=0">
             <div class="" style="text-align: center; max-width: 50%;">
@@ -140,26 +127,14 @@
                 </div>
             </div>
         </div>
-
-
-
         <div class="col-md-6">
             <google-map height="80vh" width="100%" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
                 (mapMousemove)="move($event)">
-                <!-- <map-marker #marker="mapMarker" *ngFor="let marker of results; let i=index"
-                    (mapMouseover)="openInfoWindow(marker)" [options]="markerOptions" [position]="markerPositions[i]">
-                </map-marker> -->
-                <!--  [icon]="{ url: marker.property_logo[0].logo,scaledSize:iconSize}"
-                [label]="currency[marker.country]+marker.property_pricing[0].dail_rate" -->
                 <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions; let i=index"
                     [position]="markerPosition" (mapMouseover)="openInfoWindow(marker,i)"
                     [icon]="{ url: results[i]?.property_logo[0]?.logo,scaledSize:iconSize}">
                 </map-marker>
                 <map-info-window>
-                    <!-- <div class="d-flex justify-content-center align-items-center"
-                        style="background-color: darkorange; width: 100%; height: 100%;">
-                        <p>{{someDynamicValue}}</p>
-                    </div> -->
                     <div class="info-window-content">
                         <p class="text-wrap" style="font-size:10px;padding: 0; margin: 0; font-weight: bold;">
                             {{dynamicTittle}}</p>
@@ -175,5 +150,3 @@
         </div>
     </div>
 </div>
-
-<!-- [icon]="{ url: marker.property_logo[0].logo,scaledSize:iconSize}" -->

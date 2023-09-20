@@ -7,7 +7,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { BrowserModule } from  '@angular/platform-browser';
 // all modules and components
 import { CustomersRoutingModule } from './customers-routing.module';
 import { CustomersComponent } from './customers.component';
@@ -23,6 +23,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { ForgotPasswordComponent } from './user-profile/forgot-password/forgot-password.component';
 import { QuickSignInComponent } from './paymentpage/quick-sign-in/quick-sign-in.component';
 import { QuickSignUpComponent } from './paymentpage/quick-sign-in/quick-sign-up/quick-sign-up.component';
+import { NgOtpInputModule } from  'ng-otp-input';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,8 @@ import { QuickSignUpComponent } from './paymentpage/quick-sign-in/quick-sign-up/
     HttpClientModule,
     MatListModule,
     GoogleMapsModule,
+    NgOtpInputModule,
+    // BrowserModule
     // GooglePlaceModule
 
   ],

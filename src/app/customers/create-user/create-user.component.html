@@ -140,10 +140,6 @@
                                         <i class="fa fa fa-eye icon password-icon" [hidden]="passwordHide"></i>
                                     </div>
                                 </div>
-                                <!-- <div *ngIf="profileForm.get('currentPassword')!.invalid && profileForm.get('currentPassword')!.touched"
-                                class="invalid-pass">
-                                Please enter a Password.
-                            </div> -->
                                 <div *ngIf="profileForm.controls['currentPassword'].hasError('required') && profileForm.get('currentPassword')!.touched"
                                     class="invalid-pass">
                                     Please enter a valid Password.

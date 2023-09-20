@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgOtpInputModule } from  'ng-otp-input';
 // import { SidebarComponent } from './sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
@@ -34,6 +35,7 @@ import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-passw
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     GoogleMapsModule,
+    NgOtpInputModule
     // GooglePlaceModule
 
   ],
