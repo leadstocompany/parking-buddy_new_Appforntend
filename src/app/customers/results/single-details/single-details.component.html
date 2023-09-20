@@ -200,8 +200,6 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- Modal -->
             <div class="modal fade mt-5" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -212,8 +210,10 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modalClose()"
                                 aria-label="Close"></button>
                         </div>
+
                         <div class="modal-body">
-                            <mat-stepper orientation="vertical" [selectedIndex]="selectedStep">
+                            <mat-stepper orientation="vertical" [selectedIndex]="selectedStep"
+                                (selectionChange)="parkingTimesChange($event)">
                                 <mat-step [completed]="isStep1Completed">
                                     <ng-template matStepLabel>Parking Times <br> <span style="font-size:small">Select
                                             your
@@ -256,7 +256,8 @@
                                     </ng-template>
                                 </mat-step>
                                 <mat-step>
-                                    <ng-template matStepLabel>Parking Type <br> <span style="font-size:small">This lot
+                                    <ng-template matStepLabel>Parking Type <br> <span style="font-size:small">This
+                                            lot
                                             has
                                             {{this.typesOfShoes.length}}
                                             parking types,please select one.</span></ng-template>

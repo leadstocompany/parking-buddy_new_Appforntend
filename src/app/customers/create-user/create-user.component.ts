@@ -51,8 +51,8 @@ export class CreateUserComponent {
 
   public AddProfile(): void {
     const pyload = {
-      "first_name": this.profileForm.value.first_name,
-      "last_name": this.profileForm.value.last_name,
+      "first_name": this.profileForm.value.fname,
+      "last_name": this.profileForm.value.lname,
       "email": this.profileForm.value.email,
       "mobile": this.profileForm.value.mobile,
       "phone_number": this.profileForm.value.phone,
@@ -63,6 +63,7 @@ export class CreateUserComponent {
       "user": 'customer',
       "car_model": this.profileForm.controls['makeModle'].value
     }
+    console.log('pay==>', pyload);
 
     this._customer.createUser(pyload).subscribe({
       next: (res) => {

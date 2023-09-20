@@ -22,6 +22,9 @@ export class SingleDetailsComponent {
   // public minCheckOutDate: string = ''
   public minCheckInDate: Date = new Date();
   public minCheckOutDate: Date = new Date();
+  hours = 0
+  minutes = 0
+  parktime = ''
   amenities = [
     { iconName: 'accessible', iconColor: 'black', name: 'Handicap', key: 'handicap' },
     { iconName: 'drive_eta', iconColor: 'green', name: 'Car Care', key: 'car_care' },
@@ -44,6 +47,14 @@ export class SingleDetailsComponent {
     // const date = new Date();
     // this.minCheckInDate = `${date.getUTCFullYear()}-${(date.getUTCMonth() + 1).toString().padStart(2, "0")}-${date.getUTCDate().toString().padStart(2, "0")}`;
     // this.minCheckOutDate = this.minCheckInDate
+
+    const currentTime = new Date();
+    this.hours = currentTime.getHours();
+    this.minutes = currentTime.getMinutes();
+
+    this.parktime = `${this.minutes > 30 ? this.hours - 1 : this.hours}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
+    this.parkingTimes.checkOut = this.parktime
+    this.parkingTimes.checkIn = this.parktime
 
     this.route.params.subscribe(params => {
       this.id = params['id']; // Get the value of the 'id' parameter
@@ -110,7 +121,13 @@ export class SingleDetailsComponent {
   selectedStep = 0; // Track the currently selected step
   onNextStep() {
     const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
-    if (sameDate && parseInt(this.parkingTimes.checkIn.slice(0, 2)) >= parseInt(this.parkingTimes.checkOut.slice(0, 2))) {
+    if (sameDate && (parseInt(this.parkingTimes.checkIn.slice(0, 2)) < parseInt(this.parktime.slice(0, 2)))) {
+      this._snackbarService.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
+      return
+    }
+    console.log(this.parktime, this.parkingTimes);
+    
+    if (sameDate && (parseInt(this.parkingTimes.checkIn.slice(0, 2)) >= parseInt(this.parkingTimes.checkOut.slice(0, 2)))) {
       this.isStep1Completed = false;
       this._snackbarService.openSnackbar('❌ Check-Out Time Should be greater than Check-In Time')
       return
@@ -122,6 +139,9 @@ export class SingleDetailsComponent {
     }
   }
 
+  parkingTimesChange(event: any): void {
+    this.selectedStep = event.selectedIndex
+  }
   public modalClose(): void {
     this.selectedStep = 0
   }
