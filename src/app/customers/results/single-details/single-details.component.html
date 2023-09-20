@@ -208,9 +208,9 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <mat-stepper orientation="vertical" [selectedIndex]="selectedStep">
+                        <mat-stepper orientation="vertical" [selectedIndex]="selectedStep" (selectionChange)="parkingTimesChange($event)">
                             <mat-step [completed]="isStep1Completed">
-                                <ng-template matStepLabel>Parking Times <br> <span style="font-size:small">Select your
+                                <ng-template matStepLabel >Parking Times <br> <span style="font-size:small">Select your
                                         parking check-In and
                                         check-Out times.</span></ng-template>
 

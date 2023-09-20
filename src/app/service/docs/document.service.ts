@@ -72,7 +72,7 @@ export class DocumentService {
             ]
           },
           {
-            text: 'Hey, Abcdef Xxx',
+            text: `Hey, ${data.guest_email}`,
             marginTop: 30,
             marginLeft: 20
           },
@@ -115,7 +115,7 @@ export class DocumentService {
                         }
                       },
                       {
-                        text: 'Visit Google Maps'
+                        text: `https://www.google.com/maps/dir/?api=1&destination=${data.latitude},${data.longitude}`
                       }
                     ],
                     marginTop: 30
@@ -191,7 +191,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: `: ${data.checkIN}`,
+                        text: `: ${data.check_in_date} - ${data.check_in_time}`,
                         width: '60%'
                       },
                     ],
@@ -204,7 +204,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: `: ${data.checkOut}`,
+                        text: `: ${data.check_out_date} - ${data.check_out_time}`,
                         width: '60%'
                       },
                     ],
@@ -286,7 +286,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: '999-555',
+                        text: data.shuttle_phone_number,
                         width: '60%'
                       },
                     ],
@@ -345,11 +345,11 @@ export class DocumentService {
                   {
                     columns: [
                       {
-                        text: `(${data.days} Days of parking)`,
+                        text: `(${data.no_of_days} Days of parking)`,
                         width: '60%'
                       },
                       {
-                        text: '64.95 INR',
+                        text: data.base_price,
                         width: '40%'
                       },
                     ],
@@ -362,7 +362,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: data.serviceCharge,
+                        text: data.service_charge,
                         width: '40%'
                       },
                     ],
@@ -375,7 +375,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: data.taxes,
+                        text: data.taxesandfees,
                         width: '40%'
                       },
                     ],

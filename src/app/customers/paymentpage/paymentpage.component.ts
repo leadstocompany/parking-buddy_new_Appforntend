@@ -8,6 +8,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { QuickSignInComponent } from './quick-sign-in/quick-sign-in.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-paymentpage',
@@ -147,19 +148,29 @@ export class PaymentpageComponent {
       "user": this.userID,
       "property": this.id,
     }
-    const data = {
-      title: this.tittle,
-      parkingType: this.type[0]?.product,
-      checkIN: `${new Date(this.date.checkIn).toLocaleDateString('en-IN')} - ${this.time.checkIn}`,
-      checkOut: `${new Date(this.date.checkOut).toLocaleDateString('en-IN')} - ${this.time.checkOut}`,
-      days: this.day,
-      subTotal: `${this.icon}${this.day * this.type[0].dail_rate}`,
-      serviceCharge: `${this.icon}6.49`,
-      taxes: `${this.icon}${this.finaleTaxes}`,
-      total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
-      download: true,
-    }
-    this._docService.generateOrderSummary(data)
+    // const data = {
+    //   title: this.tittle,
+    //   parkingType: this.type[0]?.product,
+    //   checkIN: `${new Date(this.date.checkIn).toLocaleDateString('en-IN')} - ${this.time.checkIn}`,
+    //   checkOut: `${new Date(this.date.checkOut).toLocaleDateString('en-IN')} - ${this.time.checkOut}`,
+    //   days: this.day,
+    //   subTotal: `${this.icon}${this.day * this.type[0].dail_rate}`,
+    //   serviceCharge: `${this.icon}6.49`,
+    //   taxes: `${this.icon}${this.finaleTaxes}`,
+    //   total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
+    //   download: true,
+    // }
+    this._customer.getBookingSlot(this.id).subscribe({
+      next: (res) => {
+        console.log('res==>', res);
+        // this._docService.generateOrderSummary(data)
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+        
+        this._snackbar.openSnackbar('❌ Internal error')
+      },
+    })
     this._customer.bookingPlot(payload).subscribe({
       next: (res) => {
         console.log(res)

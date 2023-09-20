@@ -21,7 +21,7 @@ export class CustomerService {
   filterProduct(code: string): Observable<any> {
     console.log(code)
     return this._http.get(
-      `${environment.URL}/parking_location/get/all_product/?search=${code}`,{withCredentials: true }
+      `${environment.URL}/parking_location/get/all_product/?search=${code}`, { withCredentials: true }
     );
   }
 
@@ -34,12 +34,12 @@ export class CustomerService {
   }
 
   bookingPlot(data: any): Observable<any> {
-    console.log(data,'booking-----------')
-    return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`, data,{ withCredentials: true })
+    console.log(data, 'booking-----------')
+    return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`, data, { withCredentials: true })
   }
 
   createUser(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/normal_user/user/register/`, data)
+    return this._http.post(`${environment.URL}/normal_user/user/register/`, data, { withCredentials: true })
   }
 
 
@@ -65,5 +65,9 @@ export class CustomerService {
   }
 
   // payment
+
+  getBookingSlot(id:string): Observable<any> {
+    return this._http.get(`${environment.URL}/normal_user/bookingslot/${id}/list/`,{ withCredentials: true })
+  }
 
 }
