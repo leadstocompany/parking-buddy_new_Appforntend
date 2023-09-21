@@ -85,7 +85,7 @@ export class PaymentpageComponent {
       this.tittle = queryParams['title']
       this.icon = queryParams['icon']
     })
-    this._generateUrl()
+    // this._generateUrl()
 
   }
   setStep(index: number) {
@@ -111,7 +111,7 @@ export class PaymentpageComponent {
       total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
       download: false,
     }
-    this._docService.generateOrderSummary(data)
+    this._docService.generateOrderSummary(data, false,this.icon)
     this._createBlob(this._docService.orderSummary as TDocumentDefinitions)
   }
 
@@ -168,7 +168,7 @@ export class PaymentpageComponent {
     this._customer.getBookingSlot(this.id).subscribe({
       next: (res) => {
         console.log('res==>', res);
-        // this._docService.generateOrderSummary(data)
+        this._docService.generateOrderSummary(res, true,this.icon)
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);

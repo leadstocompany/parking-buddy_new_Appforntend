@@ -21,7 +21,7 @@ export class DocumentService {
     // }
   }
 
-  public async generateOrderSummary(data: any): Promise<boolean> {
+  public async generateOrderSummary(data: any, download: any, icon: any): Promise<boolean> {
 
     return new Promise(async (resolve, reject) => {
       // const image = await this.getBase64ImageFromURL(`${window.location.origin}/assets/signup.png` as string);
@@ -95,27 +95,33 @@ export class DocumentService {
                     marginTop: 5
                   },
                   {
-                    text: 'XYZ Parking (YYZ)',
+                    text: data.property.tittle,
                     marginTop: 5
                   },
                   {
-                    text: 'xxxxxxxxxxxxxxxxxxxxxxxx,N,',
+                    text: `${data.property.street}`,
                     marginTop: 5
                   },
                   {
-                    text: 'Address, ZIP CODE',
+                    text: `${data.property.city}, ${data.property.state}, ${data.property.country}, ${data.property.zipcode}`,
                     marginTop: 5
                   },
                   {
                     text: [
                       {
-                        text: 'Driving Directions :',
+                        text: 'Driving Directions : ',
                         style: {
                           bold: true
                         }
                       },
                       {
-                        text: `https://www.google.com/maps/dir/?api=1&destination=${data.latitude},${data.longitude}`
+                        text: ' Vist Google Map',
+                        link: `https://www.google.com/maps/dir/?api=1&destination=${data.property.latitude},${data.property.longitude}`,
+                        style: {
+                          color: '#352A7E',
+                          fontSize: 15,
+                        },
+                        target: '_blank'
                       }
                     ],
                     marginTop: 30
@@ -152,7 +158,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: ': Person Parking',
+                        text: `: ${data.user.first_name} ${data.user.last_name}`,
                         width: '60%'
                       },
                     ],
@@ -165,7 +171,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: ': Parking Type',
+                        text: `: ${data.parking_type.type}`,
                         width: '60%'
                       },
                     ],
@@ -178,7 +184,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: ': Parking Spaces',
+                        text: `: Parking Spaces`,
                         width: '60%'
                       },
                     ],
@@ -217,7 +223,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: ': Parking',
+                        text: `: ${data.no_of_days == null ? 0 : data.no_of_days}`,
                         width: '60%'
                       },
                     ],
@@ -286,7 +292,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: data.shuttle_phone_number,
+                        text: data.property.shuttle_phone_number,
                         width: '60%'
                       },
                     ],
@@ -345,11 +351,11 @@ export class DocumentService {
                   {
                     columns: [
                       {
-                        text: `(${data.no_of_days} Days of parking)`,
+                        text: `(${data.no_of_days == null ? 0 : data.no_of_days} Days of parking)`,
                         width: '60%'
                       },
                       {
-                        text: data.base_price,
+                        text: `${icon} ${data.base_price == null ? 0 : data.base_price}`,
                         width: '40%'
                       },
                     ],
@@ -362,7 +368,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: data.service_charge,
+                        text: `${icon} ${data.service_charge == null ? 0 : data.service_charge}`,
                         width: '40%'
                       },
                     ],
@@ -375,7 +381,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: data.taxesandfees,
+                        text: `${icon} ${data.taxesandfees == null ? 0 : data.taxesandfees}`,
                         width: '40%'
                       },
                     ],
@@ -389,7 +395,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: data.total,
+                        text: `${icon} ${data.base_price == null ? 0 : data.base_price + data.service_charge == null ? 0 : data.service_charge + data.taxesandfees == null ? 0 : data.taxesandfees}`,
                         bold: true,
                         width: '40%'
                       },
@@ -403,7 +409,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: '64.95 INR',
+                        text: `${icon} ${data.amount}`,
                         width: '40%'
                       },
                     ],
@@ -431,7 +437,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: '64.95 INR',
+                        text: `${icon} ${Math.abs((data.base_price == null ? 0 : data.base_price + data.service_charge == null ? 0 : data.service_charge + data.taxesandfees == null ? 0 : data.taxesandfees) - data.amount)}`,
                         bold: true,
                         width: '40%'
                       },
@@ -468,7 +474,7 @@ export class DocumentService {
             marginBottom: 10
           },
           {
-            text: 'Your credit card has successfully been charged ₹10.00. A copy of your reservation is also in Your Account.',
+            text: `Your credit card has successfully been charged ${icon} ${data.amount} A copy of your reservation is also in Your Account.`,
             marginBottom: 20
           },
           {
@@ -493,7 +499,9 @@ export class DocumentService {
           },
         ]
       }
-      if (data.download == true) {
+      if (download == true) {
+        console.log('==>');
+
         pdfMake.createPdf(this.orderSummary).download('orderSummary.pdf');
       }
       resolve(true)
