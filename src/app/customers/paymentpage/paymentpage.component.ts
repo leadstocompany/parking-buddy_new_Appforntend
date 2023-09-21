@@ -111,7 +111,7 @@ export class PaymentpageComponent {
       total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
       download: false,
     }
-    this._docService.generateOrderSummary(data, false,this.icon)
+    this._docService.generateOrderSummary(data, false, this.icon)
     this._createBlob(this._docService.orderSummary as TDocumentDefinitions)
   }
 
@@ -164,11 +164,15 @@ export class PaymentpageComponent {
       "amount": this.type[0].dail_rate,
       "user": this.userID,
       "property": this.id,
+      "no_of_days": this.day,
+      "base_price": (this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes,
+      "service_charge": "6.49",
+      "taxesandfees": this.finaleTaxes,
     }
     this._customer.getBookingSlot(this.id).subscribe({
       next: (res) => {
         console.log('res==>', res);
-        this._docService.generateOrderSummary(res, true,this.icon)
+        this._docService.generateOrderSummary(res, true, this.icon)
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
