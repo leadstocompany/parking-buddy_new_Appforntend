@@ -34,6 +34,7 @@ export class PaymentpageComponent {
     "checkIn": "13:15",
     "checkOut": "05:20"
   }
+  minDate: Date = new Date(); // Initialize with the current date
   // this is a check in date 
   checkInTime: Date = new Date()
   checkOutTime: Date = new Date()
@@ -308,5 +309,12 @@ export class PaymentpageComponent {
     const date = new Date(this.checkInTime);
     this.minCheckOutDate = date;
     this.checkOutTime = date;
+  }
+
+  onOpenCalendar(container: any) {
+    container.monthSelectHandler = (event: any): void => {
+      container._store.dispatch(container._actions.select(event.date));
+    };
+    container.setViewMode('month');
   }
 }

@@ -111,8 +111,9 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="date" class="form-label">Expiry  Date</label>
-                                                    <input type="date" class="form-control" id="date"
-                                                        placeholder="Select Expiration Date">
+                                                    <!-- <input type="date" class="form-control" id="date"
+                                                        placeholder="Select Expiration Date"> -->
+                                                        <input  autocomplete="off" class="form-control" name="date" bsDatepicker [bsConfig]="{dateInputFormat: 'MM/YYYY',adaptivePosition: true}"  (onShown)="onOpenCalendar($event)" [minDate]="minDate">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="cvv" class="form-label">cvv</label>
