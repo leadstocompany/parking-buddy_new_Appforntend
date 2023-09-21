@@ -34,6 +34,7 @@ export class PaymentpageComponent {
     "checkIn": "13:15",
     "checkOut": "05:20"
   }
+  minDate: Date = new Date(); // Initialize with the current date
   // this is a check in date 
   checkInTime: Date = new Date()
   checkOutTime: Date = new Date()
@@ -211,13 +212,13 @@ export class PaymentpageComponent {
     this._taxeService.getTaxesfeesById(id).subscribe({
       next: (res) => {
         const hours = this.totalHoursBtwDates(this.date, this.editTime)
-        let amountTotal:number = 0
-        if (hours <24 && +this.type[0].hourly_rate){
+        let amountTotal: number = 0
+        if (hours < 24 && +this.type[0].hourly_rate) {
           amountTotal = +this.type[0].hourly_rate
-        }else{
+        } else {
           amountTotal = +this.type[0].dail_rate
         }
-          this.finaleTaxes = 0
+        this.finaleTaxes = 0
         res.forEach((tax: any) => {
           if (tax.type == "fixed_amount") {
             if (tax.amount_type == "Fixed") {
@@ -307,5 +308,22 @@ export class PaymentpageComponent {
     const date = new Date(this.checkInTime);
     this.minCheckOutDate = date;
     this.checkOutTime = date;
+  }
+
+  onOpenCalendar(container: any) {
+    container.monthSelectHandler = (event: any): void => {
+      container._store.dispatch(container._actions.select(event.date));
+    };
+    // const currentDate = new Date();
+    // const selectedDate = new Date(this.minDate);
+    // if (selectedDate.getFullYear() === currentDate.getFullYear()) {
+    //   const currentMonth = currentDate.getMonth();
+    //   if (selectedDate.getMonth() < currentMonth) {
+    //     this.minDate = new Date(currentDate.getFullYear(), currentMonth, 1);
+    //   }
+    // } else if (selectedDate.getFullYear() < currentDate.getFullYear()) {
+    //   this.minDate = new Date(currentDate.getFullYear(), 0, 1);
+    // }
+    container.setViewMode('month');
   }
 }
