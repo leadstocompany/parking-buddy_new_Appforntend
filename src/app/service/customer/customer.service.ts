@@ -67,7 +67,7 @@ export class CustomerService {
   // payment
 
   getBookingSlot(id:string): Observable<any> {
-    return this._http.get(`${environment.URL}/normal_user/bookingslot/${id}/list/`,{ withCredentials: true })
+    return this._http.get(`${environment.URL}normal_user/bookingslot/d77113a7-56e3-407b-9ff9-75b5fb84be9c/list/`,{ withCredentials: true })
   }
 
 }

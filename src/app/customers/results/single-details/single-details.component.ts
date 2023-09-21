@@ -52,7 +52,7 @@ export class SingleDetailsComponent {
     this.hours = currentTime.getHours();
     this.minutes = currentTime.getMinutes();
 
-    this.parktime = `${this.minutes > 30 ? this.hours - 1 : this.hours}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
+    this.parktime = `${this.minutes > 30 ? this.hours : this.hours - 1}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
     this.parkingTimes.checkOut = this.parktime
     this.parkingTimes.checkIn = this.parktime
 
@@ -138,7 +138,9 @@ export class SingleDetailsComponent {
   }
 
   parkingTimesChange(event: any): void {
-    this.selectedStep = event.selectedIndex
+    if (event.selectedIndex == 0) {
+      this.selectedStep = event.selectedIndex
+    }
   }
   public modalClose(): void {
     this.selectedStep = 0

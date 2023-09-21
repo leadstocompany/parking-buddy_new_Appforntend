@@ -58,7 +58,8 @@ export class PaymentpageComponent {
     const currentTime = new Date();
     this.hours = currentTime.getHours();
     this.minutes = currentTime.getMinutes();
-    this.parktime = `${this.minutes > 30 ? this.hours - 1 : this.hours}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
+    this.parktime = `${this.minutes > 30 ? this.hours : this.hours - 1}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
+    console.log('park==>', this.parktime);
 
 
     this.setStep(0)
@@ -211,13 +212,13 @@ export class PaymentpageComponent {
     this._taxeService.getTaxesfeesById(id).subscribe({
       next: (res) => {
         const hours = this.totalHoursBtwDates(this.date, this.editTime)
-        let amountTotal:number = 0
-        if (hours <24 && +this.type[0].hourly_rate){
+        let amountTotal: number = 0
+        if (hours < 24 && +this.type[0].hourly_rate) {
           amountTotal = +this.type[0].hourly_rate
-        }else{
+        } else {
           amountTotal = +this.type[0].dail_rate
         }
-          this.finaleTaxes = 0
+        this.finaleTaxes = 0
         res.forEach((tax: any) => {
           if (tax.type == "fixed_amount") {
             if (tax.amount_type == "Fixed") {
