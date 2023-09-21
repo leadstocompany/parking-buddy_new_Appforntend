@@ -1,10 +1,31 @@
-<div class="container-fluid d-flex justify-content-center"
-    style="background-color: lightgrey; min-height:100vh; width:100%; margin:0px; padding:0px ">
-    <div class="row d-flex flex-row justify-content-around">
+<div class="container-fluid" style="background-color: lightgrey; min-height:100vh; min-width:99vw; max-width:99vw;">
+    <div class="row navbar">
+        <div class="col-md-2 d-flex align-items-center text-align-center">
+            <h1 class="h1" style="text-align: center;" [routerLink]="['/']">Parking Partners</h1>
+        </div>
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Parking Check-In</p>
+                    <!-- Mon,Jul 15 -->
+                    <p class="fs-5">{{date.checkIn| date:'EEE, MMM d'}}</p>
+                </div>
+                <div class="col-md-1">
+                    <!-- <p>&nbsp;</p> -->
+                    <p><mat-icon class="fs-3">arrow_right_alt</mat-icon></p>
+                </div>
+                <div class="col-md-3">
+                    <p>Parking Check-Out</p>
+                    <p class="fs-5">{{date.checkOut | date:'EEE, MMM d'}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex flex-row justify-content-around mt-3">
         <div class="col-md-7" style="background-color: white;">
             <mat-stepper orientation="vertical">
                 <mat-step>
-                    <ng-template matStepLabel>Guest Details<span style="font-size:small"> Emails</span></ng-template>
+                    <ng-template matStepLabel>Guest Details<span style="font-size:small">Emails</span></ng-template>
                     <ng-template matStepContent>
                         <div class="row mt-4">
                             <div class="col-md-6">
@@ -27,7 +48,7 @@
                 <mat-step>
                     <ng-template matStepLabel>Payment Method</ng-template>
                     <ng-template matStepContent>
-                        <div class="container-fluid" style="min-height: 20vh;max-height: 70vh; overflow-y: scroll;">
+                        <div class="container-fluid" style="min-height: 20vh;max-height: 50vh; overflow-y: scroll;">
                             <section class="mt-4">
                                 <form class="d-flex flex-column gap-3">
                                     <div class="row">
@@ -117,7 +138,7 @@
                             <section class="mt-4" style="text-align: right;">
                                 <p>Pay <b>{{icon}}{{(day*type[0].dail_rate)+6.49+finaleTaxes | number:'1.2-2'}}</b>
                                     today</p>
-                                <p>By selection Complete Reservation you agree to out <span>Terms of Use </span> and
+                                <p style="text-align: left;">By selection Complete Reservation you agree to out <span>Terms of Use </span> and
                                     <span>Privacy Policy</span>
                                 </p>
                             </section>
@@ -146,12 +167,12 @@
                     <mat-divider></mat-divider>
                     <div class="price p-3">
                         <p class="d-flex flex-row justify-content-between align-content-center"><span>Subtotal</span>
-                            <span>{{icon}}{{day*type[0].dail_rate}}</span>
+                            <span>{{icon}}{{day*type[0].dail_rate | number:'1.2-2'}}</span>
                         </p>
                         <p class="d-flex flex-row justify-content-between align-content-center"><span>Service
                                 Charge</span> <span>{{icon}}6.49</span></p>
                         <p class="d-flex flex-row justify-content-between align-content-center"><span>Taxes &
-                                Fees</span> <span>{{icon}}{{finaleTaxes}}</span></p>
+                                Fees</span> <span>{{icon}}{{finaleTaxes | number:'1.2-2'}}</span></p>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="totalPrice p-3">
@@ -166,11 +187,6 @@
                         </p>
                     </div>
                     <mat-divider></mat-divider>
-                    <!-- <div class="coupon p-3">
-                        <p>Have a coupon Code?</p>
-                    </div> -->
-                    <!-- <mat-divider></mat-divider> -->
-                    <!-- <div class="p-3"></div> -->
                 </div>
             </div>
         </div>

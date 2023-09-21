@@ -8,7 +8,7 @@
                 <div class="col-md-3">
                     <p>Parking Check-In</p>
                     <!-- Mon,Jul 15 -->
-                    <p class="fs-5">{{date.checkIn | date:'EEE, MMM d'}}</p>
+                    <p class="fs-5">{{checkInTime| date:'EEE, MMM d'}}</p>
                 </div>
                 <div class="col-md-1">
                     <!-- <p>&nbsp;</p> -->
@@ -16,13 +16,13 @@
                 </div>
                 <div class="col-md-3">
                     <p>Parking Check-Out</p>
-                    <p class="fs-5">{{date.checkOut | date:'EEE, MMM d'}}</p>
+                    <p class="fs-5">{{checkOutTime | date:'EEE, MMM d'}}</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row m-3">
-        <div class="col-md-9">
+    <div class="row mt-3">
+        <div class="col-md-9 d-flex flex-column flex-md-row gap-3">
             <div class="row d-flex flex-column gap-3">
                 <div class="col-md-12 p-2">
                     <div class="row">
@@ -32,17 +32,18 @@
                         </div>
                         <div class="col-md-10">
                             <h1 class="m-0 p-0">{{value?.tittle?value.tittle:''}}</h1>
-                            <p class="m-0 p-0 d-flex flex-row align-content-center"> <span
-                                    *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
+                            <p class="m-0 p-0 d-flex text-wrap flex-row align-content-center">
+                                <span *ngFor="let star of ['0','1','2','3']; let i = index" class="filled">
                                     <mat-icon class="filled">star</mat-icon><!--  &#9733;  Unicode star character -->
-                                </span><b>Great</b><span>(960 Reviews)
-                                    |{{value?.street}},{{value?.city}},{{value?.state}},{{value?.zipcode}},</span></p>
+                                </span>
+                                <b>Great (960 Reviews)</b>
+                            </p>
+                            <p> {{value?.street}},{{value?.city}},{{value?.state}},{{value?.zipcode}}</p>
                             <div class="d-flex flex-row flex-wrap gap-3">
                                 <p class="d-flex flex-row align-items-center justify-content-center">
                                     <mat-icon>local_airport</mat-icon>
                                     <span>1.0 miles to JFK</span>
                                 </p>
-
                                 <p class="d-flex flex-row justify-content-center align-items-center">
                                     <mat-icon>directions_bus</mat-icon>
                                     <span>Shuttle</span>
@@ -94,10 +95,10 @@
                                 aria-selected="false">Reviews</button>
                         </li>
                     </ul>
-                    <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-content" id="pills-tabContent" style="min-height:40vh; max-height: 40vh;">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab" tabindex="0">
-                            <div class="row">
+                            <div class="row" style="min-height:40vh; max-height: 40vh; overflow: auto; overflow-x: hidden;">
                                 <div class="col-md-5" *ngIf="Images.length>0">
                                     <div id="carouselExample" class="carousel slide">
                                         <div class="carousel-inner">
@@ -153,8 +154,8 @@
                             <div class="amenities">
                                 <div class="row amenities">
                                     <ng-container *ngFor="let img of Images">
-                                        <div class="col-md-4" style="background-color: #f0f0f0;">
-                                            <img src={{img.images}} alt="" style="max-width: 100%; height: auto;">
+                                        <div class="col-md-4">
+                                            <img src={{img.images}} alt="" style="max-width: 100%;max-height: 100%;">
                                         </div>
                                     </ng-container>
                                 </div>
@@ -166,10 +167,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3" style="border: 0.5px solid gray;">
-            <div class="upper" style="min-height: 10vh;">
-                <div class="d-flex flex-row justify-content-between align-items-center"
-                    style="background-color: lightslategray; padding:10px; color:white">
+        <div class="col-md-3 mt-5">
+            <div style="min-height: 50vh; width:fit-content; border: 0.5px solid gray;">
+                <div class="d-flex flex-row  justify-content-between align-items-center"
+                    style="background-color: lightslategray; padding:10px; color:white;width: 100%; ">
                     <p>Starting from</p>
                     <p>$25.99 per day</p>
                 </div>
@@ -179,15 +180,14 @@
                             <span>Check In</span>
                             <input class="checkTime" type="text" #dp="bsDatepicker" [minDate]="minCheckInDate"
                                 placeholder="Check-In" bsDatepicker [ngModelOptions]="{ standalone: true }"
-                                [(ngModel)]="checkInTime" (ngModelChange)="checkOutDate()">
-                            <!-- <input type="date" [min]="minCheckInDate" class="form-control"[ngModelOptions]="{ standalone: true }" [(ngModel)]="checkInTime"> -->
+                                [(ngModel)]="checkInTime" (ngModelChange)="checkOutDate()"
+                                [bsConfig]="{ adaptivePosition: true }">
                         </div>
-                        <div class="out">
+                        <div class="out mx-2">
                             <span>Check Out</span>
                             <input class="checkTime" type="text" #dp="bsDatepicker" [minDate]="minCheckOutDate"
                                 placeholder="Check-Out" bsDatepicker [ngModelOptions]="{ standalone: true }"
-                                [(ngModel)]="checkOutTime">
-                            <!-- <input type="date" [min]="minCheckOutDate" class="form-control" [(ngModel)]="checkOutTime"> -->
+                                [(ngModel)]="checkOutTime" [bsConfig]="{ adaptivePosition: true }">
                         </div>
                     </div>
                     <div class="col-md-12 mt-2 d-flex justify-content-center">
@@ -200,91 +200,89 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal -->
-            <div class="modal fade mt-5" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title" id="exampleModalLabel">Select Parking Times and Types</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modalClose()"
-                                aria-label="Close"></button>
-                        </div>
+        </div>
+    </div>
 
-                        <div class="modal-body">
-                            <mat-stepper orientation="vertical" [selectedIndex]="selectedStep"
-                                (selectionChange)="parkingTimesChange($event)">
-                                <mat-step [completed]="isStep1Completed">
-                                    <ng-template matStepLabel>Parking Times <br> <span style="font-size:small">Select
-                                            your
-                                            parking check-In and
-                                            check-Out times.</span></ng-template>
+    <!-- Modal -->
+    <div class="modal fade mt-5" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Select Parking Times and Types</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modalClose()"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <mat-stepper orientation="vertical" [selectedIndex]="selectedStep"
+                        (selectionChange)="parkingTimesChange($event)">
+                        <mat-step [completed]="isStep1Completed">
+                            <ng-template matStepLabel>Parking Times <br> <span style="font-size:small">Select
+                                    your
+                                    parking check-In and
+                                    check-Out times.</span></ng-template>
 
-                                    <ng-template matStepContent>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="toggleTimepicker">Check In</label>
-                                                <div class="d-flex flex-row position-relative">
-                                                    <input class="input-" [ngxTimepicker]="toggleTimepicker"
-                                                        [disableClick]="true" readonly (click)="toggleTimepicker.open()"
-                                                        [format]="24" [(ngModel)]="parkingTimes.checkIn">
-                                                    <ngx-material-timepicker-toggle [for]="toggleTimepicker"
-                                                        buttonAlign="left" class="position-absolute"
-                                                        style="top:7px;"></ngx-material-timepicker-toggle>
-                                                    <ngx-material-timepicker #toggleTimepicker
-                                                        [format]="24"></ngx-material-timepicker>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="toggleTimepicker1">Check Out</label>
-                                                <div class="d-flex flex-row position-relative">
-                                                    <input class="input-" [ngxTimepicker]="toggleTimepicker1"
-                                                        [disableClick]="true" readonly
-                                                        (click)="toggleTimepicker1.open()" [format]="24"
-                                                        [(ngModel)]="parkingTimes.checkOut">
-                                                    <ngx-material-timepicker-toggle [for]="toggleTimepicker1"
-                                                        buttonAlign="left" class="position-absolute"
-                                                        style="top:7px;"></ngx-material-timepicker-toggle>
-                                                    <ngx-material-timepicker #toggleTimepicker1
-                                                        [format]="24"></ngx-material-timepicker>
-                                                </div>
-                                            </div>
+                            <ng-template matStepContent>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="toggleTimepicker">Check In</label>
+                                        <div class="d-flex flex-row position-relative">
+                                            <input class="input-" [ngxTimepicker]="toggleTimepicker"
+                                                [disableClick]="true" readonly (click)="toggleTimepicker.open()"
+                                                [format]="24" [(ngModel)]="parkingTimes.checkIn">
+                                            <ngx-material-timepicker-toggle [for]="toggleTimepicker" buttonAlign="left"
+                                                class="position-absolute"
+                                                style="top:7px;"></ngx-material-timepicker-toggle>
+                                            <ngx-material-timepicker #toggleTimepicker
+                                                [format]="24"></ngx-material-timepicker>
                                         </div>
-                                        <!-- matStepperNext -->
-                                        <button class="btn btn-danger mt-3"
-                                            (click)="isStep1Completed = true; onNextStep()">Continue</button>
-                                    </ng-template>
-                                </mat-step>
-                                <mat-step>
-                                    <ng-template matStepLabel>Parking Type <br> <span style="font-size:small">This
-                                            lot
-                                            has
-                                            {{this.typesOfShoes.length}}
-                                            parking types,please select one.</span></ng-template>
-                                    <ng-template matStepContent>
-                                        <mat-selection-list #shoes multiple="false" [(ngModel)]="parkingType"
-                                            style="max-height: 40vh; overflow: auto;">
-                                            <mat-list-option class="d-flex align-items-center"
-                                                *ngFor="let shoe of typesOfShoes" [value]="shoe">
-                                                <span class="d-flex flex-row justify-content-between align-item-center">
-                                                    <p
-                                                        class="d-flex flex-row justify-content-between align-item-center gap-3">
-                                                        <mat-icon>directions_car</mat-icon> {{shoe.product}}
-                                                    </p>
-                                                    <p>{{currency[value.country]?currency[value.country]:'$'}}{{shoe.dail_rate}}
-                                                        per day</p>
-                                                </span>
-                                            </mat-list-option>
-                                        </mat-selection-list>
-                                        <button class="btn btn-danger mt-4 align-self-center"
-                                            (click)="redirectToPayment()" [disabled]="!isStep1Completed">Proceed to
-                                            Checkout</button>
-                                    </ng-template>
-                                </mat-step>
-                            </mat-stepper>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="toggleTimepicker1">Check Out</label>
+                                        <div class="d-flex flex-row position-relative">
+                                            <input class="input-" [ngxTimepicker]="toggleTimepicker1"
+                                                [disableClick]="true" readonly (click)="toggleTimepicker1.open()"
+                                                [format]="24" [(ngModel)]="parkingTimes.checkOut">
+                                            <ngx-material-timepicker-toggle [for]="toggleTimepicker1" buttonAlign="left"
+                                                class="position-absolute"
+                                                style="top:7px;"></ngx-material-timepicker-toggle>
+                                            <ngx-material-timepicker #toggleTimepicker1
+                                                [format]="24"></ngx-material-timepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- matStepperNext -->
+                                <button class="btn btn-danger mt-3"
+                                    (click)="isStep1Completed = true; onNextStep()">Continue</button>
+                            </ng-template>
+                        </mat-step>
+                        <mat-step>
+                            <ng-template matStepLabel>Parking Type <br> <span style="font-size:small">This
+                                    lot
+                                    has
+                                    {{this.typesOfShoes.length}}
+                                    parking types,please select one.</span></ng-template>
+                            <ng-template matStepContent>
+                                <mat-selection-list #shoes multiple="false" [(ngModel)]="parkingType"
+                                    style="max-height: 40vh; overflow: auto;">
+                                    <mat-list-option class="d-flex align-items-center" *ngFor="let shoe of typesOfShoes"
+                                        [value]="shoe">
+                                        <span class="d-flex flex-row justify-content-between align-item-center">
+                                            <p class="d-flex flex-row justify-content-between align-item-center gap-3">
+                                                <mat-icon>directions_car</mat-icon> {{shoe.product}}
+                                            </p>
+                                            <p>{{currency[value.country]?currency[value.country]:'$'}}{{shoe.dail_rate}}
+                                                per day</p>
+                                        </span>
+                                    </mat-list-option>
+                                </mat-selection-list>
+                                <button class="btn btn-danger mt-4 align-self-center" (click)="redirectToPayment()"
+                                    [disabled]="!isStep1Completed">Proceed to
+                                    Checkout</button>
+                            </ng-template>
+                        </mat-step>
+                    </mat-stepper>
 
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -27,6 +27,9 @@ export class PaymentpageComponent {
   public userLogin: boolean = false;
   Email: any = ''
   userID: any = ''
+  hours = 0
+  minutes = 0
+  parktime = ''
   public editTime: any = {
     "checkIn": "13:15",
     "checkOut": "05:20"
@@ -51,6 +54,13 @@ export class PaymentpageComponent {
   step = 0;
   ngOnInit() {
     this.getUserDetails()
+
+    const currentTime = new Date();
+    this.hours = currentTime.getHours();
+    this.minutes = currentTime.getMinutes();
+    this.parktime = `${this.minutes > 30 ? this.hours - 1 : this.hours}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
+
+
     this.setStep(0)
     this.route.params.subscribe(params => {
       this.id = params['id']; // Get the value of the 'id' parameter
@@ -116,10 +126,15 @@ export class PaymentpageComponent {
 
   }
 
+
   public editTimes() {
     const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
+    if (sameDate && (parseInt(this.editTime.checkIn.slice(0, 2)) < parseInt(this.parktime.slice(0, 2)))) {
+      this._snackbar.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
+      return
+    }
     if (sameDate && parseInt(this.editTime.checkIn.slice(0, 2)) >= parseInt(this.editTime.checkOut.slice(0, 2))) {
-      this._snackbar.openSnackbar('Check Out Time is Not Valid')
+      this._snackbar.openSnackbar(`❌ Check-Out Time Should be greater than ${this.editTime.checkIn}`)
       return
     } else {
       this.time = {
@@ -148,18 +163,6 @@ export class PaymentpageComponent {
       "user": this.userID,
       "property": this.id,
     }
-    // const data = {
-    //   title: this.tittle,
-    //   parkingType: this.type[0]?.product,
-    //   checkIN: `${new Date(this.date.checkIn).toLocaleDateString('en-IN')} - ${this.time.checkIn}`,
-    //   checkOut: `${new Date(this.date.checkOut).toLocaleDateString('en-IN')} - ${this.time.checkOut}`,
-    //   days: this.day,
-    //   subTotal: `${this.icon}${this.day * this.type[0].dail_rate}`,
-    //   serviceCharge: `${this.icon}6.49`,
-    //   taxes: `${this.icon}${this.finaleTaxes}`,
-    //   total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
-    //   download: true,
-    // }
     this._customer.getBookingSlot(this.id).subscribe({
       next: (res) => {
         console.log('res==>', res);
@@ -167,7 +170,7 @@ export class PaymentpageComponent {
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
-        
+
         this._snackbar.openSnackbar('❌ Internal error')
       },
     })
@@ -207,37 +210,37 @@ export class PaymentpageComponent {
   public getText(id: any) {
     this._taxeService.getTaxesfeesById(id).subscribe({
       next: (res) => {
-        this.finaleTaxes = 0
+        const hours = this.totalHoursBtwDates(this.date, this.editTime)
+        let amountTotal:number = 0
+        if (hours <24 && +this.type[0].hourly_rate){
+          amountTotal = +this.type[0].hourly_rate
+        }else{
+          amountTotal = +this.type[0].dail_rate
+        }
+          this.finaleTaxes = 0
         res.forEach((tax: any) => {
-          console.log(tax)
           if (tax.type == "fixed_amount") {
             if (tax.amount_type == "Fixed") {
               this.finaleTaxes += +tax.amount
-              console.log('fiexedAmount', "feixed type")
             } else {
-              const totalAmount = +this.day * +this.type[0].dail_rate
+              const totalAmount = +this.day * amountTotal
               this.finaleTaxes += +totalAmount * Number(+tax.amount / 100)
-              console.log('fiexedAmount', "% type")
             }
           } else if (tax.type == 'per_day') {
             const totalCalenderHours = this.totalHoursBtwDates(this.date, this.editTime)
             const calenderDay = Math.ceil(+totalCalenderHours / 24)
             if (tax.amount_type == "Percentage") {
-              let oneDayTax = (1 * (+this.type[0].dail_rate)) * ((+tax.amount) / 100)
+              let oneDayTax = (1 * (amountTotal)) * ((+tax.amount) / 100)
               let totalDayTax = +calenderDay * +oneDayTax
               this.finaleTaxes += +totalDayTax
-              console.log('pre day', "%")
             } else {
               let oneDayTax = +tax.amount
               let totalDayTax = +calenderDay * +oneDayTax
-              console.log(totalDayTax, "1", calenderDay, "11")
-              console.log(this.finaleTaxes, totalDayTax)
               this.finaleTaxes += +totalDayTax
-              console.log('pre day', "Number")
             }
           } else if (tax.type == 'per_calendar_day') {
             if (tax.amount_type == "Percentage") {
-              let oneDayTax = (1 * (+this.type[0].dail_rate)) * ((+tax.amount) / 100)
+              let oneDayTax = (1 * (amountTotal)) * ((+tax.amount) / 100)
               let totalDayTax = +this.day * +oneDayTax
               this.finaleTaxes += totalDayTax
             } else {
@@ -263,12 +266,11 @@ export class PaymentpageComponent {
 
   totalHoursBtwDates(date: any, time: any): any {
     // Define the check-in and check-out times and dates as strings
-    const checkInTime = time.checkIn;
-    const checkOutTime = time.checkOut;
+    const checkInTime = this.convertTimeFormat(time.checkIn);
+    const checkOutTime = this.convertTimeFormat(time.checkOut);
     const checkInDate = new Date(date.checkIn).toISOString().split('T')[0];
     const checkOutDate = new Date(date.checkOut).toISOString().split('T')[0];
     // Convert the time strings to JavaScript Date objects
-    console.log(checkInDate, checkOutDate, '==========>')
     const checkInDateTime: any = new Date(`${checkInDate}T${checkInTime}:00`);
     const checkOutDateTime: any = new Date(`${checkOutDate}T${checkOutTime}:00`);
     // Calculate the time difference in milliseconds
@@ -276,6 +278,18 @@ export class PaymentpageComponent {
     // Convert milliseconds to hours
     const totalHours = timeDifferenceMillis / (1000 * 60 * 60);
     return totalHours
+  }
+
+  convertTimeFormat(time: any) {
+    // Split the input time string into hours and minutes
+    const [hours, minutes] = time.split(':');
+    // Pad the hours and minutes with leading zeros if necessary
+    const paddedHours = hours.padStart(2, '0');
+    const paddedMinutes = minutes.padStart(2, '0');
+    // Combine the padded hours and minutes into the new format
+    const formattedTime = `${paddedHours}:${paddedMinutes}`;
+
+    return formattedTime;
   }
 
   public quickSignInDialog(): void {

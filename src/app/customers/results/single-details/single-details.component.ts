@@ -122,11 +122,10 @@ export class SingleDetailsComponent {
   onNextStep() {
     const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
     if (sameDate && (parseInt(this.parkingTimes.checkIn.slice(0, 2)) < parseInt(this.parktime.slice(0, 2)))) {
+      console.log('greter than')
       this._snackbarService.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
       return
     }
-    console.log(this.parktime, this.parkingTimes);
-    
     if (sameDate && (parseInt(this.parkingTimes.checkIn.slice(0, 2)) >= parseInt(this.parkingTimes.checkOut.slice(0, 2)))) {
       this.isStep1Completed = false;
       this._snackbarService.openSnackbar('❌ Check-Out Time Should be greater than Check-In Time')
@@ -135,7 +134,6 @@ export class SingleDetailsComponent {
     else if (this.isStep1Completed) {
       this.isStep1Completed = true;
       this.selectedStep = 1; // Advance to step 2 (index 1)
-
     }
   }
 
