@@ -4,6 +4,7 @@ import { CustomerService } from 'src/app/service/customer/customer.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+import { LocationService } from 'src/app/service/location.service';
 
 
 @Component({
@@ -24,11 +25,19 @@ export class SearchComponent {
   // initialize variable user login or not 
   public userLogin = false
   public spinner = false
+  currentGeo!: GeolocationCoordinates;
+  currentAddress!: any;
+
 
 
   @ViewChild('placesSearchInput') placesSearchInput!: ElementRef;
 
-  constructor(private route: ActivatedRoute, private _router: Router, private _customerService: CustomerService, private _snackbarService: SnackbarService) {
+  constructor(
+    private locationService: LocationService,
+    private route: ActivatedRoute,
+    private _router: Router,
+    private _customerService: CustomerService,
+    private _snackbarService: SnackbarService) {
   }
 
 
@@ -124,12 +133,12 @@ export class SearchComponent {
   }
 
   getSearchResult(): void {
+    console.log(this.searchTerm)
     this.spinner = true
     this._customerService.searchAddress(this.searchTerm, '', '').subscribe({
       next: (data) => {
         this.searchData = data;
         this.getUserDetails()
-
         if (this.checkIn && this.checkout && this.searchData.length) {
           const queryParams = {
             // data: JSON.stringify(this.searchData),
@@ -149,5 +158,29 @@ export class SearchComponent {
         this._snackbarService.openSnackbar('❌' + error.error)
       }
     })
+  }
+
+
+  currentAddressLocation(): void {
+    this.locationService.getCurrentLocation().then((coords) => {
+      this.currentGeo = coords;
+      this.locationService
+        .getAddressFromCoordinates(coords)
+        .then((address: any) => {
+          console.log(address?.address_components)
+          this.currentAddress = address?.address_components.filter((type: any) => type.types[0] == "postal_code")
+          this.searchTerm = this.currentAddress[0]?.long_name
+          this.getSearchResult()
+          if (!this.searchData.length) {
+            this.currentAddress = address?.address_components.filter((type: any) => type.types[0] == "locality")
+            this.searchTerm = this.currentAddress[0]?.long_name
+            this.getSearchResult()
+          }
+
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
   }
 }
