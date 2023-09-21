@@ -61,19 +61,34 @@ export class ForgotPasswordPageComponent {
   public sendOtp(): void {
     this._authService.sentOptOnEmail({ email: this.emailForm.controls['email'].value }).subscribe({
       next: (res) => {
-        this.otpSent = true
+        if (res.error) {
+          this._snackbarService.openSnackbar('❌ ' + res.error)
+        } else {
+          this._snackbarService.openSnackbar('✔ ' + res.message)
+          this.otpSent = true
+        }
       },
       error: (error) => {
-        this._snackbarService.openSnackbar('❌' + error.error[0])
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
       }
     })
   }
 
   public verifyEmail(): void {
-    this._authService.verifyOptOnEmail({ email: this.emailForm.controls['email'].value, otp: this.otp.value }).subscribe({
+    this._authService.verifyOptOnEmail({ email: this.emailForm.controls['email'].value, otp: this.otp.value, new_password: this.passwordForm.controls['password'].value }).subscribe({
       next: (res) => {
-        this.otpSent = true
-        this.verifyOtp = true
+        if (res.error) {
+          this._snackbarService.openSnackbar('❌ ' + res.error)
+        } else {
+          this._snackbarService.openSnackbar('✔ ' + res.message)
+          if (this.user == 'CUSTOM77484ER85487548400UHGBVVGHJIHHGHHGHBNM45125445874FDC5844J') {
+            this._router.navigate(['/customers/sign-in'])
+          } else if (this.user == 'ADMIN77484ER85487548400UHGBVVGHJIHHGHHGHBNM45125445874FDC5844J') {
+            this._router.navigate(['/signIN'])
+          } else {
+            this._router.navigate(['/customers'])
+          }
+        }
       },
       error: (error) => {
         this._snackbarService.openSnackbar('❌' + error.error[0])
@@ -84,7 +99,7 @@ export class ForgotPasswordPageComponent {
   public wrongEmail(): void {
     this.otpSent = false
   }
-  
+
   togglePasswordVisibility(field: string) {
     if (field === 'password') {
       this.passwordVisible = !this.passwordVisible;

@@ -26,10 +26,10 @@ export class AuthService {
   }
 
   sentOptOnEmail(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/users/register/`, data, { withCredentials: true })
+    return this._http.post(`${environment.URL}/users/send-otp/`, data, { withCredentials: true })
   }
   verifyOptOnEmail(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/users/register/`, data, { withCredentials: true })
+    return this._http.post(`${environment.URL}/users/reset-password/`, data, { withCredentials: true })
   }
   resetPassword(data: any): Observable<any> {
     return this._http.post(`${environment.URL}/users/register/`, data, { withCredentials: true })
