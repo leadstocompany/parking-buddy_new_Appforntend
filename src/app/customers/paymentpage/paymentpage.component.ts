@@ -314,16 +314,6 @@ export class PaymentpageComponent {
     container.monthSelectHandler = (event: any): void => {
       container._store.dispatch(container._actions.select(event.date));
     };
-    // const currentDate = new Date();
-    // const selectedDate = new Date(this.minDate);
-    // if (selectedDate.getFullYear() === currentDate.getFullYear()) {
-    //   const currentMonth = currentDate.getMonth();
-    //   if (selectedDate.getMonth() < currentMonth) {
-    //     this.minDate = new Date(currentDate.getFullYear(), currentMonth, 1);
-    //   }
-    // } else if (selectedDate.getFullYear() < currentDate.getFullYear()) {
-    //   this.minDate = new Date(currentDate.getFullYear(), 0, 1);
-    // }
     container.setViewMode('month');
   }
 }
