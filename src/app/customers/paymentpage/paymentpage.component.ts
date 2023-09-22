@@ -168,7 +168,7 @@ export class PaymentpageComponent {
     }
     this._customer.bookingPlot(payload).subscribe({
       next: (response) => {
-        console.log(response,'response')
+        console.log(response, 'response')
         this._customer.getBookingSlot(response.id).subscribe({
           next: (res) => {
             console.log('res==>', res);
@@ -195,13 +195,14 @@ export class PaymentpageComponent {
         if (res.role == "normal_user") {
           this.userLogin = true
         }
-        console.log(res, 'use details')
         this.userID = res.id
         this.Email = res.email
       },
       error: (error) => {
-        console.log(error.error)
-        this._snackbar.openSnackbar('❌ ' + error.error[0])
+        if (error.error[0]) {
+          this._snackbar.openSnackbar('❌ ' + error.error[0])
+        }
+
       }
     }
     )

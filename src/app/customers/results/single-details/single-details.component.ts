@@ -34,7 +34,7 @@ export class SingleDetailsComponent {
     { iconName: 'ev_station', iconColor: 'teal', name: 'EV Charging', key: 'ev_charging' }
   ];
   Images: any = []
-
+  cancellationMessage:string = "✔ Free Cancellation"
   address = '1600 Amphitheatre Parkway, Mountain View, CA 94043';
   parkingTimes: { checkIn: string, checkOut: string } = {
     checkIn: '10:00',
@@ -121,6 +121,9 @@ export class SingleDetailsComponent {
   selectedStep = 0; // Track the currently selected step
   onNextStep() {
     const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
+    if(sameDate){
+      this.cancellationMessage=' ❌ non Cancellation'
+    }
     if (sameDate && (parseInt(this.parkingTimes.checkIn.slice(0, 2)) < parseInt(this.parktime.slice(0, 2)))) {
       console.log('greter than')
       this._snackbarService.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
