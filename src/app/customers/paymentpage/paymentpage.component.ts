@@ -55,12 +55,11 @@ export class PaymentpageComponent {
   step = 0;
   ngOnInit() {
     this.getUserDetails()
-
     const currentTime = new Date();
     this.hours = currentTime.getHours();
     this.minutes = currentTime.getMinutes();
     this.parktime = `${this.minutes > 30 ? this.hours : this.hours - 1}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
-    //console.log('park==>', this.parktime);
+    console.log('park==>', this.parktime);
     this.setStep(0)
     this.route.params.subscribe(params => {
       this.id = params['id']; // Get the value of the 'id' parameter
@@ -167,24 +166,24 @@ export class PaymentpageComponent {
       "service_charge": "6.49",
       "taxesandfees": this.finaleTaxes,
     }
-    this._customer.getBookingSlot(this.id).subscribe({
-      next: (res) => {
-        //console.log('res==>', res);
-        this._docService.generateOrderSummary(res, true, this.icon)
-      },
-      error: (error: HttpErrorResponse) => {
-        //console.log(error);
-        this._snackbar.openSnackbar('❌' + error.error[0])
-      },
-    })
     this._customer.bookingPlot(payload).subscribe({
-      next: (res) => {
-        //console.log(res)
-        this._snackbar.openSnackbar('✔ Plot Successfully Booking')
-        this._route.navigate(['/customers/thank-you'])
+      next: (response) => {
+        console.log(response,'response')
+        this._customer.getBookingSlot(response.id).subscribe({
+          next: (res) => {
+            console.log('res==>', res);
+            this._docService.generateOrderSummary(res, true, this.icon)
+            this._snackbar.openSnackbar('✔ Plot Successfully Booking')
+            this._route.navigate(['/customers/thank-you'])
+          },
+          error: (error: HttpErrorResponse) => {
+            console.log(error);
+            this._snackbar.openSnackbar('❌' + error.error[0])
+          },
+        })
       },
       error: (error) => {
-        //console.log(error)
+        console.log(error)
         this._snackbar.openSnackbar('❌ ' + error.error[0])
       }
     })
@@ -196,12 +195,12 @@ export class PaymentpageComponent {
         if (res.role == "normal_user") {
           this.userLogin = true
         }
-        //console.log(res, 'use details')
+        console.log(res, 'use details')
         this.userID = res.id
         this.Email = res.email
       },
       error: (error) => {
-        //console.log(error.error)
+        console.log(error.error)
         this._snackbar.openSnackbar('❌ ' + error.error[0])
       }
     }
@@ -257,7 +256,7 @@ export class PaymentpageComponent {
 
       },
       error: (error) => {
-        //console.log(error)
+        console.log(error)
         this._snackbar.openSnackbar('❌ ' + error.error[0])
       }
     })

@@ -1,7 +1,8 @@
 <div class="container-fluid p-2">
     <div class="row d-flex flex-md-row flex-column mt-3 navbar-tag">
         <div class="col-md-4">
-            <p style="font-size: 26px; color: blue;">Parking Partners</p>
+            <p style="font-size: 26px; color: blue;">Parking
+Spotters</p>
         </div>
         <div class="col-md-8 d-flex gap-4 justify-content-end" *ngIf="userLogin==false">
             <span (click)="changeRout('sign-In')">Sign-In</span>
@@ -22,18 +23,17 @@
                 <div class="col-md-12">
                     <div class="row gap-3 justify-content-center">
                         <div class="col-md-5 d-flex">
-
                             <input type="text" #dp="bsDatepicker" [minDate]="minCheckInDate" placeholder="Check-In"
                                 bsDatepicker [ngModelOptions]="{ standalone: true }" [(ngModel)]="checkIn"
                                 [bsConfig]="{ adaptivePosition: true }" (ngModelChange)="checkOutDate()">
-                            <button style="background-color: inherit; border: 0.5px solid gray;"
+                            <button style="background-color: inherit; border: 0.5px solid gray;font-size:0.8rem;"
                                 disabled>Check-In&nbsp;</button>
                         </div>
                         <div class="col-md-5 d-flex">
                             <input type="text" #dp="bsDatepicker" [minDate]="minCheckOutDate" placeholder="Check-Out"
                                 bsDatepicker [ngModelOptions]="{ standalone: true }"
                                 [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="checkout">
-                            <button style="background-color: inherit;  border: 0.5px solid gray;"
+                            <button style="background-color: inherit;  border: 0.5px solid gray; font-size:0.8rem;"
                                 disabled>Check-Out</button>
                         </div>
                     </div>
