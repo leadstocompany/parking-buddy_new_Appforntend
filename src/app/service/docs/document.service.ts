@@ -234,7 +234,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: ': Parking',
+                        text: `: ${data?.user?.car_plate_no ? data?.user?.car_plate_no : '-'}`,
                         width: '60%'
                       },
                     ],
@@ -247,7 +247,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: ': Parking',
+                        text: `: ${data?.user?.car_model ? data?.user?.car_model : '-'}`,
                         width: '60%'
                       },
                     ],
@@ -292,7 +292,7 @@ export class DocumentService {
                       {
                         stack: [
                           {
-                            text: `${data['shuttle_hours-open_time']?data['shuttle_hours-open_time']:'-'} - ${data['shuttle_hours-close_time']?data['shuttle_hours-close_time']:'-'} `,
+                            text: `${data['shuttle_hours-open_time'] ? data['shuttle_hours-open_time'] : '-'} - ${data['shuttle_hours-close_time'] ? data['shuttle_hours-close_time'] : '-'} `,
                           },
                           {
                             text: `Shuttle runs every ${15 > 24 ? 'hours' : 'minutes'}.`
@@ -310,7 +310,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: `${data['no_shuttle_open-time']?data['no_shuttle_open-time']:'-'} - ${data['no_shuttle_close-time']?data['no_shuttle_close-time']:'-'}`,
+                        text: `${data['no_shuttle_open-time'] ? data['no_shuttle_open-time'] : '-'} - ${data['no_shuttle_close-time'] ? data['no_shuttle_close-time'] : '-'}`,
                         width: '60%'
                       },
                     ],

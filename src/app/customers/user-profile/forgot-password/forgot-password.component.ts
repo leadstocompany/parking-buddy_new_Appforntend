@@ -14,6 +14,9 @@ export class ForgotPasswordComponent {
 
   selected = new FormControl(0);
   profileForm!: FormGroup;
+  public passwordHide: boolean = true;
+  public opasswordHide: boolean = true;
+  public cpasswordHide: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +29,7 @@ export class ForgotPasswordComponent {
   ngOnInit(): void {
     this.profileForm = this.fb.group({
       currentPassword: ['', [Validators.required]],
-      nPassword: ['', [Validators.required]],
+      nPassword: ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/)]],
       confirmPassword: ['', [Validators.required]],
     });
   }

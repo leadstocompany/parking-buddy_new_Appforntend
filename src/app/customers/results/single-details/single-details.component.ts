@@ -34,7 +34,7 @@ export class SingleDetailsComponent {
     { iconName: 'ev_station', iconColor: 'teal', name: 'EV Charging', key: 'ev_charging' }
   ];
   Images: any = []
-  cancellationMessage:string = "✔ Free Cancellation"
+
   address = '1600 Amphitheatre Parkway, Mountain View, CA 94043';
   parkingTimes: { checkIn: string, checkOut: string } = {
     checkIn: '10:00',
@@ -51,8 +51,9 @@ export class SingleDetailsComponent {
     const currentTime = new Date();
     this.hours = currentTime.getHours();
     this.minutes = currentTime.getMinutes();
-
+    console.log(this.hours, this.minutes, 'dd')
     this.parktime = `${this.minutes > 30 ? this.hours : this.hours - 1}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
+    console.log(this.parktime, 'parktime')
     this.parkingTimes.checkOut = this.parktime
     this.parkingTimes.checkIn = this.parktime
 
@@ -121,15 +122,13 @@ export class SingleDetailsComponent {
   selectedStep = 0; // Track the currently selected step
   onNextStep() {
     const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
-    if(sameDate){
-      this.cancellationMessage=' ❌ non Cancellation'
-    }
-    if (sameDate && (parseInt(this.parkingTimes.checkIn.slice(0, 2)) < parseInt(this.parktime.slice(0, 2)))) {
-      console.log('greter than')
+    console.log(this.parktime, this.parkingTimes.checkIn)
+    console.log(parseInt(this.parkingTimes.checkIn.slice(0, 2)), parseInt(this.parktime.slice(0, 2)))
+    if (this.convertToSeconds(this.parkingTimes.checkIn) < this.convertToSeconds(this.parktime)) {
       this._snackbarService.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
       return
     }
-    if (sameDate && (parseInt(this.parkingTimes.checkIn.slice(0, 2)) >= parseInt(this.parkingTimes.checkOut.slice(0, 2)))) {
+    if (sameDate && (this.convertToSeconds(this.parkingTimes.checkIn) >=  this.convertToSeconds(this.parktime) )) {
       this.isStep1Completed = false;
       this._snackbarService.openSnackbar('❌ Check-Out Time Should be greater than Check-In Time')
       return
@@ -165,4 +164,10 @@ export class SingleDetailsComponent {
     this.minCheckOutDate = date;
     this.checkOutTime = date;
   }
+
+  convertToSeconds(timeString: any) {
+    const [minutes, seconds] = timeString.split(':').map(Number);
+    return minutes * 60 + seconds;
+  }
+
 }
