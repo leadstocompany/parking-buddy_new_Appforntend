@@ -48,14 +48,11 @@ export class DocumentService {
               {
                 stack: [
                   {
-                    text: 'Parking',
-                  },
-                  {
-                    text: 'Spotters',
+                    text: 'Parking Spotters',
                   },
                 ],
                 color: '#4C3F9C',
-                width: '20%'
+                width: '50%'
               },
               {
                 stack: [
@@ -80,7 +77,7 @@ export class DocumentService {
             text: `Your parking has been confirmed and the ${data?.property?.tittle} is expecting you on ${data?.check_in_date}`,
             marginLeft: 20,
             marginBottom: 30,
-            marginTop:10
+            marginTop: 10
           },
           {
             columns: [
@@ -116,7 +113,7 @@ export class DocumentService {
                         }
                       },
                       {
-                        text: ' Vist Google Map',
+                        text: ' Visit Google Map',
                         link: `https://www.google.com/maps/dir/?api=1&destination=${data?.property?.latitude},${data?.property?.longitude}`,
                         style: {
                           color: '#352A7E',
@@ -159,7 +156,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: `: ${data?.user?.first_name} ${data?.user?.last_name}`,
+                        text: `: ${data?.user?.first_name ? data?.user?.first_name : '-'} ${data?.user?.last_name ? data?.user?.last_name : '-'}`,
                         width: '60%'
                       },
                     ],
@@ -256,19 +253,6 @@ export class DocumentService {
                     ],
                     marginTop: 5
                   },
-                  {
-                    columns: [
-                      {
-                        text: 'Cr Color',
-                        width: '40%'
-                      },
-                      {
-                        text: ': Parking',
-                        width: '60%'
-                      },
-                    ],
-                    marginTop: 5
-                  },
                 ]
               }
             ]
@@ -308,10 +292,10 @@ export class DocumentService {
                       {
                         stack: [
                           {
-                            text: `${data['shuttle_hours-open_time']} - ${data['shuttle_hours-close_time']} `,
+                            text: `${data['shuttle_hours-open_time']?data['shuttle_hours-open_time']:'-'} - ${data['shuttle_hours-close_time']?data['shuttle_hours-close_time']:'-'} `,
                           },
                           {
-                            text: `Shuttle runs every ${(data['shuttle_hours-close_time'] - data['shuttle_hours-open_time'])} ${(data['shuttle_hours-close_time'] - data['shuttle_hours-open_time']) > 24 ? 'hours' : 'minutes'}.`
+                            text: `Shuttle runs every ${15 > 24 ? 'hours' : 'minutes'}.`
                           }
                         ],
                         width: '60%'
@@ -326,7 +310,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: `${data['no_shuttle_open-time']} - ${data['no_shuttle_close-time']}`,
+                        text: `${data['no_shuttle_open-time']?data['no_shuttle_open-time']:'-'} - ${data['no_shuttle_close-time']?data['no_shuttle_close-time']:'-'}`,
                         width: '60%'
                       },
                     ],
@@ -378,7 +362,7 @@ export class DocumentService {
                   {
                     columns: [
                       {
-                        text: 'Lot Taxes & Fees*',
+                        text: 'Lot Taxes & Fees',
                         width: '60%'
                       },
                       {
@@ -396,7 +380,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: `${icon} ${data?.base_price == null ? 0 : data?.base_price + data?.service_charge == null ? 0 : data?.service_charge + data?.taxesandfees == null ? 0 : data?.taxesandfees}`,
+                        text: `${icon} ${((data?.base_price == null ? 0.1 : +data?.base_price) + (data?.service_charge == null ? 0.10 : +data?.service_charge) + (data?.taxesandfees == null ? 0.001 : +data?.taxesandfees))}`,
                         bold: true,
                         width: '40%'
                       },
@@ -438,7 +422,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: `${icon} ${Math.abs((data?.base_price == null ? 0 : data?.base_price + data?.service_charge == null ? 0 : data?.service_charge + data?.taxesandfees == null ? 0 : data?.taxesandfees) - data?.amount)}`,
+                        text: `${icon} ${Math.abs((((data?.base_price == null ? 0 : data?.base_price) + (data?.service_charge == null ? 0 : data?.service_charge) + data?.taxesandfees == null ? 0 : data?.taxesandfees)) - data?.amount)}`,
                         bold: true,
                         width: '40%'
                       },

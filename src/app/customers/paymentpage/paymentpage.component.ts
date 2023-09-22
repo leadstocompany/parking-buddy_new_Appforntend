@@ -162,7 +162,7 @@ export class PaymentpageComponent {
       "user": this.userID,
       "property": this.id,
       "no_of_days": this.day,
-      "base_price": (this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes,
+      "base_price": this.day * this.type[0].dail_rate,
       "service_charge": "6.49",
       "taxesandfees": this.finaleTaxes,
     }
