@@ -34,7 +34,6 @@ export class SingleDetailsComponent {
     { iconName: 'ev_station', iconColor: 'teal', name: 'EV Charging', key: 'ev_charging' }
   ];
   Images: any = []
-
   address = '1600 Amphitheatre Parkway, Mountain View, CA 94043';
   parkingTimes: { checkIn: string, checkOut: string } = {
     checkIn: '10:00',
@@ -42,6 +41,7 @@ export class SingleDetailsComponent {
   }
   parkingType!: any;
   value: any;
+  cancellationMessage: string = ' ✔ FreeCancellation'
   constructor(private _taxeService: TaxesService, private route: ActivatedRoute, private router: Router, private _customerService: CustomerService, private _snackbarService: SnackbarService) { }
   ngOnInit() {
     // const date = new Date();
@@ -124,11 +124,14 @@ export class SingleDetailsComponent {
     const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
     console.log(this.parktime, this.parkingTimes.checkIn)
     console.log(parseInt(this.parkingTimes.checkIn.slice(0, 2)), parseInt(this.parktime.slice(0, 2)))
+    if(sameDate){
+      this.cancellationMessage = '❌ non Cancellation'
+    }
     if (this.convertToSeconds(this.parkingTimes.checkIn) < this.convertToSeconds(this.parktime)) {
       this._snackbarService.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
       return
     }
-    if (sameDate && (this.convertToSeconds(this.parkingTimes.checkIn) >=  this.convertToSeconds(this.parktime) )) {
+    if (sameDate && (this.convertToSeconds(this.parkingTimes.checkIn) >= this.convertToSeconds(this.parktime))) {
       this.isStep1Completed = false;
       this._snackbarService.openSnackbar('❌ Check-Out Time Should be greater than Check-In Time')
       return
