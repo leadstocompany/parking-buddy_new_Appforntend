@@ -131,7 +131,7 @@ export class SingleDetailsComponent {
       this._snackbarService.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
       return
     }
-    if (sameDate && (this.convertToSeconds(this.parkingTimes.checkIn) >= this.convertToSeconds(this.parktime))) {
+    if (sameDate && (this.convertToSeconds(this.parkingTimes.checkIn) >= this.convertToSeconds(this.parkingTimes.checkOut))) {
       this.isStep1Completed = false;
       this._snackbarService.openSnackbar('❌ Check-Out Time Should be greater than Check-In Time')
       return
