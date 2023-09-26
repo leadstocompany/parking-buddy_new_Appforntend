@@ -2,7 +2,7 @@
     <div class="row d-flex flex-row justify-content-center align-items-center">
         <div class="col-md-4">
             <h2 class="text-center mt-4">Sign In</h2>
-            <form [formGroup]="signInForm" (ngSubmit)="submitForm()">
+            <form [formGroup]="signInForm">
                 <div class="row">
                     <div class="col-12 form-group">
                         <label for="email" class="form-label">Email</label>
@@ -17,7 +17,7 @@
                         </div>
 
                     </div>
-                    <div class="col-12 form-group">
+                    <!-- <div class="col-12 form-group">
                         <label for="password" class="form-label">Password</label>
                         <div class="input-div">
                             <input [type]="passwordHide ? 'password' : 'text'" id="password" class="form-control"
@@ -40,15 +40,64 @@
                             style="text-decoration: underline;color:rgb(116, 116, 247);cursor: pointer;"
                             (click)="forgotPassword()">
                             Forgot Password
-                            <!-- <a [routerLink]="['/reset-password']"> Forgot Password</a> -->
                         </p>
-                    </div>
-                    <div class="col-12">
-                        <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
-                            <span class="visually-hidden">Loading...</span>
+                    </div> -->
+                    <div [hidden]="emailVerify == true">
+                        <div class="col-12 text-end mt-3">
+                            <p style="color: white;">Create new account? <a [routerLink]="[url]">Sign Up</a></p>
+                            <p style="color: white;"
+                                style="text-decoration: underline;color:rgb(116, 116, 247);cursor: pointer;"
+                                (click)="forgotPassword()">
+                                Forgot Password
+                                <!-- <a [routerLink]="['/reset-password']"> Forgot Password</a> -->
+                            </p>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="signInForm.invalid"
-                            *ngIf="spinner==false">Sign-In</button>
+                        <div class="col-12">
+                            <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-3" *ngIf="spinner==false"
+                                (click)="verifyEmail()">Continu</button>
+                        </div>
+                    </div>
+                    <div [hidden]="otpVerify == true">
+                        <div class="col-12 form-group">
+                            <label for="email" class="form-label">OTP</label>
+                            <ng-otp-input [formCtrl]="otp" [config]="{length:6}"></ng-otp-input>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-3" *ngIf="spinner==false"
+                                [disabled]="otp.value.length < 6" (click)="verifyEmailOtp()">Continu</button>
+                        </div>
+                    </div>
+                    <div [hidden]="password == true">
+                        <div class="col-12 form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-div">
+                                <input [type]="passwordHide ? 'password' : 'text'" id="password" class="form-control"
+                                    formControlName="password" [ngClass]="{
+                            'is-invalid': signInForm.get('password')!.invalid && signInForm.get('password')!.touched
+                          }" />
+                                <div class="icons" (click)="passwordHide = !passwordHide">
+                                    <i class="fa fa-eye-slash icon password-icon" [hidden]="!passwordHide"></i>
+                                    <i class="fa fa fa-eye icon password-icon" [hidden]="passwordHide"></i>
+                                </div>
+                            </div>
+                            <div *ngIf="signInForm.get('password')!.invalid && signInForm.get('password')!.touched"
+                                class="invalid-feedback">
+                                Please enter a valid password.
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-3" (click)="submitForm()"
+                                [disabled]="signInForm.invalid" *ngIf="spinner==false">Sign-In</button>
+                        </div>
                     </div>
                 </div>
             </form>

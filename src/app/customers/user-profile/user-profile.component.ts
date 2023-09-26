@@ -77,8 +77,8 @@ export class UserProfileComponent {
         this.pastReservationData = []
         this.openReservationData = res
       },
-      error: (error:any) => {
-        this._snackbarService.openSnackbar(`❌ `+error.error[0])
+      error: (error: any) => {
+        this._snackbarService.openSnackbar(`❌ ` + error.error[0])
       },
     })
   }
@@ -90,9 +90,9 @@ export class UserProfileComponent {
         this.openReservationData = []
         this.pastReservationData = res
       },
-      error: (error:any) => {
+      error: (error: any) => {
         console.log(error);
-        this._snackbarService.openSnackbar(`❌ `+error.error[0])
+        this._snackbarService.openSnackbar(`❌ ` + error.error[0])
       },
     })
   }
@@ -114,9 +114,9 @@ export class UserProfileComponent {
           makeModle: data.car_model ? data.car_model : ""
         })
       },
-      error: (error:any) => {
+      error: (error: any) => {
         console.log(error);
-        this._snackbarService.openSnackbar(`❌ `+error.error[0])
+        this._snackbarService.openSnackbar(`❌ ` + error.error[0])
       },
     })
   }
@@ -152,10 +152,19 @@ export class UserProfileComponent {
         console.log('res ==>', res);
         this._snackbarService.openSnackbar('✔ Profile Update Successfully')
       },
-      error: (error:any) => {
+      error: (error: any) => {
         console.log(error);
-        this._snackbarService.openSnackbar(`❌ `+error.error[0])
+        this._snackbarService.openSnackbar(`❌ ` + error.error[0])
       },
     })
+  }
+
+  viewOpen(index:number): void {
+  }
+  
+  cancelOpen(index:number): void {
+  }
+  
+  viewPast(index:number): void {
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth/auth.service';
 import { SnackbarService } from '../service/snackbar.service';
 import { Router } from '@angular/router';
@@ -14,6 +14,10 @@ export class SignInPageComponent {
   spinner: boolean = false
   public url: string = ''
   public passwordHide: boolean = true;
+  public emailVerify: boolean = false;
+  public otpVerify: boolean = true;
+  public password: boolean = true;
+  otp!: FormControl
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -27,6 +31,8 @@ export class SignInPageComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(2)]]
     });
+    this.otp = new FormControl('', [Validators.required]);
+
     const currentUrl = this._router.url
     if (currentUrl.includes('/customers')) {
       this.url = '/customers/sign-up'
@@ -37,6 +43,40 @@ export class SignInPageComponent {
 
   public signUp(): void {
 
+  }
+
+  verifyEmail(): void {
+    if (this.signInForm.controls['email'].value != '') {
+      this.spinner = true
+      this._authService.emailVerifySendOtp({ email: this.signInForm.value.email }).subscribe({
+        next: (res) => {
+          this.spinner = false
+          this.emailVerify = true
+          this.otpVerify = false
+          this._snackBarService.openSnackbar('✔ Successfully OTP Send')
+        },
+        error: (error) => {
+          this._snackBarService.openSnackbar('❌' + error.error.message)
+        },
+      })
+    }
+  }
+
+  verifyEmailOtp(): void {
+    if (this.signInForm.controls['email'].value != '' && this.otp.value.length == 6) {
+      this.spinner = true
+      this._authService.emailVerifyOtp({ email: this.signInForm.value.email, otp: this.otp.value }).subscribe({
+        next: (res) => {
+          this.spinner = false
+          this.otpVerify = true
+          this.password = false
+          this._snackBarService.openSnackbar('✔ Successfully OTP verify')
+        },
+        error: (error) => {
+          this._snackBarService.openSnackbar('❌' + error.error.message)
+        },
+      })
+    }
   }
 
   submitForm() {

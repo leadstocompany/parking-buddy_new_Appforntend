@@ -53,14 +53,22 @@ td:last-child {
     color: red;
 }
 
-.forgot-password{
+.forgot-password {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.forgot-password div{
+.forgot-password div {
     width: fit-content;
     color: #1469FD;
+    cursor: pointer;
+}
+
+.icon-center {
+    text-align: center;
+}
+
+.icon-td {
     cursor: pointer;
 }
