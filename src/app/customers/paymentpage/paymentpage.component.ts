@@ -41,7 +41,6 @@ export class PaymentpageComponent {
   public minCheckInDate: Date = new Date();
   public minCheckOutDate: Date = new Date();
   constructor(
-
     private _snackbar: SnackbarService,
     private _customer: CustomerService,
     private _taxeService: TaxesService,
@@ -81,8 +80,6 @@ export class PaymentpageComponent {
       this.tittle = queryParams['title']
       this.icon = queryParams['icon']
     })
-    // this._generateUrl()
-
   }
   setStep(index: number) {
     this.step = index;
@@ -94,22 +91,22 @@ export class PaymentpageComponent {
     this.step--;
   }
 
-  private _generateUrl() {
-    const data = {
-      title: this.tittle,
-      parkingType: this.type[0]?.product,
-      checkIN: `${new Date(this.date.checkIn).toLocaleDateString('en-IN')} - ${this.time.checkIn}`,
-      checkOut: `${new Date(this.date.checkOut).toLocaleDateString('en-IN')} - ${this.time.checkOut}`,
-      days: this.day,
-      subTotal: `${this.icon}${this.day * this.type[0].dail_rate}`,
-      serviceCharge: `${this.icon}6.49`,
-      taxes: `${this.icon}${this.finaleTaxes}`,
-      total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
-      download: false,
-    }
-    this._docService.generateOrderSummary(data, false, this.icon)
-    this._createBlob(this._docService.orderSummary as TDocumentDefinitions)
-  }
+  // private _generateUrl() {
+  //   const data = {
+  //     title: this.tittle,
+  //     parkingType: this.type[0]?.product,
+  //     checkIN: `${new Date(this.date.checkIn).toLocaleDateString('en-IN')} - ${this.time.checkIn}`,
+  //     checkOut: `${new Date(this.date.checkOut).toLocaleDateString('en-IN')} - ${this.time.checkOut}`,
+  //     days: this.day,
+  //     subTotal: `${this.icon}${this.day * this.type[0].dail_rate}`,
+  //     serviceCharge: `${this.icon}6.49`,
+  //     taxes: `${this.icon}${this.finaleTaxes}`,
+  //     total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
+  //     download: false,
+  //   }
+  //   this._docService.generateOrderSummary(data, false, this.icon)
+  //   this._createBlob(this._docService.orderSummary as TDocumentDefinitions)
+  // }
 
   public _createBlob(docDefination: TDocumentDefinitions) {
     const pdfDocGenerator = pdfMake.createPdf(docDefination);
