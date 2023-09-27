@@ -42,7 +42,7 @@
                             Forgot Password
                         </p>
                     </div> -->
-                    <div [hidden]="emailVerify == true">
+                    <div>
                         <div class="col-12 text-end mt-3">
                             <p style="color: white;">Create new account? <a [routerLink]="[url]">Sign Up</a></p>
                             <p style="color: white;"
@@ -52,15 +52,15 @@
                                 <!-- <a [routerLink]="['/reset-password']"> Forgot Password</a> -->
                             </p>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12" *ngIf="emailVerify">
                             <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block mt-3" *ngIf="spinner==false"
-                                (click)="verifyEmail()">Continu</button>
+                                (click)="verifyEmail()">Verify Email</button>
                         </div>
                     </div>
-                    <div [hidden]="otpVerify == true">
+                    <div *ngIf="otpVerify">
                         <div class="col-12 form-group">
                             <label for="email" class="form-label">OTP</label>
                             <ng-otp-input [formCtrl]="otp" [config]="{length:6}"></ng-otp-input>
@@ -70,10 +70,10 @@
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block mt-3" *ngIf="spinner==false"
-                                [disabled]="otp.value.length < 6" (click)="verifyEmailOtp()">Continu</button>
+                                [disabled]="otp.value.length < 6" (click)="verifyEmailOtp()">verify</button>
                         </div>
                     </div>
-                    <div [hidden]="password == true">
+                    <div *ngIf="passwordShow">
                         <div class="col-12 form-group">
                             <label for="password" class="form-label">Password</label>
                             <div class="input-div">

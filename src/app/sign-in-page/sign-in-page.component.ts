@@ -15,8 +15,9 @@ export class SignInPageComponent {
   public url: string = ''
   public passwordHide: boolean = true;
   public emailVerify: boolean = false;
-  public otpVerify: boolean = true;
+  public otpVerify: boolean = false;
   public password: boolean = true;
+  public passwordShow: boolean = true
   otp!: FormControl
 
   constructor(
@@ -51,8 +52,9 @@ export class SignInPageComponent {
       this._authService.emailVerifySendOtp({ email: this.signInForm.value.email }).subscribe({
         next: (res) => {
           this.spinner = false
-          this.emailVerify = true
-          this.otpVerify = false
+          this.emailVerify = false
+          this.otpVerify = true
+          this.passwordShow = false
           this._snackBarService.openSnackbar('✔ Successfully OTP Send')
         },
         error: (error) => {
@@ -68,8 +70,8 @@ export class SignInPageComponent {
       this._authService.emailVerifyOtp({ email: this.signInForm.value.email, otp: this.otp.value }).subscribe({
         next: (res) => {
           this.spinner = false
-          this.otpVerify = true
-          this.password = false
+          this.otpVerify = false
+          this.password = true
           this._snackBarService.openSnackbar('✔ Successfully OTP verify')
         },
         error: (error) => {
@@ -87,16 +89,26 @@ export class SignInPageComponent {
         "password": this.signInForm.value.password
       }
 
+      console.log(data, 'data')
+
       this._authService.loginUser(data).subscribe({
         next: (res) => {
-          localStorage.setItem('accessToken', res.data.auth_token.access)
-          this._snackBarService.openSnackbar('✔ Successfully logged In')
-          if (res.data.role == 'normal_user') {
+          console.log(res)
+          if (res?.data?.active) {
+            localStorage.setItem('accessToken', res.data.auth_token.access)
+            this._snackBarService.openSnackbar('✔ Successfully logged In')
+            if (res.data.role == 'normal_user') {
+              this.spinner = false
+              this._router.navigate(['/customers'])
+            }
+            else if (res.data.role == 'vendor') {
+              this._router.navigate(['/parking'])
+            }
+          } else {
+            this._snackBarService.openSnackbar('Please verify your email')
             this.spinner = false
-            this._router.navigate(['/customers'])
-          }
-          else if (res.data.role == 'vendor') {
-            this._router.navigate(['/parking'])
+            this.emailVerify = true
+            this.passwordShow = false
           }
         },
         error: (error) => {

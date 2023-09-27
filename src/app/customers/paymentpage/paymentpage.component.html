@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color: lightgrey; min-height:100vh; min-width:99vw; max-width:99vw;">
+<div class="container-fluid" style="background-color: lightgrey; min-height:100vh;max-height:100vh; min-width:99vw; max-width:99vw;">
     <div class="row navbar">
         <div class="col-md-2 d-flex align-items-center text-align-center">
             <h1 class="h1" style="text-align: center;" [routerLink]="['/']">Parking
@@ -6,23 +6,23 @@ Spotters</h1>
         </div>
         <div class="col-md-7">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-5 col-md-3">
                     <p>Parking Check-In</p>
-                    <!-- Mon,Jul 15 -->
+                
                     <p class="fs-5">{{date.checkIn| date:'EEE, MMM d'}}</p>
                 </div>
-                <div class="col-md-1">
-                    <!-- <p>&nbsp;</p> -->
+                <div class="col-1 col-md-1">
+                
                     <p><mat-icon class="fs-3">arrow_right_alt</mat-icon></p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-5 col-md-3">
                     <p>Parking Check-Out</p>
                     <p class="fs-5">{{date.checkOut | date:'EEE, MMM d'}}</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row d-flex flex-row justify-content-around mt-3">
+    <div class="position row d-flex flex-row justify-content-around mt-3">
         <div class="col-md-7" style="background-color: white;">
             <mat-stepper orientation="vertical">
                 <mat-step>
@@ -31,7 +31,7 @@ Spotters</h1>
                         <div class="row mt-4">
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" placeholder="Enter email"
+                                <input type="text" class="form-control" id="emailId" placeholder="Enter email"
                                     [(ngModel)]="Email">
                             </div>
                             <mat-checkbox class="example-margin" [labelPosition]="'after'">
@@ -194,7 +194,6 @@ Spotters</h1>
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">

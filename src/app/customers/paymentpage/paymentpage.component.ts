@@ -59,7 +59,6 @@ export class PaymentpageComponent {
     this.hours = currentTime.getHours();
     this.minutes = currentTime.getMinutes();
     this.parktime = `${this.minutes > 30 ? this.hours : this.hours - 1}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
-    console.log('park==>', this.parktime);
     this.setStep(0)
     this.route.params.subscribe(params => {
       this.id = params['id']; // Get the value of the 'id' parameter
