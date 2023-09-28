@@ -154,7 +154,7 @@ export class PaymentpageComponent {
       'check_in_time': this.time.checkIn,
       "check_out_date": this.date.checkOut,
       "check_out_time": this.time.checkOut,
-      "amount": ((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes),
+      "amount": ((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toFixed(2),
       "user": this.userID,
       "property": this.id,
       "no_of_days": this.day,
