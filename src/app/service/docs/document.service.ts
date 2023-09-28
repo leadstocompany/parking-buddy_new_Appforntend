@@ -124,22 +124,22 @@ export class DocumentService {
                     ],
                     marginTop: 30
                   },
-                  {
-                    text: 'Enter this location at :',
-                    marginTop: 30
-                  },
-                  {
-                    text: 'xxxxx',
-                    marginTop: 5
-                  },
-                  {
-                    text: 'Entrance address for the Lot',
-                    marginTop: 30
-                  },
-                  {
-                    text: 'xxxxx',
-                    marginTop: 5
-                  }
+                  // {
+                  //   text: 'Enter this location at :',
+                  //   marginTop: 30
+                  // },
+                  // {
+                  //   text: 'xxxxx',
+                  //   marginTop: 5
+                  // },
+                  // {
+                  //   text: 'Entrance address for the Lot',
+                  //   marginTop: 30
+                  // },
+                  // {
+                  //   text: 'xxxxx',
+                  //   marginTop: 5
+                  // }
                 ],
                 width: '50%'
               },
@@ -175,19 +175,19 @@ export class DocumentService {
                     ],
                     marginTop: 5
                   },
-                  {
-                    columns: [
-                      {
-                        text: 'Parking Spaces',
-                        width: '40%'
-                      },
-                      {
-                        text: `: Parking Spaces`,
-                        width: '60%'
-                      },
-                    ],
-                    marginTop: 5
-                  },
+                  // {
+                  //   columns: [
+                  //     {
+                  //       text: 'Parking Spaces',
+                  //       width: '40%'
+                  //     },
+                  //     {
+                  //       text: `: Parking Spaces`,
+                  //       width: '60%'
+                  //     },
+                  //   ],
+                  //   marginTop: 5
+                  // },
                   {
                     columns: [
                       {
@@ -240,19 +240,19 @@ export class DocumentService {
                     ],
                     marginTop: 5
                   },
-                  {
-                    columns: [
-                      {
-                        text: 'Car Make',
-                        width: '40%'
-                      },
-                      {
-                        text: `: ${data?.user?.car_model ? data?.user?.car_model : '-'}`,
-                        width: '60%'
-                      },
-                    ],
-                    marginTop: 5
-                  },
+                  // {
+                  //   columns: [
+                  //     {
+                  //       text: 'Car Make',
+                  //       width: '40%'
+                  //     },
+                  //     {
+                  //       text: `: ${data?.user?.car_model ? data?.user?.car_model : '-'}`,
+                  //       width: '60%'
+                  //     },
+                  //   ],
+                  //   marginTop: 5
+                  // },
                 ]
               }
             ]

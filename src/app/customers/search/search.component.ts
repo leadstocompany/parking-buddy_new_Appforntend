@@ -5,6 +5,8 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 import { LocationService } from 'src/app/service/location.service';
+import { CancellationComponent } from './cancellation/cancellation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -37,7 +39,9 @@ export class SearchComponent {
     private route: ActivatedRoute,
     private _router: Router,
     private _customerService: CustomerService,
-    private _snackbarService: SnackbarService) {
+    private _snackbarService: SnackbarService,
+    private _dialog: MatDialog,
+    ) {
   }
 
 
@@ -181,6 +185,15 @@ export class SearchComponent {
         .catch((error) => {
           console.error(error);
         });
+    });
+  }
+
+  cancelModal(): void {
+    this._dialog.open(CancellationComponent, {
+      autoFocus: false,
+      disableClose: true,
+      maxWidth: '100vw',
+      maxHeight: '100vh',
     });
   }
 }

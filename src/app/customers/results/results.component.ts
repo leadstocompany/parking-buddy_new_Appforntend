@@ -36,11 +36,8 @@ export class ResultsComponent {
         next: (data) => {
           this.spinner = false
           this.results = data;
-          console.log(this.results, '----------')
           this.center = { lat: +this.results[0].latitude, lng: +this.results[0].longitude }
           this.zoom = 10;
-          console.log({ lat: Number(this.results[0]?.latitude), lng: Number(this.results[0]?.longitude) })
-          console.log(this.center)
           this.addMarker()
         },
         error: (error) => {
@@ -147,16 +144,12 @@ export class ResultsComponent {
   //  map code ============>
 
   directionsResults$!: Observable<google.maps.DirectionsResult | undefined>;
-
   display!: google.maps.LatLngLiteral;
-  // center: google.maps.LatLngLiteral = { lat: 22.719568, lng: 75.857727 };
   center: google.maps.LatLngLiteral = { lat: Number(this.results[0]?.latitude), lng: Number(this.results[0]?.longitude) };
-
   zoom = 15;
   iconSize: any = new google.maps.Size(40, 40)
-  @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   markerOptions: google.maps.MarkerOptions = { draggable: false };
-
+  @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   onMarkerClick(marker: any) {
     console.log(`Clicked on: ${marker.title}`);
   }
@@ -172,7 +165,6 @@ export class ResultsComponent {
   }
 
   markerPositions: google.maps.LatLngLiteral[] | any = [];
-
   addMarker() {
     console.log(this.results, 'maps')
     this.markerPositions = []
@@ -190,7 +182,6 @@ export class ResultsComponent {
     this.directionsResults$ = this.mapDirectionsService.route(request).pipe(map(response => response.result));
 
   }
-
   dynamicTittle: any;
   dynamicPrice: any;
   street: any;

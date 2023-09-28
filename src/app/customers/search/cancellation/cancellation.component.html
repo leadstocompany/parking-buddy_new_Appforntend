@@ -1,0 +1,38 @@
+<div class="main">
+    <div class="user-header px-2">
+        <span>&nbsp;</span>
+        <h1>Cancel Reservation</h1>
+        <mat-icon aria-hidden="false" aria-label="close icon" class="close-icon" (click)="close()">close</mat-icon>
+    </div>
+    <mat-dialog-content>
+        <form [formGroup]="profileForm" class="profile-form mt-3">
+            <div class="row d-flex flex-column gap-3">
+                <div class="col-md-12 d-flex  flex-column align-items-left">
+                    <label for="reservation" class="form-label input-label text-nowrap">Enter Reservation Number
+                        *</label>
+                    <div>
+                        <div class="input-div">
+                            <input type="text" class="form-control input-filed" formControlName="reservation"
+                                placeholder="Enter Reservation Number"
+                                [ngClass]="{'is-invalid':profileForm.get('reservation')!.invalid && profileForm.get('reservation')!.touched}"
+                                style="width: 100%;">
+                        </div>
+                        <div *ngIf="profileForm.get('reservation')!.invalid && profileForm.get('reservation')!.touched"
+                            class="invalid-feedback">
+                            Enter Reservation Number.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="row">
+            <div class="col-1">
+                <button class="mt-4 btn btn-danger" type="submit" [disabled]="profileForm.invalid"
+                    (click)="changePassword()">Save</button>
+            </div>
+        </div>
+    </mat-dialog-actions>
+</div>

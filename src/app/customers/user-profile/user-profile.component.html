@@ -36,9 +36,11 @@
                                         <td>{{reservationData.guest_email}}</td>
                                         <td>{{reservationData.parking_type}}</td>
                                         <td>{{reservationData.property}}</td>
-                                        <td class="icon-center icon-td" (click)="viewOpen(i)"><mat-icon aria-label="view">visibility</mat-icon>
+                                        <td class="icon-center icon-td" (click)="viewOpen(reservationData.id)"><mat-icon
+                                                aria-label="view">visibility</mat-icon>
                                         </td>
-                                        <td class="icon-center icon-td" (click)="cancelOpen(i)"><mat-icon aria-label="view">cancel</mat-icon></td>
+                                        <td class="icon-center icon-td" (click)="cancelOpen(reservationData.id)"><mat-icon
+                                                aria-label="view">cancel</mat-icon></td>
                                     </tr>
                                     <tr *ngIf="openReservationData.length == 0">
                                         <td colspan="9"> NO Data To Display</td>
@@ -73,7 +75,8 @@
                                         <td>{{pastData.guest_email}}</td>
                                         <td>{{pastData.parking_type}}</td>
                                         <td>{{pastData.property}}</td>
-                                        <td class="icon-center icon-td"><mat-icon aria-label="view" (click)="viewPast(i)">visibility</mat-icon>
+                                        <td class="icon-center icon-td"><mat-icon aria-label="view"
+                                                (click)="viewPast(i)">visibility</mat-icon>
                                         </td>
                                     </tr>
                                     <tr *ngIf="pastReservationData.length == 0">

@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ShowReservationComponent } from './show-reservation/show-reservation.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -159,12 +160,22 @@ export class UserProfileComponent {
     })
   }
 
-  viewOpen(index:number): void {
+  viewOpen(id: any): void {
+    this._dialog.open(ShowReservationComponent, {
+      autoFocus: false,
+      disableClose: true,
+      maxWidth:'100vw',
+      maxHeight:'100vh',
+      data: {
+        id: id
+      }
+    });
   }
-  
-  cancelOpen(index:number): void {
+
+  cancelOpen(index: number): void {
   }
-  
-  viewPast(index:number): void {
+
+  viewPast(index: number): void {
   }
+
 }

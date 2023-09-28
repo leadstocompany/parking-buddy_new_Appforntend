@@ -1,0 +1,66 @@
+.main {
+    width: 100%;
+    height: 100%;
+    background: #FF8C00;
+}
+
+.mat-dialog-actions,
+.mat-dialog-content {
+    padding: 0;
+    margin: 0;
+}
+
+.mat-dialog-content {
+    padding: 0 1rem;
+    background-color: #FF8C00;
+}
+
+.user-header {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    background: blue;
+    color: white;
+}
+
+.close-icon-div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+table th,
+table td {
+    text-align: center;
+    min-width: 150px;
+    font-size: 14px;
+}
+
+table th {
+    color: white;
+    background-color: blue;
+}
+
+// th:first-child,
+// td:first-child {
+//     position: sticky;
+//     left: 0px;
+//     z-index: 1;
+//     border-right: 0.5px solid whitesmoke;
+// }
+
+// th:last-child,
+// td:last-child {
+//     position: sticky;
+//     right: 0px;
+//     z-index: 1;
+//     border-left: 0.5px solid whitesmoke;
+// }
+
+@media screen and (max-width:'765px'){
+    .main {
+        width: 100vw;
+    }
+}

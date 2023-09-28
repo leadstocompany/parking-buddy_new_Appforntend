@@ -24,6 +24,8 @@ import { ForgotPasswordComponent } from './user-profile/forgot-password/forgot-p
 import { QuickSignInComponent } from './paymentpage/quick-sign-in/quick-sign-in.component';
 import { QuickSignUpComponent } from './paymentpage/quick-sign-in/quick-sign-up/quick-sign-up.component';
 import { NgOtpInputModule } from  'ng-otp-input';
+import { ShowReservationComponent } from './user-profile/show-reservation/show-reservation.component';
+import { CancellationComponent } from './search/cancellation/cancellation.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { NgOtpInputModule } from  'ng-otp-input';
     CreateUserComponent,
     ForgotPasswordComponent,
     QuickSignInComponent,
-    QuickSignUpComponent
+    QuickSignUpComponent,
+    ShowReservationComponent,
+    CancellationComponent
   ],
   imports: [
     CommonModule,
