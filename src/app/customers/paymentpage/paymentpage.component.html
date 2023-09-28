@@ -1,6 +1,5 @@
 <div style="min-height: 100vh; max-height:100vh; overflow-y: auto;">
-    <div class="container-fluid"
-        style="background-color: lightgrey">
+    <div class="container-fluid" style="background-color: lightgrey;height: 100vh;">
         <div class="row navbar">
             <div class="col-md-2 d-flex align-items-center text-align-center">
                 <h1 class="h1" style="text-align: center;" [routerLink]="['/']">Parking Spotters</h1>
@@ -66,12 +65,12 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="zipcode" class="form-label">Zipcode</label>
                                                 <input type="Number" class="form-control" id="zipcode"
                                                     placeholder="Enter Zip Code">
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="phoneNumber" class="form-label">Phone Number</label>
                                                 <input type="text" class="form-control" id="phoneNumber"
                                                     placeholder="Enter Phone Number">
@@ -82,11 +81,16 @@
                                             Get discounts and update via SMS
                                         </mat-checkbox>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="driver" class="form-label">Add driver's Name
                                                     (optional)</label>
                                                 <input type="text" class="form-control" id="driver"
                                                     placeholder="Enter email">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="driver" class="form-label">Car Plat Number </label>
+                                                <input type="text" class="form-control" id="driver"
+                                                    placeholder="Car Plat Number ">
                                             </div>
                                         </div>
                                     </form>
