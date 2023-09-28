@@ -154,7 +154,7 @@ export class PaymentpageComponent {
       'check_in_time': this.time.checkIn,
       "check_out_date": this.date.checkOut,
       "check_out_time": this.time.checkOut,
-      "amount": this.type[0].dail_rate,
+      "amount": ((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes),
       "user": this.userID,
       "property": this.id,
       "no_of_days": this.day,
@@ -167,7 +167,6 @@ export class PaymentpageComponent {
         console.log(response, 'response')
         this._customer.getBookingSlot(response.id).subscribe({
           next: (res) => {
-            console.log('res==>', res);
             this._docService.generateOrderSummary(res, true, this.icon)
             this._snackbar.openSnackbar('✔ Plot Successfully Booking')
             this._route.navigate(['/customers/thank-you'])
