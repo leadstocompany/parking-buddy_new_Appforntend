@@ -177,6 +177,7 @@ export class UserProfileComponent {
         if (res.error) {
           this._snackbarService.openSnackbar(`❌ ` + res.error)
         } else {
+          this._openReservationDetails()
           this._snackbarService.openSnackbar(`❌ ` + res.message)
         }
       },

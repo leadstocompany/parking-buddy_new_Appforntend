@@ -84,7 +84,7 @@
                                         <td>{{pastData.property}}</td> -->
                                         <td>{{pastData.status}}</td>
                                         <td class="icon-center icon-td"><mat-icon aria-label="view"
-                                                (click)="viewPast(i)">visibility</mat-icon>
+                                                (click)="viewOpen(pastData.id)">visibility</mat-icon>
                                         </td>
                                     </tr>
                                     <tr *ngIf="pastReservationData.length == 0">
