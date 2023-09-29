@@ -57,13 +57,13 @@ export class DocumentService {
               {
                 stack: [
                   {
-                    text: `Reservation ID: 1250802`
+                    text: `Reservation ID: ${data?.reservation_id}`
                   },
                   {
                     text: `Transaction ID: 1250802`
                   }
                 ],
-                width: '80%',
+                width: '50%',
                 alignment: 'right',
               }
             ]
@@ -277,7 +277,7 @@ export class DocumentService {
                         width: '40%'
                       },
                       {
-                        text: data?.property?.shuttle_phone_number,
+                        text: data?.user?.mobile,
                         width: '60%'
                       },
                     ],
@@ -380,7 +380,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: `${icon} ${((data?.base_price == null ? 0.1 : +data?.base_price) + (data?.service_charge == null ? 0.10 : +data?.service_charge) + (data?.taxesandfees == null ? 0.001 : +data?.taxesandfees))}`,
+                        text: `${icon} ${data?.amount}`,
                         bold: true,
                         width: '40%'
                       },
@@ -422,7 +422,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: `${icon} ${Math.abs((((data?.base_price == null ? 0 : data?.base_price) + (data?.service_charge == null ? 0 : data?.service_charge) + data?.taxesandfees == null ? 0 : data?.taxesandfees)) - data?.amount)}`,
+                        text: `${icon} ${Math.abs(data?.amount - data?.amount)}`,
                         bold: true,
                         width: '40%'
                       },

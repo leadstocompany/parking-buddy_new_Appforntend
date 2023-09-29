@@ -4,33 +4,40 @@
         <h1>View Reservation</h1>
         <mat-icon aria-hidden="false" aria-label="close icon" class="close-icon" (click)="close()">close</mat-icon>
     </div>
-    <div class="container" style="max-width: 100vw;overflow-x: auto;">
-        <div class="table-responsive mt-4">
+        <div class="table-responsive horizontal-scroll mt-4" >
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Check In Date</th>
-                        <th>Check In Time</th>
-                        <th>Check Out Date</th>
-                        <th>Check Out Time</th>
-                        <th>Email Id</th>
+                        <th>Reservation Id</th>
+                        <th>Email ID</th>
                         <th>Parking Type</th>
-                        <th>Property</th>
+                        <th>Property Name</th>
+                        <th>Base Price</th>
+                        <th>Taxes & Fees</th>
+                        <th>Service Charge</th>
+                        <th>Total Days</th>
+                        <th>Total Amount</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let reservationData of openReservationData; let i = index;">
-                        <td>{{reservationData.check_in_date == null?'-':reservationData.check_in_date |
+                        <!-- <td>{{reservationData.check_in_date == null?'-':reservationData.check_in_date |
                             date }}</td>
                         <td>{{reservationData.check_in_time == null?'-':reservationData.check_in_time}}
                         </td>
                         <td>{{reservationData.check_out_date == null?'-':reservationData.check_out_date
                             | date }}</td>
                         <td>{{reservationData.check_out_time ==
-                            null?'-':reservationData.check_out_time}}</td>
+                            null?'-':reservationData.check_out_time}}</td> -->
+                        <td>{{reservationData.reservation_id}}</td>
                         <td>{{reservationData.guest_email}}</td>
-                        <td>{{reservationData.parking_type}}</td>
-                        <td>{{reservationData.property}}</td>
+                        <td>{{reservationData.property.tittle}}</td>
+                        <td>{{reservationData.parking_type?.type}}</td>
+                        <td>{{reservationData.base_price}}</td>
+                        <td>{{reservationData.taxesandfees}}</td>
+                        <td>{{reservationData.service_charge}}</td>
+                        <td>{{reservationData.no_of_days}}</td>
+                        <td>{{reservationData.amount}}</td>
                     </tr>
                     <tr *ngIf="openReservationData.length == 0">
                         <td colspan="9"> NO Data To Display</td>
@@ -38,5 +45,4 @@
                 </tbody>
             </table>
         </div>
-    </div>
 </div>

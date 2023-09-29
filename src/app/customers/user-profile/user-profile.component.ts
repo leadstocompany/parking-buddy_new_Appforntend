@@ -163,16 +163,28 @@ export class UserProfileComponent {
   viewOpen(id: any): void {
     this._dialog.open(ShowReservationComponent, {
       autoFocus: false,
-      disableClose: true,
-      maxWidth:'100vw',
-      maxHeight:'100vh',
+      disableClose: false,
       data: {
         id: id
       }
     });
   }
 
-  cancelOpen(index: number): void {
+  public cancelReservations(id: any): void {
+    console.log(id)
+    this._customerService.cancelReservation(id).subscribe({
+      next: (res) => {
+        if (res.error) {
+          this._snackbarService.openSnackbar(`❌ ` + res.error)
+        } else {
+          this._snackbarService.openSnackbar(`❌ ` + res.message)
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+        this._snackbarService.openSnackbar(`❌ ` + error.error[0])
+      },
+    })
   }
 
   viewPast(index: number): void {

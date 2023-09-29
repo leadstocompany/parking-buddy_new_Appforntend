@@ -65,9 +65,16 @@ export class CustomerService {
   }
 
   // payment
-
   getBookingSlot(id: string): Observable<any> {
     return this._http.get(`${environment.URL}/normal_user/bookingslot/${id}/list/`, { withCredentials: true })
   }
-
+  
+  // cancel reservation 
+  cancelReservation(id: any): Observable<any> {
+    return this._http.post(`${environment.URL}/normal_user/booking/cancel/${id}/`,{status : 'canceled'},{ withCredentials: true })
+  }
+  // show reservation 
+  showReservation(id: any): Observable<any> {
+    return this._http.get(`${environment.URL}/normal_user/bookingslot/${id}/list/`, { withCredentials: true })
+  }
 }

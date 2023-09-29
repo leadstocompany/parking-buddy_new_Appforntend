@@ -30,15 +30,16 @@ export class CancellationComponent {
     this._dialogRef.close()
   }
 
-  public changePassword(): void {
-    const data = {
-      reservation: this.profileForm.value.reservation,
-    }
-    this._customerService.changePassword(data).subscribe({
+  public cancelReservations(): void {
+    console.log(this.profileForm.value.reservation)
+    this._customerService.cancelReservation(this.profileForm.value.reservation).subscribe({
       next: (res) => {
-        console.log('res ==>', res);
-        this._snackbarService.openSnackbar('✔ Parking Successfully Canceled')
-        this._dialogRef.close()
+        if (res.error) {
+          this._snackbarService.openSnackbar(`❌ ` + res.error)
+        } else {
+          this._snackbarService.openSnackbar(`❌ ` + res.message)
+          this._dialogRef.close()
+        }
       },
       error: (error: any) => {
         console.log(error);

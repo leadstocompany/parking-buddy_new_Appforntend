@@ -9,25 +9,27 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
   styleUrls: ['./show-reservation.component.scss']
 })
 export class ShowReservationComponent {
-  openReservationData!: any
-
+  openReservationData: any = []
   constructor(
     private _dialogRef: MatDialogRef<ShowReservationComponent>,
     private _customerService: CustomerService,
     private _snackbarService: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public userData: any
   ) { }
+  ngOnInit() {
+    this.fetchData()
+  }
 
   fetchData(): void {
-    this._customerService.changePassword(this.userData.id).subscribe({
+    console.log(this.userData.id)
+    this._customerService.showReservation(this.userData.id).subscribe({
       next: (res) => {
         console.log('res ==>', res);
-        this._snackbarService.openSnackbar('✔ Password Change Successfully')
-        this._dialogRef.close()
+        this.openReservationData = [res]
       },
       error: (error: any) => {
         console.log(error);
-        this._snackbarService.openSnackbar(`❌ ` + error.error[0])
+        this._snackbarService.openSnackbar(`❌ ` + error?.error[0])
       },
     })
   }

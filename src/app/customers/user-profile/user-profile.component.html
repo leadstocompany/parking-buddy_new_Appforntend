@@ -9,22 +9,25 @@
                     (selectedTabChange)="onTabChangeReservation($event)">
                     <mat-tab label="Open Reservation">
                         <div class="table-responsive mt-4">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" style="overflow: auto;">
                                 <thead>
                                     <tr>
+                                        <th>Reservation Id</th>
                                         <th>Check In Date</th>
                                         <th>Check In Time</th>
                                         <th>Check Out Date</th>
                                         <th>Check Out Time</th>
-                                        <th>Email Id</th>
+                                        <!-- <th>Email Id</th>
                                         <th>Parking Type</th>
-                                        <th>Property</th>
+                                        <th>Property</th> -->
+                                        <th>Status</th>
                                         <th class="icon-center">View</th>
                                         <th class="icon-center">Cancel</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let reservationData of openReservationData; let i = index;">
+                                        <td>{{reservationData.reservation_id}}</td>
                                         <td>{{reservationData.check_in_date == null?'-':reservationData.check_in_date |
                                             date }}</td>
                                         <td>{{reservationData.check_in_time == null?'-':reservationData.check_in_time}}
@@ -33,17 +36,18 @@
                                             | date }}</td>
                                         <td>{{reservationData.check_out_time ==
                                             null?'-':reservationData.check_out_time}}</td>
-                                        <td>{{reservationData.guest_email}}</td>
+                                        <!-- <td>{{reservationData.guest_email}}</td>
                                         <td>{{reservationData.parking_type}}</td>
-                                        <td>{{reservationData.property}}</td>
+                                        <td>{{reservationData.property}}</td> -->
+                                        <td>{{reservationData.status}}</td>
                                         <td class="icon-center icon-td" (click)="viewOpen(reservationData.id)"><mat-icon
                                                 aria-label="view">visibility</mat-icon>
                                         </td>
-                                        <td class="icon-center icon-td" (click)="cancelOpen(reservationData.id)"><mat-icon
-                                                aria-label="view">cancel</mat-icon></td>
+                                        <td class="icon-center icon-td" (click)="cancelReservations(reservationData.reservation_id)">
+                                            <mat-icon aria-label="view">cancel</mat-icon></td>
                                     </tr>
                                     <tr *ngIf="openReservationData.length == 0">
-                                        <td colspan="9"> NO Data To Display</td>
+                                        <td colspan="8"> NO Data To Display</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -54,33 +58,37 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>Reservation Id</th>
                                         <th>Check In Date</th>
                                         <th>Check In Time</th>
                                         <th>Check Out Date</th>
                                         <th>Check Out Time</th>
-                                        <th>Email Id</th>
+                                        <!-- <th>Email Id</th>
                                         <th>Parking Type</th>
-                                        <th>Property</th>
+                                        <th>Property</th> -->
+                                        <th>Status</th>
                                         <th class="icon-center">View</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let pastData of pastReservationData; let i = index;">
+                                        <td>{{pastData.reservation_id}}</td>
                                         <td>{{pastData.check_in_date == null?'-':pastData.check_in_date|
                                             date }}</td>
                                         <td>{{pastData.check_in_time == null?'-':pastData.check_in_time}}</td>
                                         <td>{{pastData.check_out_date == null?'-':pastData.check_out_date |
                                             date }}</td>
                                         <td>{{pastData.check_out_time == null?'-':pastData.check_out_time}}</td>
-                                        <td>{{pastData.guest_email}}</td>
+                                        <!-- <td>{{pastData.guest_email}}</td>
                                         <td>{{pastData.parking_type}}</td>
-                                        <td>{{pastData.property}}</td>
+                                        <td>{{pastData.property}}</td> -->
+                                        <td>{{pastData.status}}</td>
                                         <td class="icon-center icon-td"><mat-icon aria-label="view"
                                                 (click)="viewPast(i)">visibility</mat-icon>
                                         </td>
                                     </tr>
                                     <tr *ngIf="pastReservationData.length == 0">
-                                        <td colspan="8"> NO Data To Display</td>
+                                        <td colspan="7"> NO Data To Display</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -1,5 +1,5 @@
 .main {
-    width: 100%;
+    width: 80vw;
     height: 100%;
     background: #FF8C00;
 }
@@ -43,6 +43,8 @@ table th {
     background-color: blue;
 }
 
+
+
 // th:first-child,
 // td:first-child {
 //     position: sticky;
@@ -61,6 +63,6 @@ table th {
 
 @media screen and (max-width:'765px'){
     .main {
-        width: 100vw;
+        width:100lvw;
     }
 }
