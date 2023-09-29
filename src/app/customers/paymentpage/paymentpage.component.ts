@@ -117,7 +117,7 @@ export class PaymentpageComponent {
 
   public timeDiffrence(date1: any, date2: any): void {
     const timeDifference = date2 - date1;
-    this.day = timeDifference / (1000 * 60 * 60 * 24) + 1;
+    this.day = Math.ceil(timeDifference / (1000 * 60 * 60 * 24) + 1);
 
   }
 
