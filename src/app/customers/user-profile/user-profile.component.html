@@ -43,8 +43,13 @@
                                         <td class="icon-center icon-td" (click)="viewOpen(reservationData.id)"><mat-icon
                                                 aria-label="view">visibility</mat-icon>
                                         </td>
-                                        <td class="icon-center icon-td" (click)="cancelReservations(reservationData.reservation_id)">
-                                            <mat-icon aria-label="view">cancel</mat-icon></td>
+                                        <td *ngIf="reservationData.status =='booked'" class="icon-center icon-td"
+                                            (click)="cancelReservations(reservationData.reservation_id)">
+                                            <mat-icon aria-label="view">cancel</mat-icon>
+                                        </td>
+                                        <td *ngIf="reservationData.status =='canceled'" class="icon-center">
+                                            <mat-icon aria-label="view" style="color:gray">cancel</mat-icon>
+                                        </td>
                                     </tr>
                                     <tr *ngIf="openReservationData.length == 0">
                                         <td colspan="8"> NO Data To Display</td>

@@ -6,6 +6,7 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ShowReservationComponent } from './show-reservation/show-reservation.component';
+import { WarningComponentComponent } from '../warning-component/warning-component.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -171,21 +172,30 @@ export class UserProfileComponent {
   }
 
   public cancelReservations(id: any): void {
-    console.log(id)
-    this._customerService.cancelReservation(id).subscribe({
-      next: (res) => {
-        if (res.error) {
-          this._snackbarService.openSnackbar(`❌ ` + res.error)
-        } else {
-          this._openReservationDetails()
-          this._snackbarService.openSnackbar(`❌ ` + res.message)
-        }
-      },
-      error: (error: any) => {
-        console.log(error);
-        this._snackbarService.openSnackbar(`❌ ` + error.error[0])
-      },
+    const dialogRef = this._dialog.open(WarningComponentComponent, {
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        id: id
+      }
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      this._openReservationDetails()
     })
+    // this._customerService.cancelReservation(id).subscribe({
+    //   next: (res) => {
+    //     if (res.error) {
+    //       this._snackbarService.openSnackbar(`❌ ` + res.error)
+    //     } else {
+    //       this._openReservationDetails()
+    //       this._snackbarService.openSnackbar(`❌ ` + res.message)
+    //     }
+    //   },
+    //   error: (error: any) => {
+    //     console.log(error);
+    //     this._snackbarService.openSnackbar(`❌ ` + error.error[0])
+    //   },
+    // })
   }
 
   viewPast(index: number): void {

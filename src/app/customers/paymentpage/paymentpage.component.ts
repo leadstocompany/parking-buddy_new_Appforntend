@@ -158,9 +158,9 @@ export class PaymentpageComponent {
       "user": this.userID,
       "property": this.id,
       "no_of_days": this.day,
-      "base_price": this.day * this.type[0].dail_rate,
+      "base_price": (this.day * this.type[0].dail_rate).toFixed(),
       "service_charge": "6.49",
-      "taxesandfees": this.finaleTaxes,
+      "taxesandfees": this.finaleTaxes.toFixed(2),
     }
     this._customer.bookingPlot(payload).subscribe({
       next: (response) => {

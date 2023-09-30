@@ -240,19 +240,19 @@ export class DocumentService {
                     ],
                     marginTop: 5
                   },
-                  // {
-                  //   columns: [
-                  //     {
-                  //       text: 'Car Make',
-                  //       width: '40%'
-                  //     },
-                  //     {
-                  //       text: `: ${data?.user?.car_model ? data?.user?.car_model : '-'}`,
-                  //       width: '60%'
-                  //     },
-                  //   ],
-                  //   marginTop: 5
-                  // },
+                  {
+                    columns: [
+                      {
+                        text: 'Car Make',
+                        width: '40%'
+                      },
+                      {
+                        text: `: ${data?.user?.car_model ? data?.user?.car_model : '-'}`,
+                        width: '60%'
+                      },
+                    ],
+                    marginTop: 5
+                  },
                 ]
               }
             ]
@@ -422,7 +422,7 @@ export class DocumentService {
                         width: '60%'
                       },
                       {
-                        text: `${icon} ${Math.abs(data?.amount - data?.amount)}`,
+                        text: `${icon} ${Math.abs(data?.amount - data?.amount).toFixed(2)}`,
                         bold: true,
                         width: '40%'
                       },
