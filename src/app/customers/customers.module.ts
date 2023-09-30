@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS,HttpClientJsonpModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from  '@angular/platform-browser';
@@ -28,7 +28,6 @@ import { ShowReservationComponent } from './user-profile/show-reservation/show-r
 import { CancellationComponent } from './search/cancellation/cancellation.component';
 import { WarningComponentComponent } from './warning-component/warning-component.component';
 import { VerifyOtpComponent } from './paymentpage/verify-otp/verify-otp.component';
-
 @NgModule({
   declarations: [
     CustomersComponent,
@@ -57,6 +56,7 @@ import { VerifyOtpComponent } from './paymentpage/verify-otp/verify-otp.componen
     NgxMaterialTimepickerModule,
     BsDatepickerModule.forRoot(),
     HttpClientModule,
+    HttpClientJsonpModule,
     MatListModule,
     GoogleMapsModule,
     NgOtpInputModule,

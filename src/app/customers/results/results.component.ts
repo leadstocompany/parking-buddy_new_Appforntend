@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ErrorHandler, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
+import { Observable, Subject, Subscription,of  } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, map, filter,catchError } from 'rxjs/operators';
 import currency from '../../parking/ACurrency.json'
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
@@ -13,7 +13,16 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent {
-  constructor(private _snackbarService: SnackbarService, private router: Router, private _route: ActivatedRoute, private _customerService: CustomerService, private mapDirectionsService: MapDirectionsService) { }
+  apiLoaded: Observable<boolean>;
+  iconSize:any
+  constructor(httpClient: HttpClient,private _snackbarService: SnackbarService, private router: Router, private _route: ActivatedRoute, private _customerService: CustomerService, private mapDirectionsService: MapDirectionsService) {
+    this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyCIFuwtv13dwj9jK4xmcI-yCaeYYfQ7Vsc', 'callback')
+      .pipe(
+        map(() => true),
+        catchError(() => of(false)),
+      );
+      // this.iconSize =   google?.maps?.Size(40, 40)
+  }
   public results: Array<any> = [];
   public date!: { checkIn: Date, checkOut: Date }
   amountIcon = '₹'
@@ -147,7 +156,7 @@ export class ResultsComponent {
   display!: google.maps.LatLngLiteral;
   center: google.maps.LatLngLiteral = { lat: Number(this.results[0]?.latitude), lng: Number(this.results[0]?.longitude) };
   zoom = 15;
-  iconSize: any = new google.maps.Size(40, 40)
+ 
   markerOptions: google.maps.MarkerOptions = { draggable: false };
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   onMarkerClick(marker: any) {

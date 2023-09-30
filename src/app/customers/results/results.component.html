@@ -132,7 +132,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="apiLoaded | async">
+                
                 <google-map height="80vh" width="100%" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
                     (mapMousemove)="move($event)">
                     <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions; let i=index"
