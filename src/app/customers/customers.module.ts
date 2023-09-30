@@ -27,6 +27,7 @@ import { NgOtpInputModule } from  'ng-otp-input';
 import { ShowReservationComponent } from './user-profile/show-reservation/show-reservation.component';
 import { CancellationComponent } from './search/cancellation/cancellation.component';
 import { WarningComponentComponent } from './warning-component/warning-component.component';
+import { VerifyOtpComponent } from './paymentpage/verify-otp/verify-otp.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { WarningComponentComponent } from './warning-component/warning-component
     QuickSignUpComponent,
     ShowReservationComponent,
     CancellationComponent,
-    WarningComponentComponent
+    WarningComponentComponent,
+    VerifyOtpComponent
   ],
   imports: [
     CommonModule,

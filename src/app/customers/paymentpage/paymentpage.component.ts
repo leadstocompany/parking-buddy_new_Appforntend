@@ -9,6 +9,8 @@ import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { QuickSignInComponent } from './quick-sign-in/quick-sign-in.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from 'src/app/service/auth/auth.service';
+import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 
 @Component({
   selector: 'app-paymentpage',
@@ -25,6 +27,7 @@ export class PaymentpageComponent {
   public tittle: any;
   public icon: any;
   public userLogin: boolean = false;
+  public verifyUser: boolean = false;
   Email: any = ''
   userID: any = ''
   hours = 0
@@ -47,7 +50,8 @@ export class PaymentpageComponent {
     private route: ActivatedRoute,
     private _route: Router,
     private _docService: DocumentService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _authService: AuthService
   ) {
 
   }
@@ -90,23 +94,6 @@ export class PaymentpageComponent {
   prevStep() {
     this.step--;
   }
-
-  // private _generateUrl() {
-  //   const data = {
-  //     title: this.tittle,
-  //     parkingType: this.type[0]?.product,
-  //     checkIN: `${new Date(this.date.checkIn).toLocaleDateString('en-IN')} - ${this.time.checkIn}`,
-  //     checkOut: `${new Date(this.date.checkOut).toLocaleDateString('en-IN')} - ${this.time.checkOut}`,
-  //     days: this.day,
-  //     subTotal: `${this.icon}${this.day * this.type[0].dail_rate}`,
-  //     serviceCharge: `${this.icon}6.49`,
-  //     taxes: `${this.icon}${this.finaleTaxes}`,
-  //     total: `${this.icon}${((this.day * this.type[0].dail_rate) + 6.49 + this.finaleTaxes).toLocaleString('en-IN')}`,
-  //     download: false,
-  //   }
-  //   this._docService.generateOrderSummary(data, false, this.icon)
-  //   this._createBlob(this._docService.orderSummary as TDocumentDefinitions)
-  // }
 
   public _createBlob(docDefination: TDocumentDefinitions) {
     const pdfDocGenerator = pdfMake.createPdf(docDefination);
@@ -314,5 +301,43 @@ export class PaymentpageComponent {
       container._store.dispatch(container._actions.select(event.date));
     };
     container.setViewMode('month');
+  }
+
+
+
+  verifyEmail(): void {
+    if (this.Email != '') {
+      this._authService.emailVerifySendOtp({ email: this.Email }).subscribe({
+        next: (res) => {
+          if (res.message) {
+            this.verifyOtpModal()
+            this._snackbar.openSnackbar('✔ ' + res.message)
+          }
+        },
+        error: (error) => {
+          console.log(error)
+          this._snackbar.openSnackbar('❌' + error.error.message)
+        },
+      })
+    } else {
+      this._snackbar.openSnackbar('Enter Your Email !')
+    }
+  }
+
+
+  public verifyOtpModal(): void {
+    const dialogRef = this._dialog.open(VerifyOtpComponent, {
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        email: this.Email
+      }
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res.verify) {
+        this.verifyUser = true
+      }
+    })
   }
 }

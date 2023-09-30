@@ -1,0 +1,24 @@
+<div class="main">
+    <div class="user-header px-2">
+        <span>&nbsp;</span>
+        <h1>Verify OTP</h1>
+        <mat-icon aria-hidden="false" aria-label="close icon" class="close-icon" (click)="close(false)">close</mat-icon>
+    </div>
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="email" class="form-label">OTP</label>
+                <ng-otp-input [formCtrl]="otp" [config]="{length:6}"></ng-otp-input>
+                <!-- <input type="text"> -->
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="row">
+            <div class="col-1">
+                <button [disabled]="otp.value.length < 6" class="mt-4 btn btn-danger" type="button"
+                    (click)="verifyEmailOtp()">Verify</button>
+            </div>
+        </div>
+    </mat-dialog-actions>
+</div>
