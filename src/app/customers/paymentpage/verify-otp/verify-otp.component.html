@@ -7,16 +7,19 @@
     <mat-dialog-content>
         <div class="row">
             <div class="col-12 form-group">
-                <label for="email" class="form-label">OTP</label>
-                <ng-otp-input [formCtrl]="otp" [config]="{length:6}"></ng-otp-input>
-                <!-- <input type="text"> -->
+                <label for="EmailID" class="form-label">Email ID</label>
+                <input type="text" class="form-control" id="EmailID" placeholder="Enter Email Otp" [(ngModel)]="emailAddress"  readonly >
+            </div>
+            <div class="col-12 form-group">
+                <label for="otp" class="form-label">OTP</label>
+                <input type="text" class="form-control" id="otp" placeholder="Enter Email Otp" [(ngModel)]="otp" maxlength="6"  required >
             </div>
         </div>
     </mat-dialog-content>
     <mat-dialog-actions>
         <div class="row">
             <div class="col-1">
-                <button [disabled]="otp.value.length < 6" class="mt-4 btn btn-danger" type="button"
+                <button [disabled]="otp?.length < 6" class="mt-4 btn btn-danger" type="button"
                     (click)="verifyEmailOtp()">Verify</button>
             </div>
         </div>

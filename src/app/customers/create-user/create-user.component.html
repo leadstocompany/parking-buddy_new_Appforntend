@@ -1,202 +1,204 @@
-<div class="container-fluid" style="color:white">
-    <div class="row">
-        <div class="col-md-6">
-            <form [formGroup]="profileForm" class="profile-form mt-3" (ngSubmit)="AddProfile()">
-                <h1>Add Profile</h1>
-                <div class="container-fluid d-flex flex-column gap-3 mobile-view" style="width: 50vw;">
-                    <div class="row d-flex flex-column gap-3">
-                        <div class="col-md-12 d-flex flex-md-row flex-column  align-items-center gap-md-3">
-                            <label for="email" class="form-label input-label text-nowrap text-nowrap">Email *</label>
-                            <div class="input-field">
-                                <input type="text" class="form-control input-filed" id="email" formControlName="email"
-                                    placeholder="Enter email"
-                                    [ngClass]="{'is-invalid':profileForm.get('email')!.invalid && profileForm.get('email')!.touched}">
-                                <div *ngIf="profileForm.get('email')!.invalid && profileForm.get('email')!.touched"
-                                    class="invalid-feedback">
-                                    Please enter a valid Email.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 d-flex flex-md-row flex-column align-items-center gap-md-3">
-                            <label for="fname" class="form-label input-label text-nowrap">First Name *</label>
-                            <div class="input-field">
-                                <input type="text" class="form-control input-filed" formControlName="fname"
-                                    placeholder="First Name"
-                                    [ngClass]="{'is-invalid':profileForm.get('fname')!.invalid && profileForm.get('fname')!.touched}">
-                                <div *ngIf="profileForm.get('fname')!.invalid && profileForm.get('fname')!.touched"
-                                    class="invalid-feedback">
-                                    Please enter a First Name.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 d-flex flex-md-row flex-column align-items-center gap-md-3">
-                            <label for="lname" class="form-label input-label text-nowrap">Last Name *</label>
-                            <div class="input-field">
-                                <input type="text" class="form-control input-filed" formControlName="lname"
-                                    placeholder="Last Name"
-                                    [ngClass]="{'is-invalid':profileForm.get('lname')!.invalid && profileForm.get('lname')!.touched}">
-
-                                <div *ngIf="profileForm.get('lname')!.invalid && profileForm.get('lname')!.touched"
-                                    class="invalid-feedback">
-                                    Please enter a Last Name.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row d-flex flex-column gap-3">
-                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
-                            <label for="zipcode" class="form-label input-label text-nowrap">Zip Code *</label>
-                            <div class="input-field">
-                                <input type="text" class="form-control input-filed" formControlName="zipcode"
-                                    placeholder="Zip Code"
-                                    [ngClass]="{'is-invalid':profileForm.get('zipcode')!.invalid && profileForm.get('zipcode')!.touched}">
-                                <div *ngIf="profileForm.get('zipcode')!.invalid && profileForm.get('zipcode')!.touched"
-                                    class="invalid-feedback">
-                                    Please enter a zipcode.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
-                            <label for="phone" class="form-label input-label text-nowrap">Phone Number *</label>
-                            <div class="input-field">
-                                <input type="text" class="form-control input-filed" formControlName="phone"
-                                    placeholder="Phone Number"
-                                    [ngClass]="{'is-invalid':profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched}">
-
-                                <div *ngIf="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched"
-                                    class="invalid-feedback">
-                                    Please enter a phone.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
-                            <label for="mobile" class="form-label input-label text-nowrap">Mobile Number *</label>
-                            <div class="input-field">
-                                <input type="text" class="form-control input-filed" formControlName="mobile"
-                                    placeholder="Mobile Number"
-                                    [ngClass]="{'is-invalid':profileForm.get('mobile')!.invalid && profileForm.get('mobile')!.touched}">
-
-                                <div *ngIf="profileForm.get('mobile')!.invalid && profileForm.get('mobile')!.touched"
-                                    class="invalid-feedback">
-                                    Please enter a mobile.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
-                            <label for="plateNo" class="form-label input-label text-nowrap">Car Plate No *</label>
-                            <div class="input-field">
-                                <input type="text" class="form-control input-filed" formControlName="plateNo"
-                                    placeholder="Car Plate Number"
-                                    [ngClass]="{'is-invalid':profileForm.get('plateNo')!.invalid && profileForm.get('plateNo')!.touched}">
-
-                                <div *ngIf="profileForm.get('plateNo')!.invalid && profileForm.get('plateNo')!.touched"
-                                    class="invalid-feedback">
-                                    Why do I need to enter my license plate and phone number?
-                                    This facility is monitored using your vehicle's license plate. Make sure it's
-                                    correct in order to avoid being ticketed or towed
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 d-flex flex-md-row flex-column  align-items-md-center gap-md-3">
-                            <label for="makeModle" class="form-label input-label text-nowrap">Make & Model *</label>
-                            <div class="input-field">
-                                <input type="text" class="form-control input-filed" formControlName="makeModle"
-                                    placeholder="Make & Model"
-                                    [ngClass]="{'is-invalid':profileForm.get('makeModle')!.invalid && profileForm.get('makeModle')!.touched}">
-
-                                <div *ngIf="profileForm.get('makeModle')!.invalid && profileForm.get('makeModle')!.touched"
-                                    class="invalid-feedback">
-                                    Please enter Make & Modle.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
-                            <label for="state" class="form-label input-label text-nowrap">State/Province *</label>
-                            <div class="input-field">
-                                <input type="text" class="form-control input-filed" formControlName="state"
-                                    placeholder="State/Province"
-                                    [ngClass]="{'is-invalid':profileForm.get('state')!.invalid && profileForm.get('state')!.touched}">
-
-                                <div *ngIf="profileForm.get('state')!.invalid && profileForm.get('state')!.touched"
-                                    class="invalid-feedback">
-                                    Please enter a State/Province.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <mat-divider></mat-divider>
-                    <div class="row d-flex flex-column gap-3">
-                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
-                            <label for="currentPassword" class="form-label input-label text-nowrap">
-                                Password *</label>
-                            <div class="input-field">
-                                <div class="input-div">
-                                    <input [type]="passwordHide ? 'password' : 'text'" class="form-control input-filed"
-                                        formControlName="currentPassword" placeholder="Enter Password"
-                                        [ngClass]="{'is-invalid':profileForm.get('currentPassword')!.invalid && profileForm.get('currentPassword')!.touched}">
-                                    <div class="icons" (click)="passwordHide = !passwordHide">
-                                        <i class="fa fa-eye-slash icon password-icon" [hidden]="!passwordHide"></i>
-                                        <i class="fa fa fa-eye icon password-icon" [hidden]="passwordHide"></i>
+<div style="min-height: 100vh; max-height:100vh; overflow-y: auto;">
+    <div class="container-fluid" style="color:white">
+        <div class="row">
+            <div class="col-md-6">
+                <form [formGroup]="profileForm" class="profile-form mt-3" (ngSubmit)="AddProfile()">
+                    <h1>Add Profile</h1>
+                    <div class="container-fluid d-flex flex-column gap-3 mobile-view" style="width: 50vw;">
+                        <div class="row d-flex flex-column gap-3">
+                            <div class="col-md-12 d-flex flex-md-row flex-column  align-items-center gap-md-3">
+                                <label for="email" class="form-label input-label text-nowrap text-nowrap">Email *</label>
+                                <div class="input-field">
+                                    <input type="text" class="form-control input-filed" id="email" formControlName="email"
+                                        placeholder="Enter email"
+                                        [ngClass]="{'is-invalid':profileForm.get('email')!.invalid && profileForm.get('email')!.touched}">
+                                    <div *ngIf="profileForm.get('email')!.invalid && profileForm.get('email')!.touched"
+                                        class="invalid-feedback">
+                                        Please enter a valid Email.
                                     </div>
                                 </div>
-                                <div *ngIf="profileForm.controls['currentPassword'].hasError('required') && profileForm.get('currentPassword')!.touched"
-                                    class="invalid-pass">
-                                    Please enter a valid Password.
-                                </div>
-                                <div *ngIf="profileForm.controls['currentPassword'].hasError('pattern') && profileForm.get('currentPassword')!.touched"
-                                    class="invalid-pass">
-                                    Please enter a Password Include 1 Uppercase, 1 Lowercase, 1 Number & 1 Special
-                                    character.
-                                </div>
-                                <div *ngIf="profileForm.controls['currentPassword'].hasError('minlength') && profileForm.get('currentPassword')!.touched"
-                                    class="invalid-pass">
-                                    Minimum Passwor Length Should be 8.
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row d-flex flex-column gap-3">
-                        <div class="col-md-12 d-flex flex-row align-items-center gap-3">
-                            <label for="confirmPassword" class="form-label input-label text-nowrap">
-                                Confirm Password *</label>
-                            <div class="input-field">
-                                <div class="input-div">
-                                    <input [type]="confirmPasswordHide ? 'password' : 'text'"
-                                        class="form-control input-filed" formControlName="confirmPassword"
-                                        placeholder="Enter Password"
-                                        [ngClass]="{'is-invalid':profileForm.get('confirmPassword')!.invalid && profileForm.get('confirmPassword')!.touched}">
-                                    <div class="icons" (click)="confirmPasswordHide = !confirmPasswordHide">
-                                        <i class="fa fa-eye-slash icon password-icon"
-                                            [hidden]="!confirmPasswordHide"></i>
-                                        <i class="fa fa fa-eye icon password-icon" [hidden]="confirmPasswordHide"></i>
+                            <div class="col-md-12 d-flex flex-md-row flex-column align-items-center gap-md-3">
+                                <label for="fname" class="form-label input-label text-nowrap">First Name *</label>
+                                <div class="input-field">
+                                    <input type="text" class="form-control input-filed" formControlName="fname"
+                                        placeholder="First Name"
+                                        [ngClass]="{'is-invalid':profileForm.get('fname')!.invalid && profileForm.get('fname')!.touched}">
+                                    <div *ngIf="profileForm.get('fname')!.invalid && profileForm.get('fname')!.touched"
+                                        class="invalid-feedback">
+                                        Please enter a First Name.
                                     </div>
                                 </div>
-
-                                <div *ngIf="profileForm.get('confirmPassword')!.invalid && profileForm.get('confirmPassword')!.touched"
-                                    class="invalid-pass">
-                                    Please enter a Confirm Password.
-                                </div>
-                                <div *ngIf="profileForm.controls['confirmPassword'].value != profileForm.controls['currentPassword'].value && profileForm.controls['confirmPassword'].value != '' && profileForm.get('confirmPassword')!.touched"
-                                    class="invalid-pass">
-                                    Please enter Same Password.
+                            </div>
+                            <div class="col-md-12 d-flex flex-md-row flex-column align-items-center gap-md-3">
+                                <label for="lname" class="form-label input-label text-nowrap">Last Name *</label>
+                                <div class="input-field">
+                                    <input type="text" class="form-control input-filed" formControlName="lname"
+                                        placeholder="Last Name"
+                                        [ngClass]="{'is-invalid':profileForm.get('lname')!.invalid && profileForm.get('lname')!.touched}">
+    
+                                    <div *ngIf="profileForm.get('lname')!.invalid && profileForm.get('lname')!.touched"
+                                        class="invalid-feedback">
+                                        Please enter a Last Name.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4 ">
-                            <button class="mt-4  btn btn-danger" type="submit"
-                                [disabled]="profileForm.invalid || profileForm.controls['confirmPassword'].value != profileForm.controls['currentPassword'].value "
-                                style="margin-bottom: 30px;">Sing
-                                Up</button>
+                        <div class="row d-flex flex-column gap-3">
+                            <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                                <label for="zipcode" class="form-label input-label text-nowrap">Zip Code *</label>
+                                <div class="input-field">
+                                    <input type="text" class="form-control input-filed" formControlName="zipcode"
+                                        placeholder="Zip Code"
+                                        [ngClass]="{'is-invalid':profileForm.get('zipcode')!.invalid && profileForm.get('zipcode')!.touched}">
+                                    <div *ngIf="profileForm.get('zipcode')!.invalid && profileForm.get('zipcode')!.touched"
+                                        class="invalid-feedback">
+                                        Please enter a zipcode.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                                <label for="phone" class="form-label input-label text-nowrap">Phone Number *</label>
+                                <div class="input-field">
+                                    <input type="text" class="form-control input-filed" formControlName="phone"
+                                        placeholder="Phone Number"
+                                        [ngClass]="{'is-invalid':profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched}">
+    
+                                    <div *ngIf="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched"
+                                        class="invalid-feedback">
+                                        Please enter a phone.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                                <label for="mobile" class="form-label input-label text-nowrap">Mobile Number *</label>
+                                <div class="input-field">
+                                    <input type="text" class="form-control input-filed" formControlName="mobile"
+                                        placeholder="Mobile Number"
+                                        [ngClass]="{'is-invalid':profileForm.get('mobile')!.invalid && profileForm.get('mobile')!.touched}">
+    
+                                    <div *ngIf="profileForm.get('mobile')!.invalid && profileForm.get('mobile')!.touched"
+                                        class="invalid-feedback">
+                                        Please enter a mobile.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                                <label for="plateNo" class="form-label input-label text-nowrap">Car Plate No *</label>
+                                <div class="input-field">
+                                    <input type="text" class="form-control input-filed" formControlName="plateNo"
+                                        placeholder="Car Plate Number"
+                                        [ngClass]="{'is-invalid':profileForm.get('plateNo')!.invalid && profileForm.get('plateNo')!.touched}">
+    
+                                    <div *ngIf="profileForm.get('plateNo')!.invalid && profileForm.get('plateNo')!.touched"
+                                        class="invalid-feedback">
+                                        Why do I need to enter my license plate and phone number?
+                                        This facility is monitored using your vehicle's license plate. Make sure it's
+                                        correct in order to avoid being ticketed or towed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 d-flex flex-md-row flex-column  align-items-md-center gap-md-3">
+                                <label for="makeModle" class="form-label input-label text-nowrap">Make & Model *</label>
+                                <div class="input-field">
+                                    <input type="text" class="form-control input-filed" formControlName="makeModle"
+                                        placeholder="Make & Model"
+                                        [ngClass]="{'is-invalid':profileForm.get('makeModle')!.invalid && profileForm.get('makeModle')!.touched}">
+    
+                                    <div *ngIf="profileForm.get('makeModle')!.invalid && profileForm.get('makeModle')!.touched"
+                                        class="invalid-feedback">
+                                        Please enter Make & Modle.
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                                <label for="state" class="form-label input-label text-nowrap">State/Province *</label>
+                                <div class="input-field">
+                                    <input type="text" class="form-control input-filed" formControlName="state"
+                                        placeholder="State/Province"
+                                        [ngClass]="{'is-invalid':profileForm.get('state')!.invalid && profileForm.get('state')!.touched}">
+    
+                                    <div *ngIf="profileForm.get('state')!.invalid && profileForm.get('state')!.touched"
+                                        class="invalid-feedback">
+                                        Please enter a State/Province.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="row d-flex flex-column gap-3">
+                            <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                                <label for="currentPassword" class="form-label input-label text-nowrap">
+                                    Password *</label>
+                                <div class="input-field">
+                                    <div class="input-div">
+                                        <input [type]="passwordHide ? 'password' : 'text'" class="form-control input-filed"
+                                            formControlName="currentPassword" placeholder="Enter Password"
+                                            [ngClass]="{'is-invalid':profileForm.get('currentPassword')!.invalid && profileForm.get('currentPassword')!.touched}">
+                                        <div class="icons" (click)="passwordHide = !passwordHide">
+                                            <i class="fa fa-eye-slash icon password-icon" [hidden]="!passwordHide"></i>
+                                            <i class="fa fa fa-eye icon password-icon" [hidden]="passwordHide"></i>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="profileForm.controls['currentPassword'].hasError('required') && profileForm.get('currentPassword')!.touched"
+                                        class="invalid-pass">
+                                        Please enter a valid Password.
+                                    </div>
+                                    <div *ngIf="profileForm.controls['currentPassword'].hasError('pattern') && profileForm.get('currentPassword')!.touched"
+                                        class="invalid-pass">
+                                        Please enter a Password Include 1 Uppercase, 1 Lowercase, 1 Number & 1 Special
+                                        character.
+                                    </div>
+                                    <div *ngIf="profileForm.controls['currentPassword'].hasError('minlength') && profileForm.get('currentPassword')!.touched"
+                                        class="invalid-pass">
+                                        Minimum Passwor Length Should be 8.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-column gap-3">
+                            <div class="col-md-12 d-flex flex-row align-items-center gap-3">
+                                <label for="confirmPassword" class="form-label input-label text-nowrap">
+                                    Confirm Password *</label>
+                                <div class="input-field">
+                                    <div class="input-div">
+                                        <input [type]="confirmPasswordHide ? 'password' : 'text'"
+                                            class="form-control input-filed" formControlName="confirmPassword"
+                                            placeholder="Enter Password"
+                                            [ngClass]="{'is-invalid':profileForm.get('confirmPassword')!.invalid && profileForm.get('confirmPassword')!.touched}">
+                                        <div class="icons" (click)="confirmPasswordHide = !confirmPasswordHide">
+                                            <i class="fa fa-eye-slash icon password-icon"
+                                                [hidden]="!confirmPasswordHide"></i>
+                                            <i class="fa fa fa-eye icon password-icon" [hidden]="confirmPasswordHide"></i>
+                                        </div>
+                                    </div>
+    
+                                    <div *ngIf="profileForm.get('confirmPassword')!.invalid && profileForm.get('confirmPassword')!.touched"
+                                        class="invalid-pass">
+                                        Please enter a Confirm Password.
+                                    </div>
+                                    <div *ngIf="profileForm.controls['confirmPassword'].value != profileForm.controls['currentPassword'].value && profileForm.controls['confirmPassword'].value != '' && profileForm.get('confirmPassword')!.touched"
+                                        class="invalid-pass">
+                                        Please enter Same Password.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 ">
+                                <button class="mt-4  btn btn-danger" type="submit"
+                                    [disabled]="profileForm.invalid || profileForm.controls['confirmPassword'].value != profileForm.controls['currentPassword'].value "
+                                    style="margin-bottom: 30px;">Sing
+                                    Up</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-6 hide-mobile">
-            <img src="assets/signup.png" alt="Parking Lot" class="img-fluid">
+                </form>
+            </div>
+            <div class="col-md-6 hide-mobile">
+                <img src="assets/signup.png" alt="Parking Lot" class="img-fluid">
+            </div>
         </div>
     </div>
 </div>

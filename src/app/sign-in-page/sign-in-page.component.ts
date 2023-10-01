@@ -69,10 +69,17 @@ export class SignInPageComponent {
       this.spinner = true
       this._authService.emailVerifyOtp({ email: this.signInForm.value.email, otp: this.otp.value }).subscribe({
         next: (res) => {
-          this.spinner = false
-          this.otpVerify = false
-          this.password = true
-          this._snackBarService.openSnackbar('✔ Successfully OTP verify')
+
+          if (res.message) {
+            this.spinner = false
+            this.otpVerify = false
+            this.password = true
+            this.passwordShow = true
+            this._snackBarService.openSnackbar('✔ Successfully OTP verify')
+          }else{
+            this._snackBarService.openSnackbar('❌'+res.error)
+          }
+
         },
         error: (error) => {
           this._snackBarService.openSnackbar('❌' + error.error.message)

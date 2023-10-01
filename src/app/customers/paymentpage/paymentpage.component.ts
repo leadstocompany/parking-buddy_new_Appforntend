@@ -312,11 +312,15 @@ export class PaymentpageComponent {
           if (res.message) {
             this.verifyOtpModal()
             this._snackbar.openSnackbar('✔ ' + res.message)
+          }else{
+            this._snackbar.openSnackbar('✔ ' + res.error)
+
           }
+          this.verifyOtpModal()
         },
         error: (error) => {
-          console.log(error)
-          this._snackbar.openSnackbar('❌' + error.error.message)
+          this.verifyOtpModal()
+          this._snackbar.openSnackbar('❌' + error.error.error)
         },
       })
     } else {

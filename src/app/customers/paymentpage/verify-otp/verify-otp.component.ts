@@ -10,7 +10,8 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
   styleUrls: ['./verify-otp.component.scss']
 })
 export class VerifyOtpComponent {
-  otp!: FormControl
+  otp!: any;
+  emailAddress!: any;
   constructor(
     private _dialogRef: MatDialogRef<VerifyOtpComponent>,
     @Inject(MAT_DIALOG_DATA) public userData: any,
@@ -18,16 +19,16 @@ export class VerifyOtpComponent {
     private _snackBarService: SnackbarService
   ) { }
 
-  ngOnInit(){
-    console.log(this.userData,'userData')
+  ngOnInit() {
+    this.emailAddress = this.userData?.email
   }
 
-  public close(bool:boolean): void {
-    this._dialogRef.close({ verify: bool})
+  public close(bool: boolean): void {
+    this._dialogRef.close({ verify: bool })
   }
 
   verifyEmailOtp(): void {
-    if (this.userData?.email != '' && this.otp.value.length == 6) {
+    if (this.userData?.email != '' && this.otp.length == 6) {
       this._authService.emailVerifyOtp({ email: this.userData?.email, otp: this.otp?.value }).subscribe({
         next: (res) => {
           this.close(true)

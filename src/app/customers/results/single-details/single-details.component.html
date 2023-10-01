@@ -60,8 +60,8 @@
                                             <mat-icon>directions_car</mat-icon>
                                         </span>
                                         <span>
-                                            Parking Types: <span
-                                                *ngFor="let type of value?.property_product">{{type?.type}},
+                                            Parking Types:
+                                            <span *ngFor="let type of value?.property_product">{{type?.type}},
                                             </span>
                                         </span>
                                     </p>
@@ -275,10 +275,17 @@
                                             <span class="d-flex flex-row justify-content-between align-item-center">
                                                 <p
                                                     class="d-flex flex-row justify-content-between align-item-center gap-3">
-                                                    <mat-icon>directions_car</mat-icon> {{shoe.product}}
+                                                    <mat-icon>directions_car</mat-icon>
                                                 </p>
-                                                <p>{{currency[value.country]?currency[value.country]:'$'}}{{shoe.dail_rate}}
-                                                    per day</p>
+                                                <p class="d-flex flex-md-row flex-column gap-md-3">
+                                                    <span>
+                                                        {{shoe.product}}
+                                                    </span>
+                                                    <span class="">
+                                                        {{currency[value.country]?currency[value.country]:'$'}}{{shoe.dail_rate}}
+                                                        per day
+                                                    </span>
+                                                </p>
                                             </span>
                                         </mat-list-option>
                                     </mat-selection-list>
