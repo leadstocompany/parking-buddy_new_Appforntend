@@ -18,10 +18,13 @@ export class ResultsComponent {
   constructor(httpClient: HttpClient,private _snackbarService: SnackbarService, private router: Router, private _route: ActivatedRoute, private _customerService: CustomerService, private mapDirectionsService: MapDirectionsService) {
     this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyCIFuwtv13dwj9jK4xmcI-yCaeYYfQ7Vsc', 'callback')
       .pipe(
-        map(() => true),
+        map(() =>{
+          this.iconSize =   new google.maps.Size(40, 40)
+          return true
+        }),
         catchError(() => of(false)),
       );
-      // this.iconSize =   google?.maps?.Size(40, 40)
+      
   }
   public results: Array<any> = [];
   public date!: { checkIn: Date, checkOut: Date }
@@ -76,7 +79,7 @@ export class ResultsComponent {
   }
 
   public searchInput(): void {
-    console.log(this.searchTerm, '---------')
+
     this.spinner = true
     // this.searchTerms.next(this.searchTerm);
     this.getSearchResult()
