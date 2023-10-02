@@ -1,4 +1,4 @@
-<div style="min-height: 100vh; max-height:100vh; overflow-y: auto;">
+<div style="min-height: 100vh; overflow-y: auto; background-color: lightgrey;height: 100vh;">
     <div class="container-fluid" style="background-color: lightgrey;height: 100vh;">
         <div class="row navbar">
             <div class="col-md-2 d-flex align-items-center text-align-center">
@@ -32,7 +32,7 @@
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="emailId" placeholder="Enter email"
-                                        [(ngModel)]="Email"  #emailInput="ngModel" required email>
+                                        [(ngModel)]="Email" #emailInput="ngModel" required email>
                                 </div>
                                 <mat-checkbox class="example-margin" [labelPosition]="'after'">
                                     Get discounts and the latest update via email
@@ -43,11 +43,15 @@
                                         Faster Checkout</button>
                                 </div>
                             </div>
-                            <button class="btn btn-danger mt-3" matStepperNext>Continue</button>
-                            <!-- <button class="btn btn-danger mt-3" matStepperNext
+                            <!-- <button class="btn btn-danger mt-3" matStepperNext>Continue</button> -->
+                            <button class="btn btn-danger mt-3" matStepperNext
                                 *ngIf="userLogin==true || verifyUser==true">Continue</button>
-                            <button *ngIf="userLogin==false && verifyUser==false"  [disabled]="!emailInput.valid" class="btn btn-danger mt-3"
-                                (click)="verifyEmail()">Verify Email</button> -->
+                            <button *ngIf="userLogin==false && verifyUser==false && send_otp_spinner==false"  [disabled]="!emailInput.valid" class="btn btn-danger mt-3"
+                                (click)="verifyEmail()">Verify Email</button>
+                                <div class="spinner-border text-success" role="status" *ngIf="send_otp_spinner==true">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+
                         </ng-template>
                     </mat-step>
                     <mat-step>
@@ -151,7 +155,7 @@
                                     </mat-accordion>
                                 </section>
                                 <section class="mt-4" style="text-align: right;">
-                                    <p>Pay <b>{{icon}}{{(day*type[0].dail_rate)+6.49+finaleTaxes | number:'1.2-2'}}</b>
+                                    <p>Pay <b>{{icon}}{{(total_time_charge*base_charge)+6.49+finaleTaxes | number:'1.2-2'}}</b>
                                         today</p>
                                     <p style="text-align: left;">By selection Complete Reservation you agree to out
                                         <span>Terms of Use </span> and
@@ -184,8 +188,16 @@
                         <mat-divider></mat-divider>
                         <div class="price p-3">
                             <p class="d-flex flex-row justify-content-between align-content-center">
+                                <span>{{base_title}}</span>
+                                <span>{{icon}}{{base_charge}}</span>
+                            </p>
+                            <p class="d-flex flex-row justify-content-between align-content-center">
+                                <span>{{total_time_title}}</span>
+                                <span>{{ total_time_charge}}</span>
+                            </p>
+                            <p class="d-flex flex-row justify-content-between align-content-center">
                                 <span>Subtotal</span>
-                                <span>{{icon}}{{day*type[0].dail_rate | number:'1.2-2'}}</span>
+                                <span>{{icon}}{{total_time_charge*base_charge | number:'1.2-2'}}</span>
                             </p>
                             <p class="d-flex flex-row justify-content-between align-content-center"><span>Service
                                     Charge</span> <span>{{icon}}6.49</span></p>
@@ -195,16 +207,16 @@
                         <mat-divider></mat-divider>
                         <div class="totalPrice p-3">
                             <p class="d-flex flex-row justify-content-between align-content-center"><span>total</span>
-                                <span>{{icon}}{{(day*type[0].dail_rate)+6.49+finaleTaxes | number:'1.2-2'}}</span>
+                                <span>{{icon}}{{(total_time_charge*base_charge)+6.49+finaleTaxes | number:'1.2-2'}}</span>
                             </p>
                         </div>
                         <mat-divider></mat-divider>
-                        <div class="payknow p-3">
+                        <!-- <div class="payknow p-3">
                             <p class="d-flex flex-row justify-content-between align-content-center"><span>Pay Now</span>
-                                <span>{{icon}}{{(day*type[0].dail_rate)+6.49+finaleTaxes | number:'1.2-2'}}</span>
+                                <span>{{icon}}{{(total_time_charge*base_charge)+6.49+finaleTaxes | number:'1.2-2'}}</span>
                             </p>
                         </div>
-                        <mat-divider></mat-divider>
+                        <mat-divider></mat-divider> -->
                     </div>
                 </div>
             </div>

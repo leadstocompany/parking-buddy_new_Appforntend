@@ -31,7 +31,8 @@
                 </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-around mt-3" *ngIf="results.length>0" style="max-width:98vw;">
+        <div class="row d-flex justify-content-around mt-3" *ngIf="results.length>0 && (apiLoaded | async)"
+            style="max-width:98vw;">
             <div class="col-md-6" *ngIf="results.length>0">
                 <div class="row mt-2">
                     <div class="col-md-12">
@@ -133,7 +134,7 @@
                 </div>
             </div>
             <div class="col-md-6" *ngIf="apiLoaded | async">
-                
+
                 <google-map height="80vh" width="100%" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
                     (mapMousemove)="move($event)">
                     <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions; let i=index"
@@ -153,6 +154,11 @@
                         </div>
                     </map-info-window>
                 </google-map>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center" style="margin-top: 20%;" *ngIf="results.length<=0">
+            <div class="spinner-border text-bg-success mx-2" role="status" *ngIf="spinner==true">
+                <span class="visually-hidden">Loading...</span>
             </div>
         </div>
     </div>

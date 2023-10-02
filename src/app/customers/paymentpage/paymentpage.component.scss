@@ -67,3 +67,10 @@
     color: rgb(0, 17, 255);
     cursor: pointer;
 }
+
+@media screen and (max-width:'765px') {
+    #exampleModal {
+        // background-color: red;
+        padding-top: 70px;
+    }
+}

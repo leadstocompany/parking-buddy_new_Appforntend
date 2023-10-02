@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../service/auth/auth.service';
 import { SnackbarService } from '../service/snackbar.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -69,20 +70,20 @@ export class SignInPageComponent {
       this.spinner = true
       this._authService.emailVerifyOtp({ email: this.signInForm.value.email, otp: this.otp.value }).subscribe({
         next: (res) => {
-
           if (res.message) {
             this.spinner = false
             this.otpVerify = false
             this.password = true
             this.passwordShow = true
             this._snackBarService.openSnackbar('✔ Successfully OTP verify')
-          }else{
-            this._snackBarService.openSnackbar('❌'+res.error)
+          } else {
+            this._snackBarService.openSnackbar('❌' + res.error)
           }
-
         },
         error: (error) => {
-          this._snackBarService.openSnackbar('❌' + error.error.message)
+          console.log(error)
+          this.spinner = false
+          this._snackBarService.openSnackbar('❌' + error.error.error)
         },
       })
     }
@@ -95,12 +96,9 @@ export class SignInPageComponent {
         "username": this.signInForm.value.email,
         "password": this.signInForm.value.password
       }
-
-      console.log(data, 'data')
-
       this._authService.loginUser(data).subscribe({
         next: (res) => {
-          console.log(res)
+          console.log(res, '=====>')
           if (res?.data?.active) {
             localStorage.setItem('accessToken', res.data.auth_token.access)
             this._snackBarService.openSnackbar('✔ Successfully logged In')
@@ -131,10 +129,10 @@ export class SignInPageComponent {
     const currentUrl = this._router.url
     if (currentUrl.includes('/customers')) {
       this.url = '/customers/sign-up'
-      const queryParams = { user: 'CUSTOM77484ER85487548400UHGBVVGHJIHHGHHGHBNM45125445874FDC5844J' }
+      const queryParams = { user: environment.USER_URL }
       this._router.navigate(['/reset-password'], { queryParams })
     } else {
-      const queryParams = { user: 'ADMIN77484ER85487548400UHGBVVGHJIHHGHHGHBNM45125445874FDC5844J' }
+      const queryParams = { user: environment.ADMIN_URL }
       this._router.navigate(['/reset-password'], { queryParams })
     }
   }

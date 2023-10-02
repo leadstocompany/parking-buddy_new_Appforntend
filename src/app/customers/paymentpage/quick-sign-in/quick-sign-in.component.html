@@ -50,7 +50,9 @@
                         <span class="visually-hidden">Loading...</span>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="signInForm.invalid"
-                        *ngIf="spinner==false">Sign-In</button>
+                        *ngIf="spinner==false && passwordShow==true">Sign-In</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="signInForm.invalid"
+                        *ngIf="spinner==false && passwordShow==false">Verify Email</button>
                 </div>
             </div>
         </form>

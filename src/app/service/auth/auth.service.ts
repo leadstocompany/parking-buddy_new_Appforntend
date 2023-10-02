@@ -22,10 +22,19 @@ export class AuthService {
   emailVerifySendOtp(data: any): Observable<any> {
     return this._http.post(`${environment.URL}/users/email-verify-send-otp/`, data, { withCredentials: true })
   }
-
   emailVerifyOtp(data: any): Observable<any> {
-    return this._http.post(`${environment.URL}/users/verify-otp/`, data)
+    return this._http.post(`${environment.URL}/users/verify-otp/`, data, { withCredentials: true })
   }
+
+  // send otp for gest
+  guestEmailVerifySendOtp(data: any): Observable<any> {
+    return this._http.post(`${environment.URL}/users/guest-verify-send-otp/`, data, { withCredentials: true })
+  }
+  guestEmailVerifyOtp(data: any): Observable<any> {
+    return this._http.post(`${environment.URL}/users/guest-verify-otp/`, data, { withCredentials: true })
+  }
+
+
 
   getUser(): Observable<any> {
     return this._http.get(`${environment.URL}/users/get/userprofile/`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }, withCredentials: true })

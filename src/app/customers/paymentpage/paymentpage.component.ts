@@ -28,6 +28,10 @@ export class PaymentpageComponent {
   public icon: any;
   public userLogin: boolean = false;
   public verifyUser: boolean = false;
+  public base_title!: any;
+  public base_charge!: any;
+  public total_time_title!: any;
+  public total_time_charge !: any;
   Email: any = ''
   userID: any = ''
   hours = 0
@@ -43,6 +47,10 @@ export class PaymentpageComponent {
   checkOutTime: Date = new Date()
   public minCheckInDate: Date = new Date();
   public minCheckOutDate: Date = new Date();
+
+  // spinners 
+  send_otp_spinner: boolean = false;
+  download_pdf_spinner: boolean = false;
   constructor(
     private _snackbar: SnackbarService,
     private _customer: CustomerService,
@@ -111,7 +119,7 @@ export class PaymentpageComponent {
 
   public editTimes() {
     const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
-    if (sameDate && (parseInt(this.editTime.checkIn.slice(0, 2)) < parseInt(this.parktime.slice(0, 2)))) {
+    if (this.convertToSeconds(this.editTime.checkIn) < this.convertToSeconds(this.parktime)) {
       this._snackbar.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
       return
     }
@@ -200,8 +208,17 @@ export class PaymentpageComponent {
         let amountTotal: number = 0
         if (hours < 24 && +this.type[0].hourly_rate) {
           amountTotal = +this.type[0].hourly_rate
+          this.base_title = 'Hourly Rate'
+          this.total_time_title = 'Total Hours'
+          this.total_time_charge = hours
+          this.base_charge = +this.type[0].hourly_rate
+
         } else {
           amountTotal = +this.type[0].dail_rate
+          this.base_title = 'Daily Rate'
+          this.total_time_title = 'Total Days'
+          this.total_time_charge = this.day
+          this.base_charge = +this.type[0].dail_rate
         }
         this.finaleTaxes = 0
         res.forEach((tax: any) => {
@@ -264,7 +281,7 @@ export class PaymentpageComponent {
     const timeDifferenceMillis: any = checkOutDateTime - checkInDateTime;
     // Convert milliseconds to hours
     const totalHours = timeDifferenceMillis / (1000 * 60 * 60);
-    return totalHours
+    return Math.ceil(totalHours)
   }
 
   convertTimeFormat(time: any) {
@@ -275,7 +292,6 @@ export class PaymentpageComponent {
     const paddedMinutes = minutes.padStart(2, '0');
     // Combine the padded hours and minutes into the new format
     const formattedTime = `${paddedHours}:${paddedMinutes}`;
-
     return formattedTime;
   }
 
@@ -307,19 +323,21 @@ export class PaymentpageComponent {
 
   verifyEmail(): void {
     if (this.Email != '') {
-      this._authService.emailVerifySendOtp({ email: this.Email }).subscribe({
+      this.send_otp_spinner = true
+      this._authService.guestEmailVerifySendOtp({ email: this.Email }).subscribe({
         next: (res) => {
           if (res.message) {
-            this.verifyOtpModal()
             this._snackbar.openSnackbar('✔ ' + res.message)
-          }else{
+            this.send_otp_spinner = false
+            this.verifyOtpModal()
+          } else {
+            this.send_otp_spinner = false
             this._snackbar.openSnackbar('✔ ' + res.error)
-
           }
-          this.verifyOtpModal()
         },
         error: (error) => {
-          this.verifyOtpModal()
+          this.send_otp_spinner = false
+          console.log(error)
           this._snackbar.openSnackbar('❌' + error.error.error)
         },
       })
@@ -334,14 +352,21 @@ export class PaymentpageComponent {
       autoFocus: false,
       disableClose: true,
       data: {
-        email: this.Email
+        email: this.Email,
+        customerUser: true,
       }
     })
 
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res.verify) {
         this.verifyUser = true
+        this.send_otp_spinner = false
       }
     })
+  }
+
+  convertToSeconds(timeString: any) {
+    const [minutes, seconds] = timeString.split(':').map(Number);
+    return minutes * 60 + seconds;
   }
 }

@@ -1,30 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ErrorHandler, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject, Subscription,of  } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, map, filter,catchError } from 'rxjs/operators';
+import { Observable, Subject, Subscription, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, map, filter, catchError } from 'rxjs/operators';
 import currency from '../../parking/ACurrency.json'
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+import { environment } from 'src/environments/environment.prod';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent {
-  apiLoaded: Observable<boolean>;
-  iconSize:any
-  constructor(httpClient: HttpClient,private _snackbarService: SnackbarService, private router: Router, private _route: ActivatedRoute, private _customerService: CustomerService, private mapDirectionsService: MapDirectionsService) {
-    this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyCIFuwtv13dwj9jK4xmcI-yCaeYYfQ7Vsc', 'callback')
-      .pipe(
-        map(() =>{
-          this.iconSize =   new google.maps.Size(40, 40)
-          return true
-        }),
-        catchError(() => of(false)),
-      );
-      
+  apiLoaded!: Observable<boolean>;
+  iconSize: any
+  constructor(httpClient: HttpClient, private _snackbarService: SnackbarService, private router: Router, private _route: ActivatedRoute, private _customerService: CustomerService, private mapDirectionsService: MapDirectionsService) {
+    try {
+      this.apiLoaded = httpClient.jsonp(`https://maps.googleapis.com/maps/api/js?key=${environment.MAP_URL}&libraries=visualization`, 'callback')
+        .pipe(
+          map(() => {
+            this.iconSize = new google.maps.Size(40, 40)
+            return true
+          }),
+          catchError(() => of(false)),
+        );
+    } catch (error) {
+      console.log(error)
+    }
   }
   public results: Array<any> = [];
   public date!: { checkIn: Date, checkOut: Date }
@@ -38,29 +42,7 @@ export class ResultsComponent {
   sortType: string = ''
 
   ngOnInit(): void {
-    this.searchTerms
-      .pipe(
-        debounceTime(2000),
-        distinctUntilChanged(),
-        switchMap((searchTerm: any) => this._customerService.searchAddress(searchTerm, '', '')) // Custom function for making API call
-      )
-      .subscribe({
-        next: (data) => {
-          this.spinner = false
-          this.results = data;
-          this.center = { lat: +this.results[0].latitude, lng: +this.results[0].longitude }
-          this.zoom = 10;
-          this.addMarker()
-        },
-        error: (error) => {
-          this.spinner = false
-          console.log('error', error)
-        }
-      }
-      );
-
     this._route.queryParams.subscribe((queryParams) => {
-      // this.results = JSON.parse(queryParams['data']);
       this.searchTerm = queryParams['data']
       this.date = {
         checkIn: queryParams['checkIn'],
@@ -79,9 +61,7 @@ export class ResultsComponent {
   }
 
   public searchInput(): void {
-
     this.spinner = true
-    // this.searchTerms.next(this.searchTerm);
     this.getSearchResult()
     this.FilterProduct(this.searchTerm)
   }
@@ -104,12 +84,12 @@ export class ResultsComponent {
 
 
   getDetails(search: string, filter: string, type: string) {
-    console.log(search, filter, this.sortType)
+    //console.log(search, filter, this.sortType)
     this._customerService.searchAddress(search, filter, type).subscribe({
       next: (data) => {
         this.spinner = false
         this.results = data;
-        console.log(this.results, '===================>')
+        //console.log(this.results, '===================>')
         this.addMarker()
       },
       error: (error) => {
@@ -139,12 +119,10 @@ export class ResultsComponent {
         this.FilterProduct(this.searchTerm)
         this.center = { lat: +this.results[0].latitude, lng: +this.results[0].longitude }
         this.zoom = 10;
-        console.log({ lat: Number(this.results[0]?.latitude), lng: Number(this.results[0]?.longitude) })
-        console.log(this.center)
         this.addMarker()
       },
       error: (error) => {
-        console.log(error.error)
+        //console.log(error.error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌' + error.error)
       }
@@ -159,11 +137,11 @@ export class ResultsComponent {
   display!: google.maps.LatLngLiteral;
   center: google.maps.LatLngLiteral = { lat: Number(this.results[0]?.latitude), lng: Number(this.results[0]?.longitude) };
   zoom = 15;
- 
+
   markerOptions: google.maps.MarkerOptions = { draggable: false };
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   onMarkerClick(marker: any) {
-    console.log(`Clicked on: ${marker.title}`);
+    //console.log(`Clicked on: ${marker.title}`);
   }
   moveMap(event: google.maps.MapMouseEvent) {
     if (event.latLng) {
@@ -178,7 +156,7 @@ export class ResultsComponent {
 
   markerPositions: google.maps.LatLngLiteral[] | any = [];
   addMarker() {
-    console.log(this.results, 'maps')
+    //console.log(this.results, 'maps')
     this.markerPositions = []
     this.results.map((marker: any) => {
       this.markerPositions.push({ lat: +marker.latitude, lng: +marker.longitude });
@@ -199,8 +177,8 @@ export class ResultsComponent {
   street: any;
   dynamicId: any;
   openInfoWindow(marker: MapMarker, index: any) {
-    console.log(marker)
-    console.log(this.results[index])
+    //console.log(marker)
+    //console.log(this.results[index])
     this.dynamicTittle = this.results[index].tittle ? this.results[index].tittle : 'demo',
       this.dynamicPrice = this.currency[this.results[index].country] + " " + this.results[index].property_pricing[0].dail_rate
     this.street = this.results[index].street
