@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-around mt-3" *ngIf="results.length>0 && (apiLoaded | async)"
+        <div class="row d-flex justify-content-around mt-3" *ngIf="results.length>0 && (apiLoaded)"
             style="max-width:98vw;">
             <div class="col-md-6" *ngIf="results.length>0">
                 <div class="row mt-2">
@@ -133,7 +133,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6" *ngIf="apiLoaded | async">
+            <div class="col-md-6" *ngIf="apiLoaded">
 
                 <google-map height="80vh" width="100%" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
                     (mapMousemove)="move($event)">

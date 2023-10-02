@@ -11,10 +11,10 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { HttpClientModule } from '@angular/common/http';
 import { EditProfileComponent } from './sidebar/edit-profile/edit-profile.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-password-page.component';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http'; // Import the modules
 // import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-passw
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     GoogleMapsModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    HttpClientJsonpModule
     // GooglePlaceModule
 
   ],

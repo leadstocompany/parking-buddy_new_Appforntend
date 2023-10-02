@@ -8,27 +8,29 @@ import { CustomerService } from 'src/app/service/customer/customer.service';
 import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { SnackbarService } from 'src/app/service/snackbar.service';
 import { environment } from 'src/environments/environment.prod';
+import { MapServiceService } from 'src/app/service/map/map-service.service';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent {
-  apiLoaded!: Observable<boolean>;
+  // apiLoaded!: Observable<boolean>;
+  apiLoaded: boolean = false;
   iconSize: any
-  constructor(httpClient: HttpClient, private _snackbarService: SnackbarService, private router: Router, private _route: ActivatedRoute, private _customerService: CustomerService, private mapDirectionsService: MapDirectionsService) {
-    try {
-      this.apiLoaded = httpClient.jsonp(`https://maps.googleapis.com/maps/api/js?key=${environment.MAP_URL}&libraries=visualization`, 'callback')
-        .pipe(
-          map(() => {
-            this.iconSize = new google.maps.Size(40, 40)
-            return true
-          }),
-          catchError(() => of(false)),
-        );
-    } catch (error) {
-      console.log(error)
-    }
+  constructor(private _mapService: MapServiceService, httpClient: HttpClient, private _snackbarService: SnackbarService, private router: Router, private _route: ActivatedRoute, private _customerService: CustomerService, private mapDirectionsService: MapDirectionsService) {
+    // try {
+    //   this.apiLoaded = httpClient.jsonp(`https://maps.googleapis.com/maps/api/js?key=${environment.MAP_URL}&libraries=visualization`, 'callback')
+    //     .pipe(
+    //       map(() => {
+    //         this.iconSize = new google.maps.Size(40, 40)
+    //         return true
+    //       }),
+    //       catchError(() => of(false)),
+    //     );
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
   public results: Array<any> = [];
   public date!: { checkIn: Date, checkOut: Date }
@@ -42,6 +44,12 @@ export class ResultsComponent {
   sortType: string = ''
 
   ngOnInit(): void {
+    this._mapService.obsCurrentApiStatus.subscribe(status => {
+      this.apiLoaded = status.valueOf();
+      if (this.apiLoaded) {
+        this.iconSize = new google.maps.Size(40, 40)
+      }
+    });
     this._route.queryParams.subscribe((queryParams) => {
       this.searchTerm = queryParams['data']
       this.date = {
