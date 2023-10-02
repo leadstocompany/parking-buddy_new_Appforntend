@@ -48,7 +48,7 @@ export class DescriptionsComponent {
     this.spinner = true
     this._descriptionService.createDescriptions(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         if (this.editData.edit) {
@@ -58,7 +58,7 @@ export class DescriptionsComponent {
         }
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
@@ -75,7 +75,7 @@ export class DescriptionsComponent {
         }
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -110,12 +110,12 @@ export class DescriptionsComponent {
     }
     this._descriptionService.updateDescriptionsById(fd).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Updated')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌ '+error.error[0])
       }

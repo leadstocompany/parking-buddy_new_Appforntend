@@ -21,14 +21,14 @@ export class ShowReservationComponent {
   }
 
   fetchData(): void {
-    console.log(this.userData.id)
+    //console.log(this.userData.id)
     this._customerService.showReservation(this.userData.id).subscribe({
       next: (res) => {
-        console.log('res ==>', res);
+        //console.log('res ==>', res);
         this.openReservationData = [res]
       },
       error: (error: any) => {
-        console.log(error);
+        //console.log(error);
         this._snackbarService.openSnackbar(`❌ ` + error?.error[0])
       },
     })

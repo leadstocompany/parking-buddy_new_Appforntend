@@ -26,7 +26,7 @@ export class NotificationsComponent {
     }
     this._notificationService.createNotificationService(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         if (this.editData.edit) {
@@ -37,7 +37,7 @@ export class NotificationsComponent {
 
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
@@ -64,7 +64,7 @@ export class NotificationsComponent {
         this.allNotification = res
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -80,7 +80,7 @@ export class NotificationsComponent {
         }
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }

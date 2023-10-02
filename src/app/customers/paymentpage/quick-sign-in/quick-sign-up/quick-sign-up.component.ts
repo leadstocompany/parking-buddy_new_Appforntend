@@ -63,7 +63,7 @@ export class QuickSignUpComponent {
         this.close()
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackBar.openSnackbar('❌' + error.error.email[0])
       }
     })

@@ -23,11 +23,11 @@ export class DetailsService {
   }
 
   getSingleBasicDetailsService(id: any): Observable<any> {
-    console.log(id,'--->id')
+    //console.log(id,'--->id')
     return this._http.get(`${environment.URL}/parking_location/update/property/${id}/`, { headers: this.headers, withCredentials: true })
   }
   udpateSingleBasicDetailsService(data: any): Observable<any> {
-    console.log(data)
+    //console.log(data)
     return this._http.put(`${environment.URL}/parking_location/update/property/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
   }
 
@@ -36,7 +36,7 @@ export class DetailsService {
   }
 
   createOperatingHours(data: any): Observable<any> {
-    console.log(data)
+    //console.log(data)
     return this._http.put(`${environment.URL}/parking_location/add/operating_hour/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
   }
 
@@ -45,23 +45,23 @@ export class DetailsService {
 
   createShuttleHours(data: any): Observable<any> {
 
-    console.log(data,'create hours')
+    //console.log(data,'create hours')
     return this._http.post(`${environment.URL}/parking_location/add/shuttlehours/`,data, { headers: this.headers, withCredentials: true })
   }
 
   UpdateShuttleHours(data: any): Observable<any> {
-    console.log(data,'update data')
+    //console.log(data,'update data')
     return this._http.put(`${environment.URL}/parking_location/update/shuttlehours/${data.id}/`,data.data, { headers: this.headers, withCredentials: true })
   }
 
 
   getShuttleHours(id: any): Observable<any> {
-    console.log(id,'--->id')
+    //console.log(id,'--->id')
     return this._http.get(`${environment.URL}/parking_location/shuttlehours/?id=${id}`, { headers: this.headers, withCredentials: true })
   }
 
   deleteDetailsById(id: string): Observable<any> {
-    console.log('id',id)
+    //console.log('id',id)
     return this._http.delete(`${environment.URL}/parking_location/property/${id}/delete`, { headers: this.headers, withCredentials: true })
   }
 

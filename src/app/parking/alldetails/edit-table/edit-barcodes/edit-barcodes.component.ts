@@ -66,12 +66,12 @@ export class EditBarcodesComponent {
 
     this._barCodeService.updateBarCodes(fd).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
@@ -81,13 +81,13 @@ export class EditBarcodesComponent {
   public getBarCode(): void {
     this._barCodeService.getBarCodesById(this.data.id).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.barId = res[0].id,
           this.propId = res[0].product
         this.setValues(res[0])
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }

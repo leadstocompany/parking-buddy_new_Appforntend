@@ -41,13 +41,13 @@ export class SignUpPageComponent {
 
       this._authService.registerUser(data).subscribe({
         next: (res) => {
-          console.log(res)
+          //console.log(res)
           this.spinner = false
           this._snackBarService.openSnackbar('✔ Successfully Registered')
           this._router.navigate(['/signIN'])
         },
         error: (error) => {
-          console.log(error)
+          //console.log(error)
           this.spinner = false
           this._snackBarService.openSnackbar('❌' + error.error.message)
         }

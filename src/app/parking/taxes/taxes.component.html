@@ -5,7 +5,7 @@
             reservation's Sub Total (daily rate X number of days) </P>
         <P>Post-tax will calculate the tax entered based on the reservation total,including any Pre-tax entered.</P>
         <div class="d-flex flex-row justify-content-end align-items-center flex-wrap mt-4">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Tax</button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="clearTaxes()"> + Add Tax</button>
         </div>
         <div class="table-responsive text-nowrap mt-4">
             <table class="table">

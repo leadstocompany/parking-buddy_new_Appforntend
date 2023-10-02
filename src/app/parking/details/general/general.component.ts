@@ -292,7 +292,7 @@ export class GeneralComponent {
       this.getSingleValues(this.editData.id)
     } else if (this.editData.edit === false && this._saveService.getPropertyId()) {
       // this.getSingleValues(localStorage.getItem('detailsId'))
-      console.log(this._saveService.getPropertyId(), 'get property ')
+      //console.log(this._saveService.getPropertyId(), 'get property ')
       this.getSingleValues(this._saveService.getPropertyId())
     }
   }
@@ -340,7 +340,7 @@ export class GeneralComponent {
             this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
           },
           error: (error:any) => {
-            console.log(error)
+            //console.log(error)
             this.spinner = false
             this._snackbarService.openSnackbar('❌ '+error.error[0])
           }
@@ -360,7 +360,7 @@ export class GeneralComponent {
   // getAllGeneralDetails() {
   //   this._detailService.getAllBasicDetailsService().subscribe({
   //     next: (res) => {
-  //       console.log(res)
+  //       //console.log(res)
   //       this.spinner = false
   //       this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
   //     },
@@ -391,13 +391,13 @@ export class GeneralComponent {
    * Get single property
   */
   getSingleValues(id: any) {
-    console.log('id0000000000000000000000', id)
+    //console.log('id0000000000000000000000', id)
     this._detailService.getSingleBasicDetailsService(id).subscribe({
       next: (res) => {
         this.setValues(res)
       },
       error: (error:any) => {
-        console.log(error)
+        //console.log(error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌ '+error.error[0])
       }

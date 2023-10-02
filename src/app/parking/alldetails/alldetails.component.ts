@@ -23,12 +23,12 @@ export class AlldetailsComponent {
     this.getAllGeneralDetails();
   }
   getAllGeneralDetails() {
-    console.log('call function')
+    //console.log('call function')
     // getAllBasicDetailsService
     // getDetailsBasisOfUser
     this._detailService.getDetailsBasisOfUser().subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.data = res
         this.calculatePageNumbers();
         this.updateTableContent();
@@ -48,7 +48,7 @@ export class AlldetailsComponent {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(() => {
-      console.log(`Dialog result:`);
+      //console.log(`Dialog result:`);
     });
   }
 
@@ -115,7 +115,7 @@ export class AlldetailsComponent {
           this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
         },
         error: (error) => {
-          console.log(error)
+          //console.log(error)
         }
       })
   }

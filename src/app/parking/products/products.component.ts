@@ -62,7 +62,7 @@ export class ProductsComponent {
       },
       error: (error) => {
         this._snackbarService.openSnackbar('❌ ' + error.error[0])
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -73,7 +73,7 @@ export class ProductsComponent {
         this.products = res
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -91,7 +91,7 @@ export class ProductsComponent {
         this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }

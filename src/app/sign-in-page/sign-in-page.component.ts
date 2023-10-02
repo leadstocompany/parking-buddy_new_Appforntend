@@ -81,7 +81,7 @@ export class SignInPageComponent {
           }
         },
         error: (error) => {
-          console.log(error)
+          //console.log(error)
           this.spinner = false
           this._snackBarService.openSnackbar('❌' + error.error.error)
         },
@@ -98,7 +98,7 @@ export class SignInPageComponent {
       }
       this._authService.loginUser(data).subscribe({
         next: (res) => {
-          console.log(res, '=====>')
+          //console.log(res, '=====>')
           if (res?.data?.active) {
             localStorage.setItem('accessToken', res.data.auth_token.access)
             this._snackBarService.openSnackbar('✔ Successfully logged In')
@@ -117,7 +117,7 @@ export class SignInPageComponent {
           }
         },
         error: (error) => {
-          console.log(error)
+          //console.log(error)
           this.spinner = false
           this._snackBarService.openSnackbar('❌' + error.error.message)
         }

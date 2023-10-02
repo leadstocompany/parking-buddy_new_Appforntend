@@ -22,7 +22,7 @@ export class DocumentService {
   }
 
   public async generateOrderSummary(data: any, download: any, icon: any): Promise<boolean> {
-    console.log(data, 'error')
+    //console.log(data, 'error')
     return new Promise(async (resolve, reject) => {
       // const image = await this.getBase64ImageFromURL(`${window.location.origin}/assets/signup.png` as string);
       // let width = 0;
@@ -485,7 +485,7 @@ export class DocumentService {
         ]
       }
       if (download == true) {
-        console.log('==>');
+        //console.log('==>');
 
         pdfMake.createPdf(this.orderSummary).download('orderSummary.pdf');
       }

@@ -50,12 +50,12 @@ export class ForgotPasswordComponent {
       }
       this._customerService.changePassword(data).subscribe({
         next: (res) => {
-          console.log('res ==>', res);
+          //console.log('res ==>', res);
           this._snackbarService.openSnackbar('✔ Password Change Successfully')
           this._dialogRef.close()
         },
         error: (error:any) => {
-          console.log(error);
+          //console.log(error);
           this._snackbarService.openSnackbar(`❌ `+error.error[0])
         },
       })

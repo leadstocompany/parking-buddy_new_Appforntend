@@ -19,7 +19,7 @@ export class CustomerService {
   }
 
   filterProduct(code: string): Observable<any> {
-    console.log(code)
+    //console.log(code)
     return this._http.get(
       `${environment.URL}/parking_location/get/all_product/?search=${code}`, { withCredentials: true }
     );
@@ -34,7 +34,7 @@ export class CustomerService {
   }
 
   bookingPlot(data: any): Observable<any> {
-    console.log(data, 'booking-----------')
+    //console.log(data, 'booking-----------')
     return this._http.post(`${environment.URL}/normal_user/bookingplot/create/`, data, { withCredentials: true })
   }
 
@@ -60,7 +60,7 @@ export class CustomerService {
   }
 
   updateProfile(data: any): Observable<any> {
-    console.log('data==>', data);
+    //console.log('data==>', data);
     return this._http.put(`${environment.URL}/normal_user/update/user-profile/`, data, { headers: { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }, withCredentials: true })
   }
 

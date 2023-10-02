@@ -26,7 +26,7 @@ export class TaxesService {
   }
 
   deleteTexById(id: string): Observable<any> {
-    console.log('id',id)
+    //console.log('id',id)
     return this._http.delete(`${environment.URL}/parking_location/taxesfees/${id}/delete`, { headers: this.headers, withCredentials: true })
   }
 }

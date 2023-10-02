@@ -59,11 +59,11 @@ export class SidebarComponent {
   public getUserData (){
     this._auth.getUser().subscribe({
       next:(res)=>{
-        console.log(res,'user data')
+        //console.log(res,'user data')
         this.fullName = res.first_name+' '+res.last_name
       },
       error:(error)=>{
-        console.log(error)
+        //console.log(error)
       }
     })
   }

@@ -95,12 +95,12 @@ export class EditTaxesAndFessComponent {
 
     this._taxeService.updateTaxesfess(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.spinner = false
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
@@ -110,11 +110,11 @@ export class EditTaxesAndFessComponent {
   public getText() {
     this._taxeService.getTaxesfeesById(this.data.id).subscribe({
       next: (res) => {
-        console.log(res, 'get taxes ---')
+        //console.log(res, 'get taxes ---')
         this.taxData = res
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }

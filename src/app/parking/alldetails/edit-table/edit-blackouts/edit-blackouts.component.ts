@@ -71,12 +71,12 @@ export class EditBlackoutsComponent {
     }
     this._barAndBlackService.updateBlackouts(data).subscribe({
       next: (res) => {
-        console.log(res)
+        ////console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Updated')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
 
@@ -88,13 +88,13 @@ export class EditBlackoutsComponent {
   public getBlackOuts(): void {
     this._barAndBlackService.getBlackoutsById(this.data.id).subscribe({
       next: (res) => {
-        console.log(res, 'black outs')
+        //console.log(res, 'black outs')
         this.saveBlackout(res[0])
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
 
@@ -103,7 +103,7 @@ export class EditBlackoutsComponent {
   }
 
   saveBlackout(value: any) {
-    console.log(value, 'values===============')
+    //console.log(value, 'values===============')
     this.blId = value.id
     this.blackouts.setValue({
       product: '',

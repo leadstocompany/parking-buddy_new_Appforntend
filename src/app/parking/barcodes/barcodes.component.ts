@@ -57,7 +57,7 @@ export class BarcodesComponent {
     }
   }
   public createBarcode(): void {
-    console.log(this.barCodes.value)
+    //console.log(this.barCodes.value)
     this.spinner = true
     const data = {
       "version": this.barCodes.value.barcodeVersion,
@@ -69,7 +69,7 @@ export class BarcodesComponent {
 
     this._barCodeService.createBarCodes(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         if(this.editData.edit){
@@ -79,7 +79,7 @@ export class BarcodesComponent {
         }
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
@@ -92,7 +92,7 @@ export class BarcodesComponent {
         this.parkingOptions = res
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -124,7 +124,7 @@ export class BarcodesComponent {
 
     this._barCodeService.updateBarCodes(fd).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Updated')
         if (this.editData.edit) {
@@ -134,7 +134,7 @@ export class BarcodesComponent {
         }
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
@@ -142,7 +142,7 @@ export class BarcodesComponent {
   }
 
   public openEditModal(data: any) {
-    console.log(data, 'data----------------------------')
+    //console.log(data, 'data----------------------------')
     this.barId = data.id
     this.barCodes.setValue({
       product: data.product.id,
@@ -163,7 +163,7 @@ export class BarcodesComponent {
         }
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }

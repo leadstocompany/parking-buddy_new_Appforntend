@@ -75,7 +75,7 @@ export class UserProfileComponent {
   private _openReservationDetails(): void {
     this._customerService.getOpenReservationDetails().subscribe({
       next: (res) => {
-        console.log('res ==>', res);
+        //console.log('res ==>', res);
         this.pastReservationData = []
         this.openReservationData = res
       },
@@ -88,12 +88,12 @@ export class UserProfileComponent {
   private _pastReservationDetails(): void {
     this._customerService.getPastReservationDetails().subscribe({
       next: (res) => {
-        console.log('past res ==>', res);
+        //console.log('past res ==>', res);
         this.openReservationData = []
         this.pastReservationData = res
       },
       error: (error: any) => {
-        console.log(error);
+        //console.log(error);
         this._snackbarService.openSnackbar(`❌ ` + error.error[0])
       },
     })
@@ -102,7 +102,7 @@ export class UserProfileComponent {
   private _getProfileDetails(): void {
     this._customerService.getProfileDetails().subscribe({
       next: (res) => {
-        console.log('profile res ==>', res);
+        //console.log('profile res ==>', res);
         const data = res
         this.profileForm.patchValue({
           fname: data.first_name,
@@ -117,7 +117,7 @@ export class UserProfileComponent {
         })
       },
       error: (error: any) => {
-        console.log(error);
+        //console.log(error);
         this._snackbarService.openSnackbar(`❌ ` + error.error[0])
       },
     })
@@ -151,11 +151,11 @@ export class UserProfileComponent {
     }
     this._customerService.updateProfile(data).subscribe({
       next: (res) => {
-        console.log('res ==>', res);
+        //console.log('res ==>', res);
         this._snackbarService.openSnackbar('✔ Profile Update Successfully')
       },
       error: (error: any) => {
-        console.log(error);
+        //console.log(error);
         this._snackbarService.openSnackbar(`❌ ` + error.error[0])
       },
     })

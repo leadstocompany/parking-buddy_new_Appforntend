@@ -80,7 +80,7 @@ export class PricingComponent {
       error: (error) => {
         this.spinner = false
         this._snackbarService.openSnackbar('❌ '+error.error[0])
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -118,7 +118,7 @@ export class PricingComponent {
       error: (error) => {
         this.spinner = false
         this._snackbarService.openSnackbar('❌ '+error.error[0])
-        console.log(error)
+        //console.log(error)
       }
     })
 
@@ -154,12 +154,12 @@ export class PricingComponent {
   public getProduct(id: any) {
     this._productService.getProductById(id).subscribe({
       next: (res) => {
-        console.log(res, 'get values')
+        //console.log(res, 'get values')
 
         this.parkingOptions = res
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -167,11 +167,11 @@ export class PricingComponent {
   public getPricing(id: any) {
     this._pricingService.getPricingById(id).subscribe({
       next: (res) => {
-        console.log(res, 'get pricing')
+        //console.log(res, 'get pricing')
         this.document = res
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -188,7 +188,7 @@ export class PricingComponent {
         this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -197,11 +197,11 @@ export class PricingComponent {
   public getProperty(id: any) {
     this._detailService.getSingleBasicDetailsService(id).subscribe({
       next: (res) => {
-        console.log(res, 'res')
+        //console.log(res, 'res')
         this.amountIcon = this.currency[`${res.country}`]
       },
       error: (error:any) => {
-        console.log(error)
+        //console.log(error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌ '+error.error[0])
       }

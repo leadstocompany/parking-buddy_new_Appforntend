@@ -59,7 +59,7 @@ export class TaxesComponent {
   taxId: any
   amountIcon = '₹'
   currency: any = currency?.currency
-  constructor(private _detailService: DetailsService,private _formBuilder: FormBuilder, private _taxeService: TaxesService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
+  constructor(private _detailService: DetailsService, private _formBuilder: FormBuilder, private _taxeService: TaxesService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.taxes = this._formBuilder.group({
       category: [null],
@@ -95,7 +95,7 @@ export class TaxesComponent {
 
     this._taxeService.createTaxService(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.spinner = false
         if (this.editData.edit) {
@@ -105,8 +105,8 @@ export class TaxesComponent {
         }
       },
       error: (error) => {
-        console.log(error)
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        //console.log(error)
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
         this.spinner = false
       }
     })
@@ -116,11 +116,11 @@ export class TaxesComponent {
   public getText(id: any) {
     this._taxeService.getTaxesfeesById(id).subscribe({
       next: (res) => {
-        console.log(res, 'get taxes ---')
+        //console.log(res, 'get taxes ---')
         this.taxData = res
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -144,7 +144,7 @@ export class TaxesComponent {
 
     this._taxeService.updateTaxesfess(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.spinner = false
         if (this.editData.edit) {
@@ -154,8 +154,8 @@ export class TaxesComponent {
         }
       },
       error: (error) => {
-        console.log(error)
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        //console.log(error)
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
         this.spinner = false
       }
     })
@@ -163,7 +163,7 @@ export class TaxesComponent {
 
   // set values
   public openEditModal(data: any) {
-    console.log(data)
+    //console.log(data)
     this.taxId = data.id
     this.taxes.setValue({
       category: data.category,
@@ -192,7 +192,7 @@ export class TaxesComponent {
 
     this._taxeService.updateTaxesfess(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         if (this.editData.edit) {
           this.getText(this.editData.id)
         } else {
@@ -202,8 +202,8 @@ export class TaxesComponent {
         this.spinner = false
       },
       error: (error) => {
-        console.log(error)
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        //console.log(error)
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
         this.spinner = false
       }
     })
@@ -222,7 +222,7 @@ export class TaxesComponent {
         this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -230,15 +230,19 @@ export class TaxesComponent {
   public getProperty(id: any) {
     this._detailService.getSingleBasicDetailsService(id).subscribe({
       next: (res) => {
-        console.log(res, 'res')
+        //console.log(res, 'res')
         this.amountIcon = this.currency[`${res.country}`]
       },
-      error: (error:any) => {
-        console.log(error)
+      error: (error: any) => {
+        //console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
       }
     })
+  }
+
+  public clearTaxes() {
+    this.taxes.reset()
   }
 
 }

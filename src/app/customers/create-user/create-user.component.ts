@@ -66,12 +66,12 @@ export class CreateUserComponent {
 
     this._customer.createUser(pyload).subscribe({
       next: (res) => {
-        console.log(res)
+        // console.log(res)
         this._snackBar.openSnackbar('✔ form Successfully Submitted')
         this._rout.navigate(['/customers'])
       },
       error: (error) => {
-        console.log(error)
+        // console.log(error)
         this._snackBar.openSnackbar('❌' + error.error.email[0])
       }
     })

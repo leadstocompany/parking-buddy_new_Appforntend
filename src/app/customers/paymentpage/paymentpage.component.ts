@@ -159,7 +159,7 @@ export class PaymentpageComponent {
     }
     this._customer.bookingPlot(payload).subscribe({
       next: (response) => {
-        console.log(response, 'response')
+        //console.log(response, 'response')
         this._customer.getBookingSlot(response.id).subscribe({
           next: (res) => {
             this._docService.generateOrderSummary(res, true, this.icon)
@@ -167,13 +167,13 @@ export class PaymentpageComponent {
             this._route.navigate(['/customers/thank-you'])
           },
           error: (error: HttpErrorResponse) => {
-            console.log(error);
+            //console.log(error);
             this._snackbar.openSnackbar('❌' + error.error[0])
           },
         })
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbar.openSnackbar('❌ ' + error.error[0])
       }
     })
@@ -256,7 +256,7 @@ export class PaymentpageComponent {
 
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbar.openSnackbar('❌ ' + error.error[0])
       }
     })
@@ -337,7 +337,7 @@ export class PaymentpageComponent {
         },
         error: (error) => {
           this.send_otp_spinner = false
-          console.log(error)
+          //console.log(error)
           this._snackbar.openSnackbar('❌' + error.error.error)
         },
       })

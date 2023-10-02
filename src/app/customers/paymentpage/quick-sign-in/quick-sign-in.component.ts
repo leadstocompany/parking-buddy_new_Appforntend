@@ -55,7 +55,7 @@ export class QuickSignInComponent {
           }
         },
         error: (error) => {
-          console.log(error)
+          //console.log(error)
           this.spinner = false
           this._snackBarService.openSnackbar('❌' + error.error.message)
         }

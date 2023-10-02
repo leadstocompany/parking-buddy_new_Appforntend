@@ -81,7 +81,7 @@ export class ImagesComponent {
       }
       this._imageService.createImages(data).subscribe({
         next: (res) => {
-          console.log(res)
+          //console.log(res)
           this.spinner = false
           this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
           this.selectedFiles = [];
@@ -93,7 +93,7 @@ export class ImagesComponent {
           }
         },
         error: (error) => {
-          console.log(error)
+          //console.log(error)
           this._snackbarService.openSnackbar('❌ '+error.error[0])
           this.spinner = false
         }
@@ -118,15 +118,15 @@ export class ImagesComponent {
   getImages(id: any) {
     this._imageService.getIMages(id).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         if (res.length) {
           this.updateImage = true
-          console.log(res[res.length - 1].id, 'iiiiiiiiiiiiiiiii')
+          //console.log(res[res.length - 1].id, 'iiiiiiiiiiiiiiiii')
           this.setLogo(res[0].logo)
           this.imagesID = res[res.length - 1].id
           this._imageService.getAllIMages(res[res.length - 1].id).subscribe({
             next: (res) => {
-              console.log(res, 'images-----------')
+              //console.log(res, 'images-----------')
               this.selectedFiles = res.map((item: any, i: any) => ({
                 // You can customize how the 'icon' value is created
                 file: {},
@@ -134,13 +134,13 @@ export class ImagesComponent {
               }));
             },
             error: (error) => {
-              console.log(error)
+              //console.log(error)
             }
           })
         }
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -169,7 +169,7 @@ export class ImagesComponent {
       }
       this._imageService.updateImages(fd).subscribe({
         next: (res) => {
-          console.log(res)
+          //console.log(res)
           this.spinner = false
           this._snackbarService.openSnackbar('✔ Form Successfully Updated')
           this.selectedFiles = [];
@@ -181,7 +181,7 @@ export class ImagesComponent {
           }
         },
         error: (error) => {
-          console.log(error)
+          //console.log(error)
           this._snackbarService.openSnackbar('❌ '+error.error[0])
           this.spinner = false
         }

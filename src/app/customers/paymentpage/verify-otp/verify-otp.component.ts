@@ -60,7 +60,7 @@ export class VerifyOtpComponent {
       this.spinner = true
       this._authService.guestEmailVerifyOtp({ email: this.userData?.email, otp: this.emailotp?.value }).subscribe({
         next: (res) => {  
-          console.log(res)
+          //console.log(res)
           this._snackBarService.openSnackbar('✔ Successfully OTP verify')
           this.spinner = false
           this.close(true)

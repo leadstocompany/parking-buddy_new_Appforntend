@@ -32,7 +32,7 @@ export class WarningComponentComponent {
         }
       },
       error: (error: any) => {
-        console.log(error);
+        //console.log(error);
         this._snackbarService.openSnackbar(`❌ ` + error.error[0])
       },
     })

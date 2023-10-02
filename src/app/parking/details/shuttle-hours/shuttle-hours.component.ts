@@ -66,7 +66,7 @@ export class ShuttleHoursComponent {
     ]
     // Check edit or not 
     this.editData = this._saveService.getSharedData()
-    console.log(this.editData, 'this edit data 2888 ')
+    //console.log(this.editData, 'this edit data 2888 ')
     if (this.editData.edit) {
       this.getSingleValues(this.editData.id)
     } else if (this.editData.edit === false) {
@@ -148,7 +148,7 @@ export class ShuttleHoursComponent {
         this._snackbarService.openSnackbar('✔ Form Successfully Updated')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
@@ -216,7 +216,7 @@ export class ShuttleHoursComponent {
         this._snackbarService.openSnackbar('✔ Form Successfully Updated')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
@@ -233,9 +233,9 @@ export class ShuttleHoursComponent {
   getSingleValues(id: any) {
     this._detailService.getShuttleHours(id).subscribe({
       next: (res) => {
-        console.log(res, 'single data')
+        //console.log(res, 'single data')
         if (res.length) {
-          console.log(res.length)
+          //console.log(res.length)
           this.shuttleId = res[0].id
           this.setValues(res[0])
           this.updated = true
@@ -282,7 +282,7 @@ export class ShuttleHoursComponent {
       const hours = parseInt(parts[0]);
       const minutes = parseInt(parts[1]);
       const formattedTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
-      console.log(formattedTime, '-------------->')
+      //console.log(formattedTime, '-------------->')
       return formattedTime;
     } else {
       return null
@@ -291,7 +291,7 @@ export class ShuttleHoursComponent {
   }
 
   public removeDate(data: any) {
-    console.log(data)
+    //console.log(data)
     this.operatingForm.controls[data].setValue(null)
   }
 

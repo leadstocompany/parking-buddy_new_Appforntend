@@ -51,9 +51,9 @@ export class SingleDetailsComponent {
     const currentTime = new Date();
     this.hours = currentTime.getHours();
     this.minutes = currentTime.getMinutes();
-    console.log(this.hours, this.minutes, 'dd')
+    //console.log(this.hours, this.minutes, 'dd')
     this.parktime = `${this.minutes > 30 ? this.hours : this.hours - 1}:${this.minutes > 30 ? this.minutes - 30 : 60 + this.minutes - 30}`
-    console.log(this.parktime, 'parktime')
+    //console.log(this.parktime, 'parktime')
     this.parkingTimes.checkOut = this.parktime
     this.parkingTimes.checkIn = this.parktime
 
@@ -69,7 +69,7 @@ export class SingleDetailsComponent {
       this.checkInTime = new Date(this.date.checkIn)
       this.checkOutTime = new Date(this.date.checkOut)
     });
-    console.log(this.checkInTime)
+    //console.log(this.checkInTime)
     this.getSingleIdDetails()
     // this.geocoder.geocode({
     //   address: this.address
@@ -106,14 +106,14 @@ export class SingleDetailsComponent {
   getSingleIdDetails() {
     this._customerService.singleAllDetails(this.id).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.value = res
         this.Images = res?.property_logo[0]?.image_by_logo
         this.amenities = this.amenities.filter((icon) => res.property_amenities[0][icon.key] === true)
         this.typesOfShoes = res?.property_pricing
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -122,8 +122,8 @@ export class SingleDetailsComponent {
   selectedStep = 0; // Track the currently selected step
   onNextStep() {
     const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
-    console.log(this.parktime, this.parkingTimes.checkIn)
-    console.log(parseInt(this.parkingTimes.checkIn.slice(0, 2)), parseInt(this.parktime.slice(0, 2)))
+    //console.log(this.parktime, this.parkingTimes.checkIn)
+    //console.log(parseInt(this.parkingTimes.checkIn.slice(0, 2)), parseInt(this.parktime.slice(0, 2)))
     if(sameDate){
       this.cancellationMessage = '❌ non Cancellation'
     }

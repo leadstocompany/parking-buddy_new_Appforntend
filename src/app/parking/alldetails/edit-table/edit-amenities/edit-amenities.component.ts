@@ -75,12 +75,12 @@ export class EditAmenitiesComponent {
 
     this._amenitiesService.updateAmenities(fd).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         this.spinner = false
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
@@ -88,14 +88,14 @@ export class EditAmenitiesComponent {
   }
 
   getAmemnties() {
-    console.log(this.data.id,'dada')
+    //console.log(this.data.id,'dada')
     this._amenitiesService.getAmenitiesById(this.data.id).subscribe({
       next: (res) => {
-        console.log(res, 'responsesss')
+        //console.log(res, 'responsesss')
         this.ameId = res[0].id
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }

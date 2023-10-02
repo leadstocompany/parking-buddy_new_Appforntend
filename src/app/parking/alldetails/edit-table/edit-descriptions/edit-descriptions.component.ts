@@ -25,7 +25,7 @@ export class EditDescriptionsComponent {
   spinner = false
   constructor(private _descriptionService: DescriptionsService, private _snackbarService: SnackbarService, @Inject(MAT_DIALOG_DATA) private data: any) { }
   ngOnInit() {
-    console.log(this.modal.temporary)
+    //console.log(this.modal.temporary)
     this.getDescription()
   }
 
@@ -46,12 +46,12 @@ export class EditDescriptionsComponent {
     }
     this._descriptionService.updateDescriptionsById(fd).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.spinner = false
         this._snackbarService.openSnackbar('✔ Form Successfully Updated')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌ '+error.error[0])
       }
@@ -59,15 +59,15 @@ export class EditDescriptionsComponent {
   }
 
   getDescription() {
-    console.log('enter')
+    //console.log('enter')
     this._descriptionService.getDescriptionsById(this.data.id).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.desId = res[0].id
         this.setValue(res[0])
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }

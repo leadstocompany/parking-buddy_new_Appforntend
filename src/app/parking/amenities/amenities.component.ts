@@ -50,7 +50,7 @@ export class AmenitiesComponent {
   editOption: boolean = false;
   ngOnInit() {
     this.editData = this._saveService.getSharedData()
-    console.log(this.editData, 'edit_____data')
+    //console.log(this.editData, 'edit_____data')
     if (this.editData.edit) {
       this.getAmenities(this.editData.id)
       this.editOption = true
@@ -75,7 +75,7 @@ export class AmenitiesComponent {
     })
     this._amenitiesService.createAmenities(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
         if (this.editData.edit) {
           this.getAmenities(this.editData.id)
@@ -86,7 +86,7 @@ export class AmenitiesComponent {
         this.spinner = false
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }
@@ -94,18 +94,18 @@ export class AmenitiesComponent {
   }
 
   getAmenities(id: any) {
-    console.log(id, 'update amenetiles')
+    //console.log(id, 'update amenetiles')
     this._amenitiesService.getAmenitiesById(id).subscribe({
       next: (res) => {
         this.allAmenities = res
-        console.log(this.allAmenities)
+        //console.log(this.allAmenities)
         if (res.length) {
           this.ameId = res[res.length-1].id
         }
         this.setAmenitiesVlue()
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -120,7 +120,7 @@ export class AmenitiesComponent {
       "ev_charging": false,
       "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
-    console.log('---------updateeeeeeeeeeeeeeeee')
+    //console.log('---------updateeeeeeeeeeeeeeeee')
     this.selectedAmenities.forEach(item => {
       if (item.value in data) {
         data[item.value] = true;
@@ -134,13 +134,13 @@ export class AmenitiesComponent {
 
     this._amenitiesService.updateAmenities(fd).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
 
         this._snackbarService.openSnackbar('✔ Successfully Updated')
         this.spinner = false
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
       }

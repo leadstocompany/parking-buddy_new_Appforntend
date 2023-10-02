@@ -80,7 +80,7 @@ export class ResultsComponent {
         this.filterData = data
       },
       error: (error: ErrorHandler) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -102,7 +102,7 @@ export class ResultsComponent {
       },
       error: (error) => {
         this.spinner = false
-        console.log('error', error)
+        //console.log('error', error)
       }
     }
     );
@@ -125,7 +125,7 @@ export class ResultsComponent {
         this.spinner = false
         this.results = data;
         this.FilterProduct(this.searchTerm)
-        this.center = { lat: +this.results[0].latitude, lng: +this.results[0].longitude }
+        this.center = { lat: +this.results[0]?.latitude, lng: +this.results[0]?.longitude }
         this.zoom = 10;
         this.addMarker()
       },
@@ -173,8 +173,8 @@ export class ResultsComponent {
 
   addPath(index: any) {
     const request: google.maps.DirectionsRequest = {
-      destination: { lat: +this.results[0].latitude, lng: +this.results[0].longitude },
-      origin: { lat: +this.results[1].latitude, lng: +this.results[1].longitude },
+      destination: { lat: +this.results[0]?.latitude, lng: +this.results[0]?.longitude },
+      origin: { lat: +this.results[1]?.latitude, lng: +this.results[1]?.longitude },
       travelMode: google.maps.TravelMode.DRIVING
     };
     this.directionsResults$ = this.mapDirectionsService.route(request).pipe(map(response => response.result));
@@ -187,10 +187,10 @@ export class ResultsComponent {
   openInfoWindow(marker: MapMarker, index: any) {
     //console.log(marker)
     //console.log(this.results[index])
-    this.dynamicTittle = this.results[index].tittle ? this.results[index].tittle : 'demo',
-      this.dynamicPrice = this.currency[this.results[index].country] + " " + this.results[index].property_pricing[0].dail_rate
-    this.street = this.results[index].street
-    this.dynamicId = this.results[index].id
+    this.dynamicTittle = this.results[index]?.tittle ? this.results[index]?.tittle : '',
+      this.dynamicPrice = this.currency[this.results[index]?.country] + " " + this.results[index]?.property_pricing[0]?.dail_rate
+    this.street = this.results[index]?.street
+    this.dynamicId = this.results[index]?.id
     this.infoWindow.open(marker);
   }
 

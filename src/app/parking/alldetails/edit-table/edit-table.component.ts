@@ -63,7 +63,7 @@ export class EditTableComponent {
   ) { }
 
   ngOnInit() {
-    console.log(this.data, 'data')
+    //console.log(this.data, 'data')
   }
 
   closeDialog(): void {
@@ -78,7 +78,7 @@ export class EditTableComponent {
       // disableClose: true
     });
     dialogRef.afterClosed().subscribe(() => {
-      console.log(`Dialog result:`);
+      //console.log(`Dialog result:`);
     });
   }
 }

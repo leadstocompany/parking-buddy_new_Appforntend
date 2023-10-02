@@ -46,9 +46,9 @@ export class EditProfileComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-    console.log(this.selectedFile);
-    console.log(this.profileForm.value)
-    console.log(this.previewImage)
+    //console.log(this.selectedFile);
+    //console.log(this.profileForm.value)
+    //console.log(this.previewImage)
 
     const data = {
       "first_name": this.profileForm.value.fname,
@@ -64,7 +64,7 @@ export class EditProfileComponent implements OnInit {
         this.closeDialog()
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -86,7 +86,7 @@ export class EditProfileComponent implements OnInit {
         // this.previewImage = res.image ? res.image : ''
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }

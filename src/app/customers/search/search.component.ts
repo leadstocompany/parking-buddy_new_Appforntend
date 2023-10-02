@@ -88,7 +88,7 @@ export class SearchComponent {
     } else if (rout == 'sign-up') {
       this._router.navigate(['/customers/sign-up'])
     } else if (rout == 'logOut') {
-      console.log('logout')
+      //console.log('logout')
       localStorage.removeItem('accessToken')
       this.userLogin = false
       this._router.navigate(['/'])
@@ -122,7 +122,7 @@ export class SearchComponent {
   getUserDetails(): void {
     this._customerService.getProfileDetails().subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         if (res.role == "normal_user") {
           this.userLogin = true
         } else {
@@ -131,13 +131,13 @@ export class SearchComponent {
         }
       },
       error: (error) => {
-        console.log(error.error)
+        //console.log(error.error)
       }
     })
   }
 
   getSearchResult(): void {
-    console.log(this.searchTerm)
+    //console.log(this.searchTerm)
     this.spinner = true
     this._customerService.searchAddress(this.searchTerm, '', '').subscribe({
       next: (data) => {
@@ -157,7 +157,7 @@ export class SearchComponent {
         }
       },
       error: (error) => {
-        console.log(error.error)
+        //console.log(error.error)
         this.spinner = false
         this._snackbarService.openSnackbar('❌' + error.error)
       }
@@ -171,7 +171,7 @@ export class SearchComponent {
       this.locationService
         .getAddressFromCoordinates(coords)
         .then((address: any) => {
-          console.log(address?.address_components)
+          //console.log(address?.address_components)
           this.currentAddress = address?.address_components.filter((type: any) => type.types[0] == "postal_code")
           this.searchTerm = this.currentAddress[0]?.long_name
           this.getSearchResult()

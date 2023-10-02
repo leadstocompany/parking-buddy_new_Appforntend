@@ -55,7 +55,7 @@ export class AllBlackoutsComponent {
 
     this._barAndBlackService.createBlackouts(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.spinner = false
         if (this.editData.edit) {
           this.getBlackouts(this.editData.id)
@@ -65,7 +65,7 @@ export class AllBlackoutsComponent {
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
 
@@ -79,13 +79,13 @@ export class AllBlackoutsComponent {
         this.parkingOptions = res
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
 
   public openEditModal(data: any) {
-    console.log(data)
+    //console.log(data)
     this.saveBlackout(data)
   }
 
@@ -95,7 +95,7 @@ export class AllBlackoutsComponent {
         this.document = res
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }
@@ -134,7 +134,7 @@ export class AllBlackoutsComponent {
     }
     this._barAndBlackService.updateBlackouts(data).subscribe({
       next: (res) => {
-        console.log(res)
+        //console.log(res)
         this.spinner = false
         if (this.editData.edit) {
           this.getBlackouts(this.editData.id)
@@ -144,7 +144,7 @@ export class AllBlackoutsComponent {
         this._snackbarService.openSnackbar('✔ Form Successfully Updated')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
         this._snackbarService.openSnackbar('❌ '+error.error[0])
         this.spinner = false
 
@@ -165,7 +165,7 @@ export class AllBlackoutsComponent {
         this._snackbarService.openSnackbar('✔ Record Successfully Deleted')
       },
       error: (error) => {
-        console.log(error)
+        //console.log(error)
       }
     })
   }

@@ -14,7 +14,7 @@ export class AmentitiesService {
   constructor(private _http: HttpClient) { }
 
   createAmenities(data: any): Observable<any> {
-    console.log(data);
+    //console.log(data);
     return this._http.post(
       `${environment.URL}/parking_location/add/amenities/`,
       data,

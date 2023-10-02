@@ -23,17 +23,17 @@ export class BarcodesService {
   }
 
   updateBarCodes(data: any) {
-    console.log(data,'data')
+    //console.log(data,'data')
     return this._http.put(`${environment.URL}/parking_location/update/barcode/${data.id}/`, data.data, { headers: this.headers, withCredentials: true })
   }
 
   createBlackouts(data: any): Observable<any> {
-    console.log(data)
+    //console.log(data)
     return this._http.post(`${environment.URL}/parking_location/add/blackout/`, data, { headers: this.headers, withCredentials: true })
   }
 
   getBlackoutsById(id: string): Observable<any> {
-    console.log('id',id)
+    //console.log('id',id)
     return this._http.get(`${environment.URL}/parking_location/blackout/?id=${id}`, { headers: this.headers, withCredentials: true })
   }
 
@@ -42,13 +42,13 @@ export class BarcodesService {
   }
 
   deleteBlackoutsById(id: string): Observable<any> {
-    console.log('id',id)
+    //console.log('id',id)
     return this._http.delete(`${environment.URL}/parking_location/blackout/${id}/delete`, { headers: this.headers, withCredentials: true })
   }
 
 
   deleteBarcodes(id: string): Observable<any> {
-    console.log('id',id)
+    //console.log('id',id)
     return this._http.delete(`${environment.URL}/parking_location/barcode/${id}/delete`, { headers: this.headers, withCredentials: true })
   }
 
