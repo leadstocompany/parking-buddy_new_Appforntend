@@ -52,6 +52,7 @@ export class SignUpPageComponent {
           this._snackBarService.openSnackbar('❌' + error.error.message)
         }
       })
+      
 
     }
   }

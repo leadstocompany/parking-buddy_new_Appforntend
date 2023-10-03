@@ -32,7 +32,7 @@
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="emailId" placeholder="Enter email"
-                                        [(ngModel)]="Email" #emailInput="ngModel" required email>
+                                        [(ngModel)]="Email" #emailInput="ngModel" required email [readOnly]="userLogin==true || verifyUser==true">
                                 </div>
                                 <mat-checkbox class="example-margin" [labelPosition]="'after'">
                                     Get discounts and the latest update via email
