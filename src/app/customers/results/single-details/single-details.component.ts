@@ -121,13 +121,14 @@ export class SingleDetailsComponent {
   isStep1Completed = false;
   selectedStep = 0; // Track the currently selected step
   onNextStep() {
-    const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
-    //console.log(this.parktime, this.parkingTimes.checkIn)
-    //console.log(parseInt(this.parkingTimes.checkIn.slice(0, 2)), parseInt(this.parktime.slice(0, 2)))
-    if(sameDate){
+    const toDayDate = new Date()
+    // const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
+    const sameDate = this.checkToDate(new Date(this.checkInTime), new Date(this.checkOutTime))
+
+    if (this.checkToDate(toDayDate, new Date(this.checkInTime))) {
       this.cancellationMessage = '❌ non Cancellation'
     }
-    if (this.convertToSeconds(this.parkingTimes.checkIn) < this.convertToSeconds(this.parktime)) {
+    if (this.checkToDate(toDayDate, new Date(this.checkInTime)) && this.convertToSeconds(this.parkingTimes.checkIn) < this.convertToSeconds(this.parktime)) {
       this._snackbarService.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
       return
     }
@@ -171,6 +172,19 @@ export class SingleDetailsComponent {
   convertToSeconds(timeString: any) {
     const [minutes, seconds] = timeString.split(':').map(Number);
     return minutes * 60 + seconds;
+  }
+
+  checkToDate(today: any, dateToCheck: any) {
+    console.log(today,dateToCheck,'dateToCheck')
+    if (
+      today.getFullYear() === dateToCheck.getFullYear() &&
+      today.getMonth() === dateToCheck.getMonth() &&
+      today.getDate() === dateToCheck.getDate()
+    ) {
+      return true
+    } else {
+      return false
+    }
   }
 
 }

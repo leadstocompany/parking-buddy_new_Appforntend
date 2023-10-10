@@ -118,8 +118,10 @@ export class PaymentpageComponent {
 
 
   public editTimes() {
-    const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
-    if (this.convertToSeconds(this.editTime.checkIn) < this.convertToSeconds(this.parktime)) {
+    const toDayDate = new Date()
+    // const sameDate = this.checkInTime.getTime() === this.checkOutTime.getTime()
+    const sameDate = this.checkToDate(new Date(this.checkInTime), new Date(this.checkOutTime))
+    if (this.checkToDate(toDayDate, new Date(this.checkInTime)) && this.convertToSeconds(this.editTime.checkIn) < this.convertToSeconds(this.parktime)) {
       this._snackbar.openSnackbar(`❌ Check-In Time Should be greater than ${this.parktime}`)
       return
     }
@@ -368,5 +370,18 @@ export class PaymentpageComponent {
   convertToSeconds(timeString: any) {
     const [minutes, seconds] = timeString.split(':').map(Number);
     return minutes * 60 + seconds;
+  }
+
+  checkToDate(today: any, dateToCheck: any) {
+    console.log(today, dateToCheck, 'dateToCheck')
+    if (
+      today.getFullYear() === dateToCheck.getFullYear() &&
+      today.getMonth() === dateToCheck.getMonth() &&
+      today.getDate() === dateToCheck.getDate()
+    ) {
+      return true
+    } else {
+      return false
+    }
   }
 }
