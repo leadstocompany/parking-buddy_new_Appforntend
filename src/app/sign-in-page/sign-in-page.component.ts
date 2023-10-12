@@ -20,6 +20,7 @@ export class SignInPageComponent {
   public password: boolean = true;
   public passwordShow: boolean = true
   otp!: FormControl
+  admin = false
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -34,12 +35,13 @@ export class SignInPageComponent {
       password: ['', [Validators.required, Validators.minLength(2)]]
     });
     this.otp = new FormControl('', [Validators.required]);
-
     const currentUrl = this._router.url
     if (currentUrl.includes('/customers')) {
       this.url = '/customers/sign-up'
+      this.admin = false
     } else {
       this.url = '/signUP'
+      this.admin = true
     }
   }
 
