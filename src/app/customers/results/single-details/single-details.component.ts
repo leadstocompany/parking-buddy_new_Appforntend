@@ -109,7 +109,11 @@ export class SingleDetailsComponent {
         //console.log(res)
         this.value = res
         this.Images = res?.property_logo[0]?.image_by_logo
-        this.amenities = this.amenities.filter((icon) => res.property_amenities[0][icon.key] === true)
+        this.amenities = this.amenities?.filter((icon) => {
+          let value = res?.property_amenities?.length ? res?.property_amenities[0][icon?.key] : false
+          return value === true
+        })
+        console.log(this.amenities)
         this.typesOfShoes = res?.property_pricing
       },
       error: (error) => {
@@ -175,7 +179,7 @@ export class SingleDetailsComponent {
   }
 
   checkToDate(today: any, dateToCheck: any) {
-    console.log(today,dateToCheck,'dateToCheck')
+    console.log(today, dateToCheck, 'dateToCheck')
     if (
       today.getFullYear() === dateToCheck.getFullYear() &&
       today.getMonth() === dateToCheck.getMonth() &&

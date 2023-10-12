@@ -103,7 +103,7 @@
                                 aria-labelledby="pills-home-tab" tabindex="0">
                                 <div class="row"
                                     style="min-height:40vh; max-height: 40vh; overflow: auto; overflow-x: hidden;">
-                                    <div class="col-md-5" *ngIf="Images.length>0">
+                                    <div class="col-md-5" *ngIf="Images?.length>0">
                                         <div id="carouselExample" class="carousel slide">
                                             <div class="carousel-inner">
                                                 <div class="carousel-item active">
@@ -144,10 +144,10 @@
                                     <div class="row amenitie">
                                         <ng-container *ngFor="let amenity of amenities">
                                             <div class="col-md-4 amenity">
-                                                <mat-icon [ngStyle]="{'color': amenity.iconColor}">{{
-                                                    amenity.iconName
+                                                <mat-icon [ngStyle]="{'color': amenity?.iconColor}">{{
+                                                    amenity?.iconName
                                                     }}</mat-icon>
-                                                {{ amenity.name }}
+                                                {{ amenity?.name }}
                                             </div>
                                         </ng-container>
                                     </div>
