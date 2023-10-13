@@ -69,7 +69,7 @@ export class DocumentService {
             ]
           },
           {
-            text: `Hey,${data?.user?.first_name ? data?.user?.first_name + " " + data?.user?.last_name : data?.guest_email}`,
+            text: `Hey, ${data?.user?.first_name ? data?.user?.first_name + " " + data?.user?.last_name : data?.guest_email}`,
             marginTop: 30,
             marginLeft: 20
           },
