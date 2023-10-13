@@ -22,9 +22,29 @@ table td {
     color: #333;
     font-size: 14px;
     padding: 10px;
-    padding-left: 30%;
+    padding-left: 15%;
     border-radius: 8px;
     border: 1px solid rgb(0, 119, 255);
     outline: none;
     transition: border-color 0.3s ease-in-out;
+    width: 150px;
+}
+
+.ci {
+    margin-top: 7px;
+    margin-left: 5px;
+    color: red;
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .input- {
+        width: 105px;
+    }
+
+    // .ci {
+    //     position: absolute;
+    //     margin: 0;
+    //     left: 100%
+    // }
 }

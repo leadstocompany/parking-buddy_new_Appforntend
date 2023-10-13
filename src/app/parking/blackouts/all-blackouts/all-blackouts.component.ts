@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BarcodesService } from 'src/app/service/barcodes.service';
 import { ProductsService } from 'src/app/service/products.service';
@@ -18,6 +18,8 @@ export class AllBlackoutsComponent {
   document: any;
   blId: any;
   editData: any;
+  @ViewChild('staticBackdrop') modalElement!: ElementRef;
+  @ViewChild('staticBackdropE') modalElementE!: ElementRef;
   constructor(private _formBuilder: FormBuilder, private _barAndBlackService: BarcodesService, private _productService: ProductsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.blackouts = this._formBuilder.group({
@@ -63,6 +65,8 @@ export class AllBlackoutsComponent {
           this.getBlackouts(this._saveService.getPropertyId())
         }
         this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+        this.modalElement.nativeElement.click();
+        this.blackouts.reset()
       },
       error: (error) => {
         //console.log(error)
@@ -142,6 +146,8 @@ export class AllBlackoutsComponent {
           this.getBlackouts(this._saveService.getPropertyId())
         }
         this._snackbarService.openSnackbar('✔ Form Successfully Updated')
+        this.modalElementE.nativeElement.click();
+        this.blackouts.reset()
       },
       error: (error) => {
         //console.log(error)

@@ -8,7 +8,7 @@
             information include: temporary closures, temporary changing or shuttle hours and temporary airport
             construction issues </p>
         <ckeditor [editor]="Editor" [(ngModel)]="modal.temporary"></ckeditor>
-        <div class="row mt-3">
+        <!-- <div class="row mt-3">
             <div class="col-12 p-2 rounded-2" style="background-color: lightgray;">
                 <span>
                     <b>Safety Message</b>
@@ -23,14 +23,14 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="text-editer mt-4">
         <p>Check-In Information</p>
         <ckeditor [editor]="Editor" [(ngModel)]="modal.checkInInformation"></ckeditor>
     </div>
     <div class="text-editer mt-4">
-        <p>Airport Shuttle Information</p>
+        <p> Shuttle Information</p>
         <ckeditor [editor]="Editor" [(ngModel)]="modal.airportShuttleInformation"></ckeditor>
     </div>
     <div class="text-editer mt-4">

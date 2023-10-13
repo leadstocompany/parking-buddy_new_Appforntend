@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SaveidService } from 'src/app/service/saveID/saveid.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
@@ -59,6 +59,8 @@ export class TaxesComponent {
   taxId: any
   amountIcon = '₹'
   currency: any = currency?.currency
+  @ViewChild('staticBackdrop') modalElement!: ElementRef;
+  @ViewChild('staticBackdropEdit') staticBackdropEdit!: ElementRef;
   constructor(private _detailService: DetailsService, private _formBuilder: FormBuilder, private _taxeService: TaxesService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   ngOnInit() {
     this.taxes = this._formBuilder.group({
@@ -103,6 +105,8 @@ export class TaxesComponent {
         } else {
           this.getText(this._saveService.getPropertyId())
         }
+        this.modalElement.nativeElement.click();
+        this.taxes.reset()
       },
       error: (error) => {
         //console.log(error)
@@ -145,13 +149,16 @@ export class TaxesComponent {
     this._taxeService.updateTaxesfess(data).subscribe({
       next: (res) => {
         //console.log(res)
-        this._snackbarService.openSnackbar('✔ Form Successfully Submitted')
+     
         this.spinner = false
         if (this.editData.edit) {
           this.getText(this.editData.id)
         } else {
           this.getText(this._saveService.getPropertyId())
         }
+        this.staticBackdropEdit.nativeElement.click();
+        console.log('hii')
+        this._snackbarService.openSnackbar('✔ Form Successfully Updated')
       },
       error: (error) => {
         //console.log(error)
@@ -198,6 +205,7 @@ export class TaxesComponent {
         } else {
           this.getText(this._saveService.getPropertyId())
         }
+        this.staticBackdropEdit.nativeElement.click();
         this._snackbarService.openSnackbar('✔ Form Successfully updated')
         this.spinner = false
       },

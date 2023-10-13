@@ -61,7 +61,7 @@
                     </div>
                     <button *ngIf="spinner==false" type="button" class="btn btn-primary"
                         (click)="createNotification()">Create Notification</button>
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" #staticBackdrop>cancel</button>
                 </div>
             </div>
         </div>

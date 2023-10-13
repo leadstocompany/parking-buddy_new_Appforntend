@@ -75,7 +75,7 @@ export class OperatingHoursComponent {
   initForm() {
     this.operatingForm = this._formBuilder.group({
       operationHours: ['limited'],
-      openTime0: ['8:15'],
+      openTime0: [null],
       openTime1: [null],
       openTime2: [null],
       openTime3: [null],
@@ -152,7 +152,7 @@ export class OperatingHoursComponent {
 
     const fd = {
       data: data,
-      id: this.editData.edit?this.editData.id:this._saveService.getPropertyId()
+      id: this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
     this._detailService.createOperatingHours(fd).subscribe({
       next: (res) => {
@@ -167,7 +167,7 @@ export class OperatingHoursComponent {
       error: (error) => {
         //console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
       }
     })
   }
@@ -188,9 +188,9 @@ export class OperatingHoursComponent {
         //console.log(res, 'single data')
         this.setValues(res)
       },
-      error: (error:any) => {
+      error: (error: any) => {
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
       }
     })
   }

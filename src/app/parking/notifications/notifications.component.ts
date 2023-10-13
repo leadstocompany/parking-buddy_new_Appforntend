@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild,ElementRef } from '@angular/core';
 import { NotificationsService } from 'src/app/service/notifications.service';
 import { SaveidService } from 'src/app/service/saveID/saveid.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
@@ -15,6 +15,7 @@ export class NotificationsComponent {
   spinner = false
   allNotification: any = []
   editData: any;
+  @ViewChild('staticBackdrop') modalElement!: ElementRef;
   constructor(private _notificationService: NotificationsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
 
   createNotification() {
@@ -34,7 +35,7 @@ export class NotificationsComponent {
         } else {
           this.getNotification(this._saveService.getPropertyId())
         }
-
+        this.modalElement.nativeElement.click();
       },
       error: (error) => {
         //console.log(error)

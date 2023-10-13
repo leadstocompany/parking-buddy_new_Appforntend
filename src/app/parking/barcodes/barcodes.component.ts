@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BarcodesService } from 'src/app/service/barcodes.service';
 import { ProductsService } from 'src/app/service/products.service';
@@ -35,6 +35,10 @@ export class BarcodesComponent {
   public parkingOptions: any = []
   public barCodes !: FormGroup;
   editData: any;
+  @ViewChild('staticBackdrop') modalElement!: ElementRef;
+  @ViewChild('staticBackdropE') modalElementE!: ElementRef;
+
+
   constructor(private _productService: ProductsService, private _formBuilder: FormBuilder, private _barCodeService: BarcodesService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
   spinner = false
   barId: any;
@@ -77,6 +81,8 @@ export class BarcodesComponent {
         }else{
           this.getBarcode(this._saveService.getPropertyId())
         }
+        this.modalElement.nativeElement.click();
+        this.barCodes.reset()
       },
       error: (error) => {
         //console.log(error)
@@ -132,6 +138,7 @@ export class BarcodesComponent {
         } else {
           this.getBarcode(this._saveService.getPropertyId())
         }
+        this.modalElementE.nativeElement.click();
       },
       error: (error) => {
         //console.log(error)

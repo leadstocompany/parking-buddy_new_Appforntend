@@ -135,7 +135,7 @@
                 </div>
                 <button type="button" class="btn btn-primary" (click)="createBlackout()" *ngIf="spinner==false">Create
                     Blackout</button>
-                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                <button type="button" class="btn btn-warning" #staticBackdrop data-bs-dismiss="modal">cancel</button>
             </div>
         </div>
     </div>
@@ -228,7 +228,7 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
                 <button type="button" class="btn btn-primary" (click)="UpdateBlackout()" *ngIf="spinner==false">Save</button>
-                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal" #staticBackdropE>cancel</button>
             </div>
         </div>
     </div>

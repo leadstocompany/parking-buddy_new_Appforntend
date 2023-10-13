@@ -77,7 +77,7 @@ export class ShuttleHoursComponent {
   initForm() {
     this.operatingForm = this._formBuilder.group({
       operationHours: ['limited'],
-      openTime0: ['8:15'],
+      openTime0: [null],
       openTime1: [null],
       openTime2: [null],
       openTime3: [null],

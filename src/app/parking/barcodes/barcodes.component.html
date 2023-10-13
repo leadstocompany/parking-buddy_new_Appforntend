@@ -113,7 +113,7 @@
                     </div>
                     <button *ngIf="spinner==false" type="button" class="btn btn-primary"
                         (click)="createBarcode()">Create Barcode</button>
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" #staticBackdrop>cancel</button>
                 </div>
             </div>
         </div>
@@ -177,7 +177,7 @@
                     </div>
                     <button *ngIf="spinner==false" type="button" class="btn btn-primary"
                         (click)="updateBarCode()">Save</button>
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" #staticBackdropE>cancel</button>
                 </div>
             </div>
         </div>

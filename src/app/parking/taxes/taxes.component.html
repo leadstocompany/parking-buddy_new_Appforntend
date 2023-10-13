@@ -157,7 +157,7 @@
                         </div>
                         <button type="button" class="btn btn-primary" (click)="createTax()"
                             *ngIf="spinner==false">Create Tax</button>
-                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal" #staticBackdrop>cancel</button>
                     </div>
                 </div>
             </div>
@@ -271,7 +271,7 @@
                         </div>
                         <button type="button" class="btn btn-primary" (click)="updateTex()"
                             *ngIf="spinner==false">save</button>
-                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">cancel</button>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal" #staticBackdropEdit>cancelE</button>
                     </div>
                 </div>
             </div>

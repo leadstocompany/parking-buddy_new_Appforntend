@@ -18,6 +18,7 @@ export class PricingComponent {
   editId: string = ''
   amountIcon = '₹'
   @ViewChild('staticBackdrop') modalElement!: ElementRef;
+  @ViewChild('staticBackdropEdit') modalElementE!: ElementRef;
   public calender_day_price: string = "No";
   spinner: boolean = false
   public parkingOptions: any = []
@@ -79,7 +80,7 @@ export class PricingComponent {
       },
       error: (error) => {
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
         //console.log(error)
       }
     })
@@ -113,11 +114,12 @@ export class PricingComponent {
         } else {
           this.getPricing(this._saveService.getPropertyId())
         }
+        this.modalElementE.nativeElement.click();
 
       },
       error: (error) => {
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
         //console.log(error)
       }
     })
@@ -200,10 +202,10 @@ export class PricingComponent {
         //console.log(res, 'res')
         this.amountIcon = this.currency[`${res.country}`]
       },
-      error: (error:any) => {
+      error: (error: any) => {
         //console.log(error)
         this.spinner = false
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
       }
     })
   }

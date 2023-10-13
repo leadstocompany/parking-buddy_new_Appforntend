@@ -40,5 +40,10 @@ export class CancellationComponent {
         id: this.profileForm.value.reservation
       }
     });
+
+    // Subscribe to the afterClosed() method
+    dialogRef.afterClosed().subscribe(result => {
+      this.close()
+    });
   }
 }

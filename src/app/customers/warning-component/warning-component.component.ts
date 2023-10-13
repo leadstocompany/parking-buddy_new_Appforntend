@@ -25,15 +25,19 @@ export class WarningComponentComponent {
     this._customerService.cancelReservation(this.userData.id).subscribe({
       next: (res) => {
         if (res.error) {
-          this._snackbarService.openSnackbar(`❌ ` + res.error)
-        } else {
+          this._snackbarService.openSnackbar(`❌` + res.error)
+          this.close()
+        } else if (res.message) {
           this._snackbarService.openSnackbar(`❌ ` + res.message)
           this.close()
+        } else {
+          this._snackbarService.openSnackbar(`❌ Internal Server Error`)
         }
       },
       error: (error: any) => {
         //console.log(error);
-        this._snackbarService.openSnackbar(`❌ ` + error.error[0])
+        this.close()
+        this._snackbarService.openSnackbar(`❌ ` + error.error.error)
       },
     })
   }
