@@ -37,8 +37,10 @@ export class CancellationComponent {
       next: (res) => {
         if (res[0]?.status == "canceled") {
           this._snackbarService.openSnackbar('❌ This Reservation ID Is Already ')
-        } else if(res.status == "canceled"){
+          return
+        } else if (res.status == "canceled") {
           this._snackbarService.openSnackbar('❌ This Reservation ID Is Already ')
+          return
         }
         else {
           const dialogRef = this._dialog.open(WarningComponentComponent, {
