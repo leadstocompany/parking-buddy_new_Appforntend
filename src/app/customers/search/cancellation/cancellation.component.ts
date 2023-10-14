@@ -36,10 +36,10 @@ export class CancellationComponent {
     this._customerService.getReservationStatus(this.profileForm.value.reservation).subscribe({
       next: (res) => {
         if (res[0]?.status == "canceled") {
-          this._snackbarService.openSnackbar('❌ This Reservation ID Is Already ')
+          this._snackbarService.openSnackbar('❌ This Reservation ID Is Already cancelled')
           return
         } else if (res.status == "canceled") {
-          this._snackbarService.openSnackbar('❌ This Reservation ID Is Already ')
+          this._snackbarService.openSnackbar('❌ This Reservation ID Is Already cancelled')
           return
         }
         else {
