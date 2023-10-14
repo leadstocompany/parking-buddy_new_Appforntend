@@ -2,13 +2,13 @@
     <h2 class="title">AMENITIES</h2>
     <p>Manage When your parking lot will be visible on our search engine</p>
     <div class="row">
-        <div class="col-md-3 bg-color p-1  rounded-2">
-            <mat-selection-list #shoes [(ngModel)]="selectedAmenities">
+        <div class="col-md-4 bg-color p-1 rounded-2">
+            <mat-selection-list #shoes [(ngModel)]="selectedAmenities" >
                 <mat-list-item id="heading"><span style="color: white">Name</span></mat-list-item>
-                <mat-list-option color='primary' class="option-list" *ngFor="let amenity of amenities" [value]="amenity">
-                    <span class="list-options text-nowrap d-flex align-items-center gap-3">
+                <mat-list-option color='primary' class="option-list text-nowrap" *ngFor="let amenity of amenities" [value]="amenity">
+                    <span class="list-options text-nowrap d-flex align-items-center gap-3 ">
                         <span>{{amenity.name}}</span>
-                        <img src={{amenity.image}} alt=""class="img-fluid" style="width:30px">
+                        <img src={{amenity.image}} alt="" class="img-fluid" style="width:30px">
                     </span>
                 </mat-list-option>
             </mat-selection-list>
@@ -17,6 +17,8 @@
     <div class="spinner-border text-success" role="status" *ngIf="spinner==true">
         <span class="visually-hidden">Loading...</span>
     </div>
-    <button class="btn btn-primary mt-3" (click)="onFormSubmit()"  *ngIf="spinner==false && editOption==false">save</button>
-    <button class="btn btn-primary mt-3" (click)="updateSubmit()"  *ngIf="spinner==false && editOption==true ">Save</button>
+    <button class="btn btn-primary mt-3" (click)="onFormSubmit()"
+        *ngIf="spinner==false && editOption==false">save</button>
+    <button class="btn btn-primary mt-3" (click)="updateSubmit()"
+        *ngIf="spinner==false && editOption==true ">Save</button>
 </div>

@@ -14,10 +14,19 @@
     margin-top: 2px;
     background-color: white;
 }
-.list-options{
+
+.list-options {
     color: black;
     font-size: 12px;
 }
-.mdc-list{
+
+.mdc-list {
     padding: 0;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    /* Your styles for iPads go here */
+    .bg-color{
+        width: 300px;
+    }
 }

@@ -59,7 +59,7 @@ export class CancellationComponent {
 
       },
       error: (error) => {
-        //console.log(error.error)
+        this._snackbarService.openSnackbar('❌ ' + (error.error.error ? error.error.error : "Internal Server Error"))
       }
     })
 
