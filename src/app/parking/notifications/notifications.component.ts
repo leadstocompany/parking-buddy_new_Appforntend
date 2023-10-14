@@ -1,4 +1,5 @@
-import { Component,ViewChild,ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { DescriptionsService } from 'src/app/service/descriptions.service';
 import { NotificationsService } from 'src/app/service/notifications.service';
 import { SaveidService } from 'src/app/service/saveID/saveid.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
@@ -15,14 +16,16 @@ export class NotificationsComponent {
   spinner = false
   allNotification: any = []
   editData: any;
+  message: any
   @ViewChild('staticBackdrop') modalElement!: ElementRef;
-  constructor(private _notificationService: NotificationsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
+  constructor(private _descriptionService: DescriptionsService, private _notificationService: NotificationsService, private _snackbarService: SnackbarService, private _saveService: SaveidService) { }
 
   createNotification() {
     this.spinner = true
     const data = {
       "category": this.category,
       "email": this.email,
+      "message":this.message,
       "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
     }
     this._notificationService.createNotificationService(data).subscribe({
@@ -39,11 +42,25 @@ export class NotificationsComponent {
       },
       error: (error) => {
         //console.log(error)
-        this._snackbarService.openSnackbar('❌ '+error.error[0])
+        this._snackbarService.openSnackbar('❌ ' + error.error[0])
         this.spinner = false
       }
     })
 
+  }
+
+
+  getDescription(id: any) {
+    this._descriptionService.getDescriptionsById(id).subscribe({
+      next: (res) => {
+        if (res.length) {
+          this.message = res[res.length - 1]
+        }
+      },
+      error: (error) => {
+        //console.log(error)
+      }
+    })
   }
 
 
@@ -52,9 +69,11 @@ export class NotificationsComponent {
     this.editData = this._saveService.getSharedData()
     if (this.editData.edit) {
       this.getNotification(this.editData.id)
+      this.getDescription(this.editData.id)
 
     } else if (this.editData.edit === false) {
       this.getNotification(this._saveService.getPropertyId())
+      this.getDescription(this._saveService.getPropertyId())
 
     }
   }

@@ -22,6 +22,7 @@ export class DocumentService {
   }
 
   public async generateOrderSummary(data: any, download: any, icon: any): Promise<boolean> {
+    console.log(data?.property?.property_description,'data.property_description')
     //console.log(data, 'error')
     return new Promise(async (resolve, reject) => {
       // const image = await this.getBase64ImageFromURL(`${window.location.origin}/assets/signup.png` as string);
@@ -295,7 +296,7 @@ export class DocumentService {
                             text: `${data['shuttle_hours-open_time'] ? data['shuttle_hours-open_time'] : '-'} - ${data['shuttle_hours-close_time'] ? data['shuttle_hours-close_time'] : '-'} `,
                           },
                           {
-                            text: `Shuttle runs every ${15 > 24 ? 'hours' : 'minutes'}.`
+                            text: `${data?.property?.property_description?.length?this.htmlToText(data?.property?.property_description[0].shuttle_info):""}`
                           }
                         ],
                         width: '60%'
@@ -512,6 +513,19 @@ export class DocumentService {
       };
       img.src = url;
     });
+  }
+
+
+  htmlToText(html: string): any {
+    console.log(html,'===================')
+    // Create a DOMParser
+    const parser = new DOMParser();
+    // Parse the HTML
+    const doc = parser.parseFromString(html, 'text/html');
+    // Extract the text content
+    const text = doc.body.textContent;
+    console.log(text,'=============')
+    return text;
   }
 
 }
