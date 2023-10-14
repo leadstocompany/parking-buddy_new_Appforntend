@@ -51,6 +51,12 @@ export class CustomerService {
     return this._http.get(`${environment.URL}/normal_user/pastbooking/`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }, withCredentials: true })
   }
 
+
+
+  getReservationStatus(id: any): Observable<any> {
+    return this._http.get(`${environment.URL}/normal_user/booking/status/${id}/`,{ withCredentials: true })
+  }
+
   getProfileDetails(): Observable<any> {
     return this._http.get(`${environment.URL}/normal_user/get/user-profile/`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }, withCredentials: true })
   }
@@ -68,10 +74,10 @@ export class CustomerService {
   getBookingSlot(id: string): Observable<any> {
     return this._http.get(`${environment.URL}/normal_user/bookingslot/${id}/list/`, { withCredentials: true })
   }
-  
+
   // cancel reservation 
   cancelReservation(id: any): Observable<any> {
-    return this._http.post(`${environment.URL}/normal_user/booking/cancel/${id}/`,{status : 'canceled'},{ withCredentials: true })
+    return this._http.post(`${environment.URL}/normal_user/booking/cancel/${id}/`, { status: 'canceled' }, { withCredentials: true })
   }
   // show reservation 
   showReservation(id: any): Observable<any> {

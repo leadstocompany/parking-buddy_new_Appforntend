@@ -33,17 +33,38 @@ export class CancellationComponent {
   }
 
   public cancelReservations(): void {
-    const dialogRef = this._dialog.open(WarningComponentComponent, {
-      autoFocus: false,
-      disableClose: true,
-      data: {
-        id: this.profileForm.value.reservation
-      }
-    });
+    this._customerService.getReservationStatus(this.profileForm.value.reservation).subscribe({
+      next: (res) => {
+        if (res[0]?.status == "canceled") {
+          this._snackbarService.openSnackbar('❌ This Reservation ID Is Already ')
+        } else if(res.status == "canceled"){
+          this._snackbarService.openSnackbar('❌ This Reservation ID Is Already ')
+        }
+        else {
+          const dialogRef = this._dialog.open(WarningComponentComponent, {
+            autoFocus: false,
+            disableClose: true,
+            data: {
+              id: this.profileForm.value.reservation
+            }
+          });
 
-    // Subscribe to the afterClosed() method
-    dialogRef.afterClosed().subscribe(result => {
-      this.close()
-    });
+          // Subscribe to the afterClosed() method
+          dialogRef.afterClosed().subscribe(result => {
+            this.close()
+          });
+        }
+
+      },
+      error: (error) => {
+        //console.log(error.error)
+      }
+    })
+
+
+
+
+
+
   }
 }
