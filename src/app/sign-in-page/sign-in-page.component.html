@@ -62,7 +62,7 @@
                     <div *ngIf="otpVerify">
                         <div class="col-12 form-group">
                             <label for="email" class="form-label">OTP</label>
-                            <ng-otp-input [formCtrl]="otp" [config]="{length:6}"></ng-otp-input>
+                            <ng-otp-input allowNumbersOnly="true" [formCtrl]="otp" [config]="{length:6}"></ng-otp-input>
                         </div>
                         <div class="col-12 mt-3">
                             <div class="spinner-border text-success" role="status" *ngIf="spinner==true">

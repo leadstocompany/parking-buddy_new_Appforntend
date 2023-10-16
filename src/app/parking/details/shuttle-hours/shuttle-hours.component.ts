@@ -132,7 +132,7 @@ export class ShuttleHoursComponent {
         "shuttle_saturday_close_time": this.operatingForm.controls['closeTime5'].value,
         "shuttle_sunday_open_time": this.operatingForm.controls['openTime6'].value,
         "shuttle_sunday_close_time": this.operatingForm.controls['closeTime6'].value,
-        "shuttle_all_days": false,
+        "shuttle_all_days": true,
         "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
       }
     }
@@ -197,7 +197,7 @@ export class ShuttleHoursComponent {
         "shuttle_saturday_close_time": this.operatingForm.controls['closeTime5'].value,
         "shuttle_sunday_open_time": this.operatingForm.controls['openTime6'].value,
         "shuttle_sunday_close_time": this.operatingForm.controls['closeTime6'].value,
-        "shuttle_all_days": false,
+        "shuttle_all_days": true,
         "property": this.editData.edit ? this.editData.id : this._saveService.getPropertyId()
       }
     }

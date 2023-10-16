@@ -28,7 +28,7 @@
                                     bsDatepicker [ngModelOptions]="{ standalone: true }" [(ngModel)]="checkIn"
                                     [bsConfig]="{ adaptivePosition: true }" (ngModelChange)="checkOutDate()">
                                 <button style="background-color: inherit; border: 0.5px solid gray;font-size:0.8rem;"
-                                    disabled>Check-In&nbsp;</button>
+                                    disabled>&nbsp;Check-In&nbsp;</button>
                             </div>
                             <div class="col-md-5 d-flex">
                                 <input type="text" #dp="bsDatepicker" [minDate]="minCheckOutDate"
@@ -42,7 +42,7 @@
                     <div class="col-md-12">
                         <div class="row justify-content-center">
                             <div class="col-md-8 d-flex">
-                                <input #placesSearchInput type="text" style="width:100%;"
+                                <input #placesSearchInput type="text" style="width:90%;"
                                     placeholder="Search your location" [ngModelOptions]="{ standalone: true }"
                                     [(ngModel)]="searchTerm">
                                 <button (click)="submitForm()" id="submit" *ngIf="spinner==false">Submit</button>

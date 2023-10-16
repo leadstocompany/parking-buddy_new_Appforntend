@@ -89,7 +89,7 @@
                                     <label for="date" class="form-label text-nowrap">Date &nbsp; &nbsp;
                                         &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</label>
                                     <input type="text" id="date" class="form-control"
-                                        placeholder="Pick Start and End Date" bsDaterangepicker autocapitalize="off"
+                                        placeholder="Pick Start and End Date" [bsConfig]="{ adaptivePosition: true }" bsDaterangepicker autocapitalize="off"
                                         formControlName="date">
                                 </div>
                             </div>

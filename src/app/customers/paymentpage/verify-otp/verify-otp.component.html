@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-md-12 mt-2">
                     <label for="email" class="form-label" style="color: white;">Enter Otp</label>
-                    <ng-otp-input [formCtrl]="emailotp" [config]="{length:6}"></ng-otp-input>
+                    <ng-otp-input allowNumbersOnly="true" [formCtrl]="emailotp" [config]="{length:6}"></ng-otp-input>
                 </div>
             </div>
         </form>
